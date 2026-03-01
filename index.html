@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReGain Assist — Akıllı Klinik Yönetim Sistemi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --teal:       #0d9488;
+    --teal-light: #14b8a6;
+    --teal-glow:  rgba(13,148,136,.25);
+    --teal-pale:  rgba(13,148,136,.08);
+    --bg:         #060d18;
+    --bg2:        #0b1524;
+    --bg3:        #0f1e30;
+    --surface:    #111f33;
+    --border:     rgba(13,148,136,.15);
+    --border2:    rgba(255,255,255,.06);
+    --text:       #f0f6ff;
+    --text-muted: #7a9ab8;
+    --text-dim:   #4a6a88;
+    --gold:       #f0a020;
+    --danger:     #f43f5e;
+    --radius:     14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: .4;
+  }
+
+  /* ─── GRADIENT MESH ─── */
+  .mesh {
+    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw;
+    background: rgba(6,13,24,.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .logo-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--teal), #065f46);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 20px var(--teal-glow);
+  }
+
+  .logo span { color: var(--teal-light); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: color .2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    display: flex; gap: 10px; align-items: center;
+  }
+
+  .btn-ghost-sm {
+    padding: 8px 18px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--text-muted);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    text-decoration: none; transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-ghost-sm:hover { border-color: var(--teal); color: var(--teal-light); }
+
+  .btn-primary-sm {
+    padding: 8px 20px; border-radius: 8px;
+    background: var(--teal); color: #fff;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: all .2s;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 0 20px var(--teal-glow);
+  }
+
+  .btn-primary-sm:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 100px 6vw 48px;
+    overflow: hidden;
+  }
+
+  #hero .mesh-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(13,148,136,.18) 0%, transparent 70%);
+    top: -100px; left: -100px;
+  }
+
+  #hero .mesh-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(99,102,241,.12) 0%, transparent 70%);
+    bottom: -50px; right: -50px;
+  }
+
+  #hero .mesh-3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(240,160,32,.08) 0%, transparent 70%);
+    top: 40%; left: 50%; transform: translate(-50%,-50%);
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--teal-pale);
+    font-size: 12px; font-weight: 600; color: var(--teal-light);
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease both;
+  }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal-light);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 800; line-height: 1.08;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    animation: fadeUp .7s .1s ease both;
+  }
+
+  h1 .accent {
+    background: linear-gradient(135deg, var(--teal-light), #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  h1 .accent-gold {
+    background: linear-gradient(135deg, var(--gold), #fcd34d);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    max-width: 580px; font-size: 18px;
+    color: var(--text-muted); line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp .7s .2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp .7s .3s ease both;
+  }
+
+  .btn-hero {
+    padding: 16px 36px; border-radius: 12px;
+    background: var(--teal); color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    text-decoration: none; transition: all .25s;
+    border: none;
+    box-shadow: 0 0 40px var(--teal-glow), 0 4px 20px rgba(0,0,0,.3);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-hero:hover {
+    background: var(--teal-light);
+    transform: translateY(-3px);
+    box-shadow: 0 0 60px rgba(13,148,136,.4), 0 8px 30px rgba(0,0,0,.3);
+  }
+
+  .btn-hero-outline {
+    padding: 16px 36px; border-radius: 12px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: all .25s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-hero-outline:hover {
+    border-color: var(--teal);
+    color: var(--teal-light);
+    transform: translateY(-3px);
+  }
+
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+    margin-top: 24px; padding-top: 32px;
+    border-top: 1px solid var(--border2);
+    animation: fadeUp .7s .5s ease both;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--text);
+    display: block;
+  }
+
+  .stat-num .unit { color: var(--teal-light); }
+
+  .stat-label { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+  /* ─── SCREENSHOT MOCKUP ─── */
+  .hero-mockup {
+    margin-top: 40px; position: relative; z-index: 1;
+    animation: fadeUp .8s .4s ease both;
+  }
+
+  .mockup-frame {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 120px rgba(0,0,0,.6), 0 0 60px var(--teal-glow);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .mockup-bar {
+    background: var(--bg3);
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .mockup-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  .mockup-body {
+    display: grid; grid-template-columns: 200px 1fr;
+    min-height: 340px;
+  }
+
+  .mockup-sidebar {
+    background: var(--bg3);
+    border-right: 1px solid var(--border2);
+    padding: 20px 0;
+  }
+
+  .mock-menu-item {
+    padding: 10px 20px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: var(--text-dim);
+  }
+
+  .mock-menu-item.active {
+    color: var(--teal-light);
+    background: var(--teal-pale);
+    border-right: 2px solid var(--teal);
+  }
+
+  .mock-menu-icon { font-size: 14px; }
+
+  .mockup-content { padding: 24px; }
+
+  .mock-kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .mock-kpi {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .mock-kpi-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--text);
+  }
+
+  .mock-kpi-label { font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+
+  .mock-chart {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 16px; height: 140px;
+    display: flex; align-items: flex-end; gap: 6px;
+  }
+
+  .mock-bar {
+    flex: 1; border-radius: 4px 4px 0 0;
+    background: linear-gradient(to top, var(--teal), var(--teal-light));
+    opacity: .7;
+    transition: all .3s;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { position: relative; z-index: 1; }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--teal-light);
+    margin-bottom: 16px;
+  }
+
+  .section-tag::before {
+    content: ''; display: block;
+    width: 20px; height: 1px; background: var(--teal-light);
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -1.5px;
+  }
+
+  h2 .accent {
+    background: linear-gradient(135deg, var(--teal-light), #34d399);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .section-sub {
+    font-size: 17px; color: var(--text-muted);
+    line-height: 1.7; font-weight: 300;
+    max-width: 560px; margin-top: 16px;
+  }
+
+  /* ─── FEATURES ─── */
+  #features {
+    padding: 72px 6vw;
+    background: var(--bg2);
+  }
+
+  .features-header { margin-bottom: 40px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: all .3s;
+    position: relative; overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--teal-pale), transparent);
+    opacity: 0; transition: opacity .3s;
+    border-radius: var(--radius);
+  }
+
+  .feature-card:hover { border-color: var(--border); transform: translateY(-4px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--teal-pale);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .feature-tag {
+    display: inline-block; margin-top: 16px;
+    padding: 3px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 700;
+    background: var(--teal-pale); color: var(--teal-light);
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  #how {
+    padding: 72px 6vw;
+  }
+
+  .how-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    margin-top: 60px;
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 0; }
+
+  .step {
+    display: flex; gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border2);
+    cursor: pointer;
+    transition: all .2s;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 800; color: var(--text-dim);
+    transition: all .2s;
+  }
+
+  .step.active .step-num {
+    background: var(--teal); border-color: var(--teal);
+    color: #fff;
+    box-shadow: 0 0 20px var(--teal-glow);
+  }
+
+  .step-content h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700; margin-bottom: 6px;
+    color: var(--text-muted); transition: color .2s;
+  }
+
+  .step.active .step-content h3 { color: var(--text); }
+
+  .step-content p { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+  .how-visual {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    min-height: 400px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px var(--teal-glow);
+  }
+
+  /* ─── AI SECTION ─── */
+  #ai {
+    padding: 72px 6vw;
+    background: var(--bg2);
+    overflow: hidden;
+  }
+
+  .ai-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .ai-chat {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  }
+
+  .ai-chat-header {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border2);
+  }
+
+  .ai-avatar {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--teal), #065f46);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 16px var(--teal-glow);
+  }
+
+  .ai-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .ai-status { font-size: 11px; color: var(--teal-light); }
+
+  .chat-msg {
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+
+  .chat-msg.user { flex-direction: row-reverse; }
+
+  .chat-bubble {
+    padding: 12px 16px; border-radius: 12px;
+    font-size: 13px; line-height: 1.6; max-width: 80%;
+  }
+
+  .chat-msg.ai .chat-bubble {
+    background: var(--surface); color: var(--text);
+    border-bottom-left-radius: 4px;
+  }
+
+  .chat-msg.user .chat-bubble {
+    background: var(--teal); color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chat-avatar {
+    width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+
+  .chat-avatar.ai-av { background: var(--teal-pale); }
+  .chat-avatar.user-av { background: var(--surface); }
+
+  .typing-indicator {
+    display: flex; gap: 4px; padding: 12px 16px;
+    background: var(--surface); border-radius: 12px; border-bottom-left-radius: 4px;
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-dim);
+    animation: typing .8s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: .15s; }
+  .typing-dot:nth-child(3) { animation-delay: .3s; }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { padding: 72px 6vw; }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; margin-top: 36px;
+  }
+
+  .testimonial-card {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: all .3s;
+  }
+
+  .testimonial-card:hover { border-color: var(--border); transform: translateY(-4px); }
+
+  .stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+
+  .testimonial-text {
+    font-size: 15px; color: var(--text-muted);
+    line-height: 1.75; font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--teal-pale); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
+    color: var(--teal-light);
+  }
+
+  .author-name { font-weight: 600; font-size: 14px; }
+  .author-title { font-size: 12px; color: var(--text-dim); }
+
+  /* ─── FAQ ─── */
+  #faq {
+    padding: 72px 6vw;
+    background: var(--bg2);
+  }
+
+  .faq-list {
+    max-width: 760px; margin: 36px auto 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border2);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    width: 100%; text-align: left;
+    padding: 22px 0;
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px; font-weight: 500; color: var(--text);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+
+  .faq-q:hover { color: var(--teal-light); }
+
+  .faq-icon {
+    width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
+    background: var(--surface); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-dim);
+    transition: all .2s;
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--teal-pale); border-color: var(--border);
+    color: var(--teal-light); transform: rotate(45deg);
+  }
+
+  .faq-a {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.8; padding: 0 0 20px;
+    display: none;
+  }
+
+  .faq-item.open .faq-a { display: block; }
+
+  /* ─── DEMO FORM ─── */
+  #demo {
+    padding: 72px 6vw;
+    text-align: center;
+  }
+
+  .demo-inner {
+    max-width: 580px; margin: 0 auto;
+  }
+
+  .demo-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    margin-top: 24px;
+    box-shadow: 0 0 80px var(--teal-glow);
+  }
+
+  .form-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin-bottom: 14px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+
+  .form-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+
+  .form-input, .form-select, .form-textarea {
+    padding: 12px 16px; border-radius: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none;
+    transition: border-color .2s;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--teal);
+  }
+
+  .form-input::placeholder { color: var(--text-dim); }
+  .form-select option { background: var(--bg3); }
+  .form-textarea { resize: vertical; min-height: 90px; }
+
+  .btn-submit {
+    width: 100%; padding: 16px;
+    border-radius: 12px; border: none;
+    background: var(--teal); color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    transition: all .25s; margin-top: 6px;
+    box-shadow: 0 0 30px var(--teal-glow);
+  }
+
+  .btn-submit:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+  .form-note {
+    font-size: 12px; color: var(--text-dim); margin-top: 14px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 60px 6vw 40px;
+    border-top: 1px solid var(--border2);
+    background: var(--bg);
+  }
+
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+
+  .footer-brand p {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.7; margin-top: 12px; max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--text-muted); margin-bottom: 16px;
+    letter-spacing: .5px;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-col ul a {
+    font-size: 13px; color: var(--text-dim);
+    text-decoration: none; transition: color .2s;
+  }
+
+  .footer-col ul a:hover { color: var(--teal-light); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid var(--border2);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  .footer-bottom p { font-size: 12px; color: var(--text-dim); }
+
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--text-dim); text-decoration: none; }
+  .footer-links a:hover { color: var(--teal-light); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 1; transform: none;
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── MOBILE NAV ─── */
+  .nav-mobile-toggle { display: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta .btn-ghost-sm { display: none; }
+    .nav-mobile-toggle { display: block; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; color: var(--text); cursor: pointer; font-size: 18px; }
+    .how-grid, .ai-inner { grid-template-columns: 1fr; gap: 40px; }
+    .how-visual { min-height: 280px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .mockup-body { grid-template-columns: 1fr; }
+    .mockup-sidebar { display: none; }
+    .mock-kpi-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-stats { gap: 28px; }
+    .demo-card { padding: 28px 20px; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ─── GLOW LINE ─── */
+  .glow-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">🦷</div>
+    ReGain <span>Assist</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Özellikler</a></li>
+    <li><a href="#how">Nasıl Çalışır</a></li>
+    <li><a href="#ai">Apex AI</a></li>
+    <li><a href="#faq">SSS</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="https://entoriontech.com" class="btn-ghost-sm">Giriş Yap</a>
+    <a href="https://entoriontech.com" target="_blank" class="btn-primary-sm">🚀 Canlı Demo →</a>
+  </div>
+  <button class="nav-mobile-toggle">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="mesh mesh-1"></div>
+  <div class="mesh mesh-2"></div>
+  <div class="mesh mesh-3"></div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Türkiye'nin Akıllı Klinik Yönetim Sistemi
+  </div>
+
+  <h1>
+    Kliniğinizi<br>
+    <span class="accent">Yönetin.</span>
+    Hastanızı<br>
+    <span class="accent-gold">Kazanın.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Hasta takibinden randevu yönetimine, ödemelerden yapay zeka danışmanlığına —
+    her şey tek platformda. Klinik sahipleri için tasarlandı.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://entoriontech.com" target="_blank" class="btn-hero">🚀 Canlı Demoya Başla</a>
+    <a href="#features" class="btn-hero-outline">✦ Özellikleri Gör</a>
+  </div>
+
+  <div class="hero-mockup">
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#ff5f56"></div>
+        <div class="mockup-dot" style="background:#ffbd2e"></div>
+        <div class="mockup-dot" style="background:#27c93f"></div>
+        <div style="flex:1; background:var(--bg2); border-radius:6px; height:20px; margin-left:12px; max-width:300px; display:flex; align-items:center; padding:0 12px;">
+          <span style="font-size:10px; color:var(--text-dim)">app.regainassist.com</span>
+        </div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="mock-menu-item active"><span class="mock-menu-icon">📊</span> Dashboard</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">👥</span> Hastalar</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">🦷</span> Tedaviler</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">📅</span> Randevular</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">💰</span> Ödemeler</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">🤖</span> Apex AI</div>
+          <div class="mock-menu-item"><span class="mock-menu-icon">📈</span> Raporlar</div>
+        </div>
+        <div class="mockup-content">
+          <div class="mock-kpi-row">
+            <div class="mock-kpi"><div class="mock-kpi-val" style="color:var(--teal-light)">48</div><div class="mock-kpi-label">Aktif Hasta</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-val" style="color:#f0a020">₺124K</div><div class="mock-kpi-label">Bu Ay Ciro</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-val" style="color:#34d399">12</div><div class="mock-kpi-label">Bu Hafta Randevu</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-val" style="color:#f43f5e">5</div><div class="mock-kpi-label">Takip Bekliyor</div></div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-bar" style="height:40%"></div>
+            <div class="mock-bar" style="height:60%"></div>
+            <div class="mock-bar" style="height:45%"></div>
+            <div class="mock-bar" style="height:80%"></div>
+            <div class="mock-bar" style="height:55%"></div>
+            <div class="mock-bar" style="height:70%"></div>
+            <div class="mock-bar" style="height:90%; opacity:1"></div>
+            <div class="mock-bar" style="height:65%"></div>
+            <div class="mock-bar" style="height:75%"></div>
+            <div class="mock-bar" style="height:50%"></div>
+            <div class="mock-bar" style="height:85%"></div>
+            <div class="mock-bar" style="height:60%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">7<span class="unit">+</span></span>
+      <div class="stat-label">Güçlü Modül</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">%<span class="unit">100</span></span>
+      <div class="stat-label">Türkçe Destek</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24<span class="unit">/7</span></span>
+      <div class="stat-label">Apex AI Danışman</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <div class="stat-label">Hasta Kaydı</div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-header">
+    <div class="section-tag">Özellikler</div>
+    <h2>Her Şey Bir <span class="accent">Arada</span></h2>
+    <p class="section-sub">Klinik yönetiminde ihtiyacınız olan tüm araçlar, tek bir platformda birleşiyor.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <div class="feature-title">Hasta Yönetimi</div>
+      <p class="feature-desc">Hasta kayıtları, KVKK onayı, iletişim bilgileri ve tedavi geçmişi tek ekranda. Kanban görünümüyle hasta durumunu anlık takip edin.</p>
+      <span class="feature-tag">CRM</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🦷</div>
+      <div class="feature-title">Tedavi & Teklif Takibi</div>
+      <p class="feature-desc">Tedavi tekliflerini oluşturun, diş haritasına işleyin. Kanban board ile hangi hastanın hangi aşamada olduğunu görün.</p>
+      <span class="feature-tag">Tedavi</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <div class="feature-title">Randevu Takvimi</div>
+      <p class="feature-desc">Haftalık ve günlük görünüm, hekim bazlı filtreleme, gelmeyenler listesi. Otomatik WhatsApp ile hasta iletişimi.</p>
+      <span class="feature-tag">Takvim</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Ödeme & Tahsilat</div>
+      <p class="feature-desc">Nakit, kredi, havale ve taksit takibi. Hasta bazlı bakiye görünümü, tahsilat oranı ve geciken ödemeler anlık izlenir.</p>
+      <span class="feature-tag">Finans</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">Apex AI Asistan</div>
+      <p class="feature-desc">Kliniğinizin verilerini bilen yapay zeka danışmanı. Hasta takip stratejisi, teklif optimizasyonu ve klinik yönetimi konularında rehberlik.</p>
+      <span class="feature-tag">Yapay Zeka</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Raporlar & Analitik</div>
+      <p class="feature-desc">Dönemsel tahsilat, hekim bazlı ciro, tedavi dağılımı. Excel ve PDF export ile raporlarınızı anında indirin.</p>
+      <span class="feature-tag">Raporlama</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏭</div>
+      <div class="feature-title">Tedarikçi Yönetimi</div>
+      <p class="feature-desc">Tedarikçi, ürün ve sipariş takibi. Fatura yönetimi, ödeme durumu ve kategori bazlı filtreleme ile malzeme sürecinizi kontrol altında tutun.</p>
+      <span class="feature-tag">Stok</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🦷</div>
+      <div class="feature-title">Diş Haritası</div>
+      <p class="feature-desc">FDI standardında interaktif diş haritası. Her diş için tedavi durumunu işaretleyin, notlar ekleyin ve tedavi geçmişini görüntüleyin.</p>
+      <span class="feature-tag">Klinik</span>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="">
+    <div class="section-tag">Nasıl Çalışır</div>
+    <h2>3 Adımda <span class="accent">Başlayın</span></h2>
+    <p class="section-sub">Kurulum gerektirmiyor, teknik bilgiye ihtiyaç yok. Tarayıcınızdan anında kullanmaya başlayın.</p>
+  </div>
+
+  <div class="how-grid">
+    <div class="steps">
+      <div class="step active" onclick="setStep(this, 1)">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Hesabınızı Oluşturun</h3>
+          <p>Klinik adınızı ve hekim bilgilerinizi girin. 2 dakikada sisteme dahil olun, veri girişine hemen başlayın.</p>
+        </div>
+      </div>
+      <div class="step" onclick="setStep(this, 2)">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Hastalarınızı Ekleyin</h3>
+          <p>Excel'den toplu içe aktarın veya tek tek ekleyin. Mevcut hasta kaydınız varsa dakikalar içinde sisteme alın.</p>
+        </div>
+      </div>
+      <div class="step" onclick="setStep(this, 3)">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Yönetmeye Başlayın</h3>
+          <p>Apex AI size rehberlik eder. Takip edilmesi gereken hastalar, bekleyen ödemeler, bugünkü randevular — hepsi dashboard'da.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-visual">
+      <div id="step-visual-1">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--teal-pale);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;">🏥</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;">Klinik Kurulumu</div>
+            <div style="font-size:12px;color:var(--text-dim);">Adım 1 / 3</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--surface);border-radius:8px;padding:12px 16px;border:1px solid var(--border2);">
+            <div style="font-size:10px;color:var(--text-dim);margin-bottom:4px;">Klinik Adı</div>
+            <div style="font-size:13px;color:var(--text);">Dr. Ayşe Kaya Ağız ve Diş Sağlığı</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:12px 16px;border:1px solid var(--border2);">
+            <div style="font-size:10px;color:var(--text-dim);margin-bottom:4px;">Hekim</div>
+            <div style="font-size:13px;color:var(--text);">Dr. Ayşe Kaya</div>
+          </div>
+          <div style="background:var(--teal);border-radius:8px;padding:12px 16px;text-align:center;">
+            <div style="font-size:13px;color:#fff;font-weight:700;">✓ Hesap Oluşturuldu</div>
+          </div>
+        </div>
+      </div>
+      <div id="step-visual-2" style="display:none;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--teal-pale);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;">👥</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;">Hasta Listesi</div>
+            <div style="font-size:12px;color:var(--text-dim);">Adım 2 / 3</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${['Mehmet Yılmaz', 'Fatma Demir', 'Ali Çelik', 'Zeynep Arslan'].map((n,i) => `
+          <div style="background:var(--surface);border-radius:8px;padding:10px 14px;border:1px solid var(--border2);display:flex;align-items:center;gap:10px;">
+            <div style="width:28px;height:28px;border-radius:7px;background:var(--teal-pale);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--teal-light);">${n[0]}</div>
+            <div style="font-size:13px;color:var(--text);flex:1">${n}</div>
+            <div style="font-size:10px;padding:2px 8px;border-radius:6px;background:${['#4361ee22','#52b78822','#e9c46a22','#52b78822'][i]};color:${['#4361ee','#52b788','#e9c46a','#52b788'][i]};">${['Yeni','Kazanıldı','Düşünüyor','Kazanıldı'][i]}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div id="step-visual-3" style="display:none;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--teal-pale);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;">📊</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;">Dashboard</div>
+            <div style="font-size:12px;color:var(--text-dim);">Adım 3 / 3</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:var(--surface);border-radius:8px;padding:14px;border:1px solid var(--border2);">
+            <div style="font-size:22px;font-family:'Syne',sans-serif;font-weight:800;color:var(--teal-light);">48</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Aktif Hasta</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px;border:1px solid var(--border2);">
+            <div style="font-size:22px;font-family:'Syne',sans-serif;font-weight:800;color:var(--gold);">₺124K</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Bu Ay</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px;border:1px solid var(--border2);">
+            <div style="font-size:22px;font-family:'Syne',sans-serif;font-weight:800;color:#34d399;">12</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Randevu</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px;border:1px solid var(--border2);">
+            <div style="font-size:22px;font-family:'Syne',sans-serif;font-weight:800;color:var(--danger);">5</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Takip</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- AI SECTION -->
+<section id="ai">
+  <div class="mesh" style="width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,.15) 0%,transparent 70%);top:-100px;right:-100px;position:absolute;"></div>
+  <div class="ai-inner">
+    <div class="ai-chat">
+      <div class="ai-chat-header">
+        <div class="ai-avatar">🤖</div>
+        <div>
+          <div class="ai-name">Apex AI Asistan</div>
+          <div class="ai-status">● Çevrimiçi</div>
+        </div>
+      </div>
+      <div class="chat-msg user">
+        <div class="chat-avatar user-av">👤</div>
+        <div class="chat-bubble">Bu ay hangi hastaları takip etmeliyim?</div>
+      </div>
+      <div class="chat-msg ai">
+        <div class="chat-avatar ai-av">🤖</div>
+        <div class="chat-bubble">
+          <strong>3 hastanız acil takip gerektiriyor:</strong><br><br>
+          🔴 <strong>Mehmet Y.</strong> — 14 gündür düşünüyor, teklif ₺45K<br>
+          🟡 <strong>Fatma D.</strong> — 7. günde, implant teklifi bekliyor<br>
+          🟠 <strong>Ali Ç.</strong> — Gelmedi, yeniden randevu önerilir<br><br>
+          Mehmet için 14. gün takip rehberini kullanmanızı öneririm. İster misiniz?
+        </div>
+      </div>
+      <div class="chat-msg user">
+        <div class="chat-avatar user-av">👤</div>
+        <div class="chat-bubble">Evet, Mehmet için WhatsApp mesajı yaz</div>
+      </div>
+      <div class="chat-msg ai">
+        <div class="chat-avatar ai-av">🤖</div>
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="section-tag">Apex AI</div>
+      <h2>Kliniğinizin <span class="accent">Akıllı Danışmanı</span></h2>
+      <p class="section-sub" style="max-width:100%">
+        Apex AI, kliniğinizin tüm verilerini analiz eder. Hangi hastayı ne zaman arayacağınızı, hangi teklifi nasıl sunacağınızı, gelir artırıcı fırsatları size gösterir.
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:32px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg3);border-radius:12px;border:1px solid var(--border2);">
+          <div style="font-size:22px;flex-shrink:0">🎯</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;">Akıllı Takip Rehberi</div>
+            <div style="font-size:13px;color:var(--text-muted)">3., 7., 14. ve 30. günlerde ne söyleyeceğinizi birebir önerir.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg3);border-radius:12px;border:1px solid var(--border2);">
+          <div style="font-size:22px;flex-shrink:0">💬</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;">WhatsApp Mesajı Üreticisi</div>
+            <div style="font-size:13px;color:var(--text-muted)">Hastanın adını ve durumunu bilerek kişiselleştirilmiş mesajlar yazar.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg3);border-radius:12px;border:1px solid var(--border2);">
+          <div style="font-size:22px;flex-shrink:0">📈</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;">Gelir Analizi & Öneriler</div>
+            <div style="font-size:13px;color:var(--text-muted)">Düşük tahsilat oranı, kaçırılan fırsatlar ve iyileştirme önerileri sunar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="" style="text-align:center">
+    <div class="section-tag" style="justify-content:center">Referanslar</div>
+    <h2>Klinikler <span class="accent">Ne Diyor?</span></h2>
+    <p class="section-sub" style="margin:0 auto">Gerçek klinik sahiplerinin deneyimleri.</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Daha önce Excel ile takip ediyordum. ReGain Assist'e geçtikten sonra hangi hastanın nerede olduğunu anlık görüyorum. Takip oranım %40 arttı."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AK</div>
+        <div>
+          <div class="author-name">Dr. Ayşe Kaya</div>
+          <div class="author-title">Ağız ve Diş Sağlığı Kliniği — İstanbul</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Apex AI'ın hasta takip rehberi inanılmaz faydalı. '14. günde şunu söyle' tavsiyesini uyguladım, 3 kayıp hastayı geri kazandım."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MY</div>
+        <div>
+          <div class="author-name">Dr. Murat Yılmaz</div>
+          <div class="author-title">Estetik Diş Kliniği — Ankara</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Ödeme takibi modülü hayat kurtarıcı. Kimin ne kadar borcu olduğunu, kimin ödemesi geciktiğini artık saniyede görüyorum."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ZD</div>
+        <div>
+          <div class="author-name">Dr. Zeynep Demir</div>
+          <div class="author-title">Aile Diş Kliniği — İzmir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="" style="text-align:center">
+    <div class="section-tag" style="justify-content:center">SSS</div>
+    <h2>Sık Sorulan <span class="accent">Sorular</span></h2>
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item open">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ReGain Assist'i kullanmak için teknik bilgi gerekiyor mu?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Hayır. ReGain Assist, diş hekimleri ve klinik personeli için tasarlandı. Kurulum gerektirmiyor, herhangi bir tarayıcıdan anında kullanabilirsiniz. Başlarken Apex AI asistanımız size rehberlik eder.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Mevcut hasta kayıtlarımı sisteme aktarabilir miyim?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Evet. Excel veya CSV formatındaki hasta listelerinizi toplu olarak sisteme yükleyebilirsiniz. İçe aktarma sihirbazı ile birkaç dakika içinde tüm kayıtlarınız sisteme geçer.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Verilerim güvende mi?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Tüm veriler şifreli ve güvenli sunucularda saklanır. KVKK uyumlu altyapı. Hasta bilgileri yalnızca sizin erişiminize açıktır.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Kaç hekim için kullanabilirim?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Sınırsız hekim ekleyebilirsiniz. Her hekim için ayrı randevu ve hasta görünümü oluşturabilir, hekim bazlı raporlar alabilirsiniz.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Demo sonrası ne kadar sürede aktif olabilirim?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Demo görüşmesinin hemen ardından hesabınızı oluşturabilirsiniz. İlk hasta kaydınızı dakikalar içinde girebilirsiniz. Onboarding sürecinde size destek oluyoruz.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Mobil cihazdan kullanabilir miyim?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Evet, ReGain Assist tamamen mobil uyumlu. Telefon veya tabletinizden kolayca erişebilir, randevuları görebilir ve hasta durumlarını güncelleyebilirsiniz.</div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- DEMO FORM -->
+<section id="demo">
+  <div class="demo-inner">
+    <div class="">
+      <div class="section-tag" style="justify-content:center">Canlı Demo</div>
+      <h2>Hemen <span class="accent">Deneyin</span></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center">Kayıt gerektirmez. Demo hesabıyla sistemi dakikalar içinde keşfedin.</p>
+    </div>
+
+    <div class="demo-card" style="text-align:center;">
+      <div style="font-size:48px;margin-bottom:20px;">🦷</div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:12px;">Demo Hesabı Hazır</h3>
+      <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;">
+        Gerçek hasta verileriyle dolu demo kliniğimizi inceleyin. Tüm modülleri, Apex AI'ı ve raporları canlı görün.
+      </p>
+      <a href="https://entoriontech.com" target="_blank" class="btn-submit" style="display:inline-block;text-decoration:none;padding:16px 48px;width:auto;">
+        🚀 Canlı Demoya Başla
+      </a>
+      <p class="form-note" style="margin-top:20px;">🔒 Kayıt gerekmez · Ücretsiz · Anında erişim</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <div class="logo-icon">🦷</div>
+        ReGain <span>Assist</span>
+      </a>
+      <p>Türk diş kliniklerine özel, yapay zeka destekli hasta yönetim ve danışmanlık platformu.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Ürün</h4>
+      <ul>
+        <li><a href="#features">Özellikler</a></li>
+        <li><a href="#how">Nasıl Çalışır</a></li>
+        <li><a href="#ai">Apex AI</a></li>
+        <li><a href="#demo">Demo İste</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Modüller</h4>
+      <ul>
+        <li><a href="#">Hasta Yönetimi</a></li>
+        <li><a href="#">Randevu Takibi</a></li>
+        <li><a href="#">Ödeme Sistemi</a></li>
+        <li><a href="#">Raporlar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <ul>
+        <li><a href="/cdn-cgi/l/email-protection#8ee7e0e8e1ceebe0fae1fce7e1e0faebede6a0ede1e3"><span class="__cf_email__" data-cfemail="2e474048416e4b405a415c4741405a4b4d46004d4143">[email&#160;protected]</span></a></li>
+        <li><a href="#">Destek</a></li>
+        <li><a href="#">KVKK</a></li>
+        <li><a href="#">Gizlilik</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ReGain Assist · Entorion Tech. Tüm hakları saklıdır.</p>
+    <div class="footer-links">
+      <a href="#">Kullanım Koşulları</a>
+      <a href="#">KVKK</a>
+      <a href="#">Gizlilik Politikası</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal')
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80)
+        observer.unobserve(e.target)
+      }
+    })
+  }, { threshold: 0.1 })
+  reveals.forEach(r => observer.observe(r))
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item')
+    const isOpen = item.classList.contains('open')
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'))
+    if (!isOpen) item.classList.add('open')
+  }
+
+  // How it works steps
+  function setStep(stepEl, num) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'))
+    stepEl.classList.add('active')
+    document.querySelectorAll('[id^="step-visual-"]').forEach(v => v.style.display = 'none')
+    const visual = document.getElementById('step-visual-' + num)
+    if (visual) visual.style.display = 'block'
+  }
+
+  // Form submit
+  function submitForm() {
+    const btn = document.querySelector('.btn-submit')
+    btn.textContent = '✓ Talebiniz Alındı! En kısa sürede dönüş yapacağız.'
+    btn.style.background = '#065f46'
+    btn.disabled = true
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav')
+    nav.style.background = window.scrollY > 50 ? 'rgba(6,13,24,.95)' : 'rgba(6,13,24,.8)'
+  })
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').f
