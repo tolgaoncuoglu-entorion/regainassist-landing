@@ -851,7 +851,7 @@
   </div>
 
   <h1>
-    <span style="display:block;font-size:clamp(14px,2vw,18px);font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);margin-bottom:12px;">ReGain Assist</span>
+    <span style="display:block;font-size:clamp(16px,2.2vw,20px);font-weight:700;letter-spacing:1.5px;color:var(--teal-light);margin-bottom:12px;">ReGain Assist</span>
     Akıllı Klinik<br>
     <span class="accent">Yönetim Sistemi</span>
   </h1>
@@ -1316,7 +1316,10 @@
 </section>
 
 <script>
-function submitContact() {
+var SUPABASE_URL = 'https://kntpjgynchqoatpbjoap.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtudHBqZ3luY2hxb2F0cGJqb2FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3Njk2NjIsImV4cCI6MjA4NzM0NTY2Mn0.aisHheTAkHBJzX1ipYct-j4P4uyUAWh7ZeEF-i5NWkg';
+
+async function submitContact() {
   var name = document.getElementById('contact-name').value.trim();
   var phone = document.getElementById('contact-phone').value.trim();
   var email = document.getElementById('contact-email').value.trim();
@@ -1336,21 +1339,27 @@ function submitContact() {
   btn.disabled = true;
   btn.textContent = '⏳ Gönderiliyor...';
 
-  var subject = encodeURIComponent('ReGain Assist İletişim: ' + name);
-  var body = encodeURIComponent(
-    'Ad Soyad: ' + name + '\n' +
-    'Telefon: ' + phone + '\n' +
-    'E-posta: ' + (email || '-') + '\n' +
-    'Klinik: ' + (clinic || '-') + '\n' +
-    'Mesaj: ' + (msg || '-')
-  );
+  try {
+    var res = await fetch(SUPABASE_URL + '/rest/v1/iletisim_formlari', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        ad_soyad: name,
+        telefon: phone,
+        email: email || null,
+        klinik_adi: clinic || null,
+        mesaj: msg || null,
+        kaynak: 'landing_page'
+      })
+    });
 
-  // mailto fallback — ileride API'ye bağlanabilir
-  window.location.href = 'mailto:support@entoriontech.com?subject=' + subject + '&body=' + body;
+    if (!res.ok) throw new Error('Sunucu hatası');
 
-  setTimeout(function() {
-    btn.disabled = false;
-    btn.textContent = '📩 Gönder';
     result.style.display = 'block';
     result.style.background = 'rgba(13,148,136,.12)';
     result.style.color = '#14b8a6';
@@ -1360,7 +1369,15 @@ function submitContact() {
     document.getElementById('contact-email').value = '';
     document.getElementById('contact-clinic').value = '';
     document.getElementById('contact-msg').value = '';
-  }, 1000);
+  } catch (err) {
+    result.style.display = 'block';
+    result.style.background = 'rgba(244,63,94,.12)';
+    result.style.color = '#f43f5e';
+    result.textContent = 'Bir hata oluştu. Lütfen support@entoriontech.com adresine mail atın.';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '📩 Gönder';
 }
 </script>
 
