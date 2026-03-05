@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KVKK Aydınlatma Metni — ReGain Assist</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: #0d9488; }
+  .meta { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; color: #0f172a; }
+  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
+  p { margin-bottom: 12px; font-size: 14px; }
+  .warn { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .info { background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 700; border: 1px solid #e2e8f0; }
+  td { padding: 10px 14px; border: 1px solid #e2e8f0; vertical-align: top; }
+  ul { margin: 8px 0 16px 24px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  a { color: #0d9488; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 13px; color: #64748b; text-decoration: none; }
+  .back:hover { color: #0d9488; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="https://app.regainassist.com" class="back">← ReGain Assist'e Dön</a>
+
+  <h1>KVKK Aydınlatma Metni</h1>
+  <p class="meta">Son güncelleme: 4 Mart 2026 · Versiyon 1.2</p>
+
+  <div class="info">
+    Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") md. 10 ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ kapsamında hazırlanmıştır.
+  </div>
+
+  <h2>1. Veri Sorumlusu</h2>
+  <p>Entorion Teknoloji Sanayi ve Ticaret Limited Şirketi ("Şirket")</p>
+  <p>Adres: Metin Oktay Mah. 108/4 Sk. No:14/2 Karabağlar / İzmir<br>
+  E-posta: <a href="mailto:support@entoriontech.com">support@entoriontech.com</a><br>
+  Vergi No: 3361340810</p>
+
+  <h2>2. İşlenen Kişisel Veriler</h2>
+
+  <h3>2.1. Kullanıcı (Klinik Yöneticisi / Hekim) Verileri</h3>
+  <table>
+    <tr><th>Veri Kategorisi</th><th>Veriler</th><th>Amaç</th></tr>
+    <tr><td>Kimlik</td><td>Ad, soyad, TC kimlik no</td><td>Hesap oluşturma, faturalandırma</td></tr>
+    <tr><td>İletişim</td><td>E-posta, telefon</td><td>Hesap doğrulama, bildirimler, destek</td></tr>
+    <tr><td>Finansal</td><td>Ödeme bilgileri (iyzico üzerinden tokenize)</td><td>Abonelik yönetimi</td></tr>
+    <tr><td>Mesleki</td><td>Diploma no, uzmanlık alanı</td><td>ÜTS ve e-Nabız entegrasyonu</td></tr>
+    <tr><td>Teknik</td><td>IP adresi, tarayıcı bilgisi, oturum verileri</td><td>Güvenlik, performans izleme</td></tr>
+  </table>
+
+  <h3>2.2. Hasta Verileri (Klinik tarafından girilen)</h3>
+  <div class="warn">
+    <strong>⚠️ ÖNEMLİ:</strong> Hasta verilerinin KVKK'ya uygun şekilde işlenmesinden Kullanıcı (klinik) veri sorumlusu sıfatıyla sorumludur. Şirket, bu veriler bakımından veri işleyen konumundadır.
+  </div>
+  <table>
+    <tr><th>Veri Kategorisi</th><th>Veriler</th><th>Amaç</th></tr>
+    <tr><td>Kimlik</td><td>Ad, soyad, TC kimlik no, doğum tarihi, cinsiyet</td><td>Hasta kaydı, e-Nabız uyumu</td></tr>
+    <tr><td>İletişim</td><td>Telefon, adres</td><td>Randevu hatırlatma, iletişim</td></tr>
+    <tr><td>Sağlık</td><td>Tedavi kayıtları, diş haritası, ICD kodları, SUT kodları, röntgen/görüntü</td><td>Tedavi takibi, raporlama, e-Nabız export</td></tr>
+    <tr><td>Finansal</td><td>Ödeme kayıtları, borç/alacak</td><td>Finansal takip</td></tr>
+  </table>
+
+  <h2>3. ÜTS Entegrasyonu Kapsamında Veri İşleme</h2>
+  <p>ÜTS modülü kullanıldığında aşağıdaki veriler T.C. Sağlık Bakanlığı ÜTS sistemine iletilmek üzere işlenir:</p>
+  <ul>
+    <li>Klinik ve hekim kimlik bilgileri (ÜTS kullanıcı bilgileri),</li>
+    <li>Tıbbi cihaz ve malzeme bilgileri (karekod, GLN, GTIN),</li>
+    <li>Kullanım bildirimi verileri (hasta bazlı kullanım, tarih, miktar).</li>
+  </ul>
+  <p><strong>Hukuki dayanak:</strong> KVKK md. 5/2(ç) — Veri sorumlusunun hukuki yükümlülüğünü yerine getirmesi için zorunlu olması. ÜTS bildirimi yasal bir zorunluluktur.</p>
+  <p><strong>Veri aktarımı:</strong> ÜTS verileri, Kullanıcının girdiği ÜTS API bilgileri (kullanıcı adı, şifre) aracılığıyla doğrudan Sağlık Bakanlığı sunucularına iletilir. Bu bilgiler Şirket sunucularında saklanmaz; yalnızca Kullanıcının tarayıcısında şifreli olarak tutulur.</p>
+
+  <h2>4. e-Nabız Export Kapsamında Veri İşleme</h2>
+  <p>e-Nabız export işlemi sırasında aşağıdaki özel nitelikli kişisel veriler işlenir:</p>
+  <ul>
+    <li>Hasta kimlik bilgileri (TC, ad, soyad, doğum tarihi, cinsiyet),</li>
+    <li>Sağlık verileri (tedavi kayıtları, ICD tanı kodları, SUT işlem kodları),</li>
+    <li>Tedavi tarihleri ve hekim bilgileri.</li>
+  </ul>
+  <div class="warn">
+    <strong>⚠️ ÖZEL NİTELİKLİ VERİ UYARISI:</strong> Sağlık verileri, KVKK md. 6 kapsamında özel nitelikli kişisel veridir. İşlenmesi için hastanın açık rızası veya kanunda öngörülen istisnalar gereklidir.
+  </div>
+  <p><strong>Hukuki dayanak:</strong> KVKK md. 6/3 — Sağlık verilerinin, sır saklama yükümlülüğü altında bulunan kişiler tarafından işlenmesi. Kullanıcı (hekim), bu verilerin işlenmesinden veri sorumlusu olarak sorumludur.</p>
+  <p><strong>Veri aktarımı:</strong> e-Nabız export işlemi sonucunda oluşturulan dosya Kullanıcının cihazına indirilir. Bu dosya Şirket sunucularında saklanmaz. Dosyanın güvenliği ve e-Nabız'a yüklenmesi Kullanıcının sorumluluğundadır.</p>
+
+  <h2>5. Apex AI Asistan Kapsamında Veri İşleme</h2>
+  <p>AI Asistan kullanıldığında, Kullanıcının girdiği metin ve bağlam bilgileri üçüncü taraf AI hizmet sağlayıcısına (OpenAI) iletilir. Bu kapsamda:</p>
+  <ul>
+    <li>AI'a gönderilen veriler geçici olarak işlenir ve model eğitiminde kullanılmaz,</li>
+    <li>Kullanıcı, AI sohbetlerinde hasta adı, TC gibi doğrudan tanımlayıcı bilgi paylaşmaktan kaçınmalıdır,</li>
+    <li>AI yanıtları kaydedilmez ve saklanmaz.</li>
+  </ul>
+
+  <h2>6. Verilerin İşlenme Amaçları</h2>
+  <ul>
+    <li>Platform hizmetlerinin sunulması ve iyileştirilmesi,</li>
+    <li>Kullanıcı hesap yönetimi ve kimlik doğrulama,</li>
+    <li>Abonelik ve ödeme işlemlerinin yürütülmesi,</li>
+    <li>ÜTS ve e-Nabız yasal yükümlülüklerinin yerine getirilmesine yardımcı olunması,</li>
+    <li>Teknik destek sağlanması,</li>
+    <li>Yasal yükümlülüklerin yerine getirilmesi,</li>
+    <li>Platform güvenliğinin sağlanması.</li>
+  </ul>
+
+  <h2>7. Hukuki Dayanaklar</h2>
+  <table>
+    <tr><th>İşleme Amacı</th><th>Hukuki Dayanak (KVKK)</th></tr>
+    <tr><td>Hesap oluşturma, hizmet sunumu</td><td>md. 5/2(c) — Sözleşmenin ifası</td></tr>
+    <tr><td>Faturalandırma, vergi yükümlülüğü</td><td>md. 5/2(ç) — Hukuki yükümlülük</td></tr>
+    <tr><td>ÜTS bildirimi desteği</td><td>md. 5/2(ç) — Hukuki yükümlülük</td></tr>
+    <tr><td>Güvenlik, dolandırıcılık önleme</td><td>md. 5/2(f) — Meşru menfaat</td></tr>
+    <tr><td>Sağlık verisi işleme (e-Nabız)</td><td>md. 6/3 — Sağlık profesyoneli istisnası</td></tr>
+    <tr><td>AI hizmeti</td><td>md. 5/1 — Açık rıza</td></tr>
+  </table>
+
+  <h2>8. Veri Aktarımı</h2>
+  <h3>8.1. Yurt İçi Aktarım</h3>
+  <ul>
+    <li><strong>iyzico:</strong> Ödeme işlemleri (kart bilgileri tokenize edilir, Şirket tarafından saklanmaz)</li>
+    <li><strong>T.C. Sağlık Bakanlığı (ÜTS):</strong> ÜTS bildirimleri (Kullanıcı onayı ile)</li>
+  </ul>
+
+  <h3>8.2. Yurt Dışı Aktarım</h3>
+  <ul>
+    <li><strong>Supabase (AWS EU):</strong> Veritabanı barındırma — Avrupa veri merkezi, şifreli bağlantı</li>
+    <li><strong>Vercel:</strong> Web uygulama barındırma — CDN dağıtımı</li>
+    <li><strong>OpenAI:</strong> AI Asistan hizmeti — yalnızca kullanıcının gönderdiği metin verisi</li>
+  </ul>
+  <p>Yurt dışı aktarımlarda KVKK md. 9'da belirtilen güvenceler (standart sözleşme maddeleri, yeterli koruma kararı veya açık rıza) sağlanır.</p>
+
+  <h2>9. Veri Saklama Süreleri</h2>
+  <table>
+    <tr><th>Veri Türü</th><th>Saklama Süresi</th></tr>
+    <tr><td>Kullanıcı hesap bilgileri</td><td>Hesap aktif olduğu sürece + 1 yıl</td></tr>
+    <tr><td>Hasta verileri</td><td>Kullanıcının belirlediği süre (yasal saklama süresine tabi)</td></tr>
+    <tr><td>Ödeme kayıtları</td><td>10 yıl (Vergi Usul Kanunu)</td></tr>
+    <tr><td>Log ve teknik veriler</td><td>2 yıl</td></tr>
+    <tr><td>AI sohbet verileri</td><td>Saklanmaz (anlık işlenir)</td></tr>
+  </table>
+
+  <h2>10. Veri Güvenliği Tedbirleri</h2>
+  <ul>
+    <li>TLS/SSL şifreli veri iletimi,</li>
+    <li>Veritabanı düzeyinde şifreleme (AES-256),</li>
+    <li>Row Level Security (RLS) ile klinikler arası veri izolasyonu,</li>
+    <li>İki faktörlü kimlik doğrulama desteği,</li>
+    <li>Düzenli güvenlik güncellemeleri ve yama yönetimi,</li>
+    <li>Erişim logları ve denetim izleri.</li>
+  </ul>
+
+  <h2>11. İlgili Kişi Hakları</h2>
+  <p>KVKK md. 11 kapsamında aşağıdaki haklara sahipsiniz:</p>
+  <ul>
+    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+    <li>İşlenmişse buna ilişkin bilgi talep etme,</li>
+    <li>İşlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
+    <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+    <li>Eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme,</li>
+    <li>KVKK md. 7 kapsamında silinmesini veya yok edilmesini isteme,</li>
+    <li>Düzeltme/silme işlemlerinin aktarılan üçüncü kişilere bildirilmesini isteme,</li>
+    <li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonuç çıkmasına itiraz etme,</li>
+    <li>Kanuna aykırı işleme sebebiyle zarara uğramanız halinde zararın giderilmesini talep etme.</li>
+  </ul>
+  <p>Başvurularınızı <a href="mailto:support@entoriontech.com">support@entoriontech.com</a> adresine yazılı olarak iletebilirsiniz. Başvurular en geç 30 gün içinde yanıtlanır.</p>
+
+  <h2>12. Çerezler</h2>
+  <p>Platform, oturum yönetimi ve kullanıcı tercihlerinin saklanması amacıyla zorunlu çerezler kullanır. Analitik veya pazarlama çerezi kullanılmaz.</p>
+
+  <h2>13. Değişiklikler</h2>
+  <p>Bu aydınlatma metni güncellenebilir. Önemli değişiklikler e-posta ve uygulama içi bildirimle duyurulur.</p>
+
+  <h2>14. İletişim</h2>
+  <p>Entorion Teknoloji San. ve Tic. Ltd. Şti.<br>
+  Metin Oktay Mah. 108/4 Sk. No:14/2 Karabağlar / İzmir<br>
+  E-posta: <a href="mailto:support@entoriontech.com">support@entoriontech.com</a><br>
+  Tel: +90 530 459 37 19</p>
+</div>
+</body>
+</html>
