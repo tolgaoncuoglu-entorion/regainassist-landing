@@ -78,6 +78,7 @@
     display: flex; gap: 10px; align-items: center;
   }
 
+
   .nav-cta {
     display: flex; gap: 10px; align-items: center;
   }
@@ -828,8 +829,8 @@
   <div class="mesh mesh-2"></div>
   <div class="mesh mesh-3"></div>
 
-  <div style="text-align:center; padding-top: 20px; margin-bottom: 32px;">
-    <img src="/images/regain-assist-logo.png" alt="ReGain Assist" style="height:300px; width:auto; display:inline-block;">
+  <div style="text-align:center; padding-top:20px; margin-bottom:32px;">
+    <img src="/images/regain-assist-logo.png" alt="ReGain Assist" style="height:300px; width:auto; display:inline-block; max-width:90vw;">
   </div>
 
   <div class="hero-badge">
@@ -838,7 +839,6 @@
   </div>
 
   <h1>
-
     Akıllı Klinik<br>
     <span class="accent">Yönetim Sistemi</span>
   </h1>
@@ -1525,7 +1525,7 @@ async function submitContact() {
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="logo">
+      <a href="#" style="text-decoration:none;">
         <img src="/images/regain-assist-logo.png" alt="ReGain Assist" style="height:40px;width:auto;">
       </a>
       <p>Türk diş kliniklerine özel, yapay zeka destekli hasta yönetim ve danışmanlık platformu.</p>
@@ -1638,4 +1638,13 @@ async function submitContact() {
 
   // Form submit
   function submitForm() {
-    const btn = document.querySelector(
+    const btn = document.querySelector('[data-form-submit]')
+    if (btn) {
+      btn.textContent = 'Gönderildi ✓'
+      btn.style.background = '#065f46'
+    }
+  }
+
+</script>
+</body>
+</html>
