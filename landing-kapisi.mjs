@@ -53,8 +53,11 @@ const gorseller = new Set([...H.matchAll(/images\/([a-z0-9-]+)(@2x)?\.webp/g)].m
 // Marka varliklari (logo, isaret, og karti) urun ekrani DEGILDIR — beyaz
 // listede. Liste disinda HERHANGI bir gorsel cikarsa kapi kirmizi verir,
 // yani yeni bir urun ekrani sessizce giremez.
-const MARKA_VARLIKLARI = ['marka', 'og-kart', 'regain-assist-logo', 'regain-assist-icon', 'paytr-logo']
-const urunEkranlari = [...gorseller].filter(g => !MARKA_VARLIKLARI.includes(g))
+// Onek eslemesi: og karti surumlenebilir (og-kart-v2, -v3 …). Tam ad
+// listesi tutulursa her surumde kapi yanlis yere kirmizi verirdi.
+const MARKA_ONEKLERI = ['marka', 'og-kart', 'regain-assist-logo', 'regain-assist-icon', 'paytr-logo']
+const markaMi = g => MARKA_ONEKLERI.some(o => g === o || g.startsWith(o + '-'))
+const urunEkranlari = [...gorseller].filter(g => !markaMi(g))
 T(`L4a urun ekrani sayisi 0 (${urunEkranlari.join(',')||'yok'})`, urunEkranlari.length===0)
 T('L4a0 marka isareti hero icinde', H.indexOf('marka.webp') < H.indexOf('</header>'))
 // Hareket, kullanicinin tercihine SAYGILI olmali: animasyon yalnizca
