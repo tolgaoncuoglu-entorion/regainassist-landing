@@ -130,11 +130,18 @@ T('M7 ilerleme gostergesi minimal', /id="rail-say"/.test(H))
 // Story 03'un cevabi: "evet" tek basina arka plan isinin de o anda bittigi
 // izlenimi verebiliyordu. Gercek: hekimin isi biter, bildirim ~15 dk icinde
 // gonderilir. Cumle ikisini birden dogru anlatmali.
-T('N0 story 03 cevabi urun gercegine uygun',
-  /Tedavi kartını tamamladıysanız, gerisini ReGain takip eder\./.test(H)
-  && !/Tedavi kartını tamamladıysanız, evet\./.test(H))
+// Soruya ("Peki iş bitti mi?") once DOGRUDAN cevap, sonra gerekce.
+// "evet" TEK BASINA kalmamali: arka plandaki isin de o anda bittigi
+// izlenimi verirdi. Ikisi BIRLIKTE bulunmali.
+T('N0 story 03: dogrudan cevap + gerekce',
+  /Tedavi kartını tamamladıysanız, <b>evet\.<\/b> Gerisini ReGain takip eder\./.test(H))
+T('N0a "evet" tek basina degil',
+  !/Tedavi kartını tamamladıysanız, <b>evet\.<\/b>\s*<\/p>/.test(H))
 // 04'te ayni punchline iki kez vurulmamali
 T('N0b "hatırlar" punchline tek', (H.match(/ReGain hatırlar/g)||[]).length===1)
+// Sorudaki gun, zaman cizgisinin ILK adimiyla ayni olmali.
+T('N0d 04 sorusu zaman cizgisiyle tutarli',
+  /Peki… 3 gün sonra\?/.test(H) && /<span>3\. gün<\/span>/.test(H))
 T('N0c "unutturmaz" tekrari kalkti', !/Rehberi unutturmaz/.test(H))
 
 // ── N: ÜRÜN İDDİALARI ──────────────────────────────────────────────
