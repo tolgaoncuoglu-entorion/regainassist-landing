@@ -110,6 +110,10 @@ T('L6i mobil akis ayraclari gizli', /\.hero-flow i, \.akis i, \.zaman i \{ displ
 T('L6j AHA zinciri mobilde dikey', /max-width:640px\)[\s\S]*?\.zincir \{ flex-direction:column/.test(css))
 T('L6k mobil ray basligi alt alta', /\.rail-head \{ flex-direction:column/.test(css))
 
+// Starter'da 10, Pro'da 7 madde var; kartlar dogal yukseklikte birakilirsa
+// esitsiz gorunuyordu (olculdu).
+T('L6l fiyat kartlari esit yukseklik', /\.pricing-grid \{[^}]*align-items:stretch/.test(css))
+
 // ── M: TEKRAR KURALI — her mesajın TEK evi ─────────────────────────
 // Ölçüldü (önceki sürüm): dashboard 6, veri aktarımı 7, ÜTS 7, e-Nabız 7,
 // hasta takibi 8 bölümde geçiyordu. Her ana mesaj artık tek bölümde.

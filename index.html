@@ -226,7 +226,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .pricing-toggle { display:inline-flex; gap:4px; margin-top:24px; padding:4px; background:var(--surface); border:1px solid var(--border); border-radius:999px; }
   .pricing-toggle button { font-family:inherit; font-size:14px; font-weight:700; padding:9px 20px; border:none; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; }
   .pricing-toggle button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  .pricing-grid { max-width:880px; margin:38px auto 0; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
+  .pricing-grid { max-width:880px; margin:38px auto 0; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:stretch; }
   .plan-card { position:relative; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px 26px; box-shadow:var(--sh); }
   .plan-card.featured { border-color:var(--gold); box-shadow:var(--sh-lg); }
   .plan-badge { position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--gold); color:#fff; font-size:10.5px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; padding:4px 13px; border-radius:999px; white-space:nowrap; }
@@ -238,7 +238,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .plan-save { font-size:12.5px; margin-top:9px; }
   .plan-cta { display:block; margin-top:22px; padding:13px 20px; border-radius:10px; text-align:center; font-size:15px; font-weight:700; text-decoration:none; transition:opacity .15s; }
   .plan-cta:hover { opacity:.88; }
-  .plan-features { margin-top:24px; display:flex; flex-direction:column; gap:10px; font-size:14px; }
+  .plan-features { margin-top:24px; display:flex; flex-direction:column; gap:10px; font-size:14px; flex:1; }
   .plan-features .yes { color:var(--text2); }
   .plan-features .no { color:var(--text3); opacity:.55; }
   .plan-features .highlight { color:var(--text); font-weight:600; }
@@ -582,7 +582,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     <!-- PRO -->
     <div class="plan-card featured">
       <div class="plan-badge">En Popüler</div>
-      <div style="text-align:center;margin-bottom:20px;margin-top:8px;">
+      <div style="text-align:center;margin-bottom:20px;">
         <div class="plan-name">Pro</div>
         <div class="plan-desc">Büyüyen klinikler için tam platform</div>
       </div>
