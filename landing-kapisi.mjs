@@ -21,6 +21,11 @@ const al = (src,re) => (src.match(re)||[])[1]
 T('L2a title AYNI', al(H,/<title>([^<]*)</) === al(ONCE,/<title>([^<]*)</))
 T('L2b description AYNI', al(H,/name="description" content="([^"]*)"/) === al(ONCE,/name="description" content="([^"]*)"/))
 T('L2c canonical duruyor', /rel="canonical"/.test(H))
+// Sosyal kart metni sayfadaki MARKA MESAJIYLA ayni olmali; hero degisince
+// og:description bayat kalmisti ("Geriye kalan" → "Diğer her şey").
+T('L2c2 og:description marka mesajiyla uyumlu',
+  /property="og:description" content="Tedavi sizin işiniz\. Diğer her şey için/.test(H))
+T('L2c3 eski marka mesaji hicbir yerde yok', !/Geriye kalan her şey/.test(H))
 T('L2d tek h1', (H.match(/<h1[\s>]/g)||[]).length===1)
 for (const a of ['#neden','#ozellikler','#fiyatlar','#sss','#iletisim'])
   T(`L2e capa ${a}`, H.includes(`id="${a.slice(1)}"`))
