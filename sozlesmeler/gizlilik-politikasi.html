@@ -3,59 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gizlilik Politikası — ReGain Assist</title>
+<title>Gizlilik ve KVKK Politikası — ReGain Assist</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
-  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-  .logo { text-align: center; margin-bottom: 32px; }
-  .logo span { font-size: 32px; }
-  .logo h2 { font-size: 18px; color: #4361ee; margin-top: 4px; }
-  h1 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
-  .meta { font-size: 12px; color: #94a3b8; margin-bottom: 32px; }
-  h2 { font-size: 16px; font-weight: 700; color: #1e293b; margin: 28px 0 12px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: #0d9488; }
+  .meta { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; color: #0f172a; }
+  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
   p { margin-bottom: 12px; font-size: 14px; }
-  .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,.06); }
-  footer { text-align: center; margin-top: 40px; font-size: 11px; color: #94a3b8; }
+  .warn { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .info { background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 700; border: 1px solid #e2e8f0; }
+  td { padding: 10px 14px; border: 1px solid #e2e8f0; vertical-align: top; }
+  ul { margin: 8px 0 16px 24px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  a { color: #0d9488; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 13px; color: #64748b; text-decoration: none; }
+  .back:hover { color: #0d9488; }
+  .danger { background: #fee2e2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .success { background: #dcfce7; border-left: 4px solid #22c55e; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  strong { font-weight: 700; color: #0f172a; }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="logo"><span>🦷</span><h2>ReGain Assist</h2></div>
-  <div class="card">
-    <h1>Gizlilik Politikası</h1>
-    <div class="meta">Son güncelleme: 28 Şubat 2026 · Entorion Teknoloji</div>
+  <a href="https://app.regainassist.com" class="back">← ReGain Assist'e Dön</a>
 
-    <p>ReGain Assist olarak kullanıcılarımızın ve hastalarının gizliliğine büyük önem veriyoruz. Bu politika, toplanan verilerin nasıl kullanıldığını ve korunduğunu açıklamaktadır.</p>
+  <h1>ReGain Assist — Gizlilik ve Kişisel Verilerin Korunması Politikası</h1>
+  <p class="meta">Son güncelleme: 26.08.2026</p>
 
-    <h2>1. Toplanan Bilgiler</h2>
-    <p>Hizmetimizi kullanırken aşağıdaki bilgiler toplanabilir: hesap bilgileri (ad, soyad, e-posta, telefon, klinik adı), hasta bilgileri (klinik tarafından girilen hasta kayıtları, tedavi geçmişi, diş haritası verileri), kullanım verileri (oturum bilgileri, cihaz bilgileri, erişim zamanları) ve ödeme bilgileri (abonelik ve fatura bilgileri).</p>
-
-    <h2>2. Bilgilerin Kullanımı</h2>
-    <p>Toplanan bilgiler şu amaçlarla kullanılır: klinik yönetim hizmetinin sunulması, hesap güvenliğinin sağlanması, müşteri desteği sağlanması, hizmet iyileştirmeleri ve analiz, yasal yükümlülüklerin yerine getirilmesi.</p>
-
-    <h2>3. Veri Güvenliği</h2>
-    <p>Verileriniz endüstri standardı güvenlik önlemleriyle korunmaktadır. Tüm veri iletişimi SSL/TLS ile şifrelenir. Veritabanı erişimi Row Level Security (RLS) politikalarıyla kısıtlanmıştır. Her klinik yalnızca kendi verilerine erişebilir. Düzenli güvenlik güncellemeleri uygulanmaktadır.</p>
-
-    <h2>4. Üçüncü Taraf Hizmetler</h2>
-    <p>Hizmetimizin sunulması için aşağıdaki üçüncü taraf sağlayıcıları kullanılmaktadır: Supabase (veritabanı ve kimlik doğrulama), Vercel (web hosting ve dağıtım), ödeme sağlayıcıları (abonelik yönetimi için). Bu sağlayıcılar kendi gizlilik politikalarına tabidir.</p>
-
-    <h2>5. Hasta Verilerinin Sorumluluğu</h2>
-    <p>ReGain Assist, klinikler tarafından sisteme girilen hasta verilerinin "veri işleyen" konumundadır. Hasta verilerinin hukuka uygun şekilde toplanması ve işlenmesi konusunda sorumluluk, ilgili kliniğe (veri sorumlusu) aittir. Klinikler, hastalarından gerekli KVKK onaylarını almakla yükümlüdür.</p>
-
-    <h2>6. Veri Saklama ve Silme</h2>
-    <p>Hesap verileri, hesap aktif olduğu sürece saklanır. Hesap silinmesi talep edildiğinde, tüm veriler 30 gün içinde kalıcı olarak silinir. Yasal saklama yükümlülükleri saklıdır. Demo modunda girilen veriler yalnızca oturum süresince saklanır ve sayfa yenilendiğinde otomatik olarak silinir.</p>
-
-    <h2>7. Çerezler</h2>
-    <p>Hizmetimiz, oturum yönetimi ve tercih saklama amacıyla temel çerezler kullanmaktadır. Detaylı bilgi için Çerez Politikamızı inceleyebilirsiniz.</p>
-
-    <h2>8. Değişiklikler</h2>
-    <p>Bu gizlilik politikası zaman zaman güncellenebilir. Önemli değişiklikler e-posta veya uygulama içi bildirim yoluyla duyurulacaktır.</p>
-
-    <h2>9. İletişim</h2>
-    <p>Gizlilik ile ilgili sorularınız için support@entoriontech.com adresinden bize ulaşabilirsiniz.</p>
-  </div>
-  <footer>© 2026 Entorion Teknoloji. Tüm hakları saklıdır.</footer>
+  <h2>1. Veri Sorumlusu</h2>
+  <p><strong>Veri Sorumlusu: </strong>Entorion Teknoloji Sanayi ve Ticaret Limited Şirketi</p>
+  <p><strong>MERSİS No: </strong>0336134081000001</p>
+  <p><strong>Adres: </strong>Karabağlar/İzmir</p>
+  <p><strong>E-posta: </strong>info@entoriontech.com</p>
+  <h2>2. Politikanın Amacı</h2>
+  <p>İşbu Gizlilik Politikası, ReGain Assist platformunu kullanan kişilerin kişisel verilerinin 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") ve ilgili mevzuat kapsamında nasıl toplandığını, işlendiğini, saklandığını ve korunduğunu açıklar.</p>
+  <h2>3. Toplanan Kişisel Veriler</h2>
+  <p><strong>3.1. Kullanıcı (Diş Hekimi / Klinik Yöneticisi) Verileri:</strong></p>
+  <p>a) Kimlik bilgileri: ad, soyad, T.C. kimlik numarası</p>
+  <p>b) İletişim bilgileri: e-posta, telefon, adres</p>
+  <p>c) Mesleki bilgiler: diploma no, uzmanlık alanı, klinik adı</p>
+  <p>d) Finansal bilgiler: fatura bilgileri, ödeme kayıtları</p>
+  <p>e) Dijital iz bilgileri: IP adresi, oturum bilgileri, kullanım logları</p>
+  <p><strong>3.2. Hasta Verileri (Kullanıcı Tarafından Girilen):</strong></p>
+  <p>a) Kimlik bilgileri: ad, soyad, T.C. kimlik numarası, doğum tarihi</p>
+  <p>b) İletişim bilgileri: telefon, e-posta, adres</p>
+  <p>c) Sağlık verileri: tedavi kayıtları, anamnez bilgileri, röntgen/fotoğraflar</p>
+  <p>d) Finansal bilgiler: tedavi ücretleri, ödeme kayıtları</p>
+  <p><strong>ÖNEMLİ: </strong>Hasta sağlık verileri, KVKK kapsamında "özel nitelikli kişisel veri" kategorisindedir. Entorion Teknoloji, bu verilerin işlenmesinde veri işleyen sıfatıyla hareket eder. Veri sorumlusu sıfatı, hastanın tedavi gördüğü klinik/hekime aittir.</p>
+  <h2>4. Verilerin İşlenme Amaçları</h2>
+  <p>Kişisel veriler aşağıdaki amaçlarla işlenmektedir:</p>
+  <p>a) Platform hizmetlerinin sunulması ve iyileştirilmesi</p>
+  <p>b) Kullanıcı hesabının oluşturulması ve yönetimi</p>
+  <p>c) Abonelik ve ödeme işlemlerinin gerçekleştirilmesi</p>
+  <p>d) Yasal yükümlülüklerin yerine getirilmesi</p>
+  <p>e) Teknik destek sağlanması</p>
+  <p>f) Platform güvenliğinin sağlanması</p>
+  <p>g) İstatistiksel analiz ve raporlama (anonim verilerle)</p>
+  <h2>5. Verilerin İşlenme Hukuki Sebepleri</h2>
+  <p>KVKK Madde 5 ve 6 kapsamında kişisel veriler aşağıdaki hukuki sebeplere dayanılarak işlenir:</p>
+  <p>a) Açık rıza (özel nitelikli kişisel veriler için)</p>
+  <p>b) Sözleşmenin kurulması ve ifası</p>
+  <p>c) Şirketin hukuki yükümlülüklerini yerine getirmesi</p>
+  <p>d) Şirketin meşru menfaati (güvenlik, hizmet iyileştirme)</p>
+  <h2>6. Verilerin Aktarılması</h2>
+  <p>Kişisel veriler aşağıdaki durumlarda üçüncü taraflarla paylaşılabilir:</p>
+  <p>a) Bulut altyapı sağlayıcıları (sunucu ve veritabanı hizmetleri)</p>
+  <p>b) Ödeme hizmet sağlayıcıları (ödeme işlemleri için)</p>
+  <p>c) Yasal zorunluluklar kapsamında yetkili kamu kurumları</p>
+  <p>d) Hukuki danışmanlar ve denetçiler (yasal gereklilik halinde)</p>
+  <p><strong>Entorion</strong><strong> Teknoloji, kişisel verileri hiçbir koşulda pazarlama amacıyla üçüncü taraflarla paylaşmaz ve satmaz.</strong></p>
+  <h2>7. Yurt Dışına Veri Aktarımı</h2>
+  <p>Platform, bulut tabanlı altyapı hizmetleri kullanmaktadır. Bu kapsamda veriler, KVKK’nın 9. maddesi gereğince yeterli korumaya sahip ülkelere veya uygun güvencelerin sağlandığı durumlarda yurt dışına aktarılabilir. Kullanıcı, açık rıza vererek bu aktarıma onay vermektedir.</p>
+  <h2>8. Veri Güvenliği Tedbirleri</h2>
+  <p>Kişisel verilerin korunması için aşağıdaki teknik ve idari tedbirler alınmıştır:</p>
+  <p>a) SSL/TLS şifreleme ile veri iletimi</p>
+  <p>b) Veritabanı şifreleme (encryption at rest)</p>
+  <p>c) Erişim kontrolü ve yetkilendirme (RLS — Row Level Security)</p>
+  <p>d) Düzenli yedekleme</p>
+  <p>e) Güvenlik güncellemelerinin uygulanması</p>
+  <p>f) Çalışan gizlilik taahhütleri</p>
+  <h2>9. Verilerin Saklanma Süresi</h2>
+  <p>Kişisel veriler, işlenme amaçlarının gerektirdiği süre boyunca saklanır:</p>
+  <p>a) Kullanıcı verileri: Hesap aktif olduğu sürece + hesap silindikten sonra 1 yıl</p>
+  <p>b) Hasta verileri: Klinik tarafından belirlenen süre boyunca (yasal saklama yükümlülüklerine tabi)</p>
+  <p>c) Finansal veriler: Vergi mevzuatı gereği 5 yıl</p>
+  <p>d) Log kayıtları: 2 yıl</p>
+  <h2>10. Çerez Politikası</h2>
+  <p>Platform, hizmet kalitesini artırmak ve kullanıcı deneyimini iyileştirmek amacıyla çerezler (cookies) kullanmaktadır:</p>
+  <p>a) Zorunlu çerezler: Oturum yönetimi ve güvenlik</p>
+  <p>b) İşlevsel çerezler: Kullanıcı tercihlerinin hatırlanması</p>
+  <p>c) Analitik çerezler: Platform kullanım istatistikleri (anonim)</p>
+  <h2>11. Veri Sahibinin Hakları (KVKK Madde 11)</h2>
+  <p>Kişisel veri sahipleri aşağıdaki haklara sahiptir:</p>
+  <p>a) Kişisel verilerinin işlenip işlenmediğini öğrenme</p>
+  <p>b) İşlenmişse buna ilişkin bilgi talep etme</p>
+  <p>c) İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</p>
+  <p>d) Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</p>
+  <p>e) Eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme</p>
+  <p>f) KVKK’nın 7. maddesi kapsamında silinmesini veya yok edilmesini isteme</p>
+  <p>g) Düzeltme/silme işlemlerinin aktarılan üçüncü kişilere bildirilmesini isteme</p>
+  <p>h) İşlenen verilerin analiz edilmesi suretiyle aleyhine bir sonucun ortaya çıkmasına itiraz etme</p>
+  <p>ı) Kanuna aykırı işleme sebebiyle zarara uğranılması halinde zararın giderilmesini talep etme</p>
+  <h2>12. Başvuru Yöntemi</h2>
+  <p>Veri sahipleri, haklarını kullanmak için aşağıdaki yöntemlerle başvurabilir:</p>
+  <p>E-posta: info@entoriontech.com</p>
+  <p>Başvurular en geç 30 (otuz) gün içinde ücretsiz olarak sonuçlandırılır.</p>
+  <h2>13. Politika Değişiklikleri</h2>
+  <p>Entorion Teknoloji, işbu Gizlilik Politikasını güncelleme hakkını saklı tutar. Değişiklikler, Platform üzerinden ve/veya e-posta ile bildirilir.</p>
 </div>
 </body>
 </html>

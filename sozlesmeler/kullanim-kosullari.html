@@ -14,138 +14,86 @@
   h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
   p { margin-bottom: 12px; font-size: 14px; }
   .warn { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
-  .danger { background: #fee2e2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
   .info { background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 700; border: 1px solid #e2e8f0; }
+  td { padding: 10px 14px; border: 1px solid #e2e8f0; vertical-align: top; }
   ul { margin: 8px 0 16px 24px; font-size: 14px; }
   li { margin-bottom: 6px; }
   a { color: #0d9488; }
   .back { display: inline-block; margin-bottom: 24px; font-size: 13px; color: #64748b; text-decoration: none; }
   .back:hover { color: #0d9488; }
+  .danger { background: #fee2e2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .success { background: #dcfce7; border-left: 4px solid #22c55e; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  strong { font-weight: 700; color: #0f172a; }
 </style>
 </head>
 <body>
 <div class="container">
   <a href="https://app.regainassist.com" class="back">← ReGain Assist'e Dön</a>
-  
-  <h1>Kullanım Koşulları</h1>
-  <p class="meta">Son güncelleme: 4 Mart 2026 · Versiyon 1.2</p>
 
-  <h2>1. Taraflar ve Tanımlar</h2>
-  <p>Bu sözleşme, Entorion Teknoloji Sanayi ve Ticaret Limited Şirketi ("Şirket", "Biz") ile ReGain Assist platformuna ("Platform", "Hizmet") erişen ve kullanan gerçek veya tüzel kişi ("Kullanıcı", "Siz") arasında akdedilmiştir.</p>
-  <p>Platform: ReGain Assist isimli web tabanlı klinik yönetim yazılımı ve tüm alt modülleri (ÜTS Bildirimleri, e-Nabız Export, Apex AI Asistan dahil) anlamına gelir.</p>
+  <h1>ReGain Assist — Kullanım Koşulları</h1>
+  <p class="meta">Son güncelleme: 26.08.2026</p>
 
-  <h2>2. Hizmetin Kapsamı</h2>
-  <p>ReGain Assist, diş klinikleri için hasta yönetimi, randevu takibi, tedavi planlama, ödeme takibi, raporlama ve ilgili yardımcı modülleri içeren bir SaaS (Hizmet Olarak Yazılım) platformudur.</p>
-  <p>Platform aşağıdaki entegrasyon modüllerini içerir:</p>
-  <ul>
-    <li><strong>ÜTS (Ürün Takip Sistemi) Modülü:</strong> T.C. Sağlık Bakanlığı ÜTS sistemiyle veri alışverişi sağlayan yardımcı araç.</li>
-    <li><strong>e-Nabız Export Modülü:</strong> Tedavi ve hasta verilerini e-Nabız formatında dışa aktarma aracı.</li>
-    <li><strong>Apex AI Asistan:</strong> Yapay zeka destekli klinik danışmanlık aracı.</li>
-  </ul>
-
-  <h2>3. ÜTS Modülü — Sorumluluk Reddi</h2>
-  <div class="danger">
-    <strong>⚠️ ÖNEMLİ UYARI — DİKKATLE OKUYUNUZ</strong>
-  </div>
-  <p>ReGain Assist ÜTS modülü, T.C. Sağlık Bakanlığı İlaç ve Tıbbi Cihaz Kurumu (TİTCK) tarafından işletilen Ürün Takip Sistemi (ÜTS) ile entegrasyon kolaylığı sağlamak amacıyla geliştirilmiş bir yardımcı araçtır.</p>
-  
-  <h3>3.1. Resmi Sistem Değildir</h3>
-  <p>Bu modül, ÜTS'nin resmi bir parçası veya onaylı bir arayüzü değildir. Sağlık Bakanlığı, TİTCK veya herhangi bir kamu kurumu tarafından sertifikalandırılmamış, onaylanmamış veya yetkilendirilmemiştir.</p>
-
-  <h3>3.2. Kullanıcı Sorumluluğu</h3>
-  <p>ÜTS modülü aracılığıyla yapılan tüm bildirimler, veri girişleri ve işlemlerin doğruluğundan, eksiksizliğinden ve mevzuata uygunluğundan tamamen Kullanıcı sorumludur. Kullanıcı:</p>
-  <ul>
-    <li>ÜTS'ye gönderilen tüm verileri resmi ÜTS portalinden doğrulamakla,</li>
-    <li>Bildirimlerin zamanında ve doğru yapılmasını sağlamakla,</li>
-    <li>ÜTS mevzuatındaki güncellemeleri takip etmekle,</li>
-    <li>Kendi ÜTS kullanıcı bilgilerinin güvenliğini sağlamakla yükümlüdür.</li>
-  </ul>
-
-  <h3>3.3. Sorumluluk Sınırı</h3>
-  <p>Şirket, ÜTS modülünün kullanımından kaynaklanan aşağıdaki durumlardan sorumlu tutulamaz:</p>
-  <ul>
-    <li>ÜTS API'sindeki değişiklikler, kesintiler veya hatalar nedeniyle oluşan veri kayıpları,</li>
-    <li>Yanlış veya eksik bildirimlerden doğan idari yaptırımlar veya cezalar,</li>
-    <li>ÜTS mevzuatına uyumsuzluktan kaynaklanan her türlü hukuki sorumluluk,</li>
-    <li>Sağlık Bakanlığı sistemlerindeki teknik arızalar nedeniyle yaşanan aksaklıklar,</li>
-    <li>Kullanıcının ÜTS bilgilerinin yetkisiz kişilerce kullanılması.</li>
-  </ul>
-
-  <h2>4. e-Nabız Export Modülü — Sorumluluk Reddi</h2>
-  <div class="danger">
-    <strong>⚠️ ÖNEMLİ UYARI — DİKKATLE OKUYUNUZ</strong>
-  </div>
-  <p>e-Nabız Export modülü, tedavi ve hasta verilerini T.C. Sağlık Bakanlığı e-Nabız sistemine uygun formatta dışa aktarmak için geliştirilmiş bir yardımcı araçtır.</p>
-
-  <h3>4.1. Resmi Sistem Değildir</h3>
-  <p>Bu modül, e-Nabız sisteminin resmi bir parçası değildir. Sağlık Bakanlığı tarafından onaylanmamış veya sertifikalandırılmamıştır. Dışa aktarılan verilerin e-Nabız'a yüklenmesi Kullanıcının kendi sorumluluğundadır.</p>
-
-  <h3>4.2. Veri Doğruluğu</h3>
-  <p>Kullanıcı, e-Nabız'a aktarılacak tüm verilerin (hasta bilgileri, tedavi kayıtları, SUT kodları, ICD kodları) doğruluğunu ve güncelliğini teyit etmekle yükümlüdür. Platform:</p>
-  <ul>
-    <li>SUT ve ICD kod eşleştirmelerinin doğruluğunu garanti etmez,</li>
-    <li>e-Nabız veri formatındaki değişikliklerden kaynaklanan uyumsuzluklardan sorumlu değildir,</li>
-    <li>Dışa aktarılan Excel/XML dosyalarının e-Nabız sistemi tarafından kabul edileceğini garanti etmez.</li>
-  </ul>
-
-  <h3>4.3. KVKK ve Hasta Verileri</h3>
-  <p>e-Nabız export işlemi sırasında hasta kişisel verileri ve sağlık verileri işlenir. Kullanıcı, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında:</p>
-  <ul>
-    <li>Hastalarından gerekli açık rızaları almakla,</li>
-    <li>Dışa aktarılan dosyaları güvenli şekilde saklamak ve iletmekle,</li>
-    <li>Verilerin yetkisiz erişime karşı korunmasını sağlamakla yükümlüdür.</li>
-  </ul>
-
-  <h2>5. Apex AI Asistan — Sorumluluk Reddi</h2>
-  <div class="warn">
-    <strong>⚠️ UYARI:</strong> Apex AI Asistan, tıbbi tavsiye vermez ve klinik karar destek sistemi değildir.
-  </div>
-  <p>Apex AI Asistan, yapay zeka destekli bir yardımcı araçtır. AI tarafından üretilen içerikler bilgilendirme amaçlıdır ve kesinlikle tıbbi teşhis, tedavi önerisi veya reçete yerine geçmez.</p>
-  <ul>
-    <li>AI çıktıları mesleki yargının yerini almaz,</li>
-    <li>Tüm klinik kararlardan Kullanıcı (hekim) sorumludur,</li>
-    <li>AI'ın ürettiği bilgilerin doğruluğu garanti edilmez,</li>
-    <li>AI önerilerine dayanılarak alınan kararlardan Şirket sorumlu tutulamaz.</li>
-  </ul>
-
-  <h2>6. Hesap ve Erişim</h2>
-  <p>Kullanıcı, hesap bilgilerinin gizliliğinden ve hesabı üzerinden gerçekleştirilen tüm işlemlerden sorumludur. Şüpheli erişim durumunda derhal support@entoriontech.com adresine bildirimde bulunulmalıdır.</p>
-
-  <h2>7. Deneme Süresi ve Abonelik</h2>
-  <p>Yeni kullanıcılara 14 günlük ücretsiz deneme süresi tanınır. Deneme süresinde bazı modüller kısıtlı olabilir. Deneme süresi sonunda aktif abonelik başlatılmadığı takdirde hesap "askıda" durumuna alınır ve verilere salt okunur erişim sağlanır.</p>
-
-  <h2>8. Veri Sahipliği ve Taşınabilirlik</h2>
-  <p>Kullanıcının Platforma girdiği tüm veriler (hasta kayıtları, tedavi bilgileri, finansal veriler) Kullanıcıya aittir. Abonelik sonlandırıldığında Kullanıcı, 30 gün içinde tüm verilerini dışa aktarma hakkına sahiptir.</p>
-
-  <h2>9. Hizmet Düzeyi ve Erişilebilirlik</h2>
-  <p>Şirket, Platformun %99,5 çalışma süresini hedefler ancak garanti etmez. Planlı bakım çalışmaları önceden bildirilir. Üçüncü taraf hizmetlerdeki (Supabase, Vercel, ÜTS API, e-Nabız API vb.) kesintilerden Şirket sorumlu tutulamaz.</p>
-
-  <h2>10. Fikri Mülkiyet</h2>
-  <p>Platform, yazılım, tasarım, logo ve içeriklere ilişkin tüm fikri mülkiyet hakları Entorion Teknoloji Ltd. Şti.'ye aittir. Kullanıcıya yalnızca abonelik süresi boyunca sınırlı kullanım lisansı verilir.</p>
-
-  <h2>11. Yasaklı Kullanımlar</h2>
-  <p>Kullanıcı, Platformu aşağıdaki amaçlarla kullanamaz:</p>
-  <ul>
-    <li>Yasadışı faaliyetler veya mevzuata aykırı işlemler,</li>
-    <li>Platformun güvenliğini tehlikeye atacak eylemler,</li>
-    <li>Üçüncü tarafların kişisel verilerini izinsiz işleme,</li>
-    <li>Platformun tersine mühendisliği veya kaynak kodunun çözümlenmesi,</li>
-    <li>Otomatik veri toplama (scraping, crawling vb.),</li>
-    <li>Platformun başka kişi veya kurumlara alt lisanslanması.</li>
-  </ul>
-
-  <h2>12. Sorumluluk Sınırlaması</h2>
-  <p>Şirketin toplam sorumluluğu, ilgili olayın gerçekleştiği ayda Kullanıcı tarafından ödenen abonelik bedeli ile sınırlıdır. Şirket, dolaylı, arızi, özel veya sonuç olarak ortaya çıkan zararlardan hiçbir koşulda sorumlu tutulamaz.</p>
-
-  <h2>13. Değişiklikler</h2>
-  <p>Şirket, bu koşulları önceden bildirimde bulunarak değiştirme hakkını saklı tutar. Önemli değişiklikler e-posta ve uygulama içi bildirimle duyurulur. Değişiklik sonrası Platformu kullanmaya devam etmeniz, güncel koşulları kabul ettiğiniz anlamına gelir.</p>
-
-  <h2>14. Uygulanacak Hukuk ve Uyuşmazlık Çözümü</h2>
-  <p>Bu sözleşme Türkiye Cumhuriyeti hukukuna tabidir. Taraflar arasında doğabilecek uyuşmazlıklarda İzmir Mahkemeleri ve İcra Daireleri yetkilidir.</p>
-
-  <h2>15. İletişim</h2>
-  <p>Sorularınız için: <a href="mailto:support@entoriontech.com">support@entoriontech.com</a></p>
-  <p>Entorion Teknoloji San. ve Tic. Ltd. Şti.<br>Metin Oktay Mah. 108/4 Sk. No:14/2 Karabağlar / İzmir</p>
+  <h2>1. Taraflar</h2>
+  <p>İşbu Kullanım Koşulları Sözleşmesi ("İşbu Sözleşme"), <strong>Entorion</strong><strong> Teknoloji Sanayi ve Ticaret Limited Şirketi</strong> ("Şirket") ile ReGain Assist platformuna ("Platform") kayıt olan ve/veya Platformu kullanan gerçek veya tüzel kişi ("Kullanıcı") arasında, Kullanıcının Platforma erişim sağladığı tarihte yürürlüğe girer.</p>
+  <p><strong>Şirket Bilgileri</strong></p>
+  <p>Unvan: Entorion Teknoloji Sanayi ve Ticaret Limited Şirketi</p>
+  <p>MERSİS No: 0336134081000001</p>
+  <p>Adres: Karabağlar/İzmir</p>
+  <p>E-posta: info@entoriontech.com</p>
+  <h2>2. Tanımlar</h2>
+  <p><strong>"Platform": </strong>ReGain Assist adlı bulut tabanlı diş klinik yönetim yazılımını ifade eder.</p>
+  <p><strong>"Kullanıcı": </strong>Platforma kayıt olan, erişen veya kullanan diş hekimi, klinik yöneticisi veya yetkilendirilmiş personeli ifade eder.</p>
+  <p><strong>"Klinik Verileri": </strong>Kullanıcının Platform üzerinde girdiği, sakladığı veya işlediği hasta kayıtları, randevu bilgileri, finansal veriler ve diğer tüm veriyi ifade eder.</p>
+  <p><strong>"Hizmet": </strong>Platformun sunduğu hasta yönetimi, randevu takibi, tedarikçi yönetimi, finansal takip ve ilgili tüm dijital hizmetleri ifade eder.</p>
+  <h2>3. Hizmetin Kapsamı</h2>
+  <p>ReGain Assist, diş kliniklerine yönelik bulut tabanlı bir yönetim platformudur. Platform aşağıdaki hizmetleri sunar:</p>
+  <p>a) Hasta kayıt ve takip sistemi</p>
+  <p>b) Randevu yönetimi</p>
+  <p>c) Tedavi planı ve kayıt yönetimi</p>
+  <p>d) Tedarikçi ve stok yönetimi</p>
+  <p>e) Finansal takip ve raporlama</p>
+  <p>f) Kanban iş akışı yönetimi</p>
+  <p><strong>ÖNEMLİ: </strong>Platform, tıbbi cihaz niteliğinde değildir ve tıbbi teşhis veya tedavi aracı olarak kullanılamaz. Klinik kararlar yalnızca yetkili sağlık profesyonellerinin sorumluluğundadır.</p>
+  <h2>4. Kayıt ve Hesap Güvenliği</h2>
+  <p>4.1. Kullanıcı, kayıt sırasında doğru, güncel ve eksiksiz bilgi vermekle yükümlüdür.</p>
+  <p>4.2. Kullanıcı, hesap bilgilerinin (e-posta ve şifre) gizliliğini korumakla sorumludur. Hesap üzerinden gerçekleştirilen tüm işlemlerden Kullanıcı sorumludur.</p>
+  <p>4.3. Yetkisiz erişim tespit edilmesi halinde Kullanıcı derhal Şirketi bilgilendirmelidir.</p>
+  <p>4.4. Şirket, güvenlik gerekçesiyle hesapları geçici olarak askıya alma hakkını saklı tutar.</p>
+  <h2>5. Kullanım Kuralları</h2>
+  <p>Kullanıcı, Platformu kullanırken aşağıdaki kurallara uymayı kabul eder:</p>
+  <p>a) Platformu yalnızca yasal amaçlarla ve klinik yönetimi kapsamında kullanmak,</p>
+  <p>b) Üçüncü kişilerin kişisel verilerini ilgili mevzuata uygun şekilde işlemek,</p>
+  <p>c) Platform altyapısına zarar verecek, aşırı yük oluşturacak veya güvenliğini tehlikeye atacak faaliyetlerde bulunmamak,</p>
+  <p>d) Platformu tersine mühendislik, kopyalama veya izinsiz dağıtım amacıyla kullanmamak,</p>
+  <p>e) Platformu rekabetçi bir ürün geliştirmek amacıyla analiz etmemek.</p>
+  <h2>6. Fikri Mülkiyet Hakları</h2>
+  <p>6.1. ReGain Assist platformu, yazılım kodu, tasarım, logo, içerik ve tüm ilgili fikri mülkiyet hakları Entorion Teknoloji’ye aittir.</p>
+  <p>6.2. Kullanıcıya, işbu Sözleşme kapsamında sınırlı, münhasır olmayan, devredilemez bir kullanım lisansı verilir.</p>
+  <p>6.3. Kullanıcının Platforma yüklediği veriler üzerindeki haklar Kullanıcıya aittir.</p>
+  <h2>7. Veri Sahipliği ve Taşınabilirlik</h2>
+  <p>7.1. Kullanıcının Platforma girdiği tüm Klinik Verileri, Kullanıcıya aittir.</p>
+  <p>7.2. Abonelik sonlandırıldığında, Kullanıcı 30 (otuz) gün içinde verilerinin dışa aktarılmasını talep edebilir.</p>
+  <p>7.3. 30 günlük sürenin ardından Şirket, verileri silme hakkını saklı tutar.</p>
+  <h2>8. Sorumluluk Sınırlaması</h2>
+  <p>8.1. Platform "olduğu gibi" sunulmaktadır. Şirket, Platformun kesintisiz veya hatasız çalışacağını garanti etmez.</p>
+  <p>8.2. Şirket, Platformun kullanımından doğabilecek doğrudan veya dolaylı zararlardan, veri kayıplarından, kâr kaybından sorumlu tutulamaz.</p>
+  <p>8.3. Şirketin toplam sorumluluğu, her halükârda Kullanıcının son 12 (on iki) ay içinde ödediği abonelik bedeli ile sınırlıdır.</p>
+  <p>8.4. Mücbir sebepler (doğal afet, savaş, pandemi, internet altyapı arızası vb.) nedeniyle oluşan aksaklıklardan Şirket sorumlu tutulamaz.</p>
+  <h2>9. Sözleşme Değişiklikleri</h2>
+  <p>9.1. Şirket, işbu Sözleşmeyi önceden bildirimde bulunarak değiştirme hakkını saklı tutar.</p>
+  <p>9.2. Önemli değişiklikler, yürürlüğe girmesinden en az 15 (on beş) gün önce Kullanıcıya e-posta ile bildirilir.</p>
+  <p>9.3. Değişikliklerin yürürlüğe girmesinden sonra Platformun kullanılmaya devam edilmesi, değişikliklerin kabul edildiği anlamına gelir.</p>
+  <h2>10. Fesih</h2>
+  <p>10.1. Kullanıcı, aboneliğini dilediği zaman iptal ederek Sözleşmeyi feshedebilir.</p>
+  <p>10.2. Şirket, Kullanıcının işbu Sözleşmeyi ihlal etmesi halinde, yazılı uyarıdan sonra 7 (yedi) gün içinde ihlal giderilmezse hesabı askıya alabilir veya feshedebilir.</p>
+  <p>10.3. Fesih halinde, Madde 7 hükümleri (Veri Taşınabilirliği) geçerli olmaya devam eder.</p>
+  <h2>11. Uygulanacak Hukuk ve Uyuşmazlık Çözümü</h2>
+  <p>11.1. İşbu Sözleşme, Türkiye Cumhuriyeti hukuku kapsamında yorumlanır.</p>
+  <p>11.2. Taraflar arasında doğabilecek uyuşmazlıklarda İzmir Mahkemeleri ve İcra Daireleri yetkilidir.</p>
+  <h2>12. İletişim</h2>
+  <p>Sözleşme ile ilgili sorularınız ve teknik destek için: info@entoriontech.com</p>
 </div>
 </body>
 </html>

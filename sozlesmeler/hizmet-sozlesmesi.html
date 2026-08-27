@@ -3,66 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hizmet Sözleşmesi — ReGain Assist</title>
+<title>Abonelik ve Mesafeli Satış Sözleşmesi — ReGain Assist</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
-  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-  .logo { text-align: center; margin-bottom: 32px; }
-  .logo span { font-size: 32px; }
-  .logo h2 { font-size: 18px; color: #4361ee; margin-top: 4px; }
-  h1 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
-  .meta { font-size: 12px; color: #94a3b8; margin-bottom: 32px; }
-  h2 { font-size: 16px; font-weight: 700; color: #1e293b; margin: 28px 0 12px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: #0d9488; }
+  .meta { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; color: #0f172a; }
+  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
   p { margin-bottom: 12px; font-size: 14px; }
-  .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,.06); }
-  footer { text-align: center; margin-top: 40px; font-size: 11px; color: #94a3b8; }
+  .warn { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .info { background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 700; border: 1px solid #e2e8f0; }
+  td { padding: 10px 14px; border: 1px solid #e2e8f0; vertical-align: top; }
+  ul { margin: 8px 0 16px 24px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  a { color: #0d9488; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 13px; color: #64748b; text-decoration: none; }
+  .back:hover { color: #0d9488; }
+  .danger { background: #fee2e2; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  .success { background: #dcfce7; border-left: 4px solid #22c55e; padding: 16px 20px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+  strong { font-weight: 700; color: #0f172a; }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="logo"><span>🦷</span><h2>ReGain Assist</h2></div>
-  <div class="card">
-    <h1>Hizmet Sözleşmesi</h1>
-    <div class="meta">Son güncelleme: 28 Şubat 2026 · Entorion Teknoloji</div>
+  <a href="https://app.regainassist.com" class="back">← ReGain Assist'e Dön</a>
 
-    <p>Bu Hizmet Sözleşmesi ("Sözleşme"), Entorion Teknoloji ("Hizmet Sağlayıcı") ile ReGain Assist hizmetine kayıt olan klinik/kullanıcı ("Müşteri") arasında akdedilmiştir.</p>
+  <h1>ReGain Assist — Abonelik ve Mesafeli Satış Sözleşmesi</h1>
+  <p class="meta">Son güncelleme: 26.08.2026</p>
 
-    <h2>1. Sözleşmenin Konusu</h2>
-    <p>Bu sözleşme, ReGain Assist bulut tabanlı diş klinik yönetim sistemi hizmetinin sunulmasına ilişkin tarafların hak ve yükümlülüklerini düzenlemektedir.</p>
-
-    <h2>2. Hizmet Kapsamı</h2>
-    <p>Hizmet Sağlayıcı, Müşteri'ye seçilen plan dahilinde şu hizmetleri sunar: hasta kayıt ve yönetim sistemi, tedavi planlaması ve takibi, randevu yönetimi, finansal raporlama ve ödeme takibi, tedarikçi yönetimi, diş haritası ve interaktif tedavi kaydı, veri yedekleme ve güvenlik hizmetleri.</p>
-
-    <h2>3. Tarafların Yükümlülükleri</h2>
-    <p><strong>Hizmet Sağlayıcı:</strong> Hizmeti kesintisiz sunmak için azami çabayı gösterir. Verilerin güvenliğini sağlar. Teknik destek sunar. Hizmetteki önemli değişiklikleri önceden bildirir.</p>
-    <p><strong>Müşteri:</strong> Hesap bilgilerinin güvenliğini sağlar. Hasta verilerinin KVKK'ya uygun şekilde toplanmasını temin eder. Ücretlerin zamanında ödenmesini sağlar. Hizmeti yalnızca yasal amaçlarla kullanır.</p>
-
-    <h2>4. Ücret ve Ödeme</h2>
-    <p>İlk 14 günlük deneme süresi ücretsizdir. Deneme sonrası seçilen plana göre aylık ücret tahakkuk eder. Ödemeler aylık olarak, dönem başında alınır. Ödeme yapılmaması halinde hizmet erişimi kısıtlanabilir. Fiyat değişiklikleri en az 30 gün önceden bildirilir.</p>
-
-    <h2>5. Veri Sahipliği</h2>
-    <p>Müşteri tarafından sisteme girilen tüm veriler Müşteri'ye aittir. Hizmet Sağlayıcı, bu verilere yalnızca hizmetin sunulması amacıyla erişir. Sözleşmenin sona ermesi halinde Müşteri, verilerinin dışa aktarılmasını talep edebilir.</p>
-
-    <h2>6. Gizlilik</h2>
-    <p>Taraflar, bu sözleşme kapsamında öğrendikleri gizli bilgileri üçüncü şahıslarla paylaşmayacaktır. Gizlilik yükümlülüğü sözleşmenin sona ermesinden sonra da devam eder.</p>
-
-    <h2>7. Sorumluluk Sınırı</h2>
-    <p>Hizmet Sağlayıcı'nın toplam sorumluluğu, Müşteri'nin son 12 ayda ödediği toplam hizmet bedeli ile sınırlıdır. Hizmet Sağlayıcı, dolaylı, arızi, özel veya cezai zararlardan sorumlu tutulamaz.</p>
-
-    <h2>8. Süre ve Fesih</h2>
-    <p>Bu sözleşme, hesap oluşturulmasıyla yürürlüğe girer ve taraflardan biri feshetmedikçe devam eder. Her iki taraf da 30 gün önceden yazılı bildirimde bulunarak sözleşmeyi feshedebilir. Sözleşmenin ağır ihlali halinde derhal fesih hakkı saklıdır.</p>
-
-    <h2>9. Mücbir Sebepler</h2>
-    <p>Doğal afet, savaş, terör, salgın hastalık, altyapı arızaları gibi tarafların kontrolü dışındaki olaylar mücbir sebep sayılır. Mücbir sebep süresince tarafların yükümlülükleri askıya alınır.</p>
-
-    <h2>10. Uyuşmazlık Çözümü</h2>
-    <p>Bu sözleşmeden doğan uyuşmazlıklarda öncelikle dostane çözüm aranacaktır. Çözüm sağlanamaması halinde İzmir Mahkemeleri ve İcra Daireleri yetkilidir.</p>
-
-    <h2>11. İletişim</h2>
-    <p>Sözleşme ile ilgili her türlü bildirim support@entoriontech.com adresi üzerinden yapılabilir.</p>
-  </div>
-  <footer>© 2026 Entorion Teknoloji. Tüm hakları saklıdır.</footer>
+  <h2>1. Taraflar</h2>
+  <p><strong>SATICI:</strong></p>
+  <p>Unvan: Entorion Teknoloji Sanayi ve Ticaret Limited Şirketi</p>
+  <p>MERSİS No: 0336134081000001</p>
+  <p>VD / VKN: Kadifekale VD / 3361340810</p>
+  <p>Adres: Karabağlar/İzmir</p>
+  <p>E-posta: info@entoriontech.com</p>
+  <p><strong>ALICI:</strong></p>
+  <p>Platforma kayıt olan gerçek veya tüzel kişi. Alıcı bilgileri, kayıt formunda beyan edilen bilgilerdir.</p>
+  <h2>2. Sözleşmenin Konusu</h2>
+  <p>İşbu Sözleşme, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümleri gereğince, Satıcının Alıcıya ReGain Assist platformu üzerinden sunacağı dijital abonelik hizmetine ilişkin tarafların hak ve yükümlülüklerini düzenler.</p>
+  <h2>3. Hizmet ve Fiyat Bilgisi</h2>
+  <p><strong>Hizmet Adı:</strong></p>
+  <p>ReGain Assist — Diş Klinik Yönetim Platformu</p>
+  <p><strong>Hizmet İçeriği:</strong></p>
+  <p>Hasta yönetimi, randevu takibi, tedavi planı, tedarikçi yönetimi, finansal takip, kanban iş akışı, raporlama ve ilgili tüm dijital klinik yönetim hizmetleri.</p>
+  <p><strong>Abonelik Seçenekleri:</strong></p>
+  <p>a) Aylık Abonelik: 699 TL (KDV dahil) — her ay otomatik yenilenir</p>
+  <p>b) Yıllık Abonelik: 5.988 TL (KDV dahil) — 12 aylık dönem, aylık 499 TL/ay</p>
+  <p><strong>Ödeme Yöntemi:</strong></p>
+  <p>Kredi kartı / banka kartı ile online ödeme. Faturalar elektronik ortamda düzenlenir ve Alıcının kayıtlı e-posta adresine gönderilir.</p>
+  <p><strong>Fiyat Değişikliği:</strong></p>
+  <p>Şirket, abonelik fiyatlarını değiştirme hakkını saklı tutar. Fiyat değişiklikleri, mevcut abonelik dönemi sona erdikten sonra uygulanır ve en az 30 (otuz) gün önceden bildirilir.</p>
+  <h2>4. Hizmetin İfası ve Teslimatı</h2>
+  <p>4.1. Hizmet, dijital ortamda (internet üzerinden) sunulmaktadır.</p>
+  <p>4.2. Ödemenin onaylanmasının ardından Platform erişimi derhal aktif hale getirilir.</p>
+  <p>4.3. Hizmet, abonelik süresi boyunca 7/24 erişilebilir olmayı hedefler. Planlı bakım çalışmaları önceden bildirilir.</p>
+  <p>4.4. Platform erişimi, abonelik süresinin sona ermesi veya ödeme yapılmaması halinde askıya alınabilir.</p>
+  <h2>5. Cayma Hakkı</h2>
+  <p>5.1. Alıcı, mesafeli satış sözleşmesinin kurulmasından itibaren 14 (on dört) gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkını kullanabilir.</p>
+  <p>5.2. Cayma hakkının kullanılması için bu süre içinde Satıcıya yazılı bildirimde bulunulması gerekmektedir.</p>
+  <p>5.3. Cayma bildirimi için: info@entoriontech.com adresi kullanılabilir.</p>
+  <p>5.4. Cayma hakkının kullanılması halinde, ödenen bedel 14 (on dört) gün içinde Alıcıya iade edilir.</p>
+  <p><strong>Cayma Hakkının İstisnası:</strong></p>
+  <p>Mesafeli Sözleşmeler Yönetmeliği Madde 15/ğ uyarınca, dijital içeriğin ifasına başlandıktan sonra (Platform erişimi aktif edildikten sonra) cayma hakkı kullanılamaz. Alıcı, Platform erişiminin derhal aktif edilmesini talep ederek bu istisnayı kabul eder.</p>
+  <p><strong>ÖNEMLİ: </strong>Alıcı, ödeme sırasında aşağıdaki onayı vererek cayma hakkı istisnasını kabul eder:</p>
+  <p>"Dijital içeriğin ifasına derhal başlanmasını talep ediyorum ve cayma hakkımdan feragat ettiğimi kabul ediyorum."</p>
+  <h2>6. Abonelik Yenileme ve İptal</h2>
+  <p>6.1. Aylık abonelikler, dönem sonunda otomatik olarak yenilenir. Yıllık abonelikler, 12 aylık dönem sonunda otomatik yenilenir.</p>
+  <p>6.2. Alıcı, aboneliğini dilediği zaman iptal edebilir. İptal, mevcut dönemin sonunda geçerli olur.</p>
+  <p>6.3. İptal edilen aboneliklerde, mevcut dönemin kalan kısmı için kısmi iade yapılmaz.</p>
+  <p>6.4. Yıllık aboneliklerde, ilk 14 gün içinde iptal halinde tam iade yapılır (Madde 5 kapsamında).</p>
+  <p>6.5. Otomatik yenileme öncesinde Alıcıya e-posta ile hatırlatma yapılır.</p>
+  <h2>7. Ödeme Güvenliği</h2>
+  <p>7.1. Ödeme işlemleri, PCI DSS uyumlu ödeme altyapısı üzerinden gerçekleştirilir.</p>
+  <p>7.2. Satıcı, Alıcının kredi kartı bilgilerini kendi sunucularında saklamaz.</p>
+  <p>7.3. Ödeme işlemleri SSL/TLS şifreleme ile korunur.</p>
+  <h2>8. Tarafların Yükümlülükleri</h2>
+  <p><strong>Satıcının Yükümlülükleri:</strong></p>
+  <p>a) Hizmeti, sözleşme koşullarına uygun şekilde sunmak</p>
+  <p>b) Platform güvenliğini ve sürekli erişilebilirliğini sağlamak için makul özeni göstermek</p>
+  <p>c) Teknik destek sağlamak</p>
+  <p>d) Fatura ve ödeme belgelerini düzenlemek</p>
+  <p>e) Kişisel verileri KVKK kapsamında korumak</p>
+  <p><strong>Alıcının Yükümlülükleri:</strong></p>
+  <p>a) Abonelik bedelini zamanında ödemek</p>
+  <p>b) Hesap bilgilerinin güvenliğini sağlamak</p>
+  <p>c) Platformu Kullanım Koşullarına uygun şekilde kullanmak</p>
+  <p>d) Hasta verilerinin işlenmesinde KVKK yükümlülüklerine uymak</p>
+  <p>e) Kayıt bilgilerini doğru ve güncel tutmak</p>
+  <h2>9. Sorumluluk Sınırlaması</h2>
+  <p>9.1. Platform "olduğu gibi" sunulmaktadır. Satıcı, Platformun kesintisiz veya hatasız çalışacağını garanti etmez.</p>
+  <p>9.2. Satıcının toplam sorumluluğu, her halükârda Alıcının son 12 (on iki) ay içinde ödediği abonelik bedeli ile sınırlıdır.</p>
+  <p>9.3. Mücbir sebepler nedeniyle oluşan aksaklıklardan Satıcı sorumlu tutulamaz.</p>
+  <h2>10. Sözleşmenin Feshi</h2>
+  <p>10.1. Alıcı, aboneliğini dilediği zaman iptal ederek sözleşmeyi feshedebilir.</p>
+  <p>10.2. Satıcı, Alıcının sözleşme ihlali veya Platformun kötüye kullanımı halinde, yazılı uyarıdan 7 (yedi) gün sonra sözleşmeyi tek taraflı feshedebilir.</p>
+  <p>10.3. Ödeme yapılmaması halinde, 15 (on beş) günlük ek süre tanınır. Bu süre sonunda ödeme yapılmazsa abonelik askıya alınır.</p>
+  <p>10.4. Fesih halinde, Alıcının verileri 30 (otuz) gün süreyle erişilebilir durumda tutulur (Kullanım Koşulları Madde 7).</p>
+  <h2>11. İade Politikası</h2>
+  <p>11.1. Cayma hakkı kapsamındaki iadeler: 14 gün içinde Alıcının ödeme aracına iade edilir.</p>
+  <p>11.2. Teknik arıza nedeniyle 72 saatten fazla süren kesintilerde: Kesinti süresi kadar abonelik uzatılır veya orantılı iade yapılır.</p>
+  <p>11.3. Mevcut dönem için kısmi iade yapılmaz (cayma hakkı süresi hariç).</p>
+  <h2>12. Uygulanacak Hukuk ve Uyuşmazlık Çözümü</h2>
+  <p>12.1. İşbu Sözleşme, Türkiye Cumhuriyeti hukuku kapsamında yorumlanır.</p>
+  <p>12.2. Uyuşmazlıklarda, Tüketici Hakem Heyetleri ve İzmir Tüketici Mahkemeleri yetkilidir.</p>
+  <p>12.3. Tüketici Hakem Heyetlerine başvuru sınırları, her yıl Ticaret Bakanlığı tarafından belirlenir.</p>
+  <h2>13. İletişim ve Bildirim</h2>
+  <p>Genel destek: info@entoriontech.com</p>
+  <h2>14. Son Hükümler</h2>
+  <p>14.1. İşbu Sözleşme, Alıcının Platforma kayıt olması ve ödeme yapması ile yürürlüğe girer.</p>
+  <p>14.2. Sözleşmenin herhangi bir maddesinin geçersiz sayılması, diğer maddelerin geçerliliğini etkilemez.</p>
+  <p>14.3. İşbu Sözleşme, taraflar arasındaki anlaşmanın tamamını oluşturur ve daha önceki sözlü veya yazılı anlaşmaların yerine geçer.</p>
+  <p>14.4. Alıcı, işbu Sözleşmeyi, Kullanım Koşullarını, Gizlilik Politikasını ve Açık Rıza Metnini okuyup anladığını ve kabul ettiğini beyan eder.</p>
+  <p><strong>İşbu Sözleşmeyi okudum, anladım ve tüm koşulları kabul ediyorum.</strong></p>
+  <p><strong>☐ Abonelik ve Mesafeli Satış Sözleşmesini kabul ediyorum.</strong></p>
+  <p><strong>☐ Dijital içeriğin derhal ifasına başlanmasını ve cayma hakkımdan feragat ettiğimi kabul ediyorum.</strong></p>
 </div>
 </body>
 </html>
