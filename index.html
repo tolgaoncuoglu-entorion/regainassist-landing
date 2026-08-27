@@ -108,6 +108,32 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .rail-dots { display:flex; gap:6px; margin-top:12px; }
   .dot { width:26px; height:3px; border-radius:2px; background:var(--border2); border:none; padding:0; cursor:pointer; }
   .dot[aria-current="true"] { background:var(--accent); }
+  /* ── HERO YERLEŞİMİ + MARKA İŞARETİ ──────────────────────────────
+     Sağdaki boşluk ürün ekranıyla değil MARKA ile doluyor. Header'daki
+     logo 30px'te kayboluyordu; işaret burada 200px'e kadar büyüyor ve
+     header oranı hiç değişmiyor. */
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:48px; align-items:center; }
+  .hero-metin { min-width:0; }
+  .marka { position:relative; display:grid; place-items:center; aspect-ratio:1; }
+  /* Merkezde yumuşak bir ışıma — işaret zeminden ayrılsın. */
+  .marka::before { content:''; position:absolute; inset:14%; border-radius:50%;
+    background:radial-gradient(circle, rgba(13,148,136,.14) 0%, rgba(13,148,136,0) 68%); }
+  .marka img { width:50%; height:auto; position:relative; z-index:2;
+    filter:drop-shadow(0 10px 30px rgba(13,148,136,.28)); }
+  .halka { position:absolute; border-radius:50%; border:1.5px solid rgba(13,148,136,.42); }
+  .halka.h1 { width:58%;  height:58%; }
+  .halka.h2 { width:78%;  height:78%; border-color:rgba(13,148,136,.26); }
+  .halka.h3 { width:98%;  height:98%; border-color:rgba(13,148,136,.15); }
+  @media (prefers-reduced-motion:no-preference) {
+    .halka { animation:nefes 3.6s ease-in-out infinite; }
+    .halka.h2 { animation-delay:.5s; }
+    .halka.h3 { animation-delay:1s; }
+  }
+  @keyframes nefes {
+    0%, 100% { transform:scale(1);    opacity:1; }
+    50%      { transform:scale(1.07); opacity:.28; }
+  }
+
   /* ── HERO AKIŞ ÇİZGİSİ ────────────────────────────────────────────
      Hero'nun görsel gücü ürün ekranından değil, sistemin bağlı olması
      fikrinden gelir. Salt tipografi + ince ayraç. */
@@ -272,11 +298,16 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .footer-links a { color:var(--text3); text-decoration:none; }
   .footer-links a:hover { color:var(--accent); }
   @media (max-width:900px) {
+    /* Dar ekranda marka işareti metnin ALTINA geçer ve küçülür. */
+    .hero-grid { grid-template-columns:1fr; gap:28px; }
+    .marka { max-width:210px; margin:0 auto; }
     .mods { grid-template-columns:repeat(2,1fr); gap:16px; }
     /* 768'de zincir iki satıra sarıyor ve ayraç satır sonunda asılı kalıyor. */
     .zincir i { display:none; }
     .zincir { gap:8px; }
     .durumlar { grid-template-columns:1fr 1fr; }
+    /* 360px'de "₺63.200" kutusunu 2px asiyordu (olculdu: 81 > 79). */
+    .durum b { font-size:19px; letter-spacing:-.6px; }
     .pricing-grid { grid-template-columns:1fr; max-width:460px; }
     .footer-top { grid-template-columns:1fr 1fr; }
     /* Dokunma hedefleri: GORSEL olcu ayni kalir, TIKLAMA alani buyur.
@@ -334,7 +365,8 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
 <!-- HERO -->
 <header class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+   <div class="hero-metin">
     <span class="eyebrow">Diş kliniği yönetim sistemi</span>
     <h1>Tedavi sizin işiniz.<br>Diğer her şey için <span class="soft">ReGain Assist</span>.</h1>
     <p class="hero-sub">Çok modül değil. Birlikte çalışan tek sistem.</p>
@@ -355,6 +387,18 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
          bir kartın altında duruyordu; diğer bölümlerdeki değerler beyansız
          kalıyordu. Tek yerde, en başta. -->
     <p class="temsili">Sayfada kullanılan veriler temsilidir.</p>
+   </div>
+
+   <!-- MARKA İŞARETİ — hero'daki boşluğu ürün ekranıyla değil markayla
+        dolduruyor. Header'daki logo küçük kaldığı için işaret burada
+        büyük görünür. Halkalar sırayla nefes alır; hareket KAPALIYSA
+        (prefers-reduced-motion) sabit durur. -->
+   <div class="marka" aria-hidden="true">
+     <span class="halka h1"></span>
+     <span class="halka h2"></span>
+     <span class="halka h3"></span>
+     <img src="/images/marka.webp" alt="" width="400" height="400" loading="eager" decoding="async">
+   </div>
   </div>
 </header>
 

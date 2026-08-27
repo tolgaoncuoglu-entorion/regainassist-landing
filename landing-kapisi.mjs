@@ -45,7 +45,17 @@ T('L3g yillik fiyatlar JS\'te', /799/.test(H) && /1\.599/.test(H))
 // ── L4: GÖRSEL STRATEJİSİ ───────────────────────────────────────
 const gorseller = new Set([...H.matchAll(/images\/([a-z0-9-]+)(@2x)?\.webp/g)].map(m=>m[1]))
 // Politika (Tolga 27.08): landing'de URUN EKRANI KULLANILMAZ.
-T(`L4a urun ekrani sayisi 0 (${[...gorseller].join(',')||'yok'})`, gorseller.size===0)
+// Marka varliklari (logo, isaret, og karti) urun ekrani DEGILDIR — beyaz
+// listede. Liste disinda HERHANGI bir gorsel cikarsa kapi kirmizi verir,
+// yani yeni bir urun ekrani sessizce giremez.
+const MARKA_VARLIKLARI = ['marka', 'og-kart', 'regain-assist-logo', 'regain-assist-icon', 'paytr-logo']
+const urunEkranlari = [...gorseller].filter(g => !MARKA_VARLIKLARI.includes(g))
+T(`L4a urun ekrani sayisi 0 (${urunEkranlari.join(',')||'yok'})`, urunEkranlari.length===0)
+T('L4a0 marka isareti hero icinde', H.indexOf('marka.webp') < H.indexOf('</header>'))
+// Hareket, kullanicinin tercihine SAYGILI olmali: animasyon yalnizca
+// prefers-reduced-motion: no-preference altinda tanimli.
+T('L4a0b nabiz hareketi tercihe saygili',
+  /@media \(prefers-reduced-motion:no-preference\) \{[\s\S]{0,220}?\.halka \{ animation:nefes/.test(css))
 T('L4a2 dashboard EKRANI kullanilmiyor', !/story-dashboard/.test(H))
 // og:image de bir yuzeydir: urun ekrani oraya da konmamali
 const og = (H.match(/property="og:image" content="([^"]*)"/)||[])[1] || ''
