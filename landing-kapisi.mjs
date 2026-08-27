@@ -85,7 +85,11 @@ T(`L4d her ekran gorseli etiketli (${shotSayisi} gorsel / ${capSayisi} etiket)`,
 T('L4e adim adim zincir kaldirildi', !/class="chain"/.test(H))
 T('L4f AHA bolumu var', /Bunlar dört ayrı özellik değil\./.test(H) && /Aynı sistemin dört farklı anı\./.test(H))
 T('L4f2 AHA zinciri 7 halka', ((H.match(/<div class="zincir"[\s\S]*?<\/div>/)||[''])[0].match(/<span>/g)||[]).length===7)
-T('L4g temsili deger etiketli', /class="temsili">\s*Temsili değerler\./.test(H))
+// Beyan TEK YERDE ve HERO'NUN ALTINDA — sayfadaki tüm değerleri kapsar.
+// (Önce yalnız bir kartın altındaydı; diğer bölümlerin değerleri beyansızdı.)
+T('L4g temsili beyani var', /class="temsili">\s*Sayfada kullanılan veriler temsilidir\./.test(H))
+T('L4g2 beyan tek yerde', (H.match(/class="temsili"/g)||[]).length===1)
+T('L4g3 beyan hero icinde', H.indexOf('class="temsili"') < H.indexOf('</header>'))
 
 // ── L6: MOBİL ───────────────────────────────────────────────────
 // Olculdu (360/390/768px iframe): asagidaki kurallar OLMADAN widget metni
@@ -100,6 +104,11 @@ T('L6e mobil CTA saga yasli', /\.nav-in > \.btn \{ margin-left:auto; \}/.test(cs
 T('L6f mobil durum kartlari 2 sutun', /max-width:900px\)[\s\S]*?\.durumlar \{ grid-template-columns:1fr 1fr; \}/.test(css))
 T('L6g mobil bildirim kartlari tek sutun', /max-width:640px\)[\s\S]*?\.bildirim-ikili \{ grid-template-columns:1fr; \}/.test(css))
 T('L6h moduller 768:2 / 640:1 sutun', /max-width:900px\)[\s\S]*?\.mods \{ grid-template-columns:repeat\(2,1fr\)/.test(css) && /max-width:640px\)[\s\S]*?\.mods \{ grid-template-columns:1fr; \}/.test(css))
+
+// Dar ekranda yatay akislar sarinca ayrac satir sonunda asili kaliyordu.
+T('L6i mobil akis ayraclari gizli', /\.hero-flow i, \.akis i, \.zaman i \{ display:none; \}/.test(css))
+T('L6j AHA zinciri mobilde dikey', /max-width:640px\)[\s\S]*?\.zincir \{ flex-direction:column/.test(css))
+T('L6k mobil ray basligi alt alta', /\.rail-head \{ flex-direction:column/.test(css))
 
 // ── M: TEKRAR KURALI — her mesajın TEK evi ─────────────────────────
 // Ölçüldü (önceki sürüm): dashboard 6, veri aktarımı 7, ÜTS 7, e-Nabız 7,
@@ -118,13 +127,29 @@ T(`M5 marka mesaji en fazla 2 yerde (${kacBolumde(/Çok modül değil/)})`, kacB
 T('M6 storytelling basligi dogru', /Tanıdık geliyor mu\?/.test(H) && !/Kliniğin dört gerçek anı/.test(H))
 T('M7 ilerleme gostergesi minimal', /id="rail-say"/.test(H))
 
+// Story 03'un cevabi: "evet" tek basina arka plan isinin de o anda bittigi
+// izlenimi verebiliyordu. Gercek: hekimin isi biter, bildirim ~15 dk icinde
+// gonderilir. Cumle ikisini birden dogru anlatmali.
+T('N0 story 03 cevabi urun gercegine uygun',
+  /Tedavi kartını tamamladıysanız, gerisini ReGain takip eder\./.test(H)
+  && !/Tedavi kartını tamamladıysanız, evet\./.test(H))
+// 04'te ayni punchline iki kez vurulmamali
+T('N0b "hatırlar" punchline tek', (H.match(/ReGain hatırlar/g)||[]).length===1)
+T('N0c "unutturmaz" tekrari kalkti', !/Rehberi unutturmaz/.test(H))
+
 // ── N: ÜRÜN İDDİALARI ──────────────────────────────────────────────
 T('N1 ÜTS otomatik gonderim iddiasi YOK', !/ÜTS bildirimi otomatik yapıldı|otomatik olarak bildiril/i.test(H))
 T('N2 ÜTS gercek durum', /ÜTS bildirimi gönderime alındı/.test(H))
 T('N3 e-Nabiz dogrudan gonderim reddi acik', /e-Nabız’a doğrudan gönderim yapılmaz/.test(H))
 T('N4 e-Nabiz bildirim yapildi iddiasi YOK', !/e-Nabız bildirimi (yapıldı|gönderildi)/i.test(H))
 T('N5 mutlak aktarim vaadi YOK', !/veri kaybı olmaz|%100 aktarım|garantili aktarım/i.test(H))
-T('N6 onaysiz gonderim yok beyani', /onayınız olmadan gönderilmez/.test(H))
+// Eski beyan ("hicbir bildirim onayiniz olmadan gonderilmez") teknik olarak
+// dogruydu ama HER bildirim icin ayri onay izlenimi veriyordu. Yeni akista
+// hekim turu secer ve TEK onay verir; gonderimi sistem yurutur.
+T('N6 onay/gonderim iliskisi dogru anlatiliyor',
+  /Bildirim türünü siz seçersiniz\./.test(H)
+  && /Onayınızdan sonra ReGain gönderim sürecini takip eder\./.test(H))
+T('N6b her bildirimde ayri onay izlenimi yok', !/onayınız olmadan gönderilmez/.test(H))
 
 // ── O: FAQ ŞEMASI ↔ GÖRÜNEN İÇERİK ─────────────────────────────────
 const ldm = H.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)

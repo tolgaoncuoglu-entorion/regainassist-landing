@@ -127,7 +127,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     border-radius:50%; background:var(--border2); }
   .story-sonuc { font-size:15.5px; color:var(--text2); margin-top:16px; line-height:1.5; }
   .story-sonuc b { color:var(--text); font-weight:800; }
-  .temsili { font-size:11px; color:var(--text3); margin-top:10px; }
+  .temsili { font-size:12px; color:var(--text3); margin-top:16px; letter-spacing:.2px; }
   /* 01 — durum kartları */
   .durumlar { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border);
     border:1px solid var(--border); border-radius:10px; overflow:hidden; }
@@ -272,6 +272,9 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .footer-links a:hover { color:var(--accent); }
   @media (max-width:900px) {
     .mods { grid-template-columns:repeat(2,1fr); gap:16px; }
+    /* 768'de zincir iki satıra sarıyor ve ayraç satır sonunda asılı kalıyor. */
+    .zincir i { display:none; }
+    .zincir { gap:8px; }
     .durumlar { grid-template-columns:1fr 1fr; }
     .pricing-grid { grid-template-columns:1fr; max-width:460px; }
     .footer-top { grid-template-columns:1fr 1fr; }
@@ -287,6 +290,18 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     section { padding:56px 0; }
     .hero { padding:40px 0 4px; }
     .rail { grid-auto-columns:92%; }
+    /* Dar ekranda başlık ile ray kontrolleri yan yana sıkışıyor ve bölüm
+       etiketi iki satıra düşüyordu (360px'de ölçüldü). Alt alta alınıyor. */
+    .rail-head { flex-direction:column; align-items:flex-start; gap:12px; }
+    .rail-nav { margin-left:0; }
+    /* Yatay akış bileşenleri dar ekranda SARIYOR ve ayraç çizgisi satır
+       sonunda asılı kalıyordu (360/390/768'de ölçüldü). Ayraçlar gizlenir;
+       AHA zinciri ise DİKEY akar, böylece "bağlı" fikri korunur. */
+    .hero-flow i, .akis i, .zaman i { display:none; }
+    .hero-flow, .akis, .zaman { gap:6px; }
+    .zincir { flex-direction:column; gap:0; }
+    .zincir span { width:100%; text-align:center; }
+    .zincir i { width:1px; height:13px; margin:0 auto; flex-shrink:0; }
     .story-top { padding:20px 18px 4px; }
     .story-alt { padding:14px 18px 20px; }
     .bildirim-ikili { grid-template-columns:1fr; }
@@ -334,6 +349,11 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     <div class="hero-flow" aria-hidden="true">
       <span>Hasta</span><i></i><span>Tedavi</span><i></i><span>Stok</span><i></i><span>Bildirim</span><i></i><span>Tahsilat</span><i></i><span>Takip</span>
     </div>
+
+    <!-- Sayfadaki TÜM sayı ve isimleri kapsayan tek beyan. Eskiden yalnızca
+         bir kartın altında duruyordu; diğer bölümlerdeki değerler beyansız
+         kalıyordu. Tek yerde, en başta. -->
+    <p class="temsili">Sayfada kullanılan veriler temsilidir.</p>
   </div>
 </header>
 
@@ -362,8 +382,8 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
           <p class="story-a">Kliniğinizde sizi yönetim paneliniz karşılasın.</p>
           <ul class="story-sorular">
             <li>Bugün kimler, kaçta gelecek?</li>
-            <li>Ne kadar alacak var?</li>
-            <li>Görmediğiniz bir ÜTS bildirimi var mı?</li>
+            <li>Ne kadar alacağım var?</li>
+            <li>Gözümden kaçan bir ÜTS işlemi var mı?</li>
             <li>Neyin siparişini verecektik?</li>
           </ul>
         </div>
@@ -375,7 +395,6 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
             <div class="durum"><span class="d-l">Stok</span><b>2</b><span class="d-a">kritik ürün</span></div>
           </div>
           <p class="story-sonuc">Tüm bu işlerle tek tek siz uğraşmayın.<br><b>Biz hepsini önünüze getirelim.</b></p>
-          <p class="temsili">Temsili değerler.</p>
         </div>
       </article>
 
@@ -384,7 +403,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         <div class="story-top">
           <div class="story-no">02</div>
           <h3 class="story-q">“5.000 tane hastayı kim taşıyacak şimdi?”</h3>
-          <p class="story-a">ReGain Akıllı Veri Aktarım Sihirbazı.</p>
+          <p class="story-a">Akıllı Veri Aktarım Sihirbazı ile üç adımda:</p>
         </div>
         <div class="story-alt">
           <ol class="adimlar">
@@ -403,7 +422,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         <div class="story-top">
           <div class="story-no">03</div>
           <h3 class="story-q">“Tedavi tamamlandı. Peki iş bitti mi?”</h3>
-          <p class="story-a">Tedavi kartını tamamladıysanız, evet.</p>
+          <p class="story-a">Tedavi kartını tamamladıysanız, gerisini ReGain takip eder.</p>
         </div>
         <div class="story-alt">
           <ul class="tamamlar">
@@ -422,7 +441,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
           <div class="story-no">04</div>
           <h3 class="story-q">“Hocam, ben bir düşüneyim.”</h3>
           <p class="story-a">Peki… 7 gün sonra?</p>
-          <p class="story-cevap">ReGain Assist Hasta Kazanım Rehberi unutturmaz.</p>
+          <p class="story-cevap">Hasta Kazanım Rehberi devreye girer.</p>
         </div>
         <div class="story-alt">
           <ul class="story-sorular">
@@ -505,7 +524,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
       <div class="bkart">
         <h3>ÜTS</h3>
         <p>Hazır olanı anında bildirin.<br>Gelen bildirimleri görün.<br>Bekleyen işlemleri takip edin.</p>
-        <p class="bnot">Hiçbir bildirim onayınız olmadan gönderilmez.</p>
+        <p class="bnot"><b>Bildirim türünü siz seçersiniz.</b> Onayınızdan sonra ReGain gönderim sürecini takip eder.</p>
       </div>
       <div class="bkart">
         <h3>e-Nabız</h3>
@@ -603,7 +622,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
       <details class="faq-item"><summary class="faq-q">Ücretsiz deneme nasıl başlar?</summary><div class="faq-a">Kayıt olduktan sonra 14 gün boyunca tüm Pro özelliklere erişirsiniz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz. Deneme süresi bittiğinde planınızı seçersiniz.</div></details>
       <details class="faq-item"><summary class="faq-q">Mevcut hasta verilerimi aktarabilir miyim?</summary><div class="faq-a">Evet. Excel veya CSV dosyanızı yükleyin, sistem sütunları otomatik eşleştirir. Hasta bilgileri, tedavi geçmişi, ödemeler, randevular ve hekim atamaları aktarılabilir. Yazmadan önce hangi kayıtların yeni, hangilerinin güncelleneceğini önizlemede görürsünüz; aynı hasta birden fazla satırda geçiyorsa ad-soyad ve doğum tarihi üzerinden eşleştirilir. Eski yazılımınızdan Excel çıktısı almanız yeterlidir.</div></details>
       <details class="faq-item"><summary class="faq-q">e-Nabız kayıtlarını nasıl hazırlayabilirim?</summary><div class="faq-a">ReGain Assist e-Nabız’a doğrudan bildirim göndermez. Tedavi kayıtlarınızı e-Nabız paket formatına (Paket 101 Hasta Kayıt, Paket 102 Tedavi, Paket 103 Muayene) hazırlar ve Excel olarak dışa aktarır; dosyayı Sağlık Bakanlığı portalına siz yüklersiniz. Bilgileri tam olan tedaviler listeye eklenir, eksik olanlar nedeniyle birlikte gösterilir. SUT ve ICD kodları hekim tarafından girilir — sistem kod önermez.</div></details>
-      <details class="faq-item"><summary class="faq-q">ÜTS bildirimi nasıl çalışıyor?</summary><div class="faq-a">Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Hiçbir bildirim onayınız olmadan gönderilmez; eksik bilgi varsa kaydetmeden önce listelenir.</div></details>
+      <details class="faq-item"><summary class="faq-q">ÜTS bildirimi nasıl çalışıyor?</summary><div class="faq-a">Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Bildirim türünü tedavi kartında siz seçersiniz; “Tedaviyi Tamamla” onayınızdan sonra bildirim gönderim sırasına alınır ve ReGain süreci takip eder. Eksik bilgi varsa kaydetmeden önce listelenir.</div></details>
       <details class="faq-item"><summary class="faq-q">Verilerim güvenli mi?</summary><div class="faq-a">Veriler SSL/TLS ile şifreli iletilir, satır düzeyinde erişim kontrolü (RLS) ile korunur ve düzenli yedeklenir. Her klinik yalnızca kendi verisini görür. KVKK kapsamındaki aydınlatma ve açık rıza metinleri sitemizde yayınlanmıştır.</div></details>
       <details class="faq-item"><summary class="faq-q">Apex AI ne yapabilir?</summary><div class="faq-a">Klinik verileriniz üzerinde doğal dille soru sormanızı sağlar; hasta takip mesajı, tedavi açıklaması ve randevu hatırlatması gibi metinler üretir. Bir karar destek aracıdır, klinik karar mercii değildir. Pro planda sınırsız, Starter planda günde 10 mesaj kullanabilirsiniz.</div></details>
       <details class="faq-item"><summary class="faq-q">Hasta Kazanım Rehberi nedir?</summary><div class="faq-a">“Düşünüyorum” deyip ayrılan hastalar için gün bazlı bir takip rehberidir. 3, 7, 14 ve 30. gün için hastaya ne zaman, hangi kanaldan ve nasıl ulaşılacağını gösterir; tereddüt sebebine göre iletişim önerisi sunar.</div></details>
@@ -970,7 +989,7 @@ function setPricingDonem(donem) {
      "name": "ÜTS bildirimi nasıl çalışıyor?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Hiçbir bildirim onayınız olmadan gönderilmez; eksik bilgi varsa kaydetmeden önce listelenir."
+      "text": "Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Bildirim türünü tedavi kartında siz seçersiniz; “Tedaviyi Tamamla” onayınızdan sonra bildirim gönderim sırasına alınır ve ReGain süreci takip eder. Eksik bilgi varsa kaydetmeden önce listelenir."
      }
     },
     {
