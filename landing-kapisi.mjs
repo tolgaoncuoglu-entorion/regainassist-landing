@@ -234,6 +234,11 @@ T('N8d her widgetin KENDI renk kimligi', (() => {
   return m.length === 3 && new Set(m).size === 3
 })())
 T('N8e her widgetin ikonu var', (H.match(/class="kol-ikon"/g)||[]).length === 3)
+// Tolga'nin basliklandirmasi (29.08): UTS tarafi BILDIRIM, e-Nabiz tarafi
+// EXPORT — cunku e-Nabiz'a gonderim yapilmiyor, dosya disa aktariliyor.
+// Baslik bu ayrimi tasiyor.
+T('N8h baslik UTS bildirimi / e-Nabiz export ayrimini tasiyor',
+  /ÜTS Bildirimleri &amp; e-Nabız Export/.test(H))
 T('N8f maddeler IKI SUTUN (liste gorunumu degil)',
   /\.kol-grid \{[^}]*grid-template-columns:1fr 1fr/.test(H))
 T('N8g widget kart gibi (ust serit + golge)',
