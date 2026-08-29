@@ -23,9 +23,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '2032392980824888');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
-/></noscript>
 <!-- End Meta Pixel Code -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReGain Assist — Diş Kliniği Yönetim Sistemi</title>
@@ -400,6 +397,15 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 </style>
 </head>
 <body>
+<!-- Meta Pixel noscript yedegi.
+     ⚠️ HEAD'den BODY'ye tasindi: <noscript> HEAD icindeyken yalnizca
+     link/style/meta barindirabilir. JS KAPALI bir ziyaretcide ayristirici
+     oradaki <img>'i gorunce HEAD'i erken kapatabilir ve ARDINDAN GELEN
+     title/description/canonical/og etiketleri BODY'ye duserdi.
+     Bu dosyada noscript tam da onlarin ONUNDEYDI. -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
+/></noscript>
 
 <nav class="nav">
   <div class="wrap nav-in">
@@ -1219,6 +1225,25 @@ function setPricingDonem(donem) {
   }
  ]
 }
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     META PIXEL — CTA TIKLAMASI
+     Uygulamaya gecis olcumu. OZEL (custom) olaydir, standart Lead DEGILDIR:
+     CTA'ya tiklamak lead olmak degildir; gercek donusum
+     app.regainassist.com'da CompleteRegistration / StartTrial olarak olculur.
+     Kisisel veri gonderilmez; yalnizca olay adi gider.
+     ────────────────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  if (typeof fbq !== 'function') return;
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="app.regainassist.com"]') : null;
+    if (!a) return;
+    // Sayfa terk edilmeden once gonderilir.
+    fbq('trackCustom', 'CTAClick');
+  }, true);
+})();
 </script>
 
 </body>

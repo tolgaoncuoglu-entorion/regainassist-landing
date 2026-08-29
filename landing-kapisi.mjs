@@ -334,5 +334,19 @@ T('O4 e-Nabiz sorusu duzeltildi', /e-Nabız kayıtlarını nasıl hazırlayabili
 T('L5 uydurma oran yok', !/%\s?60|~\s?%\s?90|~\s?%\s?35/.test(H))
 T('L5b e-Nabiz dogrudan gonderim iddiasi yok', !/e-Nabız'a doğrudan (bildirim )?gönderi(r|lir)/.test(H))
 
+// ── P: META PIXEL ──────────────────────────────────────────────────
+// Landing'in pixel'i CANLIDA calisiyor; hicbir duzenleme onu dusurmemeli.
+// Ayrica CTA tiklamasi Lead OLARAK ISARETLENMEZ: CTA'ya tiklamak lead
+// olmak degildir, gercek donusum uygulamada olculur.
+// ⚠️ Yorumlar olcume karismasin diye once temizlenir -- 'Lead' kelimesi
+//    aciklama metninde de geciyor, olculen sey CAGRIDIR.
+const Hy = H.replace(/<!--[\s\S]*?-->/g, '')
+T('P1 pixel init duruyor', /fbq\('init', '2032392980824888'\)/.test(Hy))
+T('P2 PageView duruyor', /fbq\('track', 'PageView'\)/.test(Hy))
+T('P3 noscript yedegi duruyor', /facebook\.com\/tr\?id=2032392980824888/.test(Hy))
+T('P4 CTA ozel olay gonderiyor', /fbq\('trackCustom', 'CTAClick'\)/.test(Hy))
+T('P5 Lead HIC gonderilmiyor', !/fbq\(\s*['"]track(Custom)?['"]\s*,\s*['"]Lead['"]/.test(Hy))
+T('P6 init kullanici verisi almiyor', !/fbq\('init',\s*'\d+'\s*,\s*\{/.test(Hy))
+
 console.log(hata.length ? `KIRMIZI ${hata.length}/${ok+hata.length}:\n  - ${hata.join('\n  - ')}` : `YESIL ${ok}/${ok}`)
 process.exit(hata.length?1:0)
