@@ -198,7 +198,11 @@ T('N6b karar verilmeden tamamlanmadigi yazili',
 T('N6b2 onaysiz bildirim gitmedigi yazili',
   /onay verilmeden bildirim gönderilmez/.test(H))
 T('N6d e-Nabiz listesini KULLANICI yukluyor',
-  /Bakanlık portalına siz yüklersiniz/.test(H))
+  /Bakanlık portalına kolayca yükleyebilirsiniz/.test(H))
+// "Bakanlik" burada cins isim degil, belirli kurumun (Saglik Bakanligi)
+// yerine gecen kisaltma — ozel ad yerine kullanildigi icin BUYUK yazilir.
+T('N6e Bakanlik ozel ad olarak buyuk yaziliyor',
+  /Bakanlık portalına/.test(H) && !/bakanlık portalına/.test(H))
 
 // ── N7: YETENEK KOLLARI — iddialar URUNDE OLCULDU ───────────────────
 // Her madde koda bakilarak dogrulandi; dogrulanmamis vaat yazilmadi.
