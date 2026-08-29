@@ -203,13 +203,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     color:var(--text); margin-top:30px; line-height:1.25; text-wrap:balance; }
   .aha-final b { color:var(--accent); }
   /* ── ÜTS / e-NABIZ ───────────────────────────────────────────────── */
-  .bildirim-ikili { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:32px; }
-  .bkart { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:24px; }
-  .bkart h3 { font-size:13px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); }
-  .bkart p { font-size:16px; color:var(--text); margin-top:12px; line-height:1.55; font-weight:600; }
-  .bkart .bnot { font-size:13px; color:var(--text3); font-weight:500; margin-top:14px; padding-top:12px;
     border-top:1px dashed var(--border2); line-height:1.5; }
-  .bkart .bnot b { color:var(--text2); }
   /* SECTION */
   section { padding:76px 0; }
   .sec-tag { font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); }
@@ -219,12 +213,26 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   section[id], .faq { scroll-margin-top:80px; }
   .proof.rev .proof-txt { order:2; }
   /* MODULLER */
-  .mods { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:34px; }
-  .mod { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:22px; }
-  .mod h3 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text3); }
-  .mod ul { list-style:none; margin-top:12px; display:flex; flex-direction:column; gap:9px; }
-  .mod li { font-size:14.5px; color:var(--text2); display:flex; gap:9px; }
-  .mod li b { color:var(--text); font-weight:600; }
+  /* YETENEK KOLLARI — <details> ile: JS yok, erisilebilir, icerik DOM'da
+     kaldigi icin arama motoru okur. Ilk kol acik gelir ki bolum bos gorunmesin. */
+  .kollar { display:flex; flex-direction:column; gap:12px; margin-top:34px; }
+  .kol { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+  .kol[open] { border-color:var(--accent-l); box-shadow:var(--sh); }
+  .kol summary { list-style:none; cursor:pointer; padding:20px 22px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .kol summary::-webkit-details-marker { display:none; }
+  .kol summary::after { content:'+'; margin-left:auto; font-size:20px; font-weight:400; color:var(--text3); line-height:1; }
+  .kol[open] summary::after { content:'\2212'; color:var(--accent); }
+  .kol summary:hover .kol-ad { color:var(--accent); }
+  .kol-ad { font-size:17px; font-weight:700; letter-spacing:-.2px; color:var(--text); }
+  .kol-vaat { font-size:14.5px; color:var(--text2); }
+  .kol-govde { padding:0 22px 22px; }
+  .kol-govde ul { list-style:none; display:flex; flex-direction:column; gap:11px; border-top:1px solid var(--border); padding-top:18px; }
+  .kol-govde li { font-size:14.5px; line-height:1.55; color:var(--text2); display:flex; gap:10px; }
+  .kol-govde li::before { content:'\2014'; color:var(--accent); flex-shrink:0; }
+  .kol-govde li b { color:var(--text); font-weight:600; }
+  .kol-not { margin-top:14px; font-size:13px; line-height:1.55; color:var(--text3); }
+  .mods-ozet { margin-top:28px; font-size:13.5px; line-height:1.9; color:var(--text3); }
+  .mods-ozet b { color:var(--text2); font-weight:600; }
   /* FINAL */
   .final { background:var(--accent); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
   .final h2 { font-size:clamp(24px,3.4vw,38px); font-weight:800; letter-spacing:-.8px; line-height:1.2; text-wrap:balance; }
@@ -301,7 +309,6 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     /* Dar ekranda marka işareti metnin ALTINA geçer ve küçülür. */
     .hero-grid { grid-template-columns:1fr; gap:28px; }
     .marka { max-width:210px; margin:0 auto; }
-    .mods { grid-template-columns:repeat(2,1fr); gap:16px; }
     /* 768'de zincir iki satıra sarıyor ve ayraç satır sonunda asılı kalıyor. */
     .zincir i { display:none; }
     .zincir { gap:8px; }
@@ -336,8 +343,6 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     .zincir i { width:1px; height:13px; margin:0 auto; flex-shrink:0; }
     .story-top { padding:20px 18px 4px; }
     .story-alt { padding:14px 18px 20px; }
-    .bildirim-ikili { grid-template-columns:1fr; }
-    .mods { grid-template-columns:1fr; }
     .footer-top { grid-template-columns:1fr; gap:24px; }
     .contact-form .row { grid-template-columns:1fr; }
     .nav-links { display:none; }
@@ -524,61 +529,67 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
 <section id="ozellikler" style="background:var(--bg2);">
   <div class="wrap">
-    <span class="sec-tag">Modüller</span>
+    <span class="sec-tag">Yetenekler</span>
     <h2 class="sec">Kliniğinizin çalışma alanı.</h2>
 
-    <div class="mods">
-      <div class="mod">
-        <h3>Klinik</h3>
-        <ul>
-          <li>Hasta</li>
-          <li>Randevu</li>
-          <li>Tedavi</li>
-          <li>Ödeme</li>
-        </ul>
-      </div>
-      <div class="mod">
-        <h3>Operasyon</h3>
-        <ul>
-          <li>Tedarikçi &amp; Stok</li>
-          <li>ÜTS</li>
-          <li>e-Nabız Hazırlık</li>
-        </ul>
-      </div>
-      <div class="mod">
-        <h3>Yönetim</h3>
-        <ul>
-          <li>Hasta Kazanım Rehberi</li>
-          <li>Raporlar</li>
-          <li>Analizler</li>
-          <li>Apex AI</li>
-        </ul>
-      </div>
+    <div class="kollar">
+
+      <details class="kol" open>
+        <summary>
+          <span class="kol-ad">ÜTS &amp; e-Nabız Bildirimleri</span>
+          <span class="kol-vaat">Bildirim işlerini açık bırakmayın.</span>
+        </summary>
+        <div class="kol-govde">
+          <ul>
+            <li><b>ÜTS:</b> Tedavileri tamamladığınızda anında bildirin, gelen bildirimleri görün, bekleyeni takip edin.</li>
+            <li><b>Onay sizde.</b> Bildirim yapılıp yapılmayacağına ve ürünün stoktan düşüp düşmeyeceğine her ürün için ayrı ayrı siz karar verirsiniz; karar verilmeden tedavi tamamlanmaz, onay verilmeden bildirim gönderilmez.</li>
+            <li><b>e-Nabız:</b> Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</li>
+            <li><b>Kayıt altında.</b> Gönderilen her bildirim listelenir ve dışa aktarılabilir.</li>
+          </ul>
+          <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz; gönderime hazır listeyi Bakanlık portalına siz yüklersiniz.</p>
+        </div>
+      </details>
+
+      <details class="kol">
+        <summary>
+          <span class="kol-ad">Akıllı Veri Aktarımı</span>
+          <span class="kol-vaat">Eski kayıtlarınıza ait tüm detaylar tek dosyada taşınsın.</span>
+        </summary>
+        <div class="kol-govde">
+          <ul>
+            <li><b>Tek dosya, bütün geçmiş.</b> Hasta, tedavi, randevu ve ödeme birlikte aktarılır; dosyada varsa ÜTS ve e-Nabız bilgileri de taşınır.</li>
+            <li><b>Aynı hasta tanınır,</b> iki kez kaydedilmez; hatalı kayıtlar engellenir.</li>
+            <li><b>Hekim ataması eksikse tamamlanır.</b> Hastalara atanmış hekim yoksa tek tek veya topluca hekim atayabilirsiniz.</li>
+            <li><b>Önce görün, sonra aktarın.</b> Aktarmadan önce kaç yeni kayıt, kaç tekrar olduğunu görürsünüz.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="kol">
+        <summary>
+          <span class="kol-ad">Hasta Kazanım Rehberi</span>
+          <span class="kol-vaat">Düşünerek giden hasta unutulmasın.</span>
+        </summary>
+        <div class="kol-govde">
+          <ul>
+            <li><b>Kararsızlar bir arada.</b> Kararsız veya düşünen hastaları tek listede görün; tereddüt sebebine ve takip gününe göre ne söyleyeceğiniz hazır.</li>
+            <li><b>Aramadan önce.</b> Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</li>
+          </ul>
+        </div>
+      </details>
+
     </div>
+
+    <p class="mods-ozet">
+      <b>Tüm modüller:</b> Hasta · Randevu · Tedavi · Ödeme · Tedarikçi &amp; Stok · ÜTS ·
+      e-Nabız Hazırlık · Hasta Kazanım Rehberi · Raporlar · Analizler · Apex AI
+    </p>
   </div>
 </section>
 
 
 <!-- UTS + E-NABIZ -->
-<section>
-  <div class="wrap">
-    <span class="sec-tag">ÜTS ve e-Nabız</span>
-    <h2 class="sec">Bildirim işlerini açık bırakmayın.</h2>
 
-    <div class="bildirim-ikili">
-      <div class="bkart">
-        <h3>ÜTS</h3>
-        <p>Hazır olanı anında bildirin.<br>Gelen bildirimleri görün.<br>Bekleyen işlemleri takip edin.</p>
-        <p class="bnot"><b>Bildirim türünü siz seçersiniz.</b> Onayınızdan sonra ReGain gönderim sürecini takip eder.</p>
-      </div>
-      <div class="bkart">
-        <h3>e-Nabız</h3>
-        <p>Eksikleri görün.<br>Veriyi tamamlayın.<br>Bildirime hazır dosyayı dışa aktarın.</p>
-        <p class="bnot"><b>e-Nabız’a doğrudan gönderim yapılmaz.</b> Bakanlık portalına siz yüklersiniz.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="pricing" id="fiyatlar">
   <div class="pricing-header">

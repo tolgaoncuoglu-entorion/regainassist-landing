@@ -120,8 +120,12 @@ T('L6c dokunma hedefi kurallari 900 blogunda',
 T('L6d nokta gostergesi buyutulmus', /\.dot \{ padding:18px 5px/.test(css))
 T('L6e mobil CTA saga yasli', /\.nav-in > \.btn \{ margin-left:auto; \}/.test(css))
 T('L6f mobil durum kartlari 2 sutun', /max-width:900px\)[\s\S]*?\.durumlar \{ grid-template-columns:1fr 1fr; \}/.test(css))
-T('L6g mobil bildirim kartlari tek sutun', /max-width:640px\)[\s\S]*?\.bildirim-ikili \{ grid-template-columns:1fr; \}/.test(css))
-T('L6h moduller 768:2 / 640:1 sutun', /max-width:900px\)[\s\S]*?\.mods \{ grid-template-columns:repeat\(2,1fr\)/.test(css) && /max-width:640px\)[\s\S]*?\.mods \{ grid-template-columns:1fr; \}/.test(css))
+// 🚨 29.08: `.bildirim-ikili` ve `.mods` gridleri KALDIRILDI — yetenekler
+// artik acilir kollar (<details>). O bolumlerin responsive kurallarini
+// sart kosan testler gecersizdi; yerine kollarin gercek davranisi olculuyor.
+T('L6g kollar HER ekranda tek sutun', /\.kollar \{[^}]*flex-direction:column/.test(css))
+T('L6h kol basligi dar ekranda sariyor', /\.kol summary \{[^}]*flex-wrap:wrap/.test(css))
+T('L6h2 olu grid kurallari kalmadi', !/\.bildirim-ikili|\.mods \{/.test(css))
 
 // Dar ekranda yatay akislar sarinca ayrac satir sonunda asili kaliyordu.
 T('L6i mobil akis ayraclari gizli', /\.hero-flow i, \.akis i, \.zaman i \{ display:none; \}/.test(css))
@@ -172,13 +176,47 @@ T('N2 ÜTS gercek durum', /ÜTS bildirimi gönderime alındı/.test(H))
 T('N3 e-Nabiz dogrudan gonderim reddi acik', /e-Nabız’a doğrudan gönderim yapılmaz/.test(H))
 T('N4 e-Nabiz bildirim yapildi iddiasi YOK', !/e-Nabız bildirimi (yapıldı|gönderildi)/i.test(H))
 T('N5 mutlak aktarim vaadi YOK', !/veri kaybı olmaz|%100 aktarım|garantili aktarım/i.test(H))
-// Eski beyan ("hicbir bildirim onayiniz olmadan gonderilmez") teknik olarak
-// dogruydu ama HER bildirim icin ayri onay izlenimi veriyordu. Yeni akista
-// hekim turu secer ve TEK onay verir; gonderimi sistem yurutur.
-T('N6 onay/gonderim iliskisi dogru anlatiliyor',
-  /Bildirim türünü siz seçersiniz\./.test(H)
-  && /Onayınızdan sonra ReGain gönderim sürecini takip eder\./.test(H))
-T('N6b her bildirimde ayri onay izlenimi yok', !/onayınız olmadan gönderilmez/.test(H))
+// 27.08: eski beyan ("hicbir bildirim onayiniz olmadan gonderilmez") HER
+// bildirim icin ayri onay izlenimi veriyordu; o gunun akisinda hekim turu
+// secip TEK onay veriyordu.
+// 🚨 28.08 URUN DEGISTI: artik her urun icin IKI AYRI ZORUNLU karar var
+// (UTS bildirimi yapilsin/yapilmasin · stok dusulsun/dusulmesin) ve karar
+// verilmeden tedavi tamamlanamiyor. Yani "her urun icin ayri karar" artik
+// dogru bir anlatim — kapi eski akisi sart kosuyordu.
+T('N6 karar hekimde oldugu anlatiliyor',
+  /karar verirsiniz/.test(H) && /her ürün için ayrı ayrı/i.test(H))
+T('N6b karar verilmeden tamamlanmadigi yazili',
+  /[Kk]arar verilmeden tedavi tamamlanmaz/.test(H))
+// Tolga'nin acik istegi (29.08): bildirimin onaysiz GITMEDIGI de yazili
+// olmali. 27.08'de kaldirilan eski ifadeden farki: o zaman TEK onay vardi
+// ve "her bildirimde ayri onay" izlenimi yaniltiyordu; 28.08'den beri
+// gercekten her urun icin ayri karar veriliyor.
+T('N6b2 onaysiz bildirim gitmedigi yazili',
+  /onay verilmeden bildirim gönderilmez/.test(H))
+T('N6d e-Nabiz listesini KULLANICI yukluyor',
+  /Bakanlık portalına siz yüklersiniz/.test(H))
+
+// ── N7: YETENEK KOLLARI — iddialar URUNDE OLCULDU ───────────────────
+// Her madde koda bakilarak dogrulandi; dogrulanmamis vaat yazilmadi.
+T('N7a uc kol var', (H.match(/<details class="kol"/g)||[]).length === 3)
+T('N7b ilk kol acik geliyor', /<details class="kol" open>/.test(H))
+T('N7c aktarim kapsamı: hasta+tedavi+randevu+odeme',
+  /Hasta, tedavi, randevu ve ödeme birlikte aktarılır/.test(H))
+// HastaImport.jsx'te GTIN/Lot No/Seri No/Urun Adi alanlari VAR (olculdu).
+T('N7d UTS/e-Nabiz alanlari kosullu anlatiliyor',
+  /dosyada varsa ÜTS ve e-Nabız bilgileri de taşınır/.test(H))
+// Hastalar.jsx: topluHekimAta() + "N hastada hekim yok" dugmesi (olculdu).
+T('N7e hekim atama vaadi', /tek tek veya topluca hekim atayabilirsiniz/.test(H))
+T('N7f aktarim oncesi onizleme vaadi',
+  /kaç yeni kayıt, kaç tekrar olduğunu görürsünüz/.test(H))
+// ⛔ MUTLAK VAAT YOK: aktarim %100 dogru demiyoruz.
+T('N7g mutlak eslesme vaadi yok',
+  !/her zaman doğru eşleş|hatasız aktar|kesinlikle karışmaz/i.test(H))
+T('N7h hasta kazanim kolu somut',
+  /Kararsız veya düşünen hastaları tek listede görün/.test(H)
+  && /tereddüt sebebine ve takip gününe göre/.test(H))
+T('N6c e-Nabiz\'a dogrudan gonderim YAPILMADIGI duruyor',
+  /doğrudan gönderim yapılmaz/.test(H))
 
 // ── O: FAQ ŞEMASI ↔ GÖRÜNEN İÇERİK ─────────────────────────────────
 const ldm = H.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
