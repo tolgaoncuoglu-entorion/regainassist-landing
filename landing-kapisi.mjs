@@ -274,6 +274,25 @@ T('N9c gelmeyen hasta akisi anlatiliyor',
 T('N9d mesajlarin baslikTAN uretildigi yazili',
   /hazır başlıklardan oluşturulur/.test(H))
 T('N9e reklam adresi KORUNDU (id degismedi)', /id="hasta-kazanimi"/.test(H))
+
+// ── N10: MODULLER BOLUMU ────────────────────────────────────────────
+// Tolga: tek satirlik gri ozet "daha gorunur, daha buyuk bir bolum" olsun.
+// Modul adlari Sidebar.jsx'ten OLCULDU; uydurma modul yok.
+T('N10a moduller ayri bir bolum', /<section id="moduller">/.test(H))
+T('N10b dort kategori', (H.match(/class="mgrup"/g)||[]).length === 4)
+T('N10c on bes modul', (H.match(/<li><b>/g)||[]).length === 15)
+T('N10d her modulun ne ise yaradigi yazili',
+  (H.match(/<\/b><span>/g)||[]).length === 15)
+T('N10e eski tek satirlik ozet kalmadi', !/mods-ozet/.test(H))
+// Uc yetenek widget'i modullerde de gecer; bu TEKRAR degil: widget NE
+// YAPTIGINI, modul listesi NEREDE OLDUGUNU soyler.
+T('N10f uts / e-Nabiz / hasta kazanim moduller arasinda',
+  /ÜTS Bildirimleri<\/b>/.test(H) && /e-Nabız Export<\/b>/.test(H)
+  && /Hasta Kazanım Rehberi<\/b>/.test(H))
+T('N10g mobilde tek sutun',
+  /max-width:640px\)[\s\S]*?\.mgrid \{ grid-template-columns:1fr; \}/.test(H))
+T('N10h orta ekranda iki sutun',
+  /max-width:900px\)[\s\S]*?\.mgrid \{ grid-template-columns:repeat\(2,1fr\); \}/.test(H))
 T('N7c aktarim kapsamı: hasta+tedavi+randevu+odeme',
   /Hasta, tedavi, randevu ve ödeme birlikte aktarılır/.test(H))
 // HastaImport.jsx'te GTIN/Lot No/Seri No/Urun Adi alanlari VAR (olculdu).

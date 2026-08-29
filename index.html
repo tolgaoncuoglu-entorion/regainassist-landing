@@ -253,8 +253,19 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .kol-cta:hover { background:var(--kol-renk,var(--accent)); color:#fff; }
   .kol-cta i { font-style:normal; }
   .kol-alt-not { font-size:12.5px; color:var(--text3); }
-  .mods-ozet { margin-top:32px; font-size:13.5px; line-height:1.9; color:var(--text3); }
-  .mods-ozet b { color:var(--text2); font-weight:600; }
+  /* MODULLER — eskiden tek satirlik gri bir ozetti; Tolga "daha gorunur,
+     daha buyuk bir bolum" istedi. Kategorili grid: her modul kendi satirinda
+     ADI + NE ISE YARADIGI ile. */
+  .mod-alt { margin-top:12px; font-size:15px; color:var(--text2); max-width:620px; }
+  .mgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:34px; }
+  .mgrup { background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+           border-top:3px solid var(--mg,var(--accent)); padding:20px 20px 18px; }
+  .mgrup h3 { font-size:11.5px; font-weight:800; letter-spacing:1.3px; text-transform:uppercase;
+              color:var(--mg,var(--accent)); }
+  .mgrup ul { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:13px; }
+  .mgrup li { display:flex; flex-direction:column; gap:2px; }
+  .mgrup li b { font-size:14.5px; font-weight:650; color:var(--text); letter-spacing:-.1px; }
+  .mgrup li span { font-size:12.5px; line-height:1.45; color:var(--text3); }
   /* FINAL */
   .final { background:var(--accent); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
   .final h2 { font-size:clamp(24px,3.4vw,38px); font-weight:800; letter-spacing:-.8px; line-height:1.2; text-wrap:balance; }
@@ -349,6 +360,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
        .nav-links zaten gizleniyor; 640-900 arasi tek satirda kalsin diye
        araliklar ve punto daraltilir. */
     .nav-links { gap:14px; font-size:13px; }
+    .mgrid { grid-template-columns:repeat(2,1fr); }
     .nav-mini { gap:14px; }
     .footer-col a, .footer-links a, .nav-links a { display:inline-block; padding:8px 0; }
   }
@@ -374,6 +386,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     .contact-form .row { grid-template-columns:1fr; }
     .nav-links { display:none; }
     .kol-grid { grid-template-columns:1fr; }
+    .mgrid { grid-template-columns:1fr; }
     .kol-govde { padding-left:26px; }
     .nav-in > .btn { margin-left:auto; }
     .final { padding:40px 22px; }
@@ -636,10 +649,52 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
     </div>
 
-    <p class="mods-ozet">
-      <b>Tüm modüller:</b> Hasta · Randevu · Tedavi · Ödeme · Tedarikçi &amp; Stok · ÜTS ·
-      e-Nabız Hazırlık · Hasta Kazanım Rehberi · Raporlar · Analizler · Apex AI
-    </p>
+  </div>
+</section>
+
+<section id="moduller">
+  <div class="wrap">
+    <span class="sec-tag">Modüller</span>
+    <h2 class="sec">Kliniğin tüm işleri, dört bölümde.</h2>
+    <p class="mod-alt">Her modül aynı hasta kaydını okur; bir yerde girdiğiniz bilgi diğerinde hazır bekler.</p>
+
+    <div class="mgrid">
+      <div class="mgrup" style="--mg:var(--accent)">
+        <h3>Klinik</h3>
+        <ul>
+          <li><b>Hastalar</b><span>Kayıt, geçmiş ve diş haritası</span></li>
+          <li><b>Randevular</b><span>Takvim ve gelmeyen takibi</span></li>
+          <li><b>Tedaviler</b><span>Plan, teklif ve tamamlama</span></li>
+          <li><b>Ödemeler</b><span>Tahsilat ve bekleyen alacak</span></li>
+        </ul>
+      </div>
+      <div class="mgrup" style="--mg:var(--ok)">
+        <h3>Tedarik &amp; Bildirim</h3>
+        <ul>
+          <li><b>Tedarikçiler &amp; Stok</b><span>Ürün, fatura ve stok hareketi</span></li>
+          <li><b>ÜTS Bildirimleri</b><span>Bildirim kuyruğu ve takibi</span></li>
+          <li><b>e-Nabız Export</b><span>Bildirime hazır dosya</span></li>
+        </ul>
+      </div>
+      <div class="mgrup" style="--mg:var(--gold)">
+        <h3>Raporlama</h3>
+        <ul>
+          <li><b>Raporlar</b><span>Gelir, tedavi ve hasta raporu</span></li>
+          <li><b>Analizler</b><span>Grafikler ve eğilimler</span></li>
+          <li><b>Apex AI Asistan</b><span>Hasta mesajları ve içerik</span></li>
+          <li><b>Hasta Kazanım Rehberi</b><span>Kararsız hasta takibi</span></li>
+        </ul>
+      </div>
+      <div class="mgrup" style="--mg:var(--text3)">
+        <h3>Yönetim</h3>
+        <ul>
+          <li><b>Hekimler</b><span>Hekim kayıtları ve atama</span></li>
+          <li><b>Kullanıcılar</b><span>Personel ve yetkiler</span></li>
+          <li><b>Ayarlar</b><span>Klinik künyesi ve tercihler</span></li>
+          <li><b>Plan &amp; Abonelik</b><span>Plan ve fatura yönetimi</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
