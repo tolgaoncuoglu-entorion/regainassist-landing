@@ -341,12 +341,14 @@ T('L5b e-Nabiz dogrudan gonderim iddiasi yok', !/e-Nabız'a doğrudan (bildirim 
 // ⚠️ Yorumlar olcume karismasin diye once temizlenir -- 'Lead' kelimesi
 //    aciklama metninde de geciyor, olculen sey CAGRIDIR.
 const Hy = H.replace(/<!--[\s\S]*?-->/g, '')
-T('P1 pixel init duruyor', /fbq\('init', '2032392980824888'\)/.test(Hy))
+T('P1 pixel init duruyor', /fbq\('init', '2149949149068931'\)/.test(Hy))
 T('P2 PageView duruyor', /fbq\('track', 'PageView'\)/.test(Hy))
-T('P3 noscript yedegi duruyor', /facebook\.com\/tr\?id=2032392980824888/.test(Hy))
+T('P3 noscript yedegi duruyor', /facebook\.com\/tr\?id=2149949149068931/.test(Hy))
 T('P4 CTA ozel olay gonderiyor', /fbq\('trackCustom', 'CTAClick'\)/.test(Hy))
 T('P5 Lead HIC gonderilmiyor', !/fbq\(\s*['"]track(Custom)?['"]\s*,\s*['"]Lead['"]/.test(Hy))
 T('P6 init kullanici verisi almiyor', !/fbq\('init',\s*'\d+'\s*,\s*\{/.test(Hy))
+// 29.08: ID 2032… -> 2149… degisti (eski pixel AYRI bir dataset idi).
+T('P7 ESKI pixel ID hic gecmiyor', !H.includes('2032392980824888'))
 
 console.log(hata.length ? `KIRMIZI ${hata.length}/${ok+hata.length}:\n  - ${hata.join('\n  - ')}` : `YESIL ${ok}/${ok}`)
 process.exit(hata.length?1:0)
