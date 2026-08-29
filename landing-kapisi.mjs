@@ -247,6 +247,33 @@ T('N8f maddeler IKI SUTUN (liste gorunumu degil)',
   /\.kol-grid \{[^}]*grid-template-columns:1fr 1fr/.test(H))
 T('N8g widget kart gibi (ust serit + golge)',
   /\.kol \{[^}]*border-top:3px solid var\(--kol-renk/.test(H))
+// Tolga: "sagdaki sutunlardaki yazilar soldakilerin devami gibi okunuyor".
+// Her madde KENDI dikey cizgisiyle bagimsiz birim oldu.
+T('N8i her madde kendi dikey cizgisini tasiyor',
+  /\.kol-madde \{[^}]*border-left:2px solid var\(--kol-cizgi/.test(H))
+T('N8j her widgetin cizgi rengi kendi kimliginden',
+  (H.match(/--kol-cizgi:/g)||[]).length === 3)
+// Baslik ve aciklama ayrisir: b bloк, altinda metin.
+T('N8k madde basligi blok (aciklamayla ayni satirda degil)',
+  /\.kol-madde b \{[^}]*display:block/.test(H))
+
+// ── N9: HASTA KAZANIM VE YONETIM ────────────────────────────────────
+// Kapsam genisledi: yalniz dusunen hasta degil, MEVCUT hastanin
+// randevu oncesi/sonrasi iletisimi de. Iddialar olculdu:
+//  - takipler.js  → kararsiz hasta icin SABIT hazir metinler
+//  - AIAsistan.jsx→ 8 hazir baslik (randevu hatirlatma, tedavi oncesi/
+//    sonrasi, gelmeyen takip, teklif takip, dogum gunu, kontrol daveti)
+//  - Dashboard    → gelmeyen randevular otomatik isaretlenir + WhatsApp
+T('N9a baslik kazanim VE yonetim', /Hasta Kazanım ve Yönetim Rehberi/.test(H))
+T('N9b randevu oncesi/sonrasi iletisim anlatiliyor',
+  /Randevu hatırlatma, tedavi öncesi bilgilendirme, tedavi sonrası takip/.test(H))
+T('N9c gelmeyen hasta akisi anlatiliyor',
+  /Randevusuna gelmeyenler otomatik işaretlenir/.test(H))
+// ⛔ "hazir mesaj" ifadesi SABIT metin izlenimi vermemeli: AI Asistan
+// mesaji hazir BASLIKTAN uretir. Metin "hazır başlıklardan oluşturulur" der.
+T('N9d mesajlarin baslikTAN uretildigi yazili',
+  /hazır başlıklardan oluşturulur/.test(H))
+T('N9e reklam adresi KORUNDU (id degismedi)', /id="hasta-kazanimi"/.test(H))
 T('N7c aktarim kapsamı: hasta+tedavi+randevu+odeme',
   /Hasta, tedavi, randevu ve ödeme birlikte aktarılır/.test(H))
 // HastaImport.jsx'te GTIN/Lot No/Seri No/Urun Adi alanlari VAR (olculdu).

@@ -236,10 +236,14 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .kol summary:hover .kol-ad { color:var(--kol-renk,var(--accent)); }
   .kol-govde { padding:0 26px 22px 82px; }
   /* Iki sutun: maddeler alt alta uzun bir liste gibi degil, yan yana okunur. */
-  .kol-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 28px;
-              border-top:1px solid var(--border); padding-top:18px; }
-  .kol-madde { font-size:14.5px; line-height:1.55; color:var(--text2); }
-  .kol-madde b { display:block; color:var(--text); font-weight:650; margin-bottom:2px; }
+  /* ⚠️ Iki sutunda saga gecen metin, soldakinin DEVAMI gibi okunuyordu
+     (goz satiri soldan saga takip ediyor). Her madde kendi dikey cizgisiyle
+     BAGIMSIZ bir birim: sinir nerede bitip nerede basladigi net. */
+  .kol-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px 34px;
+              border-top:1px solid var(--border); padding-top:20px; }
+  .kol-madde { font-size:14.5px; line-height:1.55; color:var(--text2);
+               padding-left:15px; border-left:2px solid var(--kol-cizgi,var(--border2)); }
+  .kol-madde b { display:block; color:var(--text); font-weight:650; margin-bottom:3px; letter-spacing:-.1px; }
   .kol-not { margin-top:16px; font-size:13px; line-height:1.55; color:var(--text3);
              padding-left:13px; border-left:2px solid var(--border2); }
   .kol-alt { margin-top:20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
@@ -563,7 +567,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
     <div class="kollar">
 
-      <details class="kol" id="uts-enabiz" style="--kol-renk:var(--accent);--kol-pale:var(--accent-pale)" open>
+      <details class="kol" id="uts-enabiz" style="--kol-renk:var(--accent);--kol-pale:var(--accent-pale);--kol-cizgi:rgba(30,58,95,.30)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></span>
           <span class="kol-metin">
@@ -586,7 +590,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol" id="veri-aktarimi" style="--kol-renk:var(--ok);--kol-pale:rgba(26,107,94,.08)" open>
+      <details class="kol" id="veri-aktarimi" style="--kol-renk:var(--ok);--kol-pale:rgba(26,107,94,.08);--kol-cizgi:rgba(26,107,94,.32)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="m8 11 4-4 4 4"/><path d="M12 7v10"/></svg></span>
           <span class="kol-metin">
@@ -608,21 +612,23 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol" id="hasta-kazanimi" style="--kol-renk:var(--gold);--kol-pale:rgba(196,146,42,.10)" open>
+      <details class="kol" id="hasta-kazanimi" style="--kol-renk:var(--gold);--kol-pale:rgba(196,146,42,.10);--kol-cizgi:rgba(196,146,42,.42)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
           <span class="kol-metin">
-            <span class="kol-ad">Hasta Kazanım Rehberi</span>
-            <span class="kol-vaat">Düşünerek giden hasta unutulmasın.</span>
+            <span class="kol-ad">Hasta Kazanım ve Yönetim Rehberi</span>
+            <span class="kol-vaat">Hasta yolculuğunun her adımında doğru mesaj hazır.</span>
           </span>
         </summary>
         <div class="kol-govde">
           <div class="kol-grid">
             <div class="kol-madde"><b>Kararsızlar bir arada</b>Kararsız veya düşünen hastaları tek listede görün; tereddüt sebebine ve takip gününe göre ne söyleyeceğiniz hazır.</div>
+            <div class="kol-madde"><b>Randevu öncesi, tedavi sonrası</b>Randevu hatırlatma, tedavi öncesi bilgilendirme, tedavi sonrası takip, kontrol daveti ve doğum günü mesajları hazır başlıklardan oluşturulur.</div>
+            <div class="kol-madde"><b>Gelmeyen hasta kaybolmaz</b>Randevusuna gelmeyenler otomatik işaretlenir, ayrı bir panelde toplanır; WhatsApp ile tek tıkla ulaşırsınız.</div>
             <div class="kol-madde"><b>Aramadan önce</b>Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</div>
           </div>
           <div class="kol-alt">
-            <a class="kol-cta" href="https://app.regainassist.com">Hasta kazanımını deneyin <i>&rarr;</i></a>
+            <a class="kol-cta" href="https://app.regainassist.com">Hasta iletişimini deneyin <i>&rarr;</i></a>
             <span class="kol-alt-not">Kurulum gerekmez</span>
           </div>
         </div>
