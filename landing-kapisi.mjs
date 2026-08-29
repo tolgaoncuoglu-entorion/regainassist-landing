@@ -199,7 +199,20 @@ T('N6d e-Nabiz listesini KULLANICI yukluyor',
 // ── N7: YETENEK KOLLARI — iddialar URUNDE OLCULDU ───────────────────
 // Her madde koda bakilarak dogrulandi; dogrulanmamis vaat yazilmadi.
 T('N7a uc kol var', (H.match(/<details class="kol"/g)||[]).length === 3)
-T('N7b ilk kol acik geliyor', /<details class="kol" open>/.test(H))
+// 29.08: Tolga "hepsi acik widget gibi gorunsun" dedi — artik ucu de acik.
+T('N7b uc kol da ACIK geliyor', (H.match(/<details class="kol"[^>]*open>/g)||[]).length === 3)
+// Meta Ads her ozellige AYRI hedef URL istiyor; her widget kendi id'sinde.
+T('N7i her widgetin kendi id\'si var',
+  ['uts-enabiz','veri-aktarimi','hasta-kazanimi'].every(x => H.includes('id="'+x+'"')))
+T('N7j nav uc ozellige ayri link veriyor',
+  ['#uts-enabiz','#veri-aktarimi','#hasta-kazanimi'].every(x => H.includes('href="'+x+'"')))
+T('N7k widget hedefleri yapiskan navin altinda kalmiyor',
+  /\.kol\[id\][^}]*scroll-margin-top/.test(H))
+// 7 link 640-900 arasi tasmasin; 640 altinda nav zaten gizleniyor.
+T('N7l nav 900px altinda daraltiliyor',
+  /max-width:900px\)[\s\S]*?\.nav-links \{ gap:14px/.test(H))
+T('N7m nav 640 altinda gizli (mevcut davranis korundu)',
+  /max-width:640px\)[\s\S]*?\.nav-links \{ display:none; \}/.test(H))
 T('N7c aktarim kapsamı: hasta+tedavi+randevu+odeme',
   /Hasta, tedavi, randevu ve ödeme birlikte aktarılır/.test(H))
 // HastaImport.jsx'te GTIN/Lot No/Seri No/Urun Adi alanlari VAR (olculdu).

@@ -74,6 +74,9 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   .nav-links { display:flex; gap:24px; margin-left:auto; font-size:14px; font-weight:500; color:var(--text2); }
   .nav-links a { text-decoration:none; }
   .nav-links a:hover { color:var(--accent); }
+  /* Ozellikler tek link degil: Meta Ads her ozellik icin AYRI hedef URL
+     istiyor, ayni linki kabul etmiyor. Uc yetenek kendi adresine gider. */
+  .nav-mini { display:flex; gap:24px; }
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:700; border-radius:10px; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:opacity .15s,border-color .15s; }
   .btn:hover { opacity:.88; }
   .btn-primary { background:var(--accent); color:#fff; padding:12px 22px; font-size:15px; }
@@ -210,7 +213,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   h2.sec { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; text-wrap:balance; }
   h3 { font-size:17px; font-weight:700; letter-spacing:-.2px; }
   /* Yapiskan nav'in altinda kalmasin: her ic baglanti hedefi icin */
-  section[id], .faq { scroll-margin-top:80px; }
+  section[id], .faq, .kol[id] { scroll-margin-top:80px; }
   .proof.rev .proof-txt { order:2; }
   /* MODULLER */
   /* YETENEK KOLLARI — <details> ile: JS yok, erisilebilir, icerik DOM'da
@@ -323,6 +326,11 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     .dot { padding:18px 5px; background-clip:content-box; }
     .rail-dots { gap:2px; margin-top:0; align-items:center; }
     .nav-logo { display:inline-flex; align-items:center; min-height:44px; }
+    /* "Özellikler" uce bolununce nav 5 -> 7 linke cikti. 640px altinda
+       .nav-links zaten gizleniyor; 640-900 arasi tek satirda kalsin diye
+       araliklar ve punto daraltilir. */
+    .nav-links { gap:14px; font-size:13px; }
+    .nav-mini { gap:14px; }
     .footer-col a, .footer-links a, .nav-links a { display:inline-block; padding:8px 0; }
   }
   @media (max-width:640px) {
@@ -359,7 +367,11 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     <a class="nav-logo" href="/"><img src="/images/regain-assist-logo.png" alt="ReGain Assist" width="150" height="30"></a>
     <div class="nav-links">
       <a href="#neden">Nasıl çalışıyor</a>
-      <a href="#ozellikler">Özellikler</a>
+      <div class="nav-mini">
+        <a href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
+        <a href="#veri-aktarimi">Veri Aktarımı</a>
+        <a href="#hasta-kazanimi">Hasta Kazanımı</a>
+      </div>
       <a href="#fiyatlar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
@@ -534,7 +546,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
     <div class="kollar">
 
-      <details class="kol" open>
+      <details class="kol" id="uts-enabiz" open>
         <summary>
           <span class="kol-ad">ÜTS &amp; e-Nabız Bildirimleri</span>
           <span class="kol-vaat">Bildirim işlerini açık bırakmayın.</span>
@@ -550,7 +562,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol">
+      <details class="kol" id="veri-aktarimi" open>
         <summary>
           <span class="kol-ad">Akıllı Veri Aktarımı</span>
           <span class="kol-vaat">Eski kayıtlarınıza ait tüm detaylar tek dosyada taşınsın.</span>
@@ -565,7 +577,7 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol">
+      <details class="kol" id="hasta-kazanimi" open>
         <summary>
           <span class="kol-ad">Hasta Kazanım Rehberi</span>
           <span class="kol-vaat">Düşünerek giden hasta unutulmasın.</span>
