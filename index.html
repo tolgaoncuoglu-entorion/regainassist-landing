@@ -1226,22 +1226,64 @@ function setPricingDonem(donem) {
  ]
 }
 </script>
-
 <!-- ─────────────────────────────────────────────────────────────────────
      META PIXEL — CTA TIKLAMASI
      Uygulamaya gecis olcumu. OZEL (custom) olaydir, standart Lead DEGILDIR:
      CTA'ya tiklamak lead olmak degildir; gercek donusum
      app.regainassist.com'da CompleteRegistration / StartTrial olarak olculur.
      Kisisel veri gonderilmez; yalnizca olay adi gider.
+
+     ⚠️ NEDEN GECIKME VAR: onceden olay gonderilir gonderilmez tarayici
+     sayfayi terk ediyordu; istek yola cikmadan iptal oluyor ve CTAClick
+     KAYBOLUYORDU. Artik varsayilan navigasyon durdurulur, olay gonderilir,
+     ~200 ms sonra hedefe gidilir.
+
+     ⛔ KULLANICI ASLA BEKLEMEDE KALMAZ — navigasyon UC yoldan garanti:
+        ① 200 ms zamanlayici
+        ② fbq hata firlatirsa ANINDA gidilir
+        ③ fbq hic yoksa varsayilan davranisa DOKUNULMAZ (preventDefault yok)
+
+     ⚠️ SU DURUMLARDA GECIKTIRILMEZ (sayfa zaten terk edilmiyor; geciktirmek
+        kullanicinin beklentisini bozardi):
+        · target="_blank" — footer "Demo" baglantisi: olay gonderilir,
+          navigasyon serbest birakilir
+        · Cmd/Ctrl/Shift/Alt ile tiklama (yeni sekme/pencere)
+        · orta tik / sag tik
      ────────────────────────────────────────────────────────────────────── -->
 <script>
 (function () {
-  if (typeof fbq !== 'function') return;
+  var GECIKME_MS = 200;
   document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href*="app.regainassist.com"]') : null;
-    if (!a) return;
-    // Sayfa terk edilmeden once gonderilir.
-    fbq('trackCustom', 'CTAClick');
+    if (e.defaultPrevented) return;
+    if (e.button > 1) return;                          // sag tik: navigasyon degil
+    var a = e.target && e.target.closest
+          ? e.target.closest('a[href*="app.regainassist.com"]') : null;
+    if (!a || !a.href) return;
+
+    var pixelVar = (typeof fbq === 'function');
+    // Sayfanin TERK EDILMEDIGI haller: yeni sekme/pencere acilir, mevcut
+    // belge yasamaya devam eder. Olay rahatca gonderilir, navigasyona
+    // DOKUNULMAZ — geciktirmek kullanicinin beklentisini bozardi.
+    var terkEtmiyor = (a.target && a.target !== '_self')
+                   || e.button === 1
+                   || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+
+    if (terkEtmiyor) {
+      if (pixelVar) { try { fbq('trackCustom', 'CTAClick'); } catch (err) {} }
+      return;
+    }
+    if (!pixelVar) return;
+
+    e.preventDefault();
+    var hedef = a.href, gidildi = false;
+    function git() { if (gidildi) return; gidildi = true; window.location.href = hedef; }
+    var zamanlayici = setTimeout(git, GECIKME_MS);
+    try {
+      fbq('trackCustom', 'CTAClick');
+    } catch (err) {
+      clearTimeout(zamanlayici);
+      git();
+    }
   }, true);
 })();
 </script>

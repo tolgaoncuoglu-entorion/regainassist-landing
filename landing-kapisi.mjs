@@ -349,6 +349,11 @@ T('P5 Lead HIC gonderilmiyor', !/fbq\(\s*['"]track(Custom)?['"]\s*,\s*['"]Lead['
 T('P6 init kullanici verisi almiyor', !/fbq\('init',\s*'\d+'\s*,\s*\{/.test(Hy))
 // 29.08: ID 2032… -> 2149… degisti (eski pixel AYRI bir dataset idi).
 T('P7 ESKI pixel ID hic gecmiyor', !H.includes('2032392980824888'))
+// 29.08: olay gonderilir gonderilmez sayfa terk ediliyordu, istek iptal
+// oluyor ve CTAClick kayboluyordu. Davranis cta-kapisi.mjs'de olculur;
+// burada yalnizca korumanin YERINDE oldugu dogrulanir.
+T('P8 CTA navigasyonu geciktiriliyor', /GECIKME_MS = 200/.test(Hy) && /e\.preventDefault\(\)/.test(Hy))
+T('P9 pixel yoksa varsayilan davranis bozulmaz', /if \(!pixelVar\) return;/.test(Hy))
 
 console.log(hata.length ? `KIRMIZI ${hata.length}/${ok+hata.length}:\n  - ${hata.join('\n  - ')}` : `YESIL ${ok}/${ok}`)
 process.exit(hata.length?1:0)
