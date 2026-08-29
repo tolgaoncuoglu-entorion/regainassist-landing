@@ -216,25 +216,40 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   section[id], .faq, .kol[id] { scroll-margin-top:80px; }
   .proof.rev .proof-txt { order:2; }
   /* MODULLER */
-  /* YETENEK KOLLARI — <details> ile: JS yok, erisilebilir, icerik DOM'da
-     kaldigi icin arama motoru okur. Ilk kol acik gelir ki bolum bos gorunmesin. */
-  .kollar { display:flex; flex-direction:column; gap:12px; margin-top:34px; }
-  .kol { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
-  .kol[open] { border-color:var(--accent-l); box-shadow:var(--sh); }
-  .kol summary { list-style:none; cursor:pointer; padding:20px 22px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  /* YETENEK WIDGETLARI — <details> ile: JS yok, erisilebilir, icerik DOM'da
+     kaldigi icin arama motoru okur. Ucu de ACIK gelir (widget gorunumu).
+     Her yetenek kendi renk kimligini tasir: alt alta liste gibi degil,
+     ayri ayri kartlar gibi okunsun. */
+  .kollar { display:flex; flex-direction:column; gap:20px; margin-top:34px; }
+  .kol { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg);
+         border-top:3px solid var(--kol-renk,var(--accent)); overflow:hidden; box-shadow:var(--sh); }
+  .kol summary { list-style:none; cursor:pointer; padding:22px 26px 18px; display:flex; align-items:flex-start; gap:16px; }
   .kol summary::-webkit-details-marker { display:none; }
-  .kol summary::after { content:'+'; margin-left:auto; font-size:20px; font-weight:400; color:var(--text3); line-height:1; }
-  .kol[open] summary::after { content:'\2212'; color:var(--accent); }
-  .kol summary:hover .kol-ad { color:var(--accent); }
-  .kol-ad { font-size:17px; font-weight:700; letter-spacing:-.2px; color:var(--text); }
+  .kol summary::after { content:'\2212'; margin-left:auto; font-size:18px; color:var(--text3); line-height:1.4; flex-shrink:0; }
+  .kol:not([open]) summary::after { content:'+'; }
+  .kol-ikon { width:40px; height:40px; border-radius:11px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+              background:var(--kol-pale,var(--accent-pale)); color:var(--kol-renk,var(--accent)); }
+  .kol-ikon svg { width:21px; height:21px; }
+  .kol-metin { display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .kol-ad { font-size:18px; font-weight:750; letter-spacing:-.3px; color:var(--text); }
   .kol-vaat { font-size:14.5px; color:var(--text2); }
-  .kol-govde { padding:0 22px 22px; }
-  .kol-govde ul { list-style:none; display:flex; flex-direction:column; gap:11px; border-top:1px solid var(--border); padding-top:18px; }
-  .kol-govde li { font-size:14.5px; line-height:1.55; color:var(--text2); display:flex; gap:10px; }
-  .kol-govde li::before { content:'\2014'; color:var(--accent); flex-shrink:0; }
-  .kol-govde li b { color:var(--text); font-weight:600; }
-  .kol-not { margin-top:14px; font-size:13px; line-height:1.55; color:var(--text3); }
-  .mods-ozet { margin-top:28px; font-size:13.5px; line-height:1.9; color:var(--text3); }
+  .kol summary:hover .kol-ad { color:var(--kol-renk,var(--accent)); }
+  .kol-govde { padding:0 26px 22px 82px; }
+  /* Iki sutun: maddeler alt alta uzun bir liste gibi degil, yan yana okunur. */
+  .kol-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 28px;
+              border-top:1px solid var(--border); padding-top:18px; }
+  .kol-madde { font-size:14.5px; line-height:1.55; color:var(--text2); }
+  .kol-madde b { display:block; color:var(--text); font-weight:650; margin-bottom:2px; }
+  .kol-not { margin-top:16px; font-size:13px; line-height:1.55; color:var(--text3);
+             padding-left:13px; border-left:2px solid var(--border2); }
+  .kol-alt { margin-top:20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .kol-cta { display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+             font-size:14.5px; font-weight:650; color:var(--kol-renk,var(--accent));
+             border:1.5px solid var(--kol-renk,var(--accent)); border-radius:99px; padding:10px 20px; }
+  .kol-cta:hover { background:var(--kol-renk,var(--accent)); color:#fff; }
+  .kol-cta i { font-style:normal; }
+  .kol-alt-not { font-size:12.5px; color:var(--text3); }
+  .mods-ozet { margin-top:32px; font-size:13.5px; line-height:1.9; color:var(--text3); }
   .mods-ozet b { color:var(--text2); font-weight:600; }
   /* FINAL */
   .final { background:var(--accent); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
@@ -354,6 +369,8 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     .footer-top { grid-template-columns:1fr; gap:24px; }
     .contact-form .row { grid-template-columns:1fr; }
     .nav-links { display:none; }
+    .kol-grid { grid-template-columns:1fr; }
+    .kol-govde { padding-left:26px; }
     .nav-in > .btn { margin-left:auto; }
     .final { padding:40px 22px; }
   }
@@ -546,47 +563,68 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
 
     <div class="kollar">
 
-      <details class="kol" id="uts-enabiz" open>
+      <details class="kol" id="uts-enabiz" style="--kol-renk:var(--accent);--kol-pale:var(--accent-pale)" open>
         <summary>
-          <span class="kol-ad">ÜTS &amp; e-Nabız Bildirimleri</span>
-          <span class="kol-vaat">Bildirim işlerini açık bırakmayın.</span>
+          <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></span>
+          <span class="kol-metin">
+            <span class="kol-ad">ÜTS &amp; e-Nabız Bildirimleri</span>
+            <span class="kol-vaat">Bildirim işlerini açık bırakmayın.</span>
+          </span>
         </summary>
         <div class="kol-govde">
-          <ul>
-            <li><b>ÜTS:</b> Tedavileri tamamladığınızda anında bildirin, gelen bildirimleri görün, bekleyeni takip edin.</li>
-            <li><b>Onay sizde.</b> Bildirim yapılıp yapılmayacağına ve ürünün stoktan düşüp düşmeyeceğine her ürün için ayrı ayrı siz karar verirsiniz; karar verilmeden tedavi tamamlanmaz, onay verilmeden bildirim gönderilmez.</li>
-            <li><b>e-Nabız:</b> Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</li>
-            <li><b>Kayıt altında.</b> Gönderilen her bildirim listelenir ve dışa aktarılabilir.</li>
-          </ul>
+          <div class="kol-grid">
+            <div class="kol-madde"><b>ÜTS</b>Tedavileri tamamladığınızda anında bildirin, gelen bildirimleri görün, bekleyeni takip edin.</div>
+            <div class="kol-madde"><b>Onay sizde</b>Bildirim yapılıp yapılmayacağına ve ürünün stoktan düşüp düşmeyeceğine her ürün için ayrı ayrı siz karar verirsiniz; karar verilmeden tedavi tamamlanmaz, onay verilmeden bildirim gönderilmez.</div>
+            <div class="kol-madde"><b>e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</div>
+            <div class="kol-madde"><b>Kayıt altında</b>Gönderilen her bildirim listelenir ve dışa aktarılabilir.</div>
+          </div>
           <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz; gönderime hazır listeyi Bakanlık portalına siz yüklersiniz.</p>
+          <div class="kol-alt">
+            <a class="kol-cta" href="https://app.regainassist.com">Bildirim akışını ücretsiz deneyin <i>&rarr;</i></a>
+            <span class="kol-alt-not">14 gün · kredi kartı gerekmez</span>
+          </div>
         </div>
       </details>
 
-      <details class="kol" id="veri-aktarimi" open>
+      <details class="kol" id="veri-aktarimi" style="--kol-renk:var(--ok);--kol-pale:rgba(26,107,94,.08)" open>
         <summary>
-          <span class="kol-ad">Akıllı Veri Aktarımı</span>
-          <span class="kol-vaat">Eski kayıtlarınıza ait tüm detaylar tek dosyada taşınsın.</span>
+          <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="m8 11 4-4 4 4"/><path d="M12 7v10"/></svg></span>
+          <span class="kol-metin">
+            <span class="kol-ad">Akıllı Veri Aktarımı</span>
+            <span class="kol-vaat">Eski kayıtlarınıza ait tüm detaylar tek dosyada taşınsın.</span>
+          </span>
         </summary>
         <div class="kol-govde">
-          <ul>
-            <li><b>Tek dosya, bütün geçmiş.</b> Hasta, tedavi, randevu ve ödeme birlikte aktarılır; dosyada varsa ÜTS ve e-Nabız bilgileri de taşınır.</li>
-            <li><b>Aynı hasta tanınır,</b> iki kez kaydedilmez; hatalı kayıtlar engellenir.</li>
-            <li><b>Hekim ataması eksikse tamamlanır.</b> Hastalara atanmış hekim yoksa tek tek veya topluca hekim atayabilirsiniz.</li>
-            <li><b>Önce görün, sonra aktarın.</b> Aktarmadan önce kaç yeni kayıt, kaç tekrar olduğunu görürsünüz.</li>
-          </ul>
+          <div class="kol-grid">
+            <div class="kol-madde"><b>Tek dosya, bütün geçmiş</b>Hasta, tedavi, randevu ve ödeme birlikte aktarılır; dosyada varsa ÜTS ve e-Nabız bilgileri de taşınır.</div>
+            <div class="kol-madde"><b>Aynı hasta tanınır</b>İki kez kaydedilmez; hatalı kayıtlar engellenir.</div>
+            <div class="kol-madde"><b>Hekim ataması eksikse tamamlanır</b>Hastalara atanmış hekim yoksa tek tek veya topluca hekim atayabilirsiniz.</div>
+            <div class="kol-madde"><b>Önce görün, sonra aktarın</b>Aktarmadan önce kaç yeni kayıt, kaç tekrar olduğunu görürsünüz.</div>
+          </div>
+          <div class="kol-alt">
+            <a class="kol-cta" href="https://app.regainassist.com">Kayıtlarınızı taşıyarak başlayın <i>&rarr;</i></a>
+            <span class="kol-alt-not">Excel veya CSV</span>
+          </div>
         </div>
       </details>
 
-      <details class="kol" id="hasta-kazanimi" open>
+      <details class="kol" id="hasta-kazanimi" style="--kol-renk:var(--gold);--kol-pale:rgba(196,146,42,.10)" open>
         <summary>
-          <span class="kol-ad">Hasta Kazanım Rehberi</span>
-          <span class="kol-vaat">Düşünerek giden hasta unutulmasın.</span>
+          <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
+          <span class="kol-metin">
+            <span class="kol-ad">Hasta Kazanım Rehberi</span>
+            <span class="kol-vaat">Düşünerek giden hasta unutulmasın.</span>
+          </span>
         </summary>
         <div class="kol-govde">
-          <ul>
-            <li><b>Kararsızlar bir arada.</b> Kararsız veya düşünen hastaları tek listede görün; tereddüt sebebine ve takip gününe göre ne söyleyeceğiniz hazır.</li>
-            <li><b>Aramadan önce.</b> Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</li>
-          </ul>
+          <div class="kol-grid">
+            <div class="kol-madde"><b>Kararsızlar bir arada</b>Kararsız veya düşünen hastaları tek listede görün; tereddüt sebebine ve takip gününe göre ne söyleyeceğiniz hazır.</div>
+            <div class="kol-madde"><b>Aramadan önce</b>Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</div>
+          </div>
+          <div class="kol-alt">
+            <a class="kol-cta" href="https://app.regainassist.com">Hasta kazanımını deneyin <i>&rarr;</i></a>
+            <span class="kol-alt-not">Kurulum gerekmez</span>
+          </div>
         </div>
       </details>
 

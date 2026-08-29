@@ -124,7 +124,11 @@ T('L6f mobil durum kartlari 2 sutun', /max-width:900px\)[\s\S]*?\.durumlar \{ gr
 // artik acilir kollar (<details>). O bolumlerin responsive kurallarini
 // sart kosan testler gecersizdi; yerine kollarin gercek davranisi olculuyor.
 T('L6g kollar HER ekranda tek sutun', /\.kollar \{[^}]*flex-direction:column/.test(css))
-T('L6h kol basligi dar ekranda sariyor', /\.kol summary \{[^}]*flex-wrap:wrap/.test(css))
+// 29.08 yeni duzen: baslik ve vaat zaten DIKEY dizili (.kol-metin sutun),
+// sarmaya gerek yok. Onceki test yatay yerlesime aitti.
+T('L6h baslik ve vaat dikey dizili', /\.kol-metin \{[^}]*flex-direction:column/.test(css))
+T('L6h2 maddeler dar ekranda TEK sutun',
+  /max-width:640px\)[\s\S]*?\.kol-grid \{ grid-template-columns:1fr; \}/.test(css))
 T('L6h2 olu grid kurallari kalmadi', !/\.bildirim-ikili|\.mods \{/.test(css))
 
 // Dar ekranda yatay akislar sarinca ayrac satir sonunda asili kaliyordu.
@@ -213,6 +217,27 @@ T('N7l nav 900px altinda daraltiliyor',
   /max-width:900px\)[\s\S]*?\.nav-links \{ gap:14px/.test(H))
 T('N7m nav 640 altinda gizli (mevcut davranis korundu)',
   /max-width:640px\)[\s\S]*?\.nav-links \{ display:none; \}/.test(H))
+
+// ── N8: WIDGET GORUNUMU + HER WIDGETIN KENDI CTA'SI ─────────────────
+// Tolga: "gorsel olarak sik durmuyor, alt alta liste gibi gorunuyor" ve
+// "her widget'in altina CTA ekleyelim". Reklamdan gelen ziyaretci hero'yu
+// atlayip dogrudan widget'a duser; orada bir cagri bulmali.
+T('N8a her widgetin KENDI CTA\'si var', (H.match(/class="kol-cta"/g)||[]).length === 3)
+T('N8b CTA metinleri FARKLI (ayni cagri uc kez degil)', (() => {
+  const m = [...H.matchAll(/class="kol-cta"[^>]*>([^<]+)/g)].map(x => x[1].trim())
+  return m.length === 3 && new Set(m).size === 3
+})())
+T('N8c CTA uygulamaya gidiyor',
+  (H.match(/class="kol-cta" href="https:\/\/app\.regainassist\.com"/g)||[]).length === 3)
+T('N8d her widgetin KENDI renk kimligi', (() => {
+  const m = [...H.matchAll(/--kol-renk:([^;]+);/g)].map(x => x[1].trim())
+  return m.length === 3 && new Set(m).size === 3
+})())
+T('N8e her widgetin ikonu var', (H.match(/class="kol-ikon"/g)||[]).length === 3)
+T('N8f maddeler IKI SUTUN (liste gorunumu degil)',
+  /\.kol-grid \{[^}]*grid-template-columns:1fr 1fr/.test(H))
+T('N8g widget kart gibi (ust serit + golge)',
+  /\.kol \{[^}]*border-top:3px solid var\(--kol-renk/.test(H))
 T('N7c aktarim kapsamı: hasta+tedavi+randevu+odeme',
   /Hasta, tedavi, randevu ve ödeme birlikte aktarılır/.test(H))
 // HastaImport.jsx'te GTIN/Lot No/Seri No/Urun Adi alanlari VAR (olculdu).
