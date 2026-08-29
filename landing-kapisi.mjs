@@ -217,8 +217,13 @@ T('N7j nav uc ozellige ayri link veriyor',
 T('N7k widget hedefleri yapiskan navin altinda kalmiyor',
   /\.kol\[id\][^}]*scroll-margin-top/.test(H))
 // 7 link 640-900 arasi tasmasin; 640 altinda nav zaten gizleniyor.
+// Moduller linki eklenince nav 8 oldu; 900px'de daha da daraltildi ve
+// "Nasil calisiyor" orta ekranda gizlendi (ayni baglanti hero'da var).
 T('N7l nav 900px altinda daraltiliyor',
-  /max-width:900px\)[\s\S]*?\.nav-links \{ gap:14px/.test(H))
+  /max-width:900px\)[\s\S]*?\.nav-links \{ gap:10px/.test(H))
+T('N7l2 genis-ekran linki 900 altinda gizli',
+  /max-width:900px\)[\s\S]*?\.nav-genis \{ display:none; \}/.test(H))
+T('N7l3 moduller navda',  /href="#moduller"/.test(H))
 T('N7m nav 640 altinda gizli (mevcut davranis korundu)',
   /max-width:640px\)[\s\S]*?\.nav-links \{ display:none; \}/.test(H))
 

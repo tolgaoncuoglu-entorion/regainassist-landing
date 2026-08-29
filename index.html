@@ -359,9 +359,14 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
     /* "Özellikler" uce bolununce nav 5 -> 7 linke cikti. 640px altinda
        .nav-links zaten gizleniyor; 640-900 arasi tek satirda kalsin diye
        araliklar ve punto daraltilir. */
-    .nav-links { gap:14px; font-size:13px; }
+    /* 8 link (Moduller eklendi) 900px'de tek satirda kalsin.
+       640 altinda nav zaten gizleniyor. */
+    .nav-links { gap:10px; font-size:12.5px; }
+    /* 8 link 900px'e sigmiyor (olculdu ~883px > 870). "Nasil calisiyor"
+       orta ekranda gizlenir; ayni baglanti hero'daki dugmede zaten var. */
+    .nav-genis { display:none; }
     .mgrid { grid-template-columns:repeat(2,1fr); }
-    .nav-mini { gap:14px; }
+    .nav-mini { gap:10px; }
     .footer-col a, .footer-links a, .nav-links a { display:inline-block; padding:8px 0; }
   }
   @media (max-width:640px) {
@@ -400,12 +405,13 @@ src="https://www.facebook.com/tr?id=2032392980824888&ev=PageView&noscript=1"
   <div class="wrap nav-in">
     <a class="nav-logo" href="/"><img src="/images/regain-assist-logo.png" alt="ReGain Assist" width="150" height="30"></a>
     <div class="nav-links">
-      <a href="#neden">Nasıl çalışıyor</a>
+      <a class="nav-genis" href="#neden">Nasıl çalışıyor</a>
       <div class="nav-mini">
         <a href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
         <a href="#veri-aktarimi">Veri Aktarımı</a>
         <a href="#hasta-kazanimi">Hasta Kazanımı</a>
       </div>
+      <a href="#moduller">Modüller</a>
       <a href="#fiyatlar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
