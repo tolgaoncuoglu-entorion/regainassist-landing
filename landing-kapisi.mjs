@@ -206,14 +206,18 @@ T('N6e Bakanlik ozel ad olarak buyuk yaziliyor',
 
 // ── N7: YETENEK KOLLARI — iddialar URUNDE OLCULDU ───────────────────
 // Her madde koda bakilarak dogrulandi; dogrulanmamis vaat yazilmadi.
-T('N7a uc kol var', (H.match(/<details class="kol"/g)||[]).length === 3)
-// 29.08: Tolga "hepsi acik widget gibi gorunsun" dedi — artik ucu de acik.
-T('N7b uc kol da ACIK geliyor', (H.match(/<details class="kol"[^>]*open>/g)||[]).length === 3)
+// ⚠️ SAYI DEGIL KURAL: kol sayisi buradan TURETILIR. Yeni bir yetenek
+// widgeti eklemek kapiyi kirmamali; kiran sey ancak KURALIN bozulmasi olmali.
+const KOL = (H.match(/<details class="kol"/g)||[]).length
+T(`N7a en az uc kol var (bulunan: ${KOL})`, KOL >= 3)
+// 29.08: Tolga "hepsi acik widget gibi gorunsun" dedi — hepsi acik.
+T('N7b kollarin HEPSI ACIK geliyor', (H.match(/<details class="kol"[^>]*open>/g)||[]).length === KOL)
 // Meta Ads her ozellige AYRI hedef URL istiyor; her widget kendi id'sinde.
-T('N7i her widgetin kendi id\'si var',
-  ['uts-enabiz','veri-aktarimi','hasta-kazanimi'].every(x => H.includes('id="'+x+'"')))
-T('N7j nav uc ozellige ayri link veriyor',
-  ['#uts-enabiz','#veri-aktarimi','#hasta-kazanimi'].every(x => H.includes('href="'+x+'"')))
+const KOL_ID = [...H.matchAll(/<details class="kol" id="([a-z-]+)"/g)].map(m => m[1])
+T(`N7i her widgetin kendi id'si var (${KOL_ID.length}/${KOL})`,
+  KOL_ID.length === KOL && new Set(KOL_ID).size === KOL)
+T('N7j nav HER ozellige ayri link veriyor',
+  KOL_ID.every(x => H.includes('href="#'+x+'"')))
 T('N7k widget hedefleri yapiskan navin altinda kalmiyor',
   /\.kol\[id\][^}]*scroll-margin-top/.test(H))
 // 7 link 640-900 arasi tasmasin; 640 altinda nav zaten gizleniyor.
@@ -231,18 +235,18 @@ T('N7m nav 640 altinda gizli (mevcut davranis korundu)',
 // Tolga: "gorsel olarak sik durmuyor, alt alta liste gibi gorunuyor" ve
 // "her widget'in altina CTA ekleyelim". Reklamdan gelen ziyaretci hero'yu
 // atlayip dogrudan widget'a duser; orada bir cagri bulmali.
-T('N8a her widgetin KENDI CTA\'si var', (H.match(/class="kol-cta"/g)||[]).length === 3)
-T('N8b CTA metinleri FARKLI (ayni cagri uc kez degil)', (() => {
+T('N8a her widgetin KENDI CTA\'si var', (H.match(/class="kol-cta"/g)||[]).length === KOL)
+T('N8b CTA metinleri FARKLI (ayni cagri tekrarlanmiyor)', (() => {
   const m = [...H.matchAll(/class="kol-cta"[^>]*>([^<]+)/g)].map(x => x[1].trim())
-  return m.length === 3 && new Set(m).size === 3
+  return m.length === KOL && new Set(m).size === KOL
 })())
 T('N8c CTA uygulamaya gidiyor',
-  (H.match(/class="kol-cta" href="https:\/\/app\.regainassist\.com"/g)||[]).length === 3)
+  (H.match(/class="kol-cta" href="https:\/\/app\.regainassist\.com"/g)||[]).length === KOL)
 T('N8d her widgetin KENDI renk kimligi', (() => {
   const m = [...H.matchAll(/--kol-renk:([^;]+);/g)].map(x => x[1].trim())
-  return m.length === 3 && new Set(m).size === 3
+  return m.length === KOL && new Set(m).size === KOL
 })())
-T('N8e her widgetin ikonu var', (H.match(/class="kol-ikon"/g)||[]).length === 3)
+T('N8e her widgetin ikonu var', (H.match(/class="kol-ikon"/g)||[]).length === KOL)
 // Tolga'nin basliklandirmasi (29.08): UTS tarafi BILDIRIM, e-Nabiz tarafi
 // EXPORT — cunku e-Nabiz'a gonderim yapilmiyor, dosya disa aktariliyor.
 // Baslik bu ayrimi tasiyor.
@@ -257,7 +261,7 @@ T('N8g widget kart gibi (ust serit + golge)',
 T('N8i her madde kendi dikey cizgisini tasiyor',
   /\.kol-madde \{[^}]*border-left:2px solid var\(--kol-cizgi/.test(H))
 T('N8j her widgetin cizgi rengi kendi kimliginden',
-  (H.match(/--kol-cizgi:/g)||[]).length === 3)
+  (H.match(/--kol-cizgi:/g)||[]).length === KOL)
 // Baslik ve aciklama ayrisir: b bloк, altinda metin.
 T('N8k madde basligi blok (aciklamayla ayni satirda degil)',
   /\.kol-madde b \{[^}]*display:block/.test(H))
@@ -285,9 +289,13 @@ T('N9e reklam adresi KORUNDU (id degismedi)', /id="hasta-kazanimi"/.test(H))
 // Modul adlari Sidebar.jsx'ten OLCULDU; uydurma modul yok.
 T('N10a moduller ayri bir bolum', /<section id="moduller">/.test(H))
 T('N10b dort kategori', (H.match(/class="mgrup"/g)||[]).length === 4)
-T('N10c on bes modul', (H.match(/<li><b>/g)||[]).length === 15)
-T('N10d her modulun ne ise yaradigi yazili',
-  (H.match(/<\/b><span>/g)||[]).length === 15)
+// ⚠️ SAYI DEGIL KURAL (bkz. N7a): modul sayisi TURETILIR. Yeni modul
+// eklemek kapiyi kirmamali; kirilmasi gereken tek sey, bir modulun ne ise
+// yaradiginin YAZILMAMIS olmasi.
+const MOD = (H.match(/<li><b>/g)||[]).length
+T(`N10c en az on bes modul (bulunan: ${MOD})`, MOD >= 15)
+T('N10d HER modulun ne ise yaradigi yazili',
+  (H.match(/<\/b><span>/g)||[]).length === MOD)
 T('N10e eski tek satirlik ozet kalmadi', !/mods-ozet/.test(H))
 // Uc yetenek widget'i modullerde de gecer; bu TEKRAR degil: widget NE
 // YAPTIGINI, modul listesi NEREDE OLDUGUNU soyler.

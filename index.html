@@ -50,11 +50,20 @@ fbq('track', 'PageView');
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --accent:#1e3a5f; --accent-l:#2d5a8e; --accent-pale:rgba(30,58,95,.07);
-    --gold:#c4922a; --gold-lt:rgba(196,146,42,.12);
-    --bg:#faf9f6; --bg2:#f3f5f7; --surface:#ffffff;
-    --border:#e6eaef; --border2:#d8dfe7;
-    --text:#1a2332; --text2:#43566d; --text3:#7b8ea3;
+    /* ── PALET · %70-75 notr · %20 lacivert · %5-10 teal ────────────────
+       ⚠️ teal ve mavi-gri LOGODAN OLCULDU (#0d9488 / #64748b), tahmin degil.
+       ⛔ TEAL YALNIZ DONUSUM YOLUNDA: birincil CTA, onerilen plan, Simulator.
+          Baslikta, kart kenarinda, ikonda teal KULLANILMAZ — az oldugu icin
+          gucludur; her yere yayilirsa vurgu olmaktan cikar.
+       ⛔ ALTIN KALDIRILDI: ucuncu bir hue, kisitli paleti dagitiyordu.
+          Yerini logonun soguk mavi-grisi (--ikincil) aldi. */
+    --brand:#0d9488; --brand-d:#0a7b71; --brand-pale:rgba(13,148,136,.10);
+    --ikincil:#64748b; --ikincil-pale:rgba(100,116,139,.10);
+    --accent:#243b5e; --accent-l:#3c5f8f; --accent-pale:rgba(36,59,94,.07);
+    --dark:#0d1524;
+    --bg:#faf9f6; --bg2:#f4f1ec; --surface:#ffffff;
+    --border:#e9e4dc; --border2:#dbd4c9;
+    --text:#131c2c; --text2:#48586e; --text3:#87909e;
     --ok:#1a6b5e; --wait:#946d18; --stop:#b83232;
     --r:12px; --r-lg:16px;
     --sh:0 1px 2px rgba(26,35,50,.04); --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
@@ -76,7 +85,8 @@ fbq('track', 'PageView');
   .nav-mini { display:flex; gap:24px; }
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:700; border-radius:10px; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:opacity .15s,border-color .15s; }
   .btn:hover { opacity:.88; }
-  .btn-primary { background:var(--accent); color:#fff; padding:12px 22px; font-size:15px; }
+  .btn-primary { background:var(--brand); color:#fff; padding:12px 22px; font-size:15px; }
+  .btn-primary:hover { background:var(--brand-d); }
   .btn-ghost { background:transparent; color:var(--text2); border-color:var(--border2); padding:12px 20px; font-size:15px; }
   .btn-sm { padding:9px 16px; font-size:14px; }
   /* HERO */
@@ -264,10 +274,12 @@ fbq('track', 'PageView');
   .mgrup li b { font-size:14.5px; font-weight:650; color:var(--text); letter-spacing:-.1px; }
   .mgrup li span { font-size:12.5px; line-height:1.45; color:var(--text3); }
   /* FINAL */
-  .final { background:var(--accent); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
+  .final { background:var(--dark); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
   .final h2 { font-size:clamp(24px,3.4vw,38px); font-weight:800; letter-spacing:-.8px; line-height:1.2; text-wrap:balance; }
   .final p { color:rgba(255,255,255,.78); margin-top:14px; font-size:16px; }
-  .final .btn-primary { background:#fff; color:var(--accent); margin-top:26px; }
+  /* Koyu zeminde beyaz buton NOTR kalirdi; sayfanin son aksiyonu marka rengini hak eder. */
+  .final .btn-primary { background:var(--brand); color:#fff; margin-top:26px; }
+  .final .btn-primary:hover { background:var(--brand-d); }
   .final small { display:block; margin-top:14px; font-size:13px; color:rgba(255,255,255,.6); }
   .faq-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
   .faq-q { list-style:none; cursor:pointer; padding:16px 20px; font-size:15.5px; font-weight:700; display:flex; justify-content:space-between; gap:12px; }
@@ -292,8 +304,8 @@ fbq('track', 'PageView');
   .pricing-toggle button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .pricing-grid { max-width:880px; margin:38px auto 0; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:stretch; }
   .plan-card { position:relative; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px 26px; box-shadow:var(--sh); }
-  .plan-card.featured { border-color:var(--gold); box-shadow:var(--sh-lg); }
-  .plan-badge { position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--gold); color:#fff; font-size:10.5px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; padding:4px 13px; border-radius:999px; white-space:nowrap; }
+  .plan-card.featured { border-color:var(--brand); box-shadow:var(--sh-lg); }
+  .plan-badge { position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--brand); color:#fff; font-size:10.5px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; padding:4px 13px; border-radius:999px; white-space:nowrap; }
   .plan-name { font-size:19px; font-weight:800; letter-spacing:-.3px; }
   .plan-desc { font-size:13.5px; color:var(--text3); margin-top:4px; }
   .plan-price { display:flex; align-items:baseline; gap:4px; }
@@ -315,10 +327,10 @@ fbq('track', 'PageView');
   .contact-form input, .contact-form textarea { width:100%; font-family:inherit; font-size:15px; color:var(--text); background:var(--bg); border:1px solid var(--border2); border-radius:10px; padding:13px 15px; resize:vertical; }
   .contact-form input::placeholder, .contact-form textarea::placeholder { color:var(--text3); }
   .contact-form input:focus, .contact-form textarea:focus { outline:2px solid var(--accent); outline-offset:0; border-color:var(--accent); }
-  .btn-submit { font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--accent); border:none; border-radius:10px; padding:14px 20px; cursor:pointer; transition:opacity .15s; }
+  .btn-submit { font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--brand); border:none; border-radius:10px; padding:14px 20px; cursor:pointer; transition:opacity .15s; }
   .btn-submit:hover { opacity:.88; }
   .btn-submit:disabled { opacity:.5; cursor:default; }
-  .btn-submit:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .btn-submit:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
   /* ── FOOTER ──────────────────────────────────────────────────── */
   footer { background:var(--surface); border-top:1px solid var(--border); padding:52px 0 18px; }
   .footer-top { max-width:1200px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:34px; }
@@ -417,7 +429,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <a href="#veri-aktarimi">Veri Aktarımı</a>
         <a href="#hasta-kazanimi">Hasta Kazanımı</a>
       </div>
-      <a href="#moduller">Modüller</a>
+      <a href="#simulator">Simülatör</a>
+        <a href="#moduller">Modüller</a>
       <a href="#fiyatlar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
@@ -592,7 +605,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 
     <div class="kollar">
 
-      <details class="kol" id="uts-enabiz" style="--kol-renk:var(--accent);--kol-pale:var(--accent-pale);--kol-cizgi:rgba(30,58,95,.30)" open>
+      <details class="kol" id="uts-enabiz" style="--kol-renk:var(--accent);--kol-pale:var(--accent-pale);--kol-cizgi:rgba(36,59,94,.30)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></span>
           <span class="kol-metin">
@@ -615,7 +628,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol" id="veri-aktarimi" style="--kol-renk:var(--ok);--kol-pale:rgba(26,107,94,.08);--kol-cizgi:rgba(26,107,94,.32)" open>
+      <details class="kol" id="veri-aktarimi" style="--kol-renk:var(--ikincil);--kol-pale:var(--ikincil-pale);--kol-cizgi:rgba(100,116,139,.34)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M3 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="m8 11 4-4 4 4"/><path d="M12 7v10"/></svg></span>
           <span class="kol-metin">
@@ -637,7 +650,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </div>
       </details>
 
-      <details class="kol" id="hasta-kazanimi" style="--kol-renk:var(--gold);--kol-pale:rgba(196,146,42,.10);--kol-cizgi:rgba(196,146,42,.42)" open>
+      <details class="kol" id="hasta-kazanimi" style="--kol-renk:var(--accent-l);--kol-pale:rgba(60,95,143,.10);--kol-cizgi:rgba(60,95,143,.34)" open>
         <summary>
           <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
           <span class="kol-metin">
@@ -655,6 +668,31 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com">Hasta iletişimini deneyin <i>&rarr;</i></a>
             <span class="kol-alt-not">Kurulum gerekmez</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- ⚠️ TEK TEAL KOL. Diger uc kol notr/lacivert; teal burada MARKA
+           VURGUSU degil, "yeni ve one cikan modul" isaretidir. -->
+      <details class="kol" id="simulator" style="--kol-renk:var(--brand);--kol-pale:var(--brand-pale);--kol-cizgi:rgba(13,148,136,.34)" open>
+        <summary>
+          <span class="kol-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M5 8v8"/><path d="M19 8v8"/><path d="M12 9v6"/></svg></span>
+          <span class="kol-metin">
+            <span class="kol-ad">Simülatör</span>
+            <span class="kol-vaat">Görüntü üzerinde ölçün, şablon implantı siz yerleştirin.</span>
+          </span>
+        </summary>
+        <div class="kol-govde">
+          <div class="kol-grid">
+            <div class="kol-madde"><b>2D ya da 3D, fark etmez</b>Panoramik, periapikal, sefalometrik röntgen ya da CBCT kesiti; hepsinde aynı araçlar.</div>
+            <div class="kol-madde"><b>Gerçek milimetre</b>Dosya kendi ölçeğini taşıyorsa doğrudan; taşımıyorsa bilinen bir referans çizip kalibre edersiniz.</div>
+            <div class="kol-madde"><b>Çapı ve boyu siz seçersiniz</b>Şablon implant gerçek mm ölçeğinde çizilir. Ölçüm, açı, işaret ve not aynı ekranda.</div>
+            <div class="kol-madde"><b>Hasta kartına işlenir</b>Ölçümleriniz ve planlamalarınız kaydedilir; isterseniz işaretli görüntü tedavi teklifine geçer.</div>
+          </div>
+          <p class="kol-not">CBCT serisi kendi bilgisayarınızda açılır, sunucuya yüklenmez. Simülatör bir tanı veya planlama aracı değildir; ölçüm ve yerleştirme hekimin kendi işlemidir, sistem yer önermez ve anatomik yapı tanımaz.</p>
+          <div class="kol-alt">
+            <a class="kol-cta" href="https://app.regainassist.com">Simülatörü ücretsiz deneyin <i>&rarr;</i></a>
+            <span class="kol-alt-not">Pro özelliği &middot; 14 gün deneme</span>
           </div>
         </div>
       </details>
@@ -678,9 +716,10 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <li><b>Randevular</b><span>Takvim ve gelmeyen takibi</span></li>
           <li><b>Tedaviler</b><span>Plan, teklif ve tamamlama</span></li>
           <li><b>Ödemeler</b><span>Tahsilat ve bekleyen alacak</span></li>
+          <li><b>Simülatör</b><span>Görüntü üzerinde ölçüm ve şablon implant</span></li>
         </ul>
       </div>
-      <div class="mgrup" style="--mg:var(--ok)">
+      <div class="mgrup" style="--mg:var(--ikincil)">
         <h3>Tedarik &amp; Bildirim</h3>
         <ul>
           <li><b>Tedarikçiler &amp; Stok</b><span>Ürün, fatura ve stok hareketi</span></li>
@@ -688,7 +727,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <li><b>e-Nabız Export</b><span>Bildirime hazır dosya</span></li>
         </ul>
       </div>
-      <div class="mgrup" style="--mg:var(--gold)">
+      <div class="mgrup" style="--mg:var(--accent-l)">
         <h3>Raporlama</h3>
         <ul>
           <li><b>Raporlar</b><span>Gelir, tedavi ve hasta raporu</span></li>
@@ -722,7 +761,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 
     <div class="pricing-toggle">
       <button onclick="setPricingDonem('aylik')" id="btn-aylik" style="background:var(--accent);color:#fff;">Aylık</button>
-      <button onclick="setPricingDonem('yillik')" id="btn-yillik" style="background:transparent;color:var(--text3);">Yıllık <span style="font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:4px;background:var(--gold-lt);color:var(--gold);">%20</span></button>
+      <button onclick="setPricingDonem('yillik')" id="btn-yillik" style="background:transparent;color:var(--text3);">Yıllık <span style="font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:4px;background:var(--ikincil-pale);color:var(--ikincil);">%20</span></button>
     </div>
   </div>
 
@@ -740,7 +779,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       </div>
       <div class="plan-save" id="starter-tasarruf" style="display:none;text-align:center;">
         <span style="text-decoration:line-through;opacity:.5;">&#8378;999/ay</span>
-        <span style="color:var(--gold);font-weight:600;margin-left:6px;">Yılda &#8378;2.400 tasarruf</span>
+        <span style="color:var(--ikincil);font-weight:600;margin-left:6px;">Yılda &#8378;2.400 tasarruf</span>
       </div>
       <a href="https://app.regainassist.com" class="plan-cta" style="background:var(--accent);color:#fff;">Ücretsiz Deneyin</a>
       <div class="plan-features">
@@ -771,9 +810,9 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       </div>
       <div class="plan-save" id="pro-tasarruf" style="display:none;text-align:center;">
         <span style="text-decoration:line-through;opacity:.5;">&#8378;1.999/ay</span>
-        <span style="color:var(--gold);font-weight:600;margin-left:6px;">Yılda &#8378;4.800 tasarruf</span>
+        <span style="color:var(--ikincil);font-weight:600;margin-left:6px;">Yılda &#8378;4.800 tasarruf</span>
       </div>
-      <a href="https://app.regainassist.com" class="plan-cta" style="background:var(--gold);color:#fff;">Ücretsiz Deneyin</a>
+      <a href="https://app.regainassist.com" class="plan-cta" style="background:var(--brand);color:#fff;">Ücretsiz Deneyin</a>
       <div class="plan-features">
         <div style="font-size:11px;font-weight:700;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Starter'daki her şey +</div>
         <div class="highlight">&#10003; ÜTS Entegrasyonu</div>
