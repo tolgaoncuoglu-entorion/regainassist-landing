@@ -57,13 +57,31 @@ fbq('track', 'PageView');
           gucludur; her yere yayilirsa vurgu olmaktan cikar.
        ⛔ ALTIN KALDIRILDI: ucuncu bir hue, kisitli paleti dagitiyordu.
           Yerini logonun soguk mavi-grisi (--ikincil) aldi. */
-    --brand:#0d9488; --brand-d:#0a7b71; --brand-pale:rgba(13,148,136,.10);
-    --ikincil:#64748b; --ikincil-pale:rgba(100,116,139,.10);
-    --accent:#243b5e; --accent-l:#3c5f8f; --accent-pale:rgba(36,59,94,.07);
-    --dark:#0d1524;
-    --bg:#faf9f6; --bg2:#f4f1ec; --surface:#ffffff;
-    --border:#e9e4dc; --border2:#dbd4c9;
-    --text:#131c2c; --text2:#48586e; --text3:#87909e;
+    /* ═══ ReGain Design Tokens — TEK KAYNAK ═══════════════════════════
+       ⚠️ Bu blok UYGULAMA ile (src/styles/global.css) AYNI isim ve degerleri
+          tasir. Renk burada tanimlanir; asagidaki her sey buradan beslenir.
+          Yeni bir modul ayni gorsel dilde ciksin diye renk dogrudan yazilmaz.
+       ⚠️ teal ve mavi-gri LOGODAN olculdu (#0d9488 / #64748b), tahmin degil. */
+    --regain-teal-600:#0b7c72; --regain-teal-500:#0d9488; --regain-teal-400:#2dd4bf;
+    --regain-navy-900:#0d1524; --regain-navy-800:#152238;
+    --regain-navy-700:#243b5e; --regain-navy-600:#3c5f8f;
+    --regain-background:#faf9f6; --regain-surface:#ffffff;
+    --regain-border:#e5e9ef;
+    --regain-text-primary:#131c2c; --regain-text-secondary:#5b6b80;
+    --regain-text-tertiary:#94a1b2;
+    --regain-success:#1a7f5e; --regain-warning:#b07d1a; --regain-danger:#c0392f;
+
+    /* ── Sayfa tokenlari: hepsi YUKARIDAN beslenir ────────────────────── */
+    --brand:var(--regain-teal-500); --brand-d:var(--regain-teal-600);
+    --brand-pale:rgba(13,148,136,.10);
+    --ikincil:var(--regain-text-secondary); --ikincil-pale:rgba(91,107,128,.10);
+    --accent:var(--regain-navy-700); --accent-l:var(--regain-navy-600);
+    --accent-pale:rgba(36,59,94,.07);
+    --dark:var(--regain-navy-900);
+    --bg:var(--regain-background); --bg2:#f4f1ec; --surface:var(--regain-surface);
+    --border:var(--regain-border); --border2:#d9dfe8;
+    --text:var(--regain-text-primary); --text2:var(--regain-text-secondary);
+    --text3:var(--regain-text-tertiary);
     --ok:#1a6b5e; --wait:#946d18; --stop:#b83232;
     --r:12px; --r-lg:16px;
     --sh:0 1px 2px rgba(26,35,50,.04); --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
