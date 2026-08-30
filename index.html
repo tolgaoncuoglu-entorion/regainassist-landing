@@ -101,6 +101,20 @@ fbq('track', 'PageView');
   .nav-links { display:flex; gap:24px; margin-left:auto; font-size:14px; font-weight:500; color:var(--text2); }
   .nav-links a { text-decoration:none; }
   .nav-links a:hover { color:var(--accent); }
+  /* ── Simulator vurgusu ─────────────────────────────────────────────
+     Teal'in tanimli gorevlerinden biri DIKKAT/vurgu; nav'da tam yerinde.
+     ⚠️ Nav metni KUCUK (14px), yani buyuk-metin muafiyeti YOK — 4,5:1
+        gerekiyor. Olculdu (beyaz uzerinde teal dolgu):
+          dolgu %14 → 4,29  ← esik alti
+          dolgu %10 → 4,50  ← TAM esikte, yuvarlamada duser
+          dolgu % 5 → 4,80  ← secildi, payi var
+     ⚠️ Metin teal-500 DEGIL teal-600: teal-500 ayni zeminde 3,32:1. */
+  .nav-links a.nav-yeni { color:var(--regain-teal-600); font-weight:700;
+    background:rgba(13,148,136,.05); border:1px solid rgba(13,148,136,.32);
+    padding:5px 12px; border-radius:999px; align-self:center; white-space:nowrap;
+    transition:background .15s, border-color .15s; }
+  .nav-links a.nav-yeni:hover { color:var(--regain-teal-600);
+    background:rgba(13,148,136,.10); border-color:var(--brand); }
   /* Ozellikler tek link degil: Meta Ads her ozellik icin AYRI hedef URL
      istiyor, ayni linki kabul etmiyor. Uc yetenek kendi adresine gider. */
   .nav-mini { display:flex; gap:24px; }
@@ -415,6 +429,7 @@ fbq('track', 'PageView');
     /* 8 link (Moduller eklendi) 900px'de tek satirda kalsin.
        640 altinda nav zaten gizleniyor. */
     .nav-links { gap:10px; font-size:12.5px; }
+    .nav-links a.nav-yeni { padding:4px 9px; }
     /* 8 link 900px'e sigmiyor (olculdu ~883px > 870). "Nasil calisiyor"
        orta ekranda gizlenir; ayni baglanti hero'daki dugmede zaten var. */
     .nav-genis { display:none; }
@@ -473,7 +488,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <a href="#veri-aktarimi">Veri Aktarımı</a>
         <a href="#hasta-kazanimi">Hasta Kazanımı</a>
       </div>
-      <a href="#simulator">Simülatör</a>
+      <a href="#simulator" class="nav-yeni">Simülatör</a>
         <a href="#moduller">Modüller</a>
       <a href="#fiyatlar">Fiyatlar</a>
       <a href="#sss">SSS</a>
