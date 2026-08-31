@@ -363,5 +363,34 @@ T('P7 ESKI pixel ID hic gecmiyor', !H.includes('2032392980824888'))
 T('P8 CTA navigasyonu geciktiriliyor', /GECIKME_MS = 200/.test(Hy) && /e\.preventDefault\(\)/.test(Hy))
 T('P9 pixel yoksa varsayilan davranis bozulmaz', /if \(!pixelVar\) return;/.test(Hy))
 
+// ── L-K: REFERANS KAMPANYASI POP-UP ─────────────────────────────────────
+{
+  T('LK1 pop-up isaretlemesi VAR', /id="kampanya-pop"/.test(H))
+  // ⛔ KAMPANYA HENUZ DUYURULAMAZ: aktif Pro abone 0, basarili odeme 0,
+  //    sozlesme fiyatlari sistemle uyusmuyor. Bayrak KAPALI kalmali;
+  //    acilmasi BILINCLI bir karar olmali, kazara olmamali.
+  T('LK2 kampanya bayragi KAPALI', /var KAMPANYA_AKTIF = false;/.test(H))
+  T('LK3 bayrak kapaliyken kod HIC kosmuyor',
+    /if \(!KAMPANYA_AKTIF\) return;/.test(H))
+
+  // ⚠️ IDDIA DILI: aylik odemede indirim tam %50, yillikta bir aylik
+  //    bedelle sinirli oldugu icin DAHA AZ. Kosulsuz "%50 indirim" demek
+  //    yillik secen musteriye yanlis beyan olurdu.
+  T('LK4 indirim iddiasi KOSULLU ("%50\'ye varan")', /%50'ye varan/.test(H))
+  T('LK5 kosulsuz "%50 indirim" iddiasi YOK',
+    !/%50 indirim/.test(H))
+  T('LK6 kampanya kosullarina bag VAR', /class="kampanya-kosul"/.test(H))
+
+  // ⚠️ Ozel sekmede localStorage ERISIMI ISTISNA ATAR. try/catch olmazsa
+  //    pop-up hic acilmaz ve sebebi gorunmez.
+  T('LK7 localStorage try/catch icinde',
+    /try \{ return localStorage\.getItem/.test(H) && /try \{ localStorage\.setItem/.test(H))
+  // Erisilebilirlik: ESC, rol, odak.
+  T('LK8 ESC ile kapaniyor',   /e\.key === "Escape"/.test(H))
+  T('LK9 dialog rolu ve etiketi', /role="dialog"[\s\S]{0,120}aria-labelledby/.test(H))
+  // ⚠️ Hemen acilan pop-up reklamdan cok engeldir.
+  T('LK10 aninda acilmiyor (gecikme/kaydirma)', /setTimeout\(ac, 12000\)/.test(H))
+}
+
 console.log(hata.length ? `KIRMIZI ${hata.length}/${ok+hata.length}:\n  - ${hata.join('\n  - ')}` : `YESIL ${ok}/${ok}`)
 process.exit(hata.length?1:0)

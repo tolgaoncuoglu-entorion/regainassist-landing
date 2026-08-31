@@ -460,6 +460,37 @@ fbq('track', 'PageView');
     .final { padding:40px 22px; }
   }
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .rail { scroll-behavior:auto; } }
+
+  /* ═══ Referans kampanyasi pop-up ═══ */
+  /* Renkler TOKENDAN gelir; dogrudan renk yazilmaz (tasarim dili tek kaynak). */
+  #kampanya-pop{position:fixed;inset:0;z-index:1000;display:flex;
+    align-items:center;justify-content:center;padding:20px}
+  #kampanya-pop[hidden]{display:none}
+  .kampanya-perde{position:absolute;inset:0;background:rgba(22,35,60,.55)}
+  .kampanya-kutu{position:relative;max-width:440px;width:100%;
+    background:var(--regain-surface);border:1px solid var(--regain-border);
+    border-radius:16px;padding:34px 30px 28px;text-align:center;
+    box-shadow:0 24px 60px rgba(22,35,60,.22);
+    animation:kampanyaGir .28s cubic-bezier(.2,.7,.3,1)}
+  @keyframes kampanyaGir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.kampanya-kutu{animation:none}}
+  .kampanya-x{position:absolute;top:10px;right:14px;background:none;border:0;
+    font-size:26px;line-height:1;color:var(--regain-text-tertiary);cursor:pointer;padding:4px 8px}
+  .kampanya-x:hover{color:var(--regain-text-primary)}
+  .kampanya-rozet{display:inline-block;font-size:11px;font-weight:700;
+    letter-spacing:.8px;text-transform:uppercase;color:var(--brand-d);
+    background:var(--brand-pale);border-radius:20px;padding:5px 12px;margin-bottom:14px}
+  #kampanya-baslik{font-size:26px;line-height:1.28;margin:0 0 12px;
+    color:var(--regain-text-primary);text-wrap:balance}
+  #kampanya-metin{font-size:15px;line-height:1.65;margin:0 0 22px;
+    color:var(--regain-text-secondary)}
+  .kampanya-cta{display:block;background:var(--brand);color:#fff;font-weight:700;
+    font-size:16px;text-decoration:none;padding:14px 22px;border-radius:10px}
+  .kampanya-cta:hover{background:var(--brand-d)}
+  .kampanya-kosul{display:inline-block;margin-top:14px;font-size:13px;
+    color:var(--regain-text-secondary);text-decoration:underline}
+  @media(max-width:420px){#kampanya-baslik{font-size:22px}}
+
 </style>
 </head>
 <body>
@@ -725,8 +756,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           </div>
         </div>
       </details>
-
-
     </div>
 
   </div>
@@ -1387,6 +1416,87 @@ function setPricingDonem(donem) {
       git();
     }
   }, true);
+})();
+</script>
+
+<!-- ═══ REFERANS KAMPANYASI POP-UP ═══════════════════════════════════════
+     ⛔ VARSAYILAN KAPALI. Kampanya bugun DUYURULAMAZ:
+        · aktif Pro abone 0 → paylasilabilecek tek bir kod yok
+        · basarili odeme 0 → indirim/odul zinciri hic kosmadi
+        · sozlesmedeki fiyatlar sistemin aldigi fiyatlarla UYUSMUYOR
+        Bunlar kapaninca asagidaki KAMPANYA_AKTIF bayragini true yap.
+     ⚠️ Iddia dili DIKKATLE secildi: aylik odemede indirim tam %50, yillikta
+        bir aylik bedelle sinirli oldugu icin daha az. Bu yuzden "%50" degil
+        "%50'ye varan" yaziyor — abartma degil, olculen davranis.
+     ══════════════════════════════════════════════════════════════════════ -->
+<div id="kampanya-pop" role="dialog" aria-modal="true"
+     aria-labelledby="kampanya-baslik" aria-describedby="kampanya-metin" hidden>
+  <div class="kampanya-perde" data-kapat></div>
+  <div class="kampanya-kutu">
+    <button class="kampanya-x" type="button" data-kapat aria-label="Kapat">&times;</button>
+    <div class="kampanya-rozet">Referans Programı</div>
+    <h2 id="kampanya-baslik">Bir klinik davet edin,<br>1 ay ücretsiz kullanın</h2>
+    <p id="kampanya-metin">
+      Referans kodunuzla gelen klinik Pro aboneliğini başlattığında,
+      aboneliğinize <b>1 ay ücretsiz kullanım</b> eklenir. Davet ettiğiniz
+      klinik de ilk ödemesinde <b>%50'ye varan indirim</b> alır.
+    </p>
+    <a class="kampanya-cta" href="https://app.regainassist.com">14 gün ücretsiz deneyin</a>
+    <a class="kampanya-kosul" href="/sozlesmeler/mesafeli-satis.html">Kampanya koşulları</a>
+  </div>
+</div>
+
+
+
+<script>
+(function(){
+  "use strict";
+  // ⛔ TEK ANAHTAR. Kampanya hazir olana kadar KAPALI kalir.
+  var KAMPANYA_AKTIF = false;
+
+  if (!KAMPANYA_AKTIF) return;
+
+  var ANAHTAR = "regain_kampanya_kapatildi";
+  // ⚠️ Ozel sekmede localStorage ERISIMI ISTISNA ATABILIR; try/catch sart,
+  //    yoksa pop-up hic acilmaz ve sebebi gorunmez.
+  function kapatildiMi(){ try { return localStorage.getItem(ANAHTAR) === "1"; } catch(e){ return false; } }
+  function kapatildiYaz(){ try { localStorage.setItem(ANAHTAR, "1"); } catch(e){} }
+
+  if (kapatildiMi()) return;
+
+  var pop = document.getElementById("kampanya-pop");
+  if (!pop) return;
+  var acan = null;
+
+  function ac(){
+    if (pop.hidden === false) return;
+    acan = document.activeElement;
+    pop.hidden = false;
+    var cta = pop.querySelector(".kampanya-cta");
+    if (cta) cta.focus();
+    document.addEventListener("keydown", tus);
+  }
+  function kapat(){
+    pop.hidden = true;
+    kapatildiYaz();
+    document.removeEventListener("keydown", tus);
+    if (acan && acan.focus) acan.focus();
+  }
+  function tus(e){ if (e.key === "Escape") kapat(); }
+
+  pop.addEventListener("click", function(e){
+    if (e.target.hasAttribute && e.target.hasAttribute("data-kapat")) kapat();
+  });
+
+  // ⚠️ Hemen acilmaz: sayfaya bakma firsati verilmeden gelen pop-up
+  //    reklamdan cok engel olur. 12 saniye ya da sayfanin yarisi.
+  var zamanlayici = setTimeout(ac, 12000);
+  function kaydirma(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h > 0 && y / h > 0.5) { clearTimeout(zamanlayici); ac(); window.removeEventListener("scroll", kaydirma); }
+  }
+  window.addEventListener("scroll", kaydirma, { passive: true });
 })();
 </script>
 
