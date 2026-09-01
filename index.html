@@ -884,24 +884,28 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
      ⛔ Rakamlar ürünle aynı olmak ZORUNDA: %50/12 ay/24 ay ve
         %25/12 ay/yılda en fazla 12 ay. Kapı denetler.
      ══════════════════════════════════════════════════════════════════ -->
-<section id="kampanyalar" style="background:var(--bg2); border-top:1px solid var(--border);">
+<!-- ⛔ KAMPANYALAR ve FIYATLAR TEK BOLUM GIBI OKUNMALI: ayni linkten
+     geliniyor ve birlikte karar veriliyor. Ayri gorunmelerinin sebebi
+     zemin degil (ikisi de --bg2), ARADAKI CIZGI ve ust uste binen
+     dolgulardi. Kampanyanin ALT dolgusu sifirlandi, fiyatin ust
+     cizgisi kaldirildi ve ust dolgusu kucultuldu. -->
+<section id="kampanyalar" style="background:var(--bg2); border-top:1px solid var(--border); padding-bottom:0;">
   <!-- ⛔ ALT DOLGU KUCUK: fiyat bolumu HEMEN ALTTA ve ikisi birlikte
        okunmali. 72px alt dolgu araya gereksiz bosluk koyuyordu. -->
-  <div class="wrap" style="padding:64px 24px 36px;">
+  <div class="wrap" style="padding:64px 24px 0;">
     <!-- ⛔ BASLIK TEK SATIR OLMALI: bolununce zayifliyor (Tolga 01.09).
          Kap 640px'ti ve baslik ~670px istiyordu. Kap genisletildi; alt
          metin OKUNABILIRLIK icin 640'ta tutuldu (uzun satir yorar).
          ⚠️ `nowrap` KONULMADI: dar ekranda sarabilmeli, yoksa tasar. -->
-    <div style="text-align:center; max-width:860px; margin:0 auto 40px;">
+    <div style="text-align:center; max-width:860px; margin:0 auto 32px;">
       <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.2px;
         text-transform:uppercase; color:var(--brand-d); background:var(--brand-pale);
         border-radius:20px; padding:6px 14px;">Kampanyalar</span>
       <h2 style="font-size:34px; font-weight:800; line-height:1.2; margin:16px 0 10px;
         color:var(--text); text-wrap:balance;">Başlarken de, büyürken de yanınızdayız.</h2>
-      <p style="font-size:16px; line-height:1.65; color:var(--text2); margin:0 auto;
-        max-width:620px;">
-        İki kampanyamız var. Biri yeni kurulan klinikler için, diğeri
-        meslektaşını davet eden Pro aboneler için.</p>
+      <!-- ⛔ ALT METIN KALDIRILDI (Tolga): kartlar zaten iki kampanyayi
+           anlatiyor, ustte tekrar etmek yer kaplamaktan baska is
+           gormuyordu. Baslik tek basina yeterli. -->
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -995,7 +999,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   </div>
 </section>
 
-<section class="pricing" id="fiyatlar">
+<section class="pricing" id="fiyatlar" style="border-top:none; padding-top:44px;">
   <div class="pricing-header">
     <div class="section-tag">Fiyatlandırma</div>
     <h2>Basit ve şeffaf fiyatlar</h2>
