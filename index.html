@@ -489,7 +489,34 @@ fbq('track', 'PageView');
   .kampanya-cta:hover{background:var(--brand-d)}
   .kampanya-kosul{display:inline-block;margin-top:14px;font-size:13px;
     color:var(--regain-text-secondary);text-decoration:underline}
-  @media(max-width:420px){#kampanya-baslik{font-size:22px}}
+  /* Girişte açıldığı için içerik uzun; kutu TAŞMAZ, kendi içinde kayar. */
+  .kampanya-kutu{max-height:calc(100vh - 40px);overflow-y:auto;text-align:left}
+  #kampanya-baslik,.kampanya-rozet-sar{text-align:center}
+  .kampanya-rozet-sar{display:block}
+  #kampanya-metin{text-align:center}
+  /* İki kazanım YAN YANA: kimin ne aldığı tek bakışta ayrışsın. */
+  .kampanya-kazanim{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
+  .kampanya-kart{background:var(--bg2);border:1px solid var(--regain-border);
+    border-radius:12px;padding:14px 13px}
+  .kampanya-kart .kk-kim{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--regain-text-tertiary);margin-bottom:6px}
+  .kampanya-kart .kk-ne{display:block;font-size:17px;font-weight:800;line-height:1.25;
+    color:var(--brand-d);margin-bottom:5px}
+  .kampanya-kart .kk-kosul{display:block;font-size:12px;line-height:1.5;
+    color:var(--regain-text-secondary)}
+  .kampanya-detay{border:1px solid var(--regain-border);border-radius:10px;
+    padding:0 13px;margin:0 0 18px;background:var(--regain-surface)}
+  .kampanya-detay>summary{cursor:pointer;font-size:13.5px;font-weight:600;
+    color:var(--regain-text-secondary);padding:11px 0;list-style:none}
+  .kampanya-detay>summary::-webkit-details-marker{display:none}
+  .kampanya-detay>summary::after{content:"＋";float:right;color:var(--regain-text-tertiary)}
+  .kampanya-detay[open]>summary::after{content:"－"}
+  .kampanya-detay ul{margin:0 0 12px;padding-left:17px}
+  .kampanya-detay li{font-size:13px;line-height:1.62;color:var(--regain-text-secondary);
+    margin-bottom:7px}
+  .kampanya-kosul{display:block;text-align:center}
+  @media(max-width:420px){#kampanya-baslik{font-size:22px}
+    .kampanya-kazanim{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -1431,24 +1458,71 @@ function setPricingDonem(donem) {
         · «ilk 12 ay» YAZILMAK ZORUNDA. Tolga'nin ilk metni «butun abonelik
           suresince» diyordu; 12 ay secildi, metin ona uyduruldu — TERSI
           olsaydi tutamayacagimiz bir taahhut ilan etmis olurduk.
-        · «yilda en fazla 12 ay» YAZILMAK ZORUNDA: tavani yazmayan bir
-          duyuru, tavansiz taahhut sayilir.
+        · TAVAN («yilda en fazla 12 ay») 01.09'da Tolga'nin istegiyle ANA
+          CUMLEDEN CIKARILDI ve «Kampanya detaylari» icine alindi. Bu KABUL
+          EDILEBILIR cunku tavan AYNI YUZEYDE, bir tik otede duruyor.
+          ⛔ AMA POP-UP DISINDA (sosyal medya, e-posta, ilan) tavani
+          yazmayan bir duyuru TAVANSIZ TAAHHUT sayilir — oralarda
+          kisaltilamaz.
      ══════════════════════════════════════════════════════════════════════ -->
 <div id="kampanya-pop" role="dialog" aria-modal="true"
      aria-labelledby="kampanya-baslik" aria-describedby="kampanya-metin" hidden>
   <div class="kampanya-perde" data-kapat></div>
   <div class="kampanya-kutu">
     <button class="kampanya-x" type="button" data-kapat aria-label="Kapat">&times;</button>
-    <div class="kampanya-rozet">Referans Programı</div>
-    <h2 id="kampanya-baslik">Bir klinik davet edin,<br>1 ay ücretsiz kullanın</h2>
+    <span class="kampanya-rozet-sar"><span class="kampanya-rozet">Pro abonelere özel</span></span>
+    <h2 id="kampanya-baslik">Meslektaşınızı davet edin,<br>ikiniz de kazanın</h2>
     <p id="kampanya-metin">
-      Referans kodunuzla gelen her klinik Pro aboneliğini başlattığında,
-      aboneliğinize <b>1 ay ücretsiz kullanım</b> eklenir — yılda en fazla
-      12 ay. Davet ettiğiniz klinik de Pro aboneliğinin <b>ilk 12 ayı
-      boyunca %25 indirim</b> kazanır.
+      Size özel referans kodunuzla meslektaşlarınızı davet edin.
+      Davet ettiğiniz klinik Pro aboneliğini başlattığında ikiniz de kazanırsınız.
     </p>
+
+    <!-- ⚠️ İki kazanım AYRI kutularda: kimin ne aldığı karışırsa taahhüt
+         de karışır. Her kutuda kazanımın YANINDA sınırı yazar — sınırı
+         ayrı bir yere koymak, okunmayan bir yere koymaktır. -->
+    <div class="kampanya-kazanim">
+      <div class="kampanya-kart">
+        <span class="kk-kim">Siz kazanın</span>
+        <span class="kk-ne">1 ay ücretsiz</span>
+        <span class="kk-kosul">Referansınızla gelen <b>her</b> Pro abone için.</span>
+      </div>
+      <div class="kampanya-kart">
+        <span class="kk-kim">Davet ettiğiniz klinik</span>
+        <span class="kk-ne">%25 indirim</span>
+        <span class="kk-kosul">Pro aboneliğinin <b>ilk 12 ayı</b> boyunca,
+          her ödemede.</span>
+      </div>
+    </div>
+
+    <details class="kampanya-detay">
+      <summary>Kampanya detayları</summary>
+      <ul>
+        <li><b>Kodunuz nasıl oluşur?</b> Pro aboneliğinizin ilk ödemesi
+          tamamlandığında size özel kod otomatik tanımlanır. Kod kalıcıdır;
+          dilediğiniz kadar klinik davet edebilirsiniz.</li>
+        <li><b>Ücretsiz ay ne zaman eklenir?</b> Davet ettiğiniz klinik ilk
+          Pro ödemesini tamamladığı anda abonelik bitiş tarihinize eklenir.
+          Bekleyen bakiye tutulmaz, ayrıca talep etmeniz gerekmez.</li>
+        <li><b>Ücretsiz ay üst sınırı.</b> Bir klinik 12 aylık dönem içinde
+          en fazla 12 ay ücretsiz kullanım kazanabilir. Bu sınıra
+          ulaşıldığında sonraki davetler için ücretsiz süre verilmez;
+          kısmi süre verilmez.</li>
+        <li><b>%25 indirim ne kadar sürer?</b> Davet ettiğiniz kliniğin ilk
+          ücretli Pro ödemesinden itibaren 12 ay boyunca yaptığı her Pro
+          ödemesine uygulanır. Aylık abonelikte 12 ödeme demektir; yıllıkta
+          ödemenin tamamına uygulanır. Üst tutar sınırı yoktur.</li>
+        <li><b>Kimler davet edilebilir?</b> ReGain Assist'e ilk kez kaydolan
+          klinikler. Bir klinik yalnızca bir kez referansla gelebilir.</li>
+        <li><b>Sınırlar.</b> Kendi kodunuzu kullanamazsınız; aynı vergi
+          kimlik numarasına sahip klinikler birbirini davet edemez.
+          Kazanılan süre devredilemez ve nakde çevrilemez.</li>
+        <li>Kampanya süresizdir; önceden bildirimde bulunularak
+          değiştirilebilir. Değişiklik, o tarihe kadar kazanılmış hakları
+          etkilemez.</li>
+      </ul>
+    </details>
     <a class="kampanya-cta" href="https://app.regainassist.com">14 gün ücretsiz deneyin</a>
-    <a class="kampanya-kosul" href="/sozlesmeler/mesafeli-satis.html">Kampanya koşulları</a>
+    <a class="kampanya-kosul" href="/sozlesmeler/mesafeli-satis.html#kampanya">Kampanya koşullarının tamamı (Madde 3)</a>
   </div>
 </div>
 
@@ -1474,35 +1548,63 @@ function setPricingDonem(donem) {
   if (!pop) return;
   var acan = null;
 
+  // ⚠️ Girişte acildigi icin arkadaki sayfa KAYMAMALI; yoksa kutuyu
+  //    kapatan kullanici bambaska bir yerde buluyor kendini.
+  var eskiTasma = "";
+
+  function odaklanabilirler(){
+    return pop.querySelectorAll('a[href], button:not([disabled]), summary, [tabindex]:not([tabindex="-1"])');
+  }
+
   function ac(){
     if (pop.hidden === false) return;
     acan = document.activeElement;
     pop.hidden = false;
-    var cta = pop.querySelector(".kampanya-cta");
-    if (cta) cta.focus();
+    eskiTasma = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    // ⚠️ Odak KAPAT dugmesine gider, CTA'ya degil: girişte acilan bir
+    //    kutuda ilk beklenen eylem cikmaktir. CTA'ya odaklanmak,
+    //    Enter'a basan kullaniciyi istemedigi yere goturur.
+    var x = pop.querySelector(".kampanya-x");
+    if (x) x.focus();
     document.addEventListener("keydown", tus);
   }
   function kapat(){
     pop.hidden = true;
+    document.body.style.overflow = eskiTasma;
     kapatildiYaz();
     document.removeEventListener("keydown", tus);
     if (acan && acan.focus) acan.focus();
   }
-  function tus(e){ if (e.key === "Escape") kapat(); }
+  // ⛔ ODAK TUZAGI: modal aciksa Tab kutunun DISINA cikmamali. Girişte
+  //    acildigi icin klavye kullanicisi arkadaki sayfada kaybolabilirdi.
+  function tus(e){
+    if (e.key === "Escape") { kapat(); return; }
+    if (e.key !== "Tab") return;
+    var o = odaklanabilirler();
+    if (!o.length) return;
+    var ilk = o[0], son = o[o.length - 1];
+    if (e.shiftKey && document.activeElement === ilk) { e.preventDefault(); son.focus(); }
+    else if (!e.shiftKey && document.activeElement === son) { e.preventDefault(); ilk.focus(); }
+  }
 
   pop.addEventListener("click", function(e){
     if (e.target.hasAttribute && e.target.hasAttribute("data-kapat")) kapat();
   });
 
-  // ⚠️ Hemen acilmaz: sayfaya bakma firsati verilmeden gelen pop-up
-  //    reklamdan cok engel olur. 12 saniye ya da sayfanin yarisi.
-  var zamanlayici = setTimeout(ac, 12000);
-  function kaydirma(){
-    var y = window.scrollY || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    if (h > 0 && y / h > 0.5) { clearTimeout(zamanlayici); ac(); window.removeEventListener("scroll", kaydirma); }
+  // ⛔ 01.09 — Tolga: «girişte açılsın ama kapatılabilsin.»
+  //    Eski davranis 12 saniye ya da sayfanin yarisi idi; kaldirildi.
+  // ⚠️ SIFIR GECIKME DEGIL, 700ms: sayfa BOYANMADAN acilan bir kutu
+  //    "reklam" degil "site bozuk" hissi verir; kahraman bolum bir kere
+  //    gorunsun. Yine de girişte, kaydirma beklemeden acilir.
+  // ⚠️ Yazi tipleri/gorseller gec gelirse arkada kayma olmasin diye
+  //    `load` DEGIL, DOM hazir olur olmaz sayilir.
+  function baslat(){ setTimeout(ac, 700); }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", baslat);
+  } else {
+    baslat();
   }
-  window.addEventListener("scroll", kaydirma, { passive: true });
 })();
 </script>
 
