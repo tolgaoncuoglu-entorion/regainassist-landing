@@ -498,8 +498,12 @@ fbq('track', 'PageView');
   .kampanya-kazanim{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
   .kampanya-kart{background:var(--bg2);border:1px solid var(--regain-border);
     border-radius:12px;padding:14px 13px}
+  /* ⚠️ Iki baslik FARKLI satir sayisi tutuyor («Siz de kazanın» tek satir,
+     «Davet ettiğiniz klinik de kazansın» iki satir). Esit min-height
+     olmasa rakamlar farkli hizada baslar ve karsilastirma bozulurdu. */
   .kampanya-kart .kk-kim{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;
-    text-transform:uppercase;color:var(--regain-text-tertiary);margin-bottom:6px}
+    text-transform:uppercase;color:var(--regain-text-tertiary);margin-bottom:6px;
+    min-height:2.6em;line-height:1.3}
   .kampanya-kart .kk-ne{display:block;font-size:17px;font-weight:800;line-height:1.25;
     color:var(--brand-d);margin-bottom:5px}
   .kampanya-kart .kk-kosul{display:block;font-size:12px;line-height:1.5;
@@ -1482,12 +1486,12 @@ function setPricingDonem(donem) {
          ayrı bir yere koymak, okunmayan bir yere koymaktır. -->
     <div class="kampanya-kazanim">
       <div class="kampanya-kart">
-        <span class="kk-kim">Siz kazanın</span>
+        <span class="kk-kim">Siz de kazanın</span>
         <span class="kk-ne">1 ay ücretsiz</span>
         <span class="kk-kosul">Referansınızla gelen <b>her</b> Pro abone için.</span>
       </div>
       <div class="kampanya-kart">
-        <span class="kk-kim">Davet ettiğiniz klinik</span>
+        <span class="kk-kim">Davet ettiğiniz klinik de kazansın</span>
         <span class="kk-ne">%25 indirim</span>
         <span class="kk-kosul">Pro aboneliğinin <b>ilk 12 ayı</b> boyunca,
           her ödemede.</span>
