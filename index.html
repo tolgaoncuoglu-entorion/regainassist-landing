@@ -1420,14 +1420,19 @@ function setPricingDonem(donem) {
 </script>
 
 <!-- ═══ REFERANS KAMPANYASI POP-UP ═══════════════════════════════════════
-     ⛔ VARSAYILAN KAPALI. Kampanya bugun DUYURULAMAZ:
-        · aktif Pro abone 0 → paylasilabilecek tek bir kod yok
-        · basarili odeme 0 → indirim/odul zinciri hic kosmadi
-        · sozlesmedeki fiyatlar sistemin aldigi fiyatlarla UYUSMUYOR
-        Bunlar kapaninca asagidaki KAMPANYA_AKTIF bayragini true yap.
-     ⚠️ Iddia dili DIKKATLE secildi: aylik odemede indirim tam %50, yillikta
-        bir aylik bedelle sinirli oldugu icin daha az. Bu yuzden "%50" degil
-        "%50'ye varan" yaziyor — abartma degil, olculen davranis.
+     ✅ 01.09.2026 — ACILDI (Tolga karari).
+        Kapanan engel: sozlesme fiyatlari 31.08'de sisteme uyduruldu.
+        ⚠️ ACIK KALAN, BILEREK KABUL EDILEN: aktif Pro abone 0, basarili
+           odeme 0. Yani indirim/odul zinciri CANLIDA HIC KOSMADI ve
+           paylasilabilecek tek bir kod YOK. Ilk Pro abone geldiginde kod
+           uretilmezse ELLE kod tanimlanacak (docs/kampanya/ELLE_KOD.md).
+     ⚠️ IDDIA DILI OLCULEN DAVRANISTAN TURETILDI — abartilmadi:
+        · «%25» kesin bir oran, «varan» degil: tavan YOK, her odemede ayni.
+        · «ilk 12 ay» YAZILMAK ZORUNDA. Tolga'nin ilk metni «butun abonelik
+          suresince» diyordu; 12 ay secildi, metin ona uyduruldu — TERSI
+          olsaydi tutamayacagimiz bir taahhut ilan etmis olurduk.
+        · «yilda en fazla 12 ay» YAZILMAK ZORUNDA: tavani yazmayan bir
+          duyuru, tavansiz taahhut sayilir.
      ══════════════════════════════════════════════════════════════════════ -->
 <div id="kampanya-pop" role="dialog" aria-modal="true"
      aria-labelledby="kampanya-baslik" aria-describedby="kampanya-metin" hidden>
@@ -1437,9 +1442,10 @@ function setPricingDonem(donem) {
     <div class="kampanya-rozet">Referans Programı</div>
     <h2 id="kampanya-baslik">Bir klinik davet edin,<br>1 ay ücretsiz kullanın</h2>
     <p id="kampanya-metin">
-      Referans kodunuzla gelen klinik Pro aboneliğini başlattığında,
-      aboneliğinize <b>1 ay ücretsiz kullanım</b> eklenir. Davet ettiğiniz
-      klinik de ilk ödemesinde <b>%50'ye varan indirim</b> alır.
+      Referans kodunuzla gelen her klinik Pro aboneliğini başlattığında,
+      aboneliğinize <b>1 ay ücretsiz kullanım</b> eklenir — yılda en fazla
+      12 ay. Davet ettiğiniz klinik de Pro aboneliğinin <b>ilk 12 ayı
+      boyunca %25 indirim</b> kazanır.
     </p>
     <a class="kampanya-cta" href="https://app.regainassist.com">14 gün ücretsiz deneyin</a>
     <a class="kampanya-kosul" href="/sozlesmeler/mesafeli-satis.html">Kampanya koşulları</a>
@@ -1451,8 +1457,8 @@ function setPricingDonem(donem) {
 <script>
 (function(){
   "use strict";
-  // ⛔ TEK ANAHTAR. Kampanya hazir olana kadar KAPALI kalir.
-  var KAMPANYA_AKTIF = false;
+  // ⛔ TEK ANAHTAR. 01.09.2026'da Tolga'nin karariyla ACILDI.
+  var KAMPANYA_AKTIF = true;
 
   if (!KAMPANYA_AKTIF) return;
 
