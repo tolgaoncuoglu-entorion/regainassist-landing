@@ -1325,7 +1325,10 @@ function toggleFaq(btn) {
     { h1: 'Diş hekimlerini dinledik.<br>İhtiyaçlarına <span class="soft nowrap">çözüm ürettik</span>.',
       alt: 'Birbiriyle konuşan modüller. Pürüzsüz iş akışı.' },
   ];
-  const BEKLE = 7000, GECIS = 500;
+  // ⛔ BEKLE'nin ALT SINIRI okuma suresidir: baslik + alt baslik ~8
+  //    kelime, ortalama okuma hiziyla ~2.5 sn. 5 sn okumaya yer
+  //    birakir; daha kisasi basligi «kararsiz» gosterir.
+  const BEKLE = 5000, GECIS = 400;
 
   const hareketKapali = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (hareketKapali.matches) return;
@@ -1342,6 +1345,28 @@ function toggleFaq(btn) {
   }
   function basla() { if (!zaman) zaman = setInterval(sonraki, BEKLE); }
   function dur()   { clearInterval(zaman); zaman = null; }
+
+  // ── IMLEC TETIGI ──────────────────────────────────────────────────
+  // Imlec basligin uzerine gelince HEMEN sonraki mesaja gecer ve sayac
+  // BASTAN baslar (yoksa yeni mesaj, eski sayacin kalan 1 saniyesinde
+  // kayip gidebilirdi).
+  // ⛔ DOKUNMATIKTE HOVER YOKTUR: telefondan girende bu tetik HIC
+  //    calismaz, o yuzden otomatik dongu KALDIRILMADI. Tetigi tek yol
+  //    yapmak, ziyaretcilerin buyuk bolumune ikinci mesaji hic
+  //    gostermezdi.
+  // ⛔ Yalniz .doner (baslik + alt baslik) dinlenir; CTA dugmelerine
+  //    giderken fare oradan gecerse metin degismesin diye.
+  // ⛔ 700 ms'lik es: fare basligin uzerinden hizla gecerken pespese
+  //    tetiklenip metnin ZIPLAMASINI onler.
+  let sonTetik = 0;
+  document.querySelector('.doner')?.addEventListener('mouseenter', () => {
+    if (hareketKapali.matches) return;          // hareket kapaliysa DOKUNMA
+    const t = performance.now();
+    if (t - sonTetik < 700) return;
+    sonTetik = t;
+    sonraki();
+    dur(); basla();                             // sayaci BASTAN baslat
+  });
 
   // Sekme arka plandayken donmesin: gorunmeyen sey icin is yapilmaz.
   document.addEventListener('visibilitychange', () =>
