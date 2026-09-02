@@ -125,9 +125,28 @@ fbq('track', 'PageView');
   /* HERO */
   .hero { padding:64px 0 8px; }
   .eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); background:var(--accent-pale); border:1px solid rgba(30,58,95,.12); padding:6px 12px; border-radius:999px; }
-  h1 { font-size:clamp(30px,4.6vw,50px); line-height:1.14; letter-spacing:-1.2px; font-weight:800; margin:18px 0 0; max-width:16ch; text-wrap:balance; }
+  h1, .hero-h1-gibi { font-size:clamp(30px,4.6vw,50px); line-height:1.14; letter-spacing:-1.2px; font-weight:800; margin:18px 0 0; max-width:16ch; text-wrap:balance; }
   h1 .soft { color:var(--accent); }
+  /* ⛔ «ürettik.» TEK BASINA satirda kalmasin: 19+8 yerine 13+14. */
+  .nowrap { white-space:nowrap; }
   .hero-sub { font-size:clamp(17px,2vw,21px); font-weight:600; color:var(--text2); margin-top:16px; }
+  /* ── HERO DONER METIN ────────────────────────────────────────────────
+     ⛔ SAYFA ZIPLAMASIN: mesajlar farkli satir sayisi tutabilir. Bu yuzden
+        TUM mesajlar ayni grid hucresinde ust uste durur; kap daima EN
+        UZUN mesaj kadar yer kaplar. Yuksekligi JS ile olcup sabitlemek
+        yanlis olurdu — font clamp'li, satir sayisi ekran genisligiyle
+        degisir ve olcum BAYATLAR.
+     ⛔ TEK <h1>: gorunen katman h1, digerleri sadece YER TUTAN olculerdir
+        (aria-hidden + visibility:hidden). Ikinci bir h1 SEO'yu bozardi. */
+  .doner { display:grid; }
+  .doner > * { grid-area:1 / 1; }
+  .doner-olcu { visibility:hidden; pointer-events:none; }
+  .doner-kat { transition:opacity .5s ease, transform .5s ease; }
+  .doner-kat[data-gizli="1"] { opacity:0; transform:translateY(8px); }
+  /* ⛔ HAREKET KAPALIYSA hic donmez ve gecis yapmaz. */
+  @media (prefers-reduced-motion: reduce) {
+    .doner-kat { transition:none; }
+  }
   .hero-desc { font-size:15.5px; color:var(--text3); margin-top:12px; max-width:60ch; }
   .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; align-items:center; }
   .hero-note { font-size:13px; color:var(--text3); }
@@ -560,8 +579,24 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <div class="wrap hero-grid">
    <div class="hero-metin">
     <span class="eyebrow">Diş kliniği yönetim sistemi</span>
-    <h1>Tedavi sizin işiniz.<br>Diğer her şey için <span class="soft">ReGain Assist</span>.</h1>
-    <p class="hero-sub">Çok modül değil. Birlikte çalışan tek sistem.</p>
+    <div class="doner">
+      <!-- GORUNEN KATMAN — metnini JS degistirir. HTML'deki ilk mesaj
+           SABITTIR: arama motoru ve JS kapaliyken gorulen budur. -->
+      <div class="doner-kat" id="hero-kat">
+        <h1 id="hero-h1">Tedavi sizin işiniz.<br>Diğer her şey için <span class="soft">ReGain Assist</span>.</h1>
+        <p class="hero-sub" id="hero-alt">Çok modül değil. Birlikte çalışan tek sistem.</p>
+      </div>
+      <!-- YER TUTAN OLCULER — gorunmez, yalniz kabin yuksekligini en uzun
+           mesaja gore belirler. Zipllama bu sayede OLMAZ. -->
+      <div class="doner-olcu" aria-hidden="true">
+        <div class="hero-h1-gibi">Tedavi sizin işiniz.<br>Diğer her şey için ReGain Assist.</div>
+        <p class="hero-sub">Çok modül değil. Birlikte çalışan tek sistem.</p>
+      </div>
+      <div class="doner-olcu" aria-hidden="true">
+        <div class="hero-h1-gibi">Diş hekimlerini dinledik.<br>İhtiyaçlarına <span class="nowrap">çözüm ürettik</span>.</div>
+        <p class="hero-sub">Birbiriyle konuşan modüller. Pürüzsüz iş akışı.</p>
+      </div>
+    </div>
     <p class="hero-desc">Hasta kaydından tedaviye, tahsilattan ÜTS ve e-Nabız hazırlığına kadar kliniğin operasyonunu tek akışta yönetin.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://app.regainassist.com">14 Gün Ücretsiz Dene</a>
@@ -1268,6 +1303,52 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
   if (!isOpen) item.classList.add('open');
 }
+
+// ═══ HERO DONER METIN ══════════════════════════════════════════════════
+// Iki mesaj sirayla gosterilir. HTML'deki ILK mesaj sabittir; JS yalnizca
+// SONRAKILERE gecer. Boylece:
+//   · arama motoru ve JS kapali tarayici ilk mesaji gorur,
+//   · CLS olmaz (yukseklik .doner-olcu katmanlariyla zaten sabit).
+// ⛔ HAREKET KAPALIYSA (prefers-reduced-motion) HIC DONMEZ — donen metin
+//    okuma guclugu olan ve vestibuler hassasiyeti olan icin rahatsizdir.
+// ⛔ aria-live YOK: ekran okuyucu her degisimde cumleyi tekrar okurdu.
+//    Metin sessizce degisir; ilk mesaj DOM'da zaten okunmustur.
+(function heroDoner() {
+  const kat = document.getElementById('hero-kat');
+  const h1  = document.getElementById('hero-h1');
+  const alt = document.getElementById('hero-alt');
+  if (!kat || !h1 || !alt) return;   // ⛔ capa kaydiysa SESSIZCE cik, patlama
+
+  const MESAJLAR = [
+    { h1: 'Tedavi sizin işiniz.<br>Diğer her şey için <span class="soft">ReGain Assist</span>.',
+      alt: 'Çok modül değil. Birlikte çalışan tek sistem.' },
+    { h1: 'Diş hekimlerini dinledik.<br>İhtiyaçlarına <span class="soft nowrap">çözüm ürettik</span>.',
+      alt: 'Birbiriyle konuşan modüller. Pürüzsüz iş akışı.' },
+  ];
+  const BEKLE = 7000, GECIS = 500;
+
+  const hareketKapali = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (hareketKapali.matches) return;
+
+  let i = 0, zaman = null;
+  function sonraki() {
+    i = (i + 1) % MESAJLAR.length;
+    kat.dataset.gizli = '1';
+    setTimeout(() => {
+      h1.innerHTML = MESAJLAR[i].h1;
+      alt.textContent = MESAJLAR[i].alt;
+      kat.dataset.gizli = '0';
+    }, GECIS);
+  }
+  function basla() { if (!zaman) zaman = setInterval(sonraki, BEKLE); }
+  function dur()   { clearInterval(zaman); zaman = null; }
+
+  // Sekme arka plandayken donmesin: gorunmeyen sey icin is yapilmaz.
+  document.addEventListener('visibilitychange', () =>
+    document.hidden ? dur() : basla());
+  hareketKapali.addEventListener('change', (e) => e.matches ? dur() : basla());
+  basla();
+})();
 
 // Pricing toggle
 function setPricingDonem(donem) {
