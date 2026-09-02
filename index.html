@@ -400,6 +400,30 @@ fbq('track', 'PageView');
   .contact-form input, .contact-form textarea { width:100%; font-family:inherit; font-size:15px; color:var(--text); background:var(--bg); border:1px solid var(--border2); border-radius:10px; padding:13px 15px; resize:vertical; }
   .contact-form input::placeholder, .contact-form textarea::placeholder { color:var(--text3); }
   .contact-form input:focus, .contact-form textarea:focus { outline:2px solid var(--accent); outline-offset:0; border-color:var(--accent); }
+  /* ── ZORUNLU ONAYLAR ────────────────────────────────────────────────
+     ⛔ `.contact-form input` kurali RADYOLARI DA yakaliyor (width:100%,
+        padding:13px) — ezilmezse radyo dugmesi dev bir kutuya donusur.
+        Bu, kaynaga bakinca gorunmeyen bir cakismadir. */
+  .onay-blok { display:flex; flex-direction:column; gap:14px; padding:16px 18px;
+               background:var(--bg2); border:1px solid var(--border); border-radius:12px; }
+  .onay-soru { display:flex; flex-direction:column; gap:7px; }
+  .onay-baslik { font-size:13.5px; font-weight:600; color:var(--text2); line-height:1.45; }
+  .onay-baslik i { color:var(--regain-danger); font-style:normal; font-weight:700; }
+  .onay-secenekler { display:flex; gap:20px; flex-wrap:wrap; }
+  .onay-secenekler label { display:inline-flex; align-items:center; gap:7px;
+                           font-size:14px; font-weight:600; color:var(--text);
+                           cursor:pointer; }
+  .contact-form .onay-secenekler input[type="radio"] {
+    width:17px; height:17px; min-width:17px; padding:0; margin:0; border-radius:50%;
+    accent-color:var(--accent); cursor:pointer; flex-shrink:0;
+  }
+  .onay-not { font-size:12px; color:var(--text3); }
+  .onay-not a { color:var(--accent); font-weight:600; }
+  .onay-uyari { font-size:13px; font-weight:600; line-height:1.5;
+                color:var(--regain-danger); background:rgba(192,57,47,.07);
+                border-left:3px solid var(--regain-danger); border-radius:8px;
+                padding:10px 12px; }
+  @media (max-width:520px) { .onay-secenekler { gap:14px; } }
   .btn-submit { font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--brand); border:none; border-radius:10px; padding:14px 20px; cursor:pointer; transition:opacity .15s; }
   .btn-submit:hover { opacity:.88; }
   .btn-submit:disabled { opacity:.5; cursor:default; }
@@ -1163,6 +1187,38 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     </div>
     <input type="text" id="contact-clinic" placeholder="Klinik adınız">
     <textarea id="contact-msg" rows="3" placeholder="Mesajınız..."></textarea>
+
+    <!-- ═══ ZORUNLU ONAYLAR ═══════════════════════════════════════════
+         ⛔ VARSAYILAN SECILI DEGIL. On isaretli bir kutu, 6563 sayili
+            Kanun anlaminda ACIK RIZA SAYILMAZ; kanit degeri de olmaz.
+         ⛔ «Istemiyorum» da bir CEVAPTIR ve kaydedilir. Bos birakip
+            «izin yok» varsaymak ile kisinin acikca hayir demesi AYNI SEY
+            DEGILDIR; ikincisi belgelenebilir.
+         ⛔ Veri isleme onayinda «vermiyorum» secilirse form GONDERILEMEZ:
+            formu gondermek zaten veri islemektir. Secenegi sunuyoruz ama
+            sonucunu da soyluyoruz — sessizce gondermek celiski olurdu. -->
+    <div class="onay-blok">
+      <div class="onay-soru">
+        <span class="onay-baslik">Kampanya ve duyurulardan WhatsApp ile haberdar olmak istiyor musunuz? <i>*</i></span>
+        <div class="onay-secenekler">
+          <label><input type="radio" name="wa-izin" value="evet"> İstiyorum</label>
+          <label><input type="radio" name="wa-izin" value="hayir"> İstemiyorum</label>
+        </div>
+      </div>
+      <div class="onay-soru">
+        <span class="onay-baslik">İletişim bilgilerimin bu talebe dönüş amacıyla işlenmesine <i>*</i></span>
+        <div class="onay-secenekler">
+          <label><input type="radio" name="veri-izin" value="evet"> Onay veriyorum</label>
+          <label><input type="radio" name="veri-izin" value="hayir"> Onay vermiyorum</label>
+        </div>
+        <div class="onay-not">
+          Ayrıntılar: <a href="/sozlesmeler/kvkk-aydinlatma.html" target="_blank">KVKK Aydınlatma Metni</a>
+          &middot; <a href="/sozlesmeler/acik-riza.html" target="_blank">Açık Rıza Metni</a>
+        </div>
+      </div>
+      <div id="onay-uyari" class="onay-uyari" style="display:none;"></div>
+    </div>
+
     <button class="btn-submit" id="contact-btn" onclick="submitContact()">Gönder</button>
     <div id="contact-result" style="display:none;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;"></div>
   </div>
@@ -1226,6 +1282,10 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 var SUPABASE_URL = 'https://qmsmknlknwavnshekoip.supabase.co';
 var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtc21rbmxrbndhdm5zaGVrb2lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MzAzNDEsImV4cCI6MjA5ODMwNjM0MX0.LrHdf_FJODMvkCiJah6dioqrgPyDQ6WUtVL7NezoZq8';
 
+// ⚠️ ONAY METNI DEGISIRSE BU SURUM DE DEGISMELI. Kaydedilen onayin
+//    HANGI metne verildigi sonradan sorulur; surum olmadan cevap yoktur.
+var ONAY_SURUMU = 'v1-2026-09-02';
+
 async function submitContact() {
   var name = document.getElementById('contact-name').value.trim();
   var phone = document.getElementById('contact-phone').value.trim();
@@ -1240,6 +1300,33 @@ async function submitContact() {
     result.style.background = '#fef2f2';
     result.style.color = '#dc2626';
     result.textContent = 'Lütfen tüm alanları doldurun.';
+    return;
+  }
+
+  // ── ZORUNLU ONAYLAR ────────────────────────────────────────────────
+  // ⛔ SECILMEMIS ≠ HAYIR. Bos birakilan bir soru «izin vermedi» diye
+  //    kaydedilmez; kullanici acikca secmek ZORUNDADIR. Aksi hâlde
+  //    kaydedilen deger bir CEVAP degil, bir VARSAYIM olurdu.
+  var wa = document.querySelector('input[name="wa-izin"]:checked');
+  var vi = document.querySelector('input[name="veri-izin"]:checked');
+  var uyari = document.getElementById('onay-uyari');
+  uyari.style.display = 'none';
+
+  if (!wa || !vi) {
+    uyari.style.display = 'block';
+    uyari.textContent = 'Devam etmek için iki soruyu da yanıtlayın.';
+    uyari.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    return;
+  }
+  // ⛔ «Onay vermiyorum» secildiginde form GONDERILMEZ. Formu gondermek
+  //    zaten veri islemektir; sessizce gondermek, kisinin acikca
+  //    reddettigi seyi yapmak olurdu.
+  if (vi.value === 'hayir') {
+    uyari.style.display = 'block';
+    uyari.textContent = 'Onay vermediğiniz için formu gönderemiyoruz — '
+      + 'formu iletmek de bir veri işleme işlemidir. '
+      + 'Dilerseniz info@entoriontech.com adresinden bize yazabilirsiniz.';
+    uyari.scrollIntoView({ block: 'center', behavior: 'smooth' });
     return;
   }
 
@@ -1261,7 +1348,15 @@ async function submitContact() {
         email: email || null,
         klinik_adi: clinic || null,
         mesaj: msg || null,
-        kaynak: 'landing_page'
+        kaynak: 'landing_page',
+        // ⛔ ONAY KUTUSU KORUMA SAGLAMAZ, KAYDEDILEN ONAY SAGLAR.
+        //    Sürüm alani olmadan «false» iki sey demek olurdu: kisi hayir
+        //    dedi VEYA soru hic sorulmadi (onay alanlari eklenmeden once
+        //    gelen kayitlar). Ikisi ayni sey degil — biri belge, digeri
+        //    bosluk. Surum bu ikisini AYIRIR.
+        whatsapp_izni: wa.value === 'evet',
+        veri_islem_onayi: true,           // 'hayir' ise buraya HIC gelinmez
+        onay_surumu: ONAY_SURUMU
       })
     });
     if (!res.ok) throw new Error('Sunucu hatası');
@@ -1274,6 +1369,10 @@ async function submitContact() {
     document.getElementById('contact-email').value = '';
     document.getElementById('contact-clinic').value = '';
     document.getElementById('contact-msg').value = '';
+    // Secimler de sifirlanir: bir sonraki ziyaretci onceki kisinin
+    // tercihini devralmamali.
+    document.querySelectorAll('input[name="wa-izin"], input[name="veri-izin"]')
+      .forEach(function (r) { r.checked = false; });
   } catch (err) {
     result.style.display = 'block';
     result.style.background = '#fef2f2';
