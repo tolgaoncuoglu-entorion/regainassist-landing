@@ -2,17 +2,40 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009091723"></script>
+<!-- ─────────────────────────────────────────────────────────────────────
+     OLCUM ETIKETLERI YALNIZCA URETIM ALANINDA CALISIR
+
+     04.09 SAHADAN OLCULDU: Meta Events Manager pikseli localhost'ta da
+     goruyordu (22 olay). Yerelde landing'i acmak GERCEK piksele PageView
+     ve CTAClick gonderiyordu. Ayni kusur Google Ads etiketinde de vardi.
+
+     Bu yalnizca kirli veri degil PARA kaybi: kampanya bu olaylara gore
+     optimize eder, kendi test trafigimiz "donusen kullanici" diye ogretilir.
+
+     IZIN TABANLI liste — yasak tabanli DEGIL. Yeni bir onizleme ortami
+     (*.vercel.app), staging ya da 127.0.0.1 eklendiginde hicbir sey
+     yapilmasa bile etiketler orada calismaz.
+     ───────────────────────────────────────────────────────────────────── -->
 <script>
+  window.OLCUM_ACIK = ['regainassist.com','www.regainassist.com','app.regainassist.com']
+    .indexOf(String(location.hostname).toLowerCase()) > -1;
+</script>
+<!-- Google tag (gtag.js) -->
+<script>
+  // gtag DAIMA tanimlidir: sayfadaki cagrilar uretim disinda da patlamasin.
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18009091723');
+  if (window.OLCUM_ACIK) {
+    var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18009091723';
+    document.head.appendChild(g);
+    gtag('js', new Date());
+    gtag('config', 'AW-18009091723');
+  }
 </script>
 <!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
+if (window.OLCUM_ACIK) !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -20,8 +43,10 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2149949149068931');
-fbq('track', 'PageView');
+if (window.OLCUM_ACIK) {
+  fbq('init', '2149949149068931');
+  fbq('track', 'PageView');
+}
 </script>
 <!-- End Meta Pixel Code -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
