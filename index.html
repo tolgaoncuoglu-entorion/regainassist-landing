@@ -110,6 +110,17 @@ fbq('track', 'PageView');
           dolgu % 5 → 4,80  ← secildi, payi var
      ⚠️ Metin teal-500 DEGIL teal-600: teal-500 ayni zeminde 3,32:1. */
   .nav-links a.nav-yeni { color:var(--regain-teal-600); font-weight:700; white-space:nowrap; }
+  /* ── BAŞLIK CTA'SI: TEK DÜĞME, İKİ ÜRÜN ──────────────────────────
+     ⛔ İki ayrı düğme ELENDİ: nav 900px'de zaten sığmıyor (bkz. aşağıdaki
+        media notu), ikinci düğme satırı kırardı. */
+  .dene-sar { position:relative; }
+  .dene-menu { position:absolute; right:0; top:calc(100% + 8px); z-index:60;
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    box-shadow:0 12px 32px rgba(15,23,42,.14); padding:6px; min-width:264px; }
+  .dene-menu a { display:block; padding:10px 12px; border-radius:8px; text-decoration:none; }
+  .dene-menu a:hover { background:var(--bg2); }
+  .dene-menu b { display:block; font-size:14px; font-weight:700; color:var(--text); }
+  .dene-menu span { display:block; font-size:12px; color:var(--text2); margin-top:2px; line-height:1.45; }
   .nav-links a.nav-yeni:hover { color:var(--brand); }
   /* Ozellikler tek link degil: Meta Ads her ozellik icin AYRI hedef URL
      istiyor, ayni linki kabul etmiyor. Uc yetenek kendi adresine gider. */
@@ -588,13 +599,24 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <a href="#veri-aktarimi">Veri Aktarımı</a>
         <a href="#hasta-kazanimi">Hasta Kazanımı</a>
       </div>
-      <a href="#simulator" class="nav-yeni">CaseSuite</a>
+      <a href="#casesuite" class="nav-yeni">CaseSuite</a>
         <a href="#moduller">Modüller</a>
       <a href="#kampanyalar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
     </div>
-    <a class="btn btn-primary btn-sm" href="https://app.regainassist.com">Ücretsiz Dene</a>
+    <div class="dene-sar">
+      <button type="button" class="btn btn-primary btn-sm" id="deneAc"
+              aria-haspopup="true" aria-expanded="false" aria-controls="deneMenu">Ücretsiz Dene</button>
+      <div class="dene-menu" id="deneMenu" role="menu" hidden>
+        <a role="menuitem" href="https://app.regainassist.com">
+          <b>ReGain Assist Pro</b><span>Hasta, randevu, tahsilat, ÜTS ve e-Nabız</span>
+        </a>
+        <a role="menuitem" href="https://app.regainassist.com/casesuite/giris">
+          <b>CaseSuite</b><span>Tek hekim için implant vaka çalışma alanı</span>
+        </a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -862,7 +884,9 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         MPR → aksiyel/koronal/sagital, 11 gecis
         pano→ panoInterpolateSpline · drawPanoCurve
         marka katalogu → 0 gecis (markasiz sablon) -->
-<section id="simulator" class="gorsel-bolum">
+<!-- ⛔ id «simulator» idi; URL'de görünüyordu (regainassist.com/#simulator)
+     ve ürünün adı 03.09'da CaseSuite oldu. Sitemap'te atıf YOK, ölçüldü. -->
+<section id="casesuite" class="gorsel-bolum">
   <div class="wrap">
     <span class="sec-tag">Görüntüleme</span>
     <h2 class="sec">Bir de görüntüler var.</h2>
@@ -1118,7 +1142,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <div class="plan-save" id="pro-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;1.990,83'e denk gelir
       </div>
-      <a href="https://app.regainassist.com" class="plan-cta" style="background:var(--brand);color:#fff;">Ücretsiz Deneyin</a>
+      <a href="https://app.regainassist.com" class="plan-cta" style="background:var(--brand);color:#fff;">14 gün ücretsiz deneyin</a>
       <div class="plan-features">
         <div style="font-size:11px;font-weight:700;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">CaseSuite'teki her şey +</div>
         <div class="highlight">&#10003; Sınırsız Hasta Kaydı</div>
@@ -1479,6 +1503,22 @@ function toggleFaq(btn) {
 })();
 
 // Pricing toggle
+// ⛔ TIKLAMAYLA açılır, HOVER ile değil: dokunmatik cihazda hover yoktur.
+// ⛔ Dışarı tıklayınca ve Esc ile kapanır; `aria-expanded` senkron tutulur.
+(function () {
+  var ac = document.getElementById('deneAc'), menu = document.getElementById('deneMenu');
+  if (!ac || !menu) return;
+  function kapa() { menu.hidden = true; ac.setAttribute('aria-expanded', 'false'); }
+  ac.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var acik = !menu.hidden;
+    menu.hidden = acik;
+    ac.setAttribute('aria-expanded', acik ? 'false' : 'true');
+  });
+  document.addEventListener('click', function (e) { if (!menu.contains(e.target)) kapa(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapa(); });
+})();
+
 function setPricingDonem(donem) {
   var btnAylik = document.getElementById('btn-aylik');
   var btnYillik = document.getElementById('btn-yillik');
