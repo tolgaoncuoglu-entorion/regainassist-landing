@@ -374,7 +374,13 @@ if (window.OLCUM_ACIK) {
      yapıyor (i → İ) ve MARKA ADINI BOZUYOR. Marka adı taşıyan etiket
      dönüştürülmez; harf aralığı da markaya göre daraltıldı.
      ⚠️ Aynı tuzak modül rozetinde de çıkmıştı. */
-  .gorsel-bolum .sec-tag.marka { text-transform:none; letter-spacing:.2px; font-size:13px; }
+  /* 🚨 04.09 SINIF ADI CAKISMASI: once `marka` adi verilmisti ama bu ad
+     sayfada ZATEN VARDI — `.marka { display:grid; place-items:center;
+     aspect-ratio:1 }`. Etiket 1152px genislige oturunca `aspect-ratio:1`
+     yuksekligi de 1152px yapti ve baslikla etiket arasinda DEV BIR BOSLUK
+     dogdu (canlida olculdu: tag h=1152, h2 top farki ~1160px).
+     ⛔ Yeni sinif adi vermeden once SAYFADA VAR MI diye BAKILIR. */
+  .gorsel-bolum .sec-tag-urun { text-transform:none; letter-spacing:.2px; font-size:13px; }
   .gorsel-bolum h2.sec { color:#fff; }
   .gb-alt { font-size:19px; color:rgba(255,255,255,.74); margin-top:12px; max-width:62ch; line-height:1.55; }
   .gb-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:30px; }
@@ -935,7 +941,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
          reklam setindeki «Görüntüleyici değil. Çalışma alanı.» ile de
          ayrışıyordu. ⚠️ Üstteki etiket de «Görüntüleme» diyordu — başlık
          değişip etiket kalsaydı bölüm KENDİ KENDİYLE çelişirdi. -->
-    <span class="sec-tag marka">CaseSuite</span>
+    <span class="sec-tag sec-tag-urun">CaseSuite</span>
     <h2 class="sec">Sadece görüntüleme değil, <b>implant çalışma alanı.</b></h2>
     <p class="gb-alt">Röntgeni yalnızca açmayın. Hastanın dosyasının bir parçası olarak çalışın.</p>
     <div class="gb-grid">
