@@ -34,7 +34,9 @@ T('L2g meta pixel', H.includes('fbq('))
 T('L2h JSON-LD', (H.match(/application\/ld\+json/g)||[]).length>0)
 
 // ── L3: FİYAT/İLETİŞİM İŞLEVİ BOZULMADI ─────────────────────────
-for (const id of ['starter-fiyat','pro-fiyat','starter-tasarruf','pro-tasarruf',
+// ⛔ 04.09: 'starter-*' → 'vaka-*'. Starter 03.09'da satistan cekildi,
+//    karti 04.09'da CaseSuite ile degistirildi.
+for (const id of ['vaka-fiyat','pro-fiyat','vaka-tasarruf','pro-tasarruf',
                   'btn-aylik','btn-yillik','contact-name','contact-phone',
                   'contact-email','contact-clinic','contact-msg','contact-btn','contact-result'])
   T(`L3 id ${id}`, H.includes(`id="${id}"`))
@@ -43,9 +45,38 @@ T('L3c submitContact duruyor', /function submitContact/.test(H))
 T('L3d supabase cagrisi duruyor', H.includes('iletisim_formlari'))
 // Fiyat KENDI elemaninda olculur: sayfada baska yerde gecen '999'
 // (ornegin border-radius:999px) testi ayirt edici olmaktan cikariyordu.
-T('L3e starter aylik 999', /id="starter-fiyat"[^>]*>999</.test(H))
-T('L3f pro aylik 1.999', /id="pro-fiyat"[^>]*>1\.999</.test(H))
-T('L3g yillik fiyatlar JS\'te', /799/.test(H) && /1\.599/.test(H))
+// ⛔⛔ BU AYAKLAR 01.09'DAN BERI BAYATTI: fiyatlar 999/1.999'dan
+//    1.490/2.490'a cikmisti, kapi ESKI SAYIYI ariyor ve her kosumda
+//    kirmizi yaniyordu. Surekli bagiran kapi hicbir sey olcmez —
+//    gercek bir sapma da bu gurultunun icinde kaybolurdu.
+T('L3e CaseSuite aylik 790', /id="vaka-fiyat"[^>]*>790</.test(H))
+T('L3f pro aylik 2.490', /id="pro-fiyat"[^>]*>2\.490</.test(H))
+T('L3g yillik fiyatlar JS\'te', /'7\.900'/.test(H) && /'23\.890'/.test(H))
+
+// ── L3h: JSON-LD FIYATI ↔ GORUNEN FIYAT ─────────────────────────
+// 🚨 04.09'da olculdu: yapisal veri arama motorlarina hala «Starter 999,
+//    Pro 1999» diyordu. Gorunen fiyat 01.09'da degismis, JSON-LD
+//    DEGISMEMISTI ve buna BAKAN KIMSE YOKTU. Ayni sayi iki yuzeydeyse
+//    kapi onlari KARSILASTIRIR; tek yuzeyi olcen kapi otekini kacirir.
+const jsonld = (H.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/) || [])[1] || ''
+T('L3h JSON-LD okunabildi (kapi OLCEBILDI)', jsonld.length > 200, `${jsonld.length} krk`)
+let teklifler = []
+try {
+  const d = JSON.parse(jsonld)
+  for (const o of (d['@graph'] || [])) if (o && o.offers) teklifler = teklifler.concat(o.offers)
+} catch (e) { /* asagidaki ayak yakalar */ }
+T('L3h JSON-LD gecerli ve teklif tasiyor (kapi OLCEBILDI)', teklifler.length >= 2, `${teklifler.length} teklif`)
+const gorunen = {
+  'ReGain CaseSuite': (H.match(/id="vaka-fiyat"[^>]*>([^<]+)</) || [])[1],
+  'Pro':              (H.match(/id="pro-fiyat"[^>]*>([^<]+)</) || [])[1],
+}
+for (const t of teklifler) {
+  const g = gorunen[t.name]
+  T(`L3h JSON-LD '${t.name}' teklifi sayfada gorunen bir plan`, !!g, `${t.name}`)
+  if (g) T(`L3h JSON-LD '${t.name}' fiyati gorunen fiyatla AYNI (${t.price} = ${g})`,
+           String(t.price) === String(g).replace(/\./g, ''))
+}
+T('L3h satistan cekilen plan JSON-LD teklifinde YOK', !/"name":\s*"Starter"/.test(jsonld))
 
 // ── L4: GÖRSEL STRATEJİSİ ───────────────────────────────────────
 const gorseller = new Set([...H.matchAll(/images\/([a-z0-9-]+)(@2x)?\.webp/g)].map(m=>m[1]))
@@ -326,16 +357,23 @@ T('N6c e-Nabiz\'a dogrudan gonderim YAPILMADIGI duruyor',
 
 // ── O: FAQ ŞEMASI ↔ GÖRÜNEN İÇERİK ─────────────────────────────────
 const ldm = H.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
-const ld = JSON.parse(ldm[1])
-const faq = (ld['@graph']||[ld]).find(x=>x['@type']==='FAQPage')
+// ⛔ KORUMASIZ `JSON.parse` KAPIYI ÇÖKERTİYORDU: bozuk yapısal veride kapı
+//    KIRMIZI yakmak yerine yığın izi basıp ölüyordu ve bu bölümdeki ayakların
+//    HİÇBİRİ koşmuyordu. Çöken kapı ölçen kapı değildir — «hiç koşmadı» ile
+//    «temiz çıktı» aynı şey sanılabilirdi. Artık bulgu olarak raporlanıyor.
+let ld = null
+try { ld = ldm ? JSON.parse(ldm[1]) : null } catch (e) { ld = null }
+T('O0 JSON-LD ayrıştırılabildi (kapı ÖLÇEBİLDİ)', !!ld)
+const faq = ld ? (ld['@graph']||[ld]).find(x=>x['@type']==='FAQPage') : null
+T('O0b FAQ şeması bulundu (kapı ÖLÇEBİLDİ)', !!(faq && faq.mainEntity))
 const soz = (t)=>t.replace(/<[^>]+>/g,'').replace(/&#8378;/g,'₺').replace(/\s+/g,' ').trim()
-const semaS = faq.mainEntity.map(q=>q.name)
+const semaS = faq && faq.mainEntity ? faq.mainEntity.map(q=>q.name) : []
 const gorS  = [...H.matchAll(/<summary class="faq-q">([\s\S]*?)<\/summary>/g)].map(m=>soz(m[1]))
 T(`O1 FAQ soru sayisi esit (${semaS.length}/${gorS.length})`, semaS.length===gorS.length)
-T('O2 FAQ sorulari BIREBIR', semaS.every((q,i)=>q===gorS[i]))
-const semaC = faq.mainEntity.map(q=>soz(q.acceptedAnswer.text))
+T('O2 FAQ sorulari BIREBIR', semaS.length>0 && semaS.every((q,i)=>q===gorS[i]))
+const semaC = faq && faq.mainEntity ? faq.mainEntity.map(q=>soz(q.acceptedAnswer.text)) : []
 const gorC  = [...H.matchAll(/<div class="faq-a">([\s\S]*?)<\/div>/g)].map(m=>soz(m[1]))
-T('O3 FAQ cevaplari BIREBIR', semaC.every((c,i)=>c===gorC[i]))
+T('O3 FAQ cevaplari BIREBIR', semaC.length>0 && semaC.every((c,i)=>c===gorC[i]))
 T('O4 e-Nabiz sorusu duzeltildi', /e-Nabız kayıtlarını nasıl hazırlayabilirim\?/.test(H) && !/e-Nabız entegrasyonu nasıl çalışıyor/.test(H))
 
 // ── L5: DOĞRULANMAMIŞ İSTATİSTİK GERİ GELMEDİ ───────────────────
