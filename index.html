@@ -370,15 +370,26 @@ if (window.OLCUM_ACIK) {
   /* ── GORUNTULEME BOLUMU — sayfadaki TEK koyu alan ───────────────── */
   .gorsel-bolum { background:var(--dark); color:#fff; }
   .gorsel-bolum .sec-tag { color:var(--regain-teal-300); }
+  /* 🚨 TÜRKÇE BÜYÜK HARF: `uppercase` bu yerelde «CaseSuite» → «CASESUİTE»
+     yapıyor (i → İ) ve MARKA ADINI BOZUYOR. Marka adı taşıyan etiket
+     dönüştürülmez; harf aralığı da markaya göre daraltıldı.
+     ⚠️ Aynı tuzak modül rozetinde de çıkmıştı. */
+  .gorsel-bolum .sec-tag.marka { text-transform:none; letter-spacing:.2px; font-size:13px; }
   .gorsel-bolum h2.sec { color:#fff; }
   .gb-alt { font-size:19px; color:rgba(255,255,255,.74); margin-top:12px; max-width:62ch; line-height:1.55; }
   .gb-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:30px; }
+  /* ⚠️ 04.09: `.gb-kart.genis` (tam genişlik) KALDIRILDI — Tolga 2×3 dengeli
+     ızgara istedi. Beşinci kartın tek kalması sorunu, altıncı GERÇEK özellik
+     eklenerek çözüldü; kural artık gereksiz. */
   .gb-kart { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.11);
              border-left:3px solid var(--regain-teal-300); border-radius:12px; padding:18px 20px;
              font-size:14.5px; color:rgba(255,255,255,.72); line-height:1.6; }
   .gb-kart b { display:block; color:#fff; font-size:16px; font-weight:700; margin-bottom:5px; letter-spacing:-.2px; }
   .gb-kapanis { margin-top:28px; font-size:22px; font-weight:600; color:rgba(255,255,255,.78); letter-spacing:-.3px; }
   .gb-kapanis b { color:var(--regain-teal-300); font-weight:800; }
+  /* ⭐ Başlıktaki vurgu, bölümün mevcut diliyle AYNI kaynaktan: yeni renk
+     uydurulmadı, `.gb-kapanis b` ile aynı token paylaşıldı. */
+  .gorsel-bolum h2.sec b { color:var(--regain-teal-300); font-weight:800; }
   .gb-alt2 { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:22px; }
   .gb-not { font-size:12.5px; color:rgba(255,255,255,.55); line-height:1.6; flex:1; min-width:240px; }
   .gb-beyan { margin-top:18px; font-size:12px; color:rgba(255,255,255,.42); line-height:1.6; max-width:88ch; }
@@ -919,14 +930,32 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
      ve ürünün adı 03.09'da CaseSuite oldu. Sitemap'te atıf YOK, ölçüldü. -->
 <section id="casesuite" class="gorsel-bolum">
   <div class="wrap">
-    <span class="sec-tag">Görüntüleme</span>
-    <h2 class="sec">Bir de görüntüler var.</h2>
+    <!-- ⛔ 04.09 (Tolga): «Sadece görüntüleme değil, implant çalışma alanı.»
+         Eski başlık «Bir de görüntüler var.» ürünü GÖRÜNTÜLEYİCİ sanıyordu;
+         reklam setindeki «Görüntüleyici değil. Çalışma alanı.» ile de
+         ayrışıyordu. ⚠️ Üstteki etiket de «Görüntüleme» diyordu — başlık
+         değişip etiket kalsaydı bölüm KENDİ KENDİYLE çelişirdi. -->
+    <span class="sec-tag marka">CaseSuite</span>
+    <h2 class="sec">Sadece görüntüleme değil, <b>implant çalışma alanı.</b></h2>
     <p class="gb-alt">Röntgeni yalnızca açmayın. Hastanın dosyasının bir parçası olarak çalışın.</p>
     <div class="gb-grid">
       <div class="gb-kart"><b>DICOM görüntüleme</b>Panoramik, periapikal ve sefalometrik görüntüler.</div>
       <div class="gb-kart"><b>CBCT çalışma alanı</b>MPR ve 3D görüntüleme.</div>
       <div class="gb-kart"><b>Panoramik rekonstrüksiyon</b>Dental arkı belirleyin, panoramik görünüm ve ardışık kesitler oluşturun.</div>
       <div class="gb-kart"><b>Ölçüm &amp; sanal implant yerleşimi</b>Ölçün, çap ve boy seçerek markasız implant şablonlarını görüntüleyin.</div>
+      <!-- ⛔ 04.09 (Tolga): «özelliklerine vaka karşılaştırma da eklensin».
+           ⭐ TAM GENİŞLİK bilerek: ızgara iki sütunlu, beşinci kart tek başına
+           kalırdı. Üstelik karşılaştırma ürünün AYIRT EDİCİ özelliği (reklam
+           seti de onunla öne çıkıyor) — boşluk sorunu ve vurgu aynı kararla
+           çözüldü.
+           ⛔ ÖZNE HEKİM: «yazılım karşılaştırır» denmiyor; planları hekim
+           kurar, hekim karşılaştırır. Kapsam beyanıyla çelişmez. -->
+      <div class="gb-kart"><b>Vaka karşılaştırma</b>Aynı vakaya Plan A, B ve C kurun; yan yana görüp kararı siz verin.</div>
+      <!-- ⛔ ALTINCI KART UYDURULMADI: ikisi de fiyat kartında ZATEN listeli
+           gerçek özellik (Vaka Raporu · Vaka Arşivi) ve reklam setindeki
+           «Vakalarınız sizde kalır» kartıyla aynı şeyi söylüyor. Izgarayı
+           doldurmak için özellik icat etmek, satmadığımızı satmak olurdu. -->
+      <div class="gb-kart"><b>Vaka arşivi ve rapor</b>Çalışmanız cihazınızda saklanır; PDF ve PNG rapor alın.</div>
     </div>
     <p class="gb-kapanis">Kararı siz verin. <b>ReGain çalışma alanını hazırlar.</b></p>
     <div class="gb-alt2">
