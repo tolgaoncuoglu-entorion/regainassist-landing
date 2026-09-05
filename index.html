@@ -444,6 +444,14 @@ if (window.OLCUM_ACIK) {
   .amount { font-size:42px; font-weight:800; letter-spacing:-1.6px; line-height:1; font-variant-numeric:tabular-nums; }
   .per { font-size:14px; font-weight:600; color:var(--text3); }
   .plan-save { font-size:12.5px; margin-top:9px; }
+  /* ⭐ 05.09 (Tolga): yıllık kartta avantaj rozeti. Fiyatın ALTINDA, KENDİ
+     SATIRINDA — fiyatla yan yana dursaydı «7.900 TL 2 ay» diye TEK CÜMLE
+     okunurdu (%50 + 24 ay dersinin aynısı). */
+  .plan-avantaj { display:inline-block; margin-top:10px; font-size:12px; font-weight:800;
+    letter-spacing:.3px; padding:5px 12px; border-radius:999px;
+    background:color-mix(in srgb, var(--brand) 14%, transparent); color:var(--brand); }
+  /* ⚠️ Rozet YALNIZ CaseSuite kartinda; renk kartin kendi CTA'siyla ayni. */
+  .plan-card.suite .plan-avantaj { background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent); }
   .plan-cta { display:block; margin-top:22px; padding:13px 20px; border-radius:10px; text-align:center; font-size:15px; font-weight:700; text-decoration:none; transition:opacity .15s; }
   .plan-cta:hover { opacity:.88; }
   .plan-features { margin-top:24px; display:flex; flex-direction:column; gap:10px; font-size:14px; flex:1; }
@@ -1178,6 +1186,11 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <span class="amount" id="vaka-fiyat">790</span>
         <span class="per" id="vaka-per">/ay</span>
       </div>
+      <!-- ⛔ SAYI UYDURULMADI, HESAPLANDI: 790x12 = 9.480 · yıllık 7.900 →
+           fark 1.580 = TAM 2 aylık bedel. -->
+      <div id="vaka-avantaj" style="display:none;text-align:center;">
+        <span class="plan-avantaj">2 ay avantajlı</span>
+      </div>
       <div class="plan-save" id="vaka-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;658,33'e denk gelir
       </div>
@@ -1203,6 +1216,11 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <span class="amount" id="pro-fiyat">2.490</span>
         <span class="per" id="pro-per">/ay</span>
       </div>
+      <!-- ⛔ 05.09: PRO kartinda avantaj rozeti YOK (Tolga: «sadece CaseSuite
+           fiyatlarina»). Kisa sure once eklenip AYNI TURDA kaldirildi.
+           ⚠️ Pro'nun yillik avantaji ZATEN VAR ve daha buyuk (2,4 ay); rozet
+              koymamak onu gizlemek degil, VURGUYU CaseSuite'e birakmak. Ay
+              basina denk gelen tutar satiri yerinde duruyor. -->
       <div class="plan-save" id="pro-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;1.990,83'e denk gelir
       </div>
@@ -1607,6 +1625,7 @@ function setPricingDonem(donem) {
     document.getElementById('pro-per').textContent = '/yıl';
     vakaTasarruf.style.display = 'block';
     proTasarruf.style.display = 'block';
+    document.getElementById('vaka-avantaj').style.display = 'block';
   } else {
     btnAylik.style.background = 'var(--accent)';
     btnAylik.style.color = '#fff';
@@ -1618,6 +1637,7 @@ function setPricingDonem(donem) {
     document.getElementById('pro-per').textContent = '/ay';
     vakaTasarruf.style.display = 'none';
     proTasarruf.style.display = 'none';
+    document.getElementById('vaka-avantaj').style.display = 'none';
   }
 }
 </script>
