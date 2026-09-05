@@ -1217,10 +1217,18 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <span class="per" id="pro-per">/ay</span>
       </div>
       <!-- ⛔ 05.09: PRO kartinda avantaj rozeti YOK (Tolga: «sadece CaseSuite
-           fiyatlarina»). Kisa sure once eklenip AYNI TURDA kaldirildi.
-           ⚠️ Pro'nun yillik avantaji ZATEN VAR ve daha buyuk (2,4 ay); rozet
-              koymamak onu gizlemek degil, VURGUYU CaseSuite'e birakmak. Ay
-              basina denk gelen tutar satiri yerinde duruyor. -->
+           fiyatlarina»). ⚠️ Pro'nun yillik avantaji ZATEN VAR ve daha buyuk
+           (2,4 ay); rozet koymamak onu gizlemek degil, vurguyu CaseSuite'e
+           birakmak.
+           🚨 AMA ROZET HIZAYI BOZDU (Tolga gordu): CaseSuite'te fazladan bir
+           satir olusunca altindaki her sey asagi kaydi ve IKI KARTIN CTA'LARI
+           AYRI HIZAYA dustu. Cozum rozeti kaldirmak degil, Pro'da AYNI YUKSEKLIGI
+           REZERVE etmek: asagidaki oge GORUNMEZ ama YER KAPLAR.
+           ⛔ `display:none` DEGIL `visibility:hidden` — none yer kaplamaz ve
+              sorunu cozmezdi. -->
+      <div id="pro-avantaj-bosluk" style="display:none;text-align:center;visibility:hidden;" aria-hidden="true">
+        <span class="plan-avantaj">2 ay avantajlı</span>
+      </div>
       <div class="plan-save" id="pro-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;1.990,83'e denk gelir
       </div>
@@ -1626,6 +1634,7 @@ function setPricingDonem(donem) {
     vakaTasarruf.style.display = 'block';
     proTasarruf.style.display = 'block';
     document.getElementById('vaka-avantaj').style.display = 'block';
+    document.getElementById('pro-avantaj-bosluk').style.display = 'block';
   } else {
     btnAylik.style.background = 'var(--accent)';
     btnAylik.style.color = '#fff';
@@ -1638,6 +1647,7 @@ function setPricingDonem(donem) {
     vakaTasarruf.style.display = 'none';
     proTasarruf.style.display = 'none';
     document.getElementById('vaka-avantaj').style.display = 'none';
+    document.getElementById('pro-avantaj-bosluk').style.display = 'none';
   }
 }
 </script>
