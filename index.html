@@ -377,6 +377,8 @@ if (window.OLCUM_ACIK) {
   .mgrup-ss { margin-bottom:16px; }
   /* CaseSuite (koyu zemin) ekranı — çerçeve aynı; açık şerit koyu zeminde durur. */
   .gb-ss { max-width:920px; margin:30px auto 0; }
+  /* Yetenekler (#ozellikler) blok ekranı — özellik ızgarasının altında, ortalı. */
+  .kol-ss { max-width:840px; margin:24px auto 4px; }
   .mgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:34px; }
   .mgrup { background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
            border-top:3px solid var(--mg,var(--accent)); padding:20px 20px 18px; }
@@ -669,7 +671,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <div class="wrap nav-in">
     <a class="nav-logo" href="/"><img src="/images/regain-assist-logo.png" alt="ReGain Assist" width="150" height="30"></a>
     <div class="nav-links">
-      <a class="nav-genis" href="#neden">Nasıl çalışıyor</a>
+      <a class="nav-genis" href="#hikayeler">Nasıl çalışıyor</a>
       <div class="nav-mini">
         <a href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
         <a href="#veri-aktarimi">Veri Aktarımı</a>
@@ -909,6 +911,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             <div class="kol-madde"><b>e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</div>
             <div class="kol-madde"><b>Kayıt altında</b>Gönderilen her bildirim listelenir ve dışa aktarılabilir.</div>
           </div>
+          <div class="ss-frame kol-ss">
+            <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+            <picture>
+              <source srcset="/images/pro/modul_tedarik_uts_16x10.webp" type="image/webp">
+              <img class="ss-img" src="/images/pro/modul_tedarik_uts_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="ÜTS bildirim merkezi ekranı">
+            </picture>
+          </div>
           <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz; gönderime hazır listeyi Bakanlık portalına kolayca yükleyebilirsiniz.</p>
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Bildirim akışını ücretsiz deneyin <i>&rarr;</i></a>
@@ -932,6 +941,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             <div class="kol-madde"><b>Hekim ataması eksikse tamamlanır</b>Hastalara atanmış hekim yoksa tek tek veya topluca hekim atayabilirsiniz.</div>
             <div class="kol-madde"><b>Önce görün, sonra aktarın</b>Aktarmadan önce kaç yeni kayıt, kaç tekrar olduğunu görürsünüz.</div>
           </div>
+          <div class="ss-frame kol-ss">
+            <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+            <picture>
+              <source srcset="/images/pro/ozellik_veri_aktarimi_16x10.webp" type="image/webp">
+              <img class="ss-img" src="/images/pro/ozellik_veri_aktarimi_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Veri içe aktarma — alan eşleştirme ve önizleme ekranı">
+            </picture>
+          </div>
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Kayıtlarınızı taşıyarak başlayın <i>&rarr;</i></a>
             <span class="kol-alt-not">Excel veya CSV</span>
@@ -953,6 +969,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             <div class="kol-madde"><b>Randevu öncesi, tedavi sonrası</b>Randevu hatırlatma, tedavi öncesi bilgilendirme, tedavi sonrası takip, kontrol daveti ve doğum günü mesajları hazır başlıklardan oluşturulur.</div>
             <div class="kol-madde"><b>Gelmeyen hasta kaybolmaz</b>Randevusuna gelmeyenler otomatik işaretlenir, ayrı bir panelde toplanır; WhatsApp ile tek tıkla ulaşırsınız.</div>
             <div class="kol-madde"><b>Aramadan önce</b>Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</div>
+          </div>
+          <div class="ss-frame kol-ss">
+            <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+            <picture>
+              <source srcset="/images/pro/modul_hasta_kazanim_16x10.webp" type="image/webp">
+              <img class="ss-img" src="/images/pro/modul_hasta_kazanim_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Hasta kazanım rehberi ekranı">
+            </picture>
           </div>
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Hasta iletişimini deneyin <i>&rarr;</i></a>
@@ -1052,8 +1075,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <div class="ss-frame mgrup-ss">
           <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
           <picture>
-            <source srcset="/images/pro/modul_tedarik_uts_16x10.webp" type="image/webp">
-            <img class="ss-img" src="/images/pro/modul_tedarik_uts_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="ÜTS bildirim ekranı">
+            <source srcset="/images/pro/modul_tedarik_tedarikciler_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_tedarik_tedarikciler_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Tedarikçiler ekranı">
           </picture>
         </div>
         <h3>Tedarik &amp; Bildirim</h3>
@@ -1083,8 +1106,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <div class="ss-frame mgrup-ss">
           <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
           <picture>
-            <source srcset="/images/pro/modul_hasta_kazanim_16x10.webp" type="image/webp">
-            <img class="ss-img" src="/images/pro/modul_hasta_kazanim_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Hasta kazanım rehberi ekranı">
+            <source srcset="/images/pro/modul_yonetim_hekimler_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_yonetim_hekimler_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Hekimler ekranı">
           </picture>
         </div>
         <h3>Yönetim</h3>
