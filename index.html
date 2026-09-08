@@ -146,6 +146,22 @@ if (window.OLCUM_ACIK) {
   .dene-menu a:hover { background:var(--bg2); }
   .dene-menu b { display:block; font-size:14px; font-weight:700; color:var(--text); }
   .dene-menu span { display:block; font-size:12px; color:var(--text2); margin-top:2px; line-height:1.45; }
+  /* «Ürün ▾» açılır menü — .dene-menu ile aynı dil; sola hizalı.
+     Buton bir nav-link gibi görünür (buton kabuğu değil). */
+  .urun-sar { position:relative; display:inline-flex; align-items:center; }
+  .urun-ac { display:inline-flex; align-items:center; gap:5px; background:none; border:none; padding:0;
+    font-family:inherit; font-size:14px; font-weight:500; color:var(--text2); cursor:pointer; }
+  .urun-ac:hover, .urun-ac[aria-expanded="true"] { color:var(--accent); }
+  .urun-ac svg { transition:transform .2s ease; }
+  .urun-ac[aria-expanded="true"] svg { transform:rotate(180deg); }
+  .urun-menu { position:absolute; left:0; top:calc(100% + 12px); z-index:60;
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    box-shadow:0 12px 32px rgba(15,23,42,.14); padding:6px; min-width:206px; }
+  .urun-menu a { display:block; padding:9px 12px; border-radius:8px; font-size:14px; font-weight:500;
+    color:var(--text2); white-space:nowrap; text-decoration:none; }
+  .urun-menu a:hover { background:var(--bg2); color:var(--accent); }
+  .urun-menu a.nav-yeni { color:var(--regain-teal-600); font-weight:700; }
+  .urun-menu a.nav-yeni:hover { color:var(--brand); background:var(--bg2); }
   .nav-links a.nav-yeni:hover { color:var(--brand); }
   /* Ozellikler tek link degil: Meta Ads her ozellik icin AYRI hedef URL
      istiyor, ayni linki kabul etmiyor. Uc yetenek kendi adresine gider. */
@@ -674,14 +690,24 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <div class="wrap nav-in">
     <a class="nav-logo" href="/"><img src="/images/regain-assist-logo.png" alt="ReGain Assist" width="1194" height="536"></a>
     <div class="nav-links">
-      <a class="nav-genis" href="#hikayeler">Nasıl çalışıyor</a>
-      <div class="nav-mini">
-        <a href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
-        <a href="#veri-aktarimi">Veri Aktarımı</a>
-        <a href="#hasta-kazanimi">Hasta Kazanımı</a>
+      <!-- ⛔ ÇAPALAR KORUNDU (Google Ads site bağlantıları): tüm hedefler aynı,
+           yalnız 8 üst-öğe → «Ürün ▾» açılır menü + 3 düz link'e toplandı.
+           Klavye: <button> Enter/Space açar, Tab menüye girer, Esc kapatır. -->
+      <div class="urun-sar">
+        <button type="button" class="urun-ac" id="urunAc"
+                aria-haspopup="true" aria-expanded="false" aria-controls="urunMenu">
+          Ürün
+          <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="urun-menu" id="urunMenu" role="menu" hidden>
+          <a role="menuitem" href="#hikayeler">Nasıl çalışıyor</a>
+          <a role="menuitem" href="#moduller">Modüller</a>
+          <a role="menuitem" href="#casesuite" class="nav-yeni">CaseSuite</a>
+          <a role="menuitem" href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
+          <a role="menuitem" href="#veri-aktarimi">Veri Aktarımı</a>
+          <a role="menuitem" href="#hasta-kazanimi">Hasta Kazanımı</a>
+        </div>
       </div>
-      <a href="#casesuite" class="nav-yeni">CaseSuite</a>
-        <a href="#moduller">Modüller</a>
       <a href="#kampanyalar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
@@ -1719,6 +1745,24 @@ function toggleFaq(btn) {
   });
   document.addEventListener('click', function (e) { if (!menu.contains(e.target)) kapa(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapa(); });
+})();
+
+// «Ürün ▾» açılır menü — dene menüsüyle aynı desen.
+// ⛔ Tıklamayla açılır (dokunmatikte hover yok); dışarı tıklama + Esc kapatır;
+//    aria-expanded senkron; menü linkine tıklayınca kapanır (aynı sayfa çapası).
+(function () {
+  var ac = document.getElementById('urunAc'), menu = document.getElementById('urunMenu');
+  if (!ac || !menu) return;
+  function kapa(odak) { menu.hidden = true; ac.setAttribute('aria-expanded', 'false'); if (odak) ac.focus(); }
+  ac.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var acik = !menu.hidden;
+    menu.hidden = acik;
+    ac.setAttribute('aria-expanded', acik ? 'false' : 'true');
+  });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) kapa(); });
+  document.addEventListener('click', function (e) { if (!menu.contains(e.target) && e.target !== ac) kapa(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) kapa(true); });
 })();
 
 function setPricingDonem(donem) {
