@@ -337,7 +337,7 @@ if (window.OLCUM_ACIK) {
      yani sayfadaki HER bolum 76px dikey boslugunu sessizce kaybetmisti.
      Artik yok; kalintinin ait oldugu .kol-not zaten asagida tam tanimli. */
   /* SECTION */
-  section { padding:76px 0; }
+  section { padding:56px 0; }   /* 76→56 (~%26): bölüm-arası boşluk azaltıldı (Faz 1.3) */
   .sec-tag { font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); }
   h2.sec { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; text-wrap:balance; }
   h3 { font-size:17px; font-weight:700; letter-spacing:-.2px; }
@@ -598,7 +598,7 @@ if (window.OLCUM_ACIK) {
     .footer-col a, .footer-links a, .nav-links a { display:inline-block; padding:8px 0; }
   }
   @media (max-width:640px) {
-    section { padding:56px 0; }
+    section { padding:44px 0; }   /* mobil: 56→44 (Faz 1.3) */
     .hero { padding:40px 0 4px; }
     .rail { grid-auto-columns:92%; }
     /* Dar ekranda başlık ile ray kontrolleri yan yana sıkışıyor ve bölüm
