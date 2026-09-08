@@ -379,6 +379,9 @@ if (window.OLCUM_ACIK) {
   .gb-ss { max-width:920px; margin:30px auto 0; }
   /* Yetenekler (#ozellikler) blok ekranı — özellik ızgarasının altında, ortalı. */
   .kol-ss { max-width:840px; margin:24px auto 4px; }
+  /* İki ekran yan yana (ör. ÜTS | e-Nabız) — mobilde alt alta. */
+  .kol-ss-cift { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:920px; margin:24px auto 4px; }
+  @media (max-width:760px) { .kol-ss-cift { grid-template-columns:1fr; } }
   .mgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:34px; }
   .mgrup { background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
            border-top:3px solid var(--mg,var(--accent)); padding:20px 20px 18px; }
@@ -911,12 +914,21 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             <div class="kol-madde"><b>e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</div>
             <div class="kol-madde"><b>Kayıt altında</b>Gönderilen her bildirim listelenir ve dışa aktarılabilir.</div>
           </div>
-          <div class="ss-frame kol-ss">
-            <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
-            <picture>
-              <source srcset="/images/pro/modul_tedarik_uts_16x10.webp" type="image/webp">
-              <img class="ss-img" src="/images/pro/modul_tedarik_uts_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="ÜTS bildirim merkezi ekranı">
-            </picture>
+          <div class="kol-ss-cift">
+            <div class="ss-frame">
+              <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+              <picture>
+                <source srcset="/images/pro/modul_tedarik_uts_16x10.webp" type="image/webp">
+                <img class="ss-img" src="/images/pro/modul_tedarik_uts_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="ÜTS bildirim merkezi ekranı">
+              </picture>
+            </div>
+            <div class="ss-frame">
+              <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+              <picture>
+                <source srcset="/images/pro/ozellik_enabiz_16x10.webp" type="image/webp">
+                <img class="ss-img" src="/images/pro/ozellik_enabiz_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="e-Nabız export — veri önizleme ve eksik alan denetimi ekranı">
+              </picture>
+            </div>
           </div>
           <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz; gönderime hazır listeyi Bakanlık portalına kolayca yükleyebilirsiniz.</p>
           <div class="kol-alt">
