@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<!-- ─────────────────────────────────────────────────────────────────────
+     ÖLÇÜM ETİKETLERİ YALNIZCA ÜRETİM ALANINDA (index.html ile aynı disiplin).
+     Bu sayfa Google CaseSuite reklam grubunun NİHAİ URL'idir → base tag gerekli
+     (gclid çereze); dönüşüm burada DEĞİL, trial gerçekten oluşunca app'te atılır.
+     ───────────────────────────────────────────────────────────────────── -->
+<script>
+  window.OLCUM_ACIK = ['regainassist.com','www.regainassist.com','app.regainassist.com']
+    .indexOf(String(location.hostname).toLowerCase()) > -1;
+</script>
+<!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (window.OLCUM_ACIK) {
+    var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18009091723';
+    document.head.appendChild(g);
+    gtag('js', new Date());
+    gtag('config', 'AW-18009091723');
+  }
+</script>
+<!-- Meta Pixel Code -->
+<script>
+if (window.OLCUM_ACIK) !function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView'); }
+</script>
+<!-- End Meta Pixel Code -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseSuite — CBCT üzerinde implant planlama çalışma alanı | ReGain Assist</title>
+<meta name="description" content="CBCT'nizi tarayıcıda açın, ölçün, manuel implant şablonları yerleştirin ve A/B/C planlarınızı yan yana karşılaştırın. Görüntüler cihazınızda kalır. 14 gün ücretsiz deneyin.">
+<link rel="canonical" href="https://www.regainassist.com/casesuite">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ReGain Assist">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://www.regainassist.com/casesuite">
+<meta property="og:title" content="CaseSuite — CBCT üzerinde implant planlama çalışma alanı">
+<meta property="og:description" content="Görüntüleyici değil, vakanızın çalışma alanı. CBCT'yi açın, ölçün, manuel implant şablonu yerleştirin, A/B/C planlarını karşılaştırın. Görüntüler cihazınızda kalır.">
+<meta property="og:image" content="https://www.regainassist.com/images/pro/casesuite_in_pro_16x10.jpg">
+<meta property="og:image:alt" content="CaseSuite — CBCT çalışma alanı ekranı">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CaseSuite — CBCT üzerinde implant planlama çalışma alanı">
+<meta name="twitter:description" content="Görüntüleyici değil. Vakanızın çalışma alanı.">
+<meta name="twitter:image" content="https://www.regainassist.com/images/pro/casesuite_in_pro_16x10.jpg">
+<link rel="icon" href="/images/regain-assist-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#0d9488; --brand-d:#0b7c72; --brand-pale:rgba(13,148,136,.10);
+    --accent:#243b5e; --accent-l:#3c5f8f;
+    --dark:#1e293b;
+    --bg:#ffffff; --bg2:#f5f7fa; --surface:#ffffff;
+    --border:#e3e8ef; --border2:#d9dfe8;
+    --text:#16233c; --text2:#5a6b85; --text3:#94a3b8;
+    --r:12px; --r-lg:16px;
+    --sh:0 1px 2px rgba(26,35,50,.04);
+    --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
+    --sh-ss:0 24px 40px rgba(26,35,50,.14);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;height:auto;display:block}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:16px;height:64px}
+  .nav-logo img{height:28px;width:auto}
+  .nav-cta{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .nav-gir{font-size:14px;font-weight:600;color:var(--text2)}
+  .nav-gir:hover{color:var(--accent)}
+  /* BUTON */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:10px;
+    padding:12px 22px;font-size:15px;letter-spacing:-.01em;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(13,148,136,.28)}
+  .btn-sm{padding:9px 16px;font-size:14px;border-radius:9px}
+  .btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--border2)}
+  .btn-ghost:hover{border-color:var(--accent)}
+  /* HERO */
+  .hero{padding:60px 0 8px;text-align:center}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--brand-d);background:var(--brand-pale);padding:6px 14px;border-radius:999px}
+  h1{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin:22px 0 0}
+  h1 .teal{color:var(--brand)}
+  .hero-sub{font-size:clamp(16px,2vw,19px);color:var(--text2);line-height:1.65;margin:18px auto 0;max-width:720px}
+  .hero-mini{font-size:13.5px;color:var(--text3);margin:12px 0 0}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin-top:26px}
+  .hero-note{font-size:13px;color:var(--text3)}
+  /* EKRAN ÇERÇEVESİ */
+  .ss-frame{border-radius:var(--r-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);box-shadow:var(--sh-ss);max-width:920px;margin:40px auto 0}
+  .ss-bar{height:30px;display:flex;align-items:center;gap:7px;padding:0 13px;background:var(--bg2);border-bottom:1px solid var(--border)}
+  .ss-dot{width:9px;height:9px;border-radius:50%;background:var(--border2)}
+  .ss-frame img{width:100%;height:auto;display:block}
+  .temsili{font-size:12px;color:var(--text3);text-align:center;margin:12px 0 0}
+  /* ÖZELLİKLER */
+  section{padding:64px 0}
+  .sec-tag{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  h2.sec{font-size:clamp(24px,3.1vw,34px);font-weight:800;letter-spacing:-.02em;margin:10px 0 0;line-height:1.2}
+  .sec-alt{font-size:16px;color:var(--text2);margin:12px 0 0;max-width:640px}
+  .ozet{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .kartlar{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+  @media(max-width:860px){.kartlar{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.kartlar{grid-template-columns:1fr}}
+  .kart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px}
+  .kart b{display:block;font-size:15.5px;font-weight:700;color:var(--text);letter-spacing:-.1px}
+  .kart span{display:block;font-size:13.5px;color:var(--text2);line-height:1.5;margin-top:6px}
+  /* GÜVEN ŞERİDİ */
+  .guven{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media(max-width:640px){.guven{grid-template-columns:1fr}}
+  .guven .kart{display:flex;flex-direction:column}
+  /* KAPANIŞ CTA */
+  .kapanis{text-align:center;background:var(--dark);color:#fff}
+  .kapanis h2{font-size:clamp(24px,3.2vw,36px);font-weight:800;letter-spacing:-.02em;margin:0}
+  .kapanis p{color:rgba(255,255,255,.72);font-size:16px;margin:14px auto 0;max-width:560px}
+  .kapanis .btn-primary{margin-top:26px}
+  .kapanis .alt-not{display:block;font-size:12.5px;color:rgba(255,255,255,.55);margin-top:14px}
+  /* BEYAN */
+  .beyan{font-size:12.5px;color:var(--text3);line-height:1.7;max-width:820px;margin:0 auto;text-align:center}
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:30px 0;background:var(--bg2)}
+  .foot-in{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:center;font-size:13px;color:var(--text3)}
+  .foot-in a{color:var(--text2)}
+  .foot-in a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="https://www.regainassist.com/" aria-label="ReGain Assist"><img src="/images/regain-assist-logo.png" alt="ReGain Assist"></a>
+    <div class="nav-cta">
+      <a class="nav-gir" href="https://app.regainassist.com/casesuite/giris">Giriş</a>
+      <a class="btn btn-primary btn-sm" href="https://app.regainassist.com/casesuite/giris?mod=kayit">14 Gün Ücretsiz Dene</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">İmplant vaka çalışma alanı</span>
+    <h1>Görüntüleyici değil.<br><span class="teal">Vakanızın çalışma alanı.</span></h1>
+    <p class="hero-sub">CBCT'nizi tarayıcıda açın, ölçün, manuel implant şablonları oluşturun ve alternatiflerinizi yan yana karşılaştırın.</p>
+    <p class="hero-mini">Tarayıcıda çalışır. Görüntüler cihazınızda kalır.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://app.regainassist.com/casesuite/giris?mod=kayit">14 Gün Ücretsiz Dene</a>
+      <a class="btn btn-ghost" href="https://app.regainassist.com/casesuite/giris">Uygulamayı aç</a>
+      <span class="hero-note">Kredi kartı gerekmez</span>
+    </div>
+
+    <!-- ÜRÜN EKRANI İLK HTML'DE (SSR/SEO/hız): reklam açılış denetimi ve LCP
+         için görsel sunucudan gelir; JS'e bağlı değildir. -->
+    <div class="ss-frame">
+      <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+      <picture>
+        <source srcset="/images/pro/casesuite_in_pro_16x10.webp" type="image/webp">
+        <img src="/images/pro/casesuite_in_pro_16x10.jpg" width="1600" height="999" fetchpriority="high" decoding="async" alt="CaseSuite — CBCT dört panel MPR ve ölçüm ekranı">
+      </picture>
+    </div>
+    <p class="temsili">Görüntüler temsili vakadır.</p>
+  </div>
+</header>
+
+<section class="ozet">
+  <div class="wrap">
+    <span class="sec-tag">Ne yapar</span>
+    <h2 class="sec">Röntgeni yalnızca açmayın. Vakanın parçası olarak çalışın.</h2>
+    <div class="kartlar">
+      <div class="kart"><b>DICOM görüntüleme</b><span>Panoramik, periapikal ve sefalometrik görüntüler.</span></div>
+      <div class="kart"><b>CBCT çalışma alanı</b><span>MPR kesitler ve 3B görüntüleme.</span></div>
+      <div class="kart"><b>Panoramik rekonstrüksiyon</b><span>Dental arkı belirleyin, panoramik görünüm ve ardışık kesitler oluşturun.</span></div>
+      <div class="kart"><b>Ölçüm &amp; sanal implant</b><span>Ölçün; çap ve boy seçerek markasız implant şablonlarını yerleştirin.</span></div>
+      <div class="kart"><b>Vaka karşılaştırma</b><span>Aynı vakaya Plan A, B ve C kurun; yan yana görüp kararı siz verin.</span></div>
+      <div class="kart"><b>Vaka arşivi ve rapor</b><span>Çalışmanız cihazınızda saklanır; PDF ve PNG rapor alın.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="sec-tag">Neden CaseSuite</span>
+    <h2 class="sec">Kurulum yok. Veri dışarı çıkmaz.</h2>
+    <div class="guven">
+      <div class="kart"><b>Tarayıcıda çalışır</b><span>Saatlerce kurulum yok; siteye girip CBCT serinizi kendi bilgisayarınızdan açarsınız.</span></div>
+      <div class="kart"><b>Görüntüler cihazınızda kalır</b><span>CBCT serisi sunucuya yüklenmez; çalışmanız cihazınızda saklanır.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="kapanis">
+  <div class="wrap">
+    <h2>Vakanızın çalışma alanını bugün açın.</h2>
+    <p>14 gün ücretsiz deneyin; kredi kartı gerekmez. Karar sizin, ReGain çalışma alanını hazırlar.</p>
+    <a class="btn btn-primary" href="https://app.regainassist.com/casesuite/giris?mod=kayit">14 Gün Ücretsiz Dene</a>
+    <span class="alt-not">Pro özelliği · CBCT serisi kendi bilgisayarınızda açılır, sunucuya yüklenmez</span>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="beyan">CaseSuite bir tanı veya klinik karar destek aracı değildir; hiçbir öneride bulunmaz. Ölçüm ve yerleştirme hekimin kendi işlemidir; sistem anatomik yapı tanımaz, uygunluk değerlendirmesi yapmaz.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 ReGain Assist</span>
+    <a href="/sozlesmeler/casesuite-kullanim-kosullari.html">Kullanım Koşulları</a>
+    <a href="/sozlesmeler/casesuite-kvkk.html">KVKK Aydınlatma</a>
+    <a href="/sozlesmeler/casesuite-mesafeli-satis.html">Mesafeli Satış</a>
+    <a href="/sozlesmeler/">Tüm yasal metinler</a>
+    <a href="https://www.regainassist.com/">ReGain Assist</a>
+  </div>
+</footer>
+
+</body>
+</html>
