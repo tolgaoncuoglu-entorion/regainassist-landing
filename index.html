@@ -357,6 +357,26 @@ if (window.OLCUM_ACIK) {
      daha buyuk bir bolum" istedi. Kategorili grid: her modul kendi satirinda
      ADI + NE ISE YARADIGI ile. */
   .mod-alt { margin-top:12px; font-size:15px; color:var(--text2); max-width:620px; }
+  /* ── EKRAN GÖRSELİ ÇERÇEVESİ (10.09) — hiçbir görsel çıplak durmaz ─────
+     ⛔ YENİ RENK/TOKEN YOK: köşe var(--r-lg)=16px, çerçeve var(--border),
+        zemin var(--surface), üst şerit var(--bg2). Gölge yumuşak-geniş-düşük
+        opak (sistemin gölge rengiyle: rgba(26,35,50,…)). */
+  .ss-frame { border-radius:var(--r-lg); overflow:hidden; background:var(--surface);
+    border:1px solid var(--border); box-shadow:0 24px 40px rgba(26,35,50,.14); }
+  .ss-bar { height:30px; display:flex; align-items:center; gap:7px; padding:0 13px;
+    background:var(--bg2); border-bottom:1px solid var(--border); }
+  .ss-dot { width:9px; height:9px; border-radius:50%; background:var(--border2); flex-shrink:0; }
+  .ss-img { width:100%; height:auto; display:block; }
+  /* Hero ürün ekranı: geniş; ALT %25 sayfa zeminine gradient mask ile söner
+     (dissolve). Sönen kenarda gölge tutarsız durmasın diye burada gölge yok. */
+  .hero-ss-wrap { margin-top:44px; }
+  .hero-ss { max-width:1000px; margin:0 auto; box-shadow:none;
+    -webkit-mask-image:linear-gradient(to bottom,#000 74%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 74%,transparent 100%); }
+  /* Modül kartı ekranı: kartın ÜSTÜNDE, üçte bir kadar; metin baskın kalır. */
+  .mgrup-ss { margin-bottom:16px; }
+  /* CaseSuite (koyu zemin) ekranı — çerçeve aynı; açık şerit koyu zeminde durur. */
+  .gb-ss { max-width:920px; margin:30px auto 0; }
   .mgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:34px; }
   .mgrup { background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
            border-top:3px solid var(--mg,var(--accent)); padding:20px 20px 18px; }
@@ -729,6 +749,22 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
      <img src="/images/marka.webp" alt="" width="400" height="400" loading="eager" decoding="async">
    </div>
   </div>
+
+  <!-- HERO ÜRÜN EKRANI (10.09): dashboard, pencere çerçevesi içinde; altı %25
+       sayfa zeminine söner. ⛔ Metin/başlık/CTA'ya dokunulmadı; marka işareti
+       yerinde kaldı, bu görsel iki sütunlu satırın ALTINA eklendi.
+       ⭐ eager + fetchpriority=high: kıvrım üstü, LCP adayı. -->
+  <div class="wrap hero-ss-wrap">
+    <div class="ss-frame hero-ss">
+      <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+      <picture>
+        <source srcset="/images/pro/hero_dashboard_16x9.webp" type="image/webp">
+        <img class="ss-img" src="/images/pro/hero_dashboard_16x9.jpg" width="2400" height="1350"
+             loading="eager" fetchpriority="high" decoding="async"
+             alt="ReGain Assist kontrol paneli ekranı">
+      </picture>
+    </div>
+  </div>
 </header>
 
 <!-- ═══ TANIDIK GELİYOR MU? — dört hikâye ═══ -->
@@ -952,6 +988,14 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <span class="sec-tag sec-tag-urun">CaseSuite</span>
     <h2 class="sec">Sadece görüntüleme değil, <b>implant çalışma alanı.</b></h2>
     <p class="gb-alt">Röntgeni yalnızca açmayın. Hastanın dosyasının bir parçası olarak çalışın.</p>
+    <!-- CaseSuite ürün ekranı (10.09): pencere çerçevesi; koyu zeminde açık şerit durur. -->
+    <div class="ss-frame gb-ss">
+      <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+      <picture>
+        <source srcset="/images/pro/casesuite_in_pro_16x10.webp" type="image/webp">
+        <img class="ss-img" src="/images/pro/casesuite_in_pro_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="CaseSuite CBCT çalışma alanı ekranı">
+      </picture>
+    </div>
     <div class="gb-grid">
       <div class="gb-kart"><b>DICOM görüntüleme</b>Panoramik, periapikal ve sefalometrik görüntüler.</div>
       <div class="gb-kart"><b>CBCT çalışma alanı</b>MPR ve 3D görüntüleme.</div>
@@ -988,6 +1032,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 
     <div class="mgrid">
       <div class="mgrup" style="--mg:var(--accent)">
+        <div class="ss-frame mgrup-ss">
+          <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+          <picture>
+            <source srcset="/images/pro/modul_klinik_randevular_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_klinik_randevular_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Randevu takvimi ekranı">
+          </picture>
+        </div>
         <h3>Klinik</h3>
         <ul>
           <li><b>Hastalar</b><span>Kayıt, geçmiş ve diş haritası</span></li>
@@ -998,6 +1049,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </ul>
       </div>
       <div class="mgrup" style="--mg:var(--ikincil)">
+        <div class="ss-frame mgrup-ss">
+          <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+          <picture>
+            <source srcset="/images/pro/modul_tedarik_uts_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_tedarik_uts_16x10.jpg" width="1600" height="999" loading="lazy" decoding="async" alt="ÜTS bildirim ekranı">
+          </picture>
+        </div>
         <h3>Tedarik &amp; Bildirim</h3>
         <ul>
           <li><b>Tedarikçiler &amp; Stok</b><span>Ürün, fatura ve stok hareketi</span></li>
@@ -1006,6 +1064,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </ul>
       </div>
       <div class="mgrup" style="--mg:var(--accent-l)">
+        <div class="ss-frame mgrup-ss">
+          <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+          <picture>
+            <source srcset="/images/pro/modul_raporlama_raporlar_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_raporlama_raporlar_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Raporlar ekranı">
+          </picture>
+        </div>
         <h3>Raporlama</h3>
         <ul>
           <li><b>Raporlar</b><span>Gelir, tedavi ve hasta raporu</span></li>
@@ -1015,6 +1080,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </ul>
       </div>
       <div class="mgrup" style="--mg:var(--text3)">
+        <div class="ss-frame mgrup-ss">
+          <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+          <picture>
+            <source srcset="/images/pro/modul_hasta_kazanim_16x10.webp" type="image/webp">
+            <img class="ss-img" src="/images/pro/modul_hasta_kazanim_16x10.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Hasta kazanım rehberi ekranı">
+          </picture>
+        </div>
         <h3>Yönetim</h3>
         <ul>
           <li><b>Hekimler</b><span>Hekim kayıtları ve atama</span></li>
