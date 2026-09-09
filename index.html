@@ -1025,6 +1025,14 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Bildirim akışını ücretsiz deneyin <i>&rarr;</i></a>
             <span class="kol-alt-not">14 gün · kredi kartı gerekmez</span>
+            <!-- ⛔ İç bağ: /uts-dis-klinigi-yazilimi sitemap'te kayıtlıydı ama
+                 hiçbir sayfadan bağ almıyordu, yani YETİM SAYFAYDI. Aynı hata
+                 /casesuite'te de vardı ve düzeltilirken burada tekrarlandı.
+                 Bağlam içi bağ BURAYA, site geneli bağ FOOTER'a kondu; ikisi
+                 birden çünkü bu modül bir <details> içinde ve varsayılan
+                 KAPALI, yalnız buradaki bağ ziyaretçinin gözüne girmez. -->
+            <a class="kol-alt-not" style="color:var(--brand-d);font-weight:600;text-decoration:underline"
+               href="/uts-dis-klinigi-yazilimi/">ÜTS bildirimi nasıl yapılır? Rehberi okuyun</a>
           </div>
         </div>
       </details>
@@ -1567,6 +1575,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <a href="#fiyatlar">Fiyatlar</a></li>
         <li><a href="#ozellikler">Özellikler</a></li>
         <li><a href="#sss">SSS</a></li>
+        <li><a href="/uts-dis-klinigi-yazilimi/">Rehber: ÜTS bildirimi</a></li>
         <li><a href="https://app.regainassist.com" target="_blank">Demo</a></li>
       </ul>
     </div>
