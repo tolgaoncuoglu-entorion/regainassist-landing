@@ -157,6 +157,10 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .sss[open] summary::before{content:"– "}
   .sss p{margin:12px 0 0;font-size:16px}
   .kaynak{font-size:13.5px;color:var(--text3);margin-top:28px}
+  .nav-menu{display:flex;gap:22px;margin-left:26px}
+  .nav-menu a{font-size:14.5px;font-weight:600;color:var(--text2)}
+  .nav-menu a:hover{color:var(--accent)}
+  @media(max-width:820px){.nav-menu{display:none}}
 </style>
 <!-- JSON-LD · Article + FAQPage + BreadcrumbList.
      ⛔ Article'da hiçbir SİCİL iddiası yok: metin ürünün NE YAPABİLDİĞİNİ
@@ -278,6 +282,17 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-logo" href="https://www.regainassist.com/" aria-label="ReGain Assist"><img src="/images/regain-assist-logo.png" alt="ReGain Assist"></a>
+    <!-- ⛔ Sayfada SITE MENUSU YOKTU: yalnız «Giriş» ve deneme butonu vardı,
+         yani okuyucu ne siteye girebiliyor ne de sayfadan çıkabiliyordu.
+         ⚠️ Çapa id'leri (#ozellikler, #uts-enabiz, #fiyatlar) DEĞİŞMEZ:
+         canlı bir Google Ads site bağlantısı #uts-enabiz'e gidiyor.
+         Görünen etiket değişebilir, id değişemez. -->
+    <div class="nav-menu">
+      <a href="https://www.regainassist.com/#ozellikler">Özellikler</a>
+      <a href="https://www.regainassist.com/#uts-enabiz">ÜTS &amp; e-Nabız</a>
+      <a href="https://www.regainassist.com/casesuite">CaseSuite</a>
+      <a href="https://www.regainassist.com/#fiyatlar">Fiyatlar</a>
+    </div>
     <div class="nav-cta">
       <a class="nav-gir" href="https://app.regainassist.com/login">Giriş</a>
       <a class="btn btn-primary btn-sm" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
