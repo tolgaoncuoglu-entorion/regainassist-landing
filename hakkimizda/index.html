@@ -132,6 +132,33 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .foot-in a{color:var(--text2)}
   .foot-in a:hover{color:var(--accent)}
 </style>
+<!-- JSON-LD · 09.09: alt sayfalar şemasızdı, makine bunların siteye
+     NEREDEN bağlandığını göremiyordu. Fiyat BİLEREK yok: bu sayfada
+     fiyat gösterilmiyor, şema sayfanın gösterdiğinden ileri gitmez. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ReGain Assist",
+     "item": "https://www.regainassist.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Hakkımızda",
+     "item": "https://www.regainassist.com/hakkimizda"
+    }
+   ]
+  }
+ ]
+}
+</script>
 </head>
 <body>
 

@@ -140,6 +140,50 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .foot-in a{color:var(--text2)}
   .foot-in a:hover{color:var(--accent)}
 </style>
+<!-- JSON-LD · 09.09: alt sayfalar şemasızdı, makine bunların siteye
+     NEREDEN bağlandığını göremiyordu. Fiyat BİLEREK yok: bu sayfada
+     fiyat gösterilmiyor, şema sayfanın gösterdiğinden ileri gitmez. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://www.regainassist.com/#org",
+   "name": "Entorion Teknoloji San. ve Tic. Ltd. Şti.",
+   "url": "https://www.regainassist.com/"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ReGain Assist",
+     "item": "https://www.regainassist.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "CaseSuite",
+     "item": "https://www.regainassist.com/casesuite"
+    }
+   ]
+  },
+  {
+   "@type": "SoftwareApplication",
+   "name": "ReGain CaseSuite",
+   "applicationCategory": "MedicalBusinessApplication",
+   "operatingSystem": "Web",
+   "url": "https://www.regainassist.com/casesuite",
+   "description": "Tarayıcıda çalışan CBCT ve DICOM görüntüleme, manuel ölçüm ve şablon implant yerleştirme çalışma alanı. Görüntü serisi kullanıcının kendi bilgisayarında açılır, sunucuya yüklenmez. Tanı koymaz, anatomik yapı tanımaz, uygunluk değerlendirmesi veya yerleşim önerisi üretmez.",
+   "publisher": {
+    "@id": "https://www.regainassist.com/#org"
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 

@@ -1143,7 +1143,17 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     </div>
     <p class="gb-kapanis">Kararı siz verin. <b>ReGain çalışma alanını hazırlar.</b></p>
     <div class="gb-alt2">
-      <a class="btn btn-primary btn-sm" href="https://app.regainassist.com/casesuite">CaseSuite'i inceleyin</a>
+      <!-- ⛔ 09.09: bu bağ SPA'ya (app.regainassist.com/casesuite) gidiyordu.
+           Ölçüldü: o adres tarayıcı robotuna 15 KARAKTER metin gösteriyor,
+           çünkü SPA sayfayı JavaScript ile çiziyor. Buradaki STATİK sayfa
+           ise 232 kelime, kendi başlığı ve meta'sı ilk byte'ta.
+           ⛔ Sonuç daha kötüydü: www/casesuite sitemap'te KAYITLI ama
+           ana sayfadan hiçbir bağ almıyordu, yani YETİM SAYFAYDI —
+           tarayıcı onu keşfedemez.
+           ⚠️ Dönüşüm KIRILMADI: statik sayfanın kendi içinde app kayıt
+           hunisine üç bağ var (ölçüldü). Bir adım ekleniyor, hiçbir adım
+           kaybolmuyor. Google Ads nihai URL'i de buraya bakmalı. -->
+      <a class="btn btn-primary btn-sm" href="https://www.regainassist.com/casesuite">CaseSuite'i inceleyin</a>
       <span class="gb-not">Pro özelliği &middot; 14 gün deneme &middot; CBCT serisi kendi bilgisayarınızda açılır, sunucuya yüklenmez</span>
     </div>
     <p class="gb-beyan">CaseSuite bir tanı veya klinik karar destek aracı değildir; hiçbir öneride bulunmaz. Ölçüm ve yerleştirme hekimin kendi işlemidir; sistem anatomik yapı tanımaz, uygunluk değerlendirmesi yapmaz.</p>
@@ -1959,6 +1969,15 @@ function setPricingDonem(donem) {
 })();
 </script>
 
+<!-- ⛔ JSON-LD · 09.09 eklenen: CaseSuite AYRI bir SoftwareApplication.
+     Tek başına satılıyor (aylık 790 TRY), kendi sözleşme seti ve kendi giriş
+     hunisi var; tek ürün altında yalnız Offer olarak durduğunda makine onu
+     ReGain Assist'in bir paketi sanıyordu.
+     ⛔ Şemaya YALNIZ SAYFADA GÖRÜNEN fiyat yazılır. Yıllık 7.900 ve 23.890
+     üründe var ama bu sayfada gösterilmiyor; şemaya konulsaydı sayfa ile
+     şema ayrışırdı ve zengin sonuç uyarısı doğardı.
+     ⛔ Açıklama JSON'un DIŞINDA: `@comment` gibi tanımsız bir @ anahtarı
+     katı JSON-LD ayrıştırıcılarında bloğun tamamını düşürebilir. -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -2000,6 +2019,22 @@ function setPricingDonem(donem) {
      "priceCurrency": "TRY"
     }
    ]
+  },
+  {
+   "@type": "SoftwareApplication",
+   "name": "ReGain CaseSuite",
+   "applicationCategory": "MedicalBusinessApplication",
+   "operatingSystem": "Web",
+   "url": "https://www.regainassist.com/casesuite",
+   "description": "Diş hekimleri için tarayıcıda çalışan CBCT ve DICOM görüntüleme, manuel ölçüm ve şablon implant yerleştirme çalışma alanı. Görüntü serisi kullanıcının kendi bilgisayarında açılır, sunucuya yüklenmez. Tanı koymaz, anatomik yapı tanımaz, uygunluk değerlendirmesi veya yerleşim önerisi üretmez.",
+   "publisher": { "@id": "https://www.regainassist.com/#org" },
+   "isPartOf": { "@id": "https://www.regainassist.com/#org" },
+   "offers": {
+    "@type": "Offer",
+    "name": "CaseSuite",
+    "price": "790",
+    "priceCurrency": "TRY"
+   }
   },
   {
    "@type": "FAQPage",
