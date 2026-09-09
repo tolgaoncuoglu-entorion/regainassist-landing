@@ -637,6 +637,22 @@ if (window.OLCUM_ACIK) {
   }
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .rail { scroll-behavior:auto; } }
 
+  /* ═══ KAMPANYA ŞERİDİ (Faz 2.4) ═══ hero üstü ince duyuru; #kampanyalar'a
+     yumuşak kaydırır (html scroll-behavior:smooth); kapatınca sessionStorage (bu oturum).
+     Zemin brand-d #0b7c72: beyaz metin 5.07:1 AA (brand #0d9488 3.74 kalırdı). */
+  .kampanya-serit{ position:relative; display:flex; align-items:center; justify-content:center;
+    gap:12px; background:var(--brand-d); color:#fff; padding:9px 46px 9px 18px;
+    font-size:14px; line-height:1.4; text-align:center; }
+  .kampanya-serit .ks-link{ color:#fff; text-decoration:none; display:inline-flex;
+    align-items:center; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .kampanya-serit .ks-link strong{ font-weight:700; }
+  .kampanya-serit .ks-detay{ font-weight:600; text-decoration:underline; text-underline-offset:2px; white-space:nowrap; }
+  .kampanya-serit .ks-link:hover .ks-detay{ text-decoration:none; }
+  .ks-kapat{ position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none;
+    border:0; color:#fff; font-size:22px; line-height:1; cursor:pointer; padding:2px 7px; opacity:.85; }
+  .ks-kapat:hover{ opacity:1; }
+  @media(max-width:560px){ .kampanya-serit{ font-size:12.5px; padding:8px 42px 8px 12px; } }
+
   /* ═══ Referans kampanyasi pop-up ═══ */
   /* Renkler TOKENDAN gelir; dogrudan renk yazilmaz (tasarim dili tek kaynak). */
   #kampanya-pop{position:fixed;inset:0;z-index:1000;display:flex;
@@ -701,6 +717,27 @@ if (window.OLCUM_ACIK) {
 </style>
 </head>
 <body>
+<!-- KAMPANYA ŞERİDİ (Faz 2.4): hero üstü ince şerit, nav'ın üstünde (kaydırınca
+     akıp gider, nav yapışık kalır). #kampanyalar'a yumuşak kaydırır; × kapatınca
+     bu OTURUM boyunca gizli (sessionStorage), modaldan AYRI hafif hatırlatma. -->
+<div id="kampanya-serit" class="kampanya-serit">
+  <a class="ks-link" href="#kampanyalar">
+    <strong>Yeni kliniğe ilk yıl %50 indirim</strong>
+    <span class="ks-detay">Detayları gör →</span>
+  </a>
+  <button type="button" class="ks-kapat" id="ks-kapat" aria-label="Kampanya şeridini kapat">&times;</button>
+</div>
+<script>
+/* Ayrıştırma sırasında çalışır: kapatılmış oturumda BOYAMADAN önce gizler
+   (flash/CLS yok); ayrıca × düğmesini bağlar. sessionStorage erişimi özel
+   sekmede istisna atabilir → try/catch. */
+(function(){
+  var s=document.getElementById('kampanya-serit');
+  try{ if(sessionStorage.getItem('regain_serit_kapatildi')==='1' && s) s.style.display='none'; }catch(e){}
+  var k=document.getElementById('ks-kapat');
+  if(k) k.addEventListener('click',function(){ if(s) s.style.display='none'; try{ sessionStorage.setItem('regain_serit_kapatildi','1'); }catch(e){} });
+})();
+</script>
 <!-- Meta Pixel noscript yedegi.
      ⚠️ HEAD'den BODY'ye tasindi: <noscript> HEAD icindeyken yalnizca
      link/style/meta barindirabilir. JS KAPALI bir ziyaretcide ayristirici
@@ -1934,7 +1971,6 @@ function setPricingDonem(donem) {
    "logo": "https://www.regainassist.com/images/regain-assist-logo.png",
    "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Karabağlar",
     "addressRegion": "İzmir",
     "addressCountry": "TR"
    }
