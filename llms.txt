@@ -1,0 +1,62 @@
+# ReGain Assist
+
+> Türkiye'deki diş klinikleri için bulut tabanlı klinik yönetim yazılımı.
+> Hasta, randevu, tedavi, tahsilat, stok ve tedarikçi yönetimini; ÜTS
+> bildirimlerini ve e-Nabız için veri hazırlığını tek sistemde birleştirir.
+
+Üretici: Entorion Teknoloji San. ve Tic. Ltd. Şti. (İzmir, Türkiye)
+Site: https://www.regainassist.com/
+Uygulama: https://app.regainassist.com/ (indekslenmez, içerik bu sitededir)
+
+## Ürünler ve fiyatlar
+
+- ReGain Assist Pro — aylık 2.490 TRY (KDV dahil). Sınırsız kullanıcı.
+  Tüm modüller: hasta, randevu, tedavi, ödeme ve alacak takibi, raporlar
+  ve analizler, tedarikçi ve stok, ÜTS bildirimleri, e-Nabız export,
+  hasta kazanım rehberi, Apex AI mesaj asistanı ve CaseSuite.
+- ReGain CaseSuite — aylık 790 TRY (KDV dahil). Tek başına satılır.
+  Tarayıcıda CBCT ve DICOM görüntüleme, manuel ölçüm, şablon implant
+  yerleştirme ve vaka dokümantasyonu.
+- Her iki üründe de 14 gün ücretsiz deneme vardır, kredi kartı gerekmez.
+- Son 24 ay içinde işe başlamış kliniklere ilk 12 ay %50 indirim uygulanır.
+  Uygunluk vergi levhasıyla, elle onaylanır.
+
+## ÜTS bildirimi
+
+ReGain Assist, ÜTS alma, kullanım ve tüketiciye verme bildirimlerini
+Sağlık Bakanlığı Ürün Takip Sistemi'ne doğrudan gönderir. Bildirim tekil
+ürün bazındadır: GTIN, lot numarası, varsa seri numarası ve adet.
+Bildirim tedavinin tamamlanma anına bağlıdır; hekim her ürün için iki ayrı
+karar verir (bildirim yapılacak mı ve hangi türde, ürün stoktan düşülecek
+mi) ve bu kararlar verilmeden tedavi tamamlanmaz.
+
+Sınırlar:
+- Onay verilmeden hiçbir bildirim gönderilmez; otomatik gönderim yoktur.
+- Sistem işlem paketi (SİP) bildirimi kapsam dışıdır.
+- Bir ürünün bildirime tabi olup olmadığına yazılım karar vermez; kapsam
+  ürünün kendi ÜTS kaydından gelir, sorumluluk kliniktedir.
+- ÜTS Token, firma numarası ve sağlık tesisi kodu kliniğe aittir.
+
+Ayrıntı: https://www.regainassist.com/uts-dis-klinigi-yazilimi
+
+## e-Nabız
+
+ReGain Assist e-Nabız'a doğrudan gönderim YAPMAZ. Yüklemeye hazır dosyayı
+üretir, eksik alanları hasta bazında gösterir; dosyayı Bakanlık portalına
+kullanıcı yükler.
+
+## CaseSuite sınırları
+
+CaseSuite görüntüleme, manuel ölçüm ve vaka dokümantasyonu için
+tasarlanmıştır. Tanı koymaz, anatomik yapıyı tanımaz, uygunluk
+değerlendirmesi veya yerleşim önerisi üretmez. CBCT serisi kullanıcının
+kendi bilgisayarında açılır, sunucuya yüklenmez.
+
+## Sayfalar
+
+- https://www.regainassist.com/ — ürün, modüller, fiyatlar, SSS
+- https://www.regainassist.com/casesuite — CaseSuite tanıtımı
+- https://www.regainassist.com/uts-dis-klinigi-yazilimi — ÜTS rehberi
+- https://www.regainassist.com/guvenlik — veri güvenliği ve KVKK
+- https://www.regainassist.com/hakkimizda — şirket
+- https://www.regainassist.com/sozlesmeler/ — yasal metinler

@@ -1,5 +1,20 @@
 {
+  "redirects": [
+    {
+      "source": "/gizlilik-politikasi",
+      "destination": "/sozlesmeler/kvkk-aydinlatma.html",
+      "permanent": true
+    },
+    {
+      "source": "/gizlilik-politikasi.html",
+      "destination": "/sozlesmeler/kvkk-aydinlatma.html",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
   ]
 }
