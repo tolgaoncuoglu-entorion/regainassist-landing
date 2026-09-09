@@ -2239,7 +2239,10 @@ function setPricingDonem(donem) {
 (function(){
   "use strict";
   // ⛔ TEK ANAHTAR. 01.09.2026'da Tolga'nin karariyla ACILDI.
-  var KAMPANYA_AKTIF = true;
+  // 09.09.2026 KAPATILDI: giris modali yerine hero ustu ince kampanya SERIDI
+  //   kullaniliyor (daha kurumsal, interstitial cezasi yok). Modal markup/CSS
+  //   dormant durur; geri istenirse bu bayrak true yapilir.
+  var KAMPANYA_AKTIF = false;
 
   if (!KAMPANYA_AKTIF) return;
 
