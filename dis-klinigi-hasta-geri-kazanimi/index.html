@@ -100,14 +100,16 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .kaynak{font-size:13.5px;color:var(--text3);margin-top:28px}
 </style>
 <!-- JSON-LD · Article + FAQPage + BreadcrumbList.
-     ⛔ GERİ ALMA İDDİASI YOK (Tolga 10.09): «onayı istediğiniz zaman geri
-     alabilirsiniz» benzeri bir cümle GEÇMEZ. Üründe bugün onayı geri almanın
-     yolu yok (hasta düzenlemede alan hiç gönderilmiyor); yazılsaydı sayfa
-     ürünün yapmadığı bir şeyi vaat etmiş olurdu.
-     ⛔ ARAMA HACMİ SIFIR (ölçüldü). Bu sayfa arama talebi yakalamak için değil;
-     reklam ve Instagram açılış sayfası, artı hekimin YZ'ye sorduğu soru.
-     ⛔ 3/7/14/30 günleri ve matristeki 24 yaklaşım notu ÜRÜNDEN çıkarıldı
-     (HastaKazanimRehberi GUNLER + src/api/takipler.js), uydurulmadı. -->
+     ⛔ «AÇIK SORULAR» BÖLÜMÜ KALDIRILDI (Tolga 10.09, iki kez).
+     Gerekçe: «sorduk, cevap gelince yazacağız» kime sorulduğunu söylemiyor,
+     hekimi elinde soruyla bırakıyor ve dışarıdan «hukuki tarafı çalışılmamış»
+     diye okunuyor. Hekimin ihtiyacı cevap değil GÜVENLİ VARSAYILAN; onu da
+     «ReGain bu işi nasıl yapıyor» bölümü söylüyor.
+     ⛔ GERİ ALMA İDDİASI YOK: üründe bugün onayı geri almanın yolu yok.
+     ⛔ 3/7/14/30 ve matristeki 24 not ÜRÜNDEN çıkarıldı, uydurulmadı.
+     ⚠️ Örnek mesaj takipler.js'ten BİREBİR alındı; tek değişiklik uzun
+     tirenin virgüle çevrilmesi (sayfada boşlukla çevrili tire 0 tutuluyor).
+     ⛔ Geri kazanım oranı KULLANICI GİRDİSİ: bizim verdiğimiz bir oran yok. -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -167,7 +169,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
      "name": "«Düşüneyim» diyen hastayı aramak doğru mu?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Aramanın kendisi sorun değil; zamanlaması, sıklığı ve içeriği belirleyicidir. Bir kez arayıp bilgi vermek ile üst üste arayıp karar zorlamak aynı şey değildir. Bu sayfadaki yaklaşım tek bir temas ve hastanın sebebine uygun bir cümle üzerine kuruludur."
+      "text": "Aramanın kendisi sorun değil; zamanlaması, sıklığı ve içeriği belirleyicidir. Bir kez arayıp bilgi vermek ile üst üste arayıp karar zorlamak aynı şey değildir."
      }
     },
     {
@@ -175,7 +177,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
      "name": "Neden üçüncü gün?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Bunun dayanağı bir klinik çalışma değil, bir muhakemedir ve sayfada böyle sunulur. İlk gün hasta hâlâ muayenenin etkisindedir ve henüz karar vermemiştir; o gün gelen arama bilgi değil baskı gibi okunur. Otuzuncu günden sonra hasta çoğunlukla ya başka bir yere gitmiş ya konuyu ertelemiştir; o noktadaki temas artık takip değil satıştır."
+      "text": "İlk gün hasta hâlâ muayenenin etkisindedir; o gün gelen arama baskı gibi okunur. Üçüncü günde ilk tepki geçmiş, teklif hâlâ akıldadır. Ayrıntılı gerekçe «Ne zaman aranmalı» bölümünde."
      }
     },
     {
@@ -188,10 +190,26 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
     },
     {
      "@type": "Question",
+     "name": "Sebebi nasıl öğreneceğim?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Koltukta tek bir soru yeter: «Karar vermeden önce sizi en çok düşündüren şey ne?» Cevabı hasta kaydına geçirmek, sonraki temasın hangi cümleyle kurulacağını belirler. Sebep kaydedilmemişse matris çalışmaz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Aramayı hekim mi asistan mı yapmalı?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "İlk temaslar asistan tarafından yapılabilir; bilgi verme ve müsaitlik sorma idari bir iştir. Klinik bir endişe söz konusuysa, özellikle işlem korkusunda, temasın hekimden gelmesi farklı okunur. Pratikte 3. ve 7. gün asistan, 14. ve 30. gün hekim işe yarar."
+     }
+    },
+    {
+     "@type": "Question",
      "name": "Takip mesajı göndermek için hastanın onayı gerekir mi?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Yükümlülük kliniğe aittir ve onayın kayıtlı olması gerekir. Mesajın ticari elektronik ileti sayılıp sayılmadığı, dolayısıyla İYS kaydı gerekip gerekmediği ise bu sayfanın yazıldığı tarihte doğrulanmış değildir; aşağıdaki «açık sorular» bölümüne bakın."
+      "text": "Yükümlülük kliniğe aittir ve onayın kayıtlı olması gerekir. Veri işleme rızası ile iletişim onayı ayrı şeylerdir; birincisi ikincisinin yerine geçmez. Ürün, kayıtlı rıza yoksa metni kopyalamadan önce sizi uyarır."
      }
     },
     {
@@ -199,7 +217,15 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
      "name": "Kampanya duyurusu takip sayılır mı?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Hayır. Takip, hastanın kendi tedavi planıyla ilgili bir hatırlatmadır. İndirim ya da kampanya duyurusunu takip kılığına sokmak takip değildir; içerik değiştiği anda iletinin niteliği de değişir."
+      "text": "Hayır. Takip, hastanın kendi tedavi planıyla ilgili bir hatırlatmadır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Randevusuna gelmeyen hasta da bu akışa mı girer?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır, o ayrı bir durumdur. Tedaviyi kabul etmemiş hasta karar aşamasındadır; randevusuna gelmeyen hasta karar vermiş ama gelememiştir. İkisine aynı metinle yazmak, ikisini de yanlış anlamak olur."
      }
     }
    ]
@@ -241,8 +267,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   <div class="wrap icerik">
 
     <h2>Önce rakam: bu sizde kaç hasta?</h2>
-    <p>Bu bir tahmin aracı değil, kendi sayılarınızla yapılan bir çarpma. Üç girdi girin;
-      hesap tarayıcınızda yapılır, hiçbir yere gönderilmez.</p>
     <div class="hesap">
       <label for="teklif">Haftada verdiğiniz tedavi teklifi sayısı
         <input id="teklif" type="number" min="0" step="1" value="10" inputmode="numeric"></label>
@@ -250,10 +274,12 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
         <input id="oran" type="number" min="0" max="100" step="1" value="30" inputmode="numeric"></label>
       <label for="bedel">Ortalama tedavi bedeli (&#8378;)
         <input id="bedel" type="number" min="0" step="100" value="20000" inputmode="numeric"></label>
+      <label for="geri">Bunların yüzde kaçını geri kazanabileceğinizi düşünüyorsunuz?
+        <input id="geri" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label>
       <output id="sonuc" aria-live="polite"></output>
-      <p class="vars"><b>Varsayımlar açıkta:</b> yılda 48 çalışma haftası. Hesap yalnızca
-        «dönmeyen teklif» sayısını yıllığa çevirir. Bu hastaların tamamının kazanılabileceğini
-        varsaymaz; kaçının kazanılabileceğine dair elimizde bir oran yoktur ve uydurmadık.</p>
+      <p class="vars">Kendi sayılarınızla yapılan bir çarpma; hesap tarayıcınızda kalır,
+        hiçbir yere gönderilmez. Varsayım açıkta: yılda 48 çalışma haftası. Geri kazanım
+        oranını biz vermiyoruz, siz veriyorsunuz; elimizde böyle bir oran yok ve uydurmadık.</p>
     </div>
 
     <h2>Neden dönmüyorlar?</h2>
@@ -269,11 +295,19 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       <li><b>Diğer.</b> Söylenmemiş bir sebep. Bu kategoriyi boş bırakmak yerine sormak gerekir.</li>
     </ol>
 
+    <h3>Sebebi nasıl öğrenirsiniz?</h3>
+    <p>Sayfanın geri kalanı «sebebe göre» kurulu, ama sebep kendiliğinden bilinmez. Koltukta
+      tek bir soru yeter:</p>
+    <div class="kutu">
+      <p><b>«Karar vermeden önce sizi en çok düşündüren şey ne?»</b></p>
+      <p>Cevabı hasta kaydına geçirmek, sonraki temasın hangi cümleyle kurulacağını belirler.
+        Sebep kaydedilmemişse aşağıdaki matris çalışmaz; elinizde yalnız bir gün kalır.</p>
+    </div>
+
     <h2>Ne zaman aranmalı?</h2>
     <div class="kutu">
       <p><b>Bu bölümün dayanağı bir klinik çalışma değil, bir muhakemedir</b> ve öyle
-        okunmalıdır. Elimizde bu aralıkları doğrulayan yayımlanmış bir veri yok; olmadığı
-        için de sayı uydurmuyoruz.</p>
+        okunmalıdır. Elimizde bu aralıkları doğrulayan yayımlanmış bir veri yok.</p>
     </div>
     <p><b>Neden birinci gün değil?</b> Hasta hâlâ muayenenin etkisindedir ve henüz karar
       vermemiştir. O gün gelen arama bilgi değil baskı gibi okunur; kararı hızlandırmaz,
@@ -285,6 +319,12 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       ve karşı taraf da böyle okur.</p>
     <p>Dört temas günü bu yüzden <b>3, 7, 14 ve 30</b>. Aradaki mesafe kasıtlı olarak açılır:
       sıklaşan temas ısrara dönüşür.</p>
+
+    <h3>Kim aramalı?</h3>
+    <p>İlk temaslar asistan tarafından yapılabilir; bilgi vermek ve müsaitlik sormak idari bir
+      iştir. Klinik bir endişe söz konusuysa, özellikle işlem korkusunda, temasın hekimden
+      gelmesi farklı okunur. Pratik bir bölüşüm: <b>3. ve 7. gün asistan, 14. ve 30. gün
+      hekim.</b></p>
 
     <h2>Sebebe göre yaklaşım</h2>
     <p>Aynı gün, farklı sebep, farklı cümle. Matris altı sebep ile dört temas gününün
@@ -303,84 +343,99 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       </table>
     </div>
 
+    <h3>Matris pratikte neye benziyor?</h3>
+    <p>Yukarıdaki hücreler yaklaşımı anlatır, cümleyi değil. <b>Fiyat</b> sebebi ile
+      <b>3. gün</b> kesişimindeki gerçek mesaj şudur:</p>
+    <div class="kutu">
+      <p>«Merhaba [AD], geçen görüşmemiz için teşekkürler 😊 Tedavi planınızla ilgili aklınıza
+        takılan bir şey var mı? Ödeme seçeneklerimizi de konuşabilirdik, size uygun bir plan
+        çıkarabiliriz. Müsait olduğunuzda aramak ister misiniz?»</p>
+      <p style="font-size:14.5px;color:var(--text3)">Dikkat edin: fiyat savunulmuyor, indirim
+        teklif edilmiyor, karar sorulmuyor. Yalnız kapı aralanıyor.</p>
+    </div>
+
+    <h2>Randevusuna gelmeyen hasta ayrı bir durumdur</h2>
+    <p>İkisi karıştırılırsa ikisi de yanlış anlaşılır. Tedaviyi kabul etmemiş hasta <b>karar
+      aşamasındadır</b>; randevusuna gelmeyen hasta <b>karar vermiş ama gelememiştir</b>.
+      Birincisine tereddüt sebebine göre yazılır, ikincisine yeni bir randevu önerilir. Aynı
+      metni ikisine göndermek, ikisini de yanlış okumak olur.</p>
+
     <h2>Yapılmaması gerekenler</h2>
     <div class="kutu sinir">
       <ul>
         <li><b>Israrlı arama.</b> Dört temas günü bir üst sınırdır, hedef değil. Cevap
           gelmiyorsa cevap gelmiştir.</li>
         <li><b>Toplu mesaj.</b> Aynı metni listeye göndermek takip değil duyurudur.</li>
-        <li><b>Kampanya duyurusunu takip kılığına sokmak.</b> İçerik değiştiği anda iletinin
-          niteliği de değişir.</li>
+        <li><b>Kampanya duyurusunu takip kılığına sokmak.</b> Takip, hastanın kendi tedavi
+          planıyla ilgili bir hatırlatmadır; içerik değiştiği anda iletinin niteliği de değişir.</li>
         <li><b>Fiyat pazarlığına dönüştürmek.</b> İndirimle kapatılan tereddüt, çoğunlukla
           fiyat tereddüdü bile değildir.</li>
       </ul>
     </div>
 
     <h2>Hukuki sınırlar</h2>
-    <p>Bu bölüm hukuki tavsiye değildir. Ama bir kısmı tartışmasızdır ve yazılmaması için
-      bir sebep yoktur:</p>
+    <p>Bu bölüm hukuki tavsiye değildir. Ama bir kısmı tartışmasızdır:</p>
     <div class="kutu">
-      <p><b>Bilinenler</b></p>
       <ul>
         <li><b>Yükümlülük kliniğe aittir</b>, kullandığı yazılıma değil. Yazılım bir metin
           üretebilir; o metni göndermenin sorumluluğu gönderendedir.</li>
         <li><b>Onay kayıtlı olmalıdır.</b> «Hasta zaten biliyordu» bir kayıt değildir.
           Kayıtta olmayan onay, olmayan onaydır.</li>
-        <li><b>Veri işleme rızası ile iletişim onayı aynı şey değildir.</b> Hastanın
-          kişisel verilerinin işlenmesine rıza göstermesi, kendisine ticari ya da
-          hatırlatma amaçlı ileti gönderilmesine onay verdiği anlamına gelmez.</li>
-        <li><b>Kampanya duyurusunu takip kılığına sokmak takip değildir.</b> Takip, hastanın
-          kendi tedavi planıyla ilgili bir hatırlatmadır.</li>
+        <li><b>Veri işleme rızası ile iletişim onayı aynı şey değildir.</b> Hastanın kişisel
+          verilerinin işlenmesine rıza göstermesi, kendisine hatırlatma ya da ticari amaçlı
+          ileti gönderilmesine onay verdiği anlamına gelmez.</li>
       </ul>
-    </div>
-    <div class="kutu acik">
-      <p><b>Açık sorular</b></p>
-      <p>Aşağıdaki üç soruyu sorduk. Cevapları geldiğinde bu bölüme yazacağız. O zamana kadar
-        burada bir cevap uydurmayacağız; Türkçede bu soruları net soran başka bir kaynak
-        bulamadık, bu yüzden soruların kendisini açıkta bırakmayı tercih ediyoruz.</p>
-      <ol>
-        <li>Hastanın kendi tedavi planıyla ilgili bir hatırlatma mesajı <b>ticari elektronik
-          ileti</b> sayılır mı? Sayılıyorsa İYS kaydı ve önceden onay gerekir.</li>
-        <li><b>Türk Diş Hekimleri Birliği Reklam ve Tanıtım Yönetmeliği</b> kapsamında,
-          mevcut bir hastaya yapılan takip araması nerede durur?</li>
-        <li>Hastanın telefon numarasını bu amaçla kullanmak için <b>KVKK'da hangi hukuki
-          sebep</b> geçerlidir: sözleşmenin ifası mı, meşru menfaat mi, açık rıza mı?</li>
-      </ol>
     </div>
 
     <h2>ReGain Assist bu işi nasıl yapıyor?</h2>
     <p>Kararsız hastalar tek listede toplanır; tereddüt sebebi ve takip günü yan yana durur.
       Yukarıdaki matrisin her hücresi için hazır bir mesaj ve arama metni bulunur. Randevusuna
       gelmeyen hasta otomatik işaretlenir.</p>
-    <p><b>Ne yapmaz:</b> mesajı sizin yerinize göndermez, metni üretir ve gönderen siz
+    <p><b>Ne yapmaz:</b> mesajı sizin yerinize göndermez; metni üretir, gönderen siz
       olursunuz. Hastanın kaydında KVKK açık rızası işaretli değilse metni kopyalamadan önce
-      uyarır ve uyarıldığınızı kayda geçirir; kararı yine siz verirsiniz.</p>
+      uyarır ve uyarıldığınızı kayda geçirir; kararı yine siz verirsiniz. Ürün en muhafazakâr
+      yorumu varsayar: kayıtlı rıza yoksa sessiz kalmaz.</p>
 
     <h2>Sık sorulanlar</h2>
   <details class="sss">
     <summary>«Düşüneyim» diyen hastayı aramak doğru mu?</summary>
-    <p>Aramanın kendisi sorun değil; zamanlaması, sıklığı ve içeriği belirleyicidir. Bir kez arayıp bilgi vermek ile üst üste arayıp karar zorlamak aynı şey değildir. Bu sayfadaki yaklaşım tek bir temas ve hastanın sebebine uygun bir cümle üzerine kuruludur.</p>
+    <p>Aramanın kendisi sorun değil; zamanlaması, sıklığı ve içeriği belirleyicidir. Bir kez arayıp bilgi vermek ile üst üste arayıp karar zorlamak aynı şey değildir.</p>
   </details>
   <details class="sss">
     <summary>Neden üçüncü gün?</summary>
-    <p>Bunun dayanağı bir klinik çalışma değil, bir muhakemedir ve sayfada böyle sunulur. İlk gün hasta hâlâ muayenenin etkisindedir ve henüz karar vermemiştir; o gün gelen arama bilgi değil baskı gibi okunur. Otuzuncu günden sonra hasta çoğunlukla ya başka bir yere gitmiş ya konuyu ertelemiştir; o noktadaki temas artık takip değil satıştır.</p>
+    <p>İlk gün hasta hâlâ muayenenin etkisindedir; o gün gelen arama baskı gibi okunur. Üçüncü günde ilk tepki geçmiş, teklif hâlâ akıldadır. Ayrıntılı gerekçe «Ne zaman aranmalı» bölümünde.</p>
   </details>
   <details class="sss">
     <summary>Hangi tereddüt sebepleri var?</summary>
     <p>Altı sebep ayırt edilir: fiyat, aile veya eş danışma, başka bir klinikle karşılaştırma, işlem korkusu, zaman ve diğer. Sebep bilinmeden kurulan cümle çoğunlukla yanlış cümledir; fiyat endişesi olan hastaya işlem anlatmak, korkusu olan hastaya taksit anlatmak gibi.</p>
   </details>
   <details class="sss">
+    <summary>Sebebi nasıl öğreneceğim?</summary>
+    <p>Koltukta tek bir soru yeter: «Karar vermeden önce sizi en çok düşündüren şey ne?» Cevabı hasta kaydına geçirmek, sonraki temasın hangi cümleyle kurulacağını belirler. Sebep kaydedilmemişse matris çalışmaz.</p>
+  </details>
+  <details class="sss">
+    <summary>Aramayı hekim mi asistan mı yapmalı?</summary>
+    <p>İlk temaslar asistan tarafından yapılabilir; bilgi verme ve müsaitlik sorma idari bir iştir. Klinik bir endişe söz konusuysa, özellikle işlem korkusunda, temasın hekimden gelmesi farklı okunur. Pratikte 3. ve 7. gün asistan, 14. ve 30. gün hekim işe yarar.</p>
+  </details>
+  <details class="sss">
     <summary>Takip mesajı göndermek için hastanın onayı gerekir mi?</summary>
-    <p>Yükümlülük kliniğe aittir ve onayın kayıtlı olması gerekir. Mesajın ticari elektronik ileti sayılıp sayılmadığı, dolayısıyla İYS kaydı gerekip gerekmediği ise bu sayfanın yazıldığı tarihte doğrulanmış değildir; aşağıdaki «açık sorular» bölümüne bakın.</p>
+    <p>Yükümlülük kliniğe aittir ve onayın kayıtlı olması gerekir. Veri işleme rızası ile iletişim onayı ayrı şeylerdir; birincisi ikincisinin yerine geçmez. Ürün, kayıtlı rıza yoksa metni kopyalamadan önce sizi uyarır.</p>
   </details>
   <details class="sss">
     <summary>Kampanya duyurusu takip sayılır mı?</summary>
-    <p>Hayır. Takip, hastanın kendi tedavi planıyla ilgili bir hatırlatmadır. İndirim ya da kampanya duyurusunu takip kılığına sokmak takip değildir; içerik değiştiği anda iletinin niteliği de değişir.</p>
+    <p>Hayır. Takip, hastanın kendi tedavi planıyla ilgili bir hatırlatmadır.</p>
+  </details>
+  <details class="sss">
+    <summary>Randevusuna gelmeyen hasta da bu akışa mı girer?</summary>
+    <p>Hayır, o ayrı bir durumdur. Tedaviyi kabul etmemiş hasta karar aşamasındadır; randevusuna gelmeyen hasta karar vermiş ama gelememiştir. İkisine aynı metinle yazmak, ikisini de yanlış anlamak olur.</p>
   </details>
     <p class="kaynak">Bu sayfa bir hukuki danışmanlık değildir. Yükümlülüklerinizi
       değerlendirmek için kendi hukuk danışmanınıza başvurun.</p>
 
-    <div style="margin-top:44px;text-align:center">
+    <p style="margin-top:40px"><b>Bu listeyi elle tutmak zor olan kısım değil;</b> kimin ne
+      zaman ve hangi cümleyle aranacağını hatırlamak zor olan kısım. ReGain Assist bunu
+      hasta kaydına bağlar.</p>
+    <div style="margin-top:20px;text-align:center">
       <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 gün ücretsiz deneyin</a>
       <p class="hero-note" style="margin-top:12px">Kredi kartı gerekmez.
         <a href="/rehber/" style="color:var(--brand-d);font-weight:600">Diğer rehberler</a></p>
@@ -392,34 +447,38 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   <div class="wrap foot-in">
     <span>© 2026 ReGain Assist</span>
     <a href="/rehber/">Rehberler</a>
-    <a href="/uts-dis-klinigi-yazilimi/">Rehber: ÜTS bildirimi</a>
     <a href="/sozlesmeler/">Tüm yasal metinler</a>
     <a href="https://www.regainassist.com/">ReGain Assist</a>
   </div>
 </footer>
 
 <script>
-  // ⛔ HESAP TARAYICIDA. Hiçbir girdi sunucuya gitmez, ölçüm etiketine bağlanmaz:
-  //    hekimin kendi ciro sayıları bizim işimiz değil.
-  // ⛔ TEK ÇARPMA, KATSAYI YOK. «Bunların %X'i kazanılır» gibi bir oran UYDURULMADI;
-  //    elimizde öyle bir veri yok ve olmayan sayıyı hesaba sokmak, hesabın tamamının
-  //    güvenilirliğini götürürdü.
+  // ⛔ HESAP TARAYICIDA. Girdiler sunucuya gitmez, ölçüm etiketine bağlanmaz.
+  // ⛔ GERİ KAZANIM ORANINI BİZ VERMİYORUZ: dördüncü girdi hekimin kendi
+  //    tahminidir. Elimizde yayımlanmış bir dönüşüm oranı yok; koysaydık
+  //    hesabın tamamının güvenilirliği giderdi.
   (function () {
     var t = document.getElementById('teklif'), o = document.getElementById('oran'),
-        b = document.getElementById('bedel'), c = document.getElementById('sonuc');
+        b = document.getElementById('bedel'), g = document.getElementById('geri'),
+        c = document.getElementById('sonuc');
     var HAFTA = 48;
     function bic(n) { return n.toLocaleString('tr-TR'); }
-    function hesapla() {
-      var hafta = Math.max(0, Number(t.value) || 0);
-      var oran = Math.min(100, Math.max(0, Number(o.value) || 0));
-      var bedel = Math.max(0, Number(b.value) || 0);
-      var hasta = Math.round(hafta * (oran / 100) * HAFTA);
-      c.innerHTML = 'Yılda <b>' + bic(hasta) + ' hasta</b> tedaviyi kabul etmeden ayrılıyor. ' +
-        'Tamamı kabul etseydi karşılığı <b>&#8378;' + bic(hasta * bedel) + '</b> olurdu.' +
-        '<br><span style="font-size:14px;color:var(--text2)">Tamamının kazanılacağını ' +
-        'söylemiyoruz; bu, takip edilmeyen kümenin büyüklüğüdür.</span>';
+    function say(el, ust) {
+      var v = Number(el.value) || 0;
+      return ust ? Math.min(ust, Math.max(0, v)) : Math.max(0, v);
     }
-    [t, o, b].forEach(function (el) { el.addEventListener('input', hesapla); });
+    function hesapla() {
+      var hasta = Math.round(say(t) * (say(o, 100) / 100) * HAFTA);
+      var bedel = say(b);
+      var geri = Math.round(hasta * (say(g, 100) / 100));
+      c.innerHTML =
+        'Yılda <b>' + bic(hasta) + ' hasta</b> tedaviyi kabul etmeden ayrılıyor. ' +
+        'Kendi tahmininizle <b>' + bic(geri) + ' hastayı</b> geri kazanmak, yılda ' +
+        '<b>&#8378;' + bic(geri * bedel) + '</b> demek.' +
+        '<br><span style="font-size:14px;color:var(--text2)">Takip edilmeyen kümenin ' +
+        'tamamı: &#8378;' + bic(hasta * bedel) + '.</span>';
+    }
+    [t, o, b, g].forEach(function (el) { el.addEventListener('input', hesapla); });
     hesapla();
   })();
 </script>
