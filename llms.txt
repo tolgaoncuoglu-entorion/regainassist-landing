@@ -72,9 +72,12 @@ kendi bilgisayarında açılır, sunucuya yüklenmez.
 - https://www.regainassist.com/casesuite — CaseSuite tanıtımı
 - https://www.regainassist.com/rehber — rehber dizini
 - https://www.regainassist.com/uts-dis-klinigi-yazilimi — ÜTS bildirimi rehberi
+- https://www.regainassist.com/dis-klinigi-yazilimi — diş kliniği yazılımı
+  seçerken bakılacak başlıklar: mevzuat başlıkları, satıcıya sorulacak on
+  somut soru, veri taşınabilirliği, fiyatta gizli kalan kalemler
 - https://www.regainassist.com/dis-klinigi-hasta-geri-kazanimi — tedaviyi
   kabul etmeyen hastanın takibi: altı tereddüt sebebi, 3/7/14/30 gün matrisi,
-  hukuki sınırlar ve açık sorular
+  hukuki sınırlar
 - https://www.regainassist.com/mbys-dis-klinigi-hasta-listesi — MBYS veri
   hazırlığı rehberi (101/102/103 paketleri, MBYS ile e-Nabız farkı)
 - https://www.regainassist.com/guvenlik — veri güvenliği ve KVKK
