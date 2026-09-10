@@ -777,11 +777,12 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <a role="menuitem" href="#hikayeler">Nasıl çalışıyor</a>
           <a role="menuitem" href="#moduller">Modüller</a>
           <a role="menuitem" href="#casesuite" class="nav-yeni">CaseSuite</a>
-          <a role="menuitem" href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
+          <a role="menuitem" href="#uts-enabiz">ÜTS &amp; MBYS</a>
           <a role="menuitem" href="#veri-aktarimi">Veri Aktarımı</a>
           <a role="menuitem" href="#hasta-kazanimi">Hasta Kazanımı</a>
         </div>
       </div>
+      <a href="/rehber/">Rehberler</a>
       <a href="#kampanyalar">Fiyatlar</a>
       <a href="#sss">SSS</a>
       <a href="#iletisim">İletişim</a>
@@ -822,16 +823,15 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <div class="hero-h1-gibi">Tedavi sizin işiniz.<br>Diğer her şey için ReGain Assist.</div>
         <p class="hero-sub">Çok modül değil. Birlikte çalışan tek sistem.</p>
       </div>
-      <div class="doner-olcu" aria-hidden="true">
-        <div class="hero-h1-gibi">Diş hekimlerini dinledik.<br>İhtiyaçlarına <span class="nowrap">çözüm ürettik</span>.</div>
-        <p class="hero-sub">Birbiriyle konuşan modüller. Pürüzsüz iş akışı.</p>
-      </div>
     </div>
     <p class="hero-desc">Hasta kaydından tedaviye, tahsilattan ÜTS bildirimine, CBCT üzerinde implant planlamasından şube yönetimine kadar &mdash; kliniğin tamamı tek sistemde, sınırsız kullanıcıyla.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
       <a class="btn btn-ghost" href="#hikayeler">Nasıl çalışıyor?</a>
-      <span class="hero-note">Kredi kartı gerekmez</span>
+      <!-- ⚠️ Üçü de doğrulanabilir: kurulum adımı yok, uygulama tarayıcıdan
+           çalışıyor, deneme kartsız başlıyor. Reklamdan gelen hekim aradığı
+           cümleyi ilk ekranda görmeli. -->
+      <span class="hero-note">Kurulum yok &middot; Tarayıcıdan çalışır &middot; Kredi kartı gerekmez</span>
     </div>
 
     <!-- Hero'nun gorsel gucu: urun ekrani DEGIL, sistemin baglantili olmasi
@@ -1577,8 +1577,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <details class="faq-item"><summary class="faq-q">Mevcut hasta verilerimi aktarabilir miyim?</summary><div class="faq-a">Evet. Excel veya CSV dosyanızı yükleyin, sistem sütunları otomatik eşleştirir. Hasta bilgileri, tedavi geçmişi, ödemeler, randevular ve hekim atamaları aktarılabilir. Yazmadan önce hangi kayıtların yeni, hangilerinin güncelleneceğini önizlemede görürsünüz; aynı hasta birden fazla satırda geçiyorsa ad-soyad ve doğum tarihi üzerinden eşleştirilir. Eski yazılımınızdan Excel çıktısı almanız yeterlidir.</div></details>
       <details class="faq-item"><summary class="faq-q">e-Nabız kayıtlarını nasıl hazırlayabilirim?</summary><div class="faq-a">ReGain Assist e-Nabız’a doğrudan bildirim göndermez. Tedavi kayıtlarınızı e-Nabız paket formatına (Paket 101 Hasta Kayıt, Paket 102 Tedavi, Paket 103 Muayene) hazırlar ve Excel olarak dışa aktarır; dosyayı Sağlık Bakanlığı portalına siz yüklersiniz. Bilgileri tam olan tedaviler listeye eklenir, eksik olanlar nedeniyle birlikte gösterilir. SUT ve ICD kodları hekim tarafından girilir — sistem kod önermez.</div></details>
       <details class="faq-item"><summary class="faq-q">ÜTS bildirimi nasıl çalışıyor?</summary><div class="faq-a">Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Bildirim türünü tedavi kartında siz seçersiniz; “Tedaviyi Tamamla” onayınızdan sonra bildirim gönderim sırasına alınır ve ReGain süreci takip eder. Eksik bilgi varsa kaydetmeden önce listelenir.</div></details>
-      <details class="faq-item"><summary class="faq-q">Verilerim güvenli mi?</summary><div class="faq-a">Veriler SSL/TLS ile şifreli iletilir, satır düzeyinde erişim kontrolü (RLS) ile korunur ve düzenli yedeklenir. Her klinik yalnızca kendi verisini görür. KVKK kapsamındaki aydınlatma ve açık rıza metinleri sitemizde yayınlanmıştır.</div></details>
-      <details class="faq-item"><summary class="faq-q">Apex AI ne yapabilir?</summary><div class="faq-a">Apex AI hasta iletişim mesajları ve tedavi sonrası bakım rehberleri üretir: randevu hatırlatma, tedavi öncesi/sonrası bilgilendirme, gelmeyen hastaya nazik hatırlatma, teklif takibi, doğum günü ve 6 aylık kontrol daveti gibi. Ürettiği metni hekim düzenleyip gönderir; Apex kendisi mesaj göndermez ve klinik verinizde soru-cevap yapmaz. Karar destek aracıdır, klinik karar mercii değildir. Pro planda kullanılır; CaseSuite aboneliğinde Apex AI yer almaz.</div></details>
+      <details class="faq-item"><summary class="faq-q">Verilerim güvenli mi?</summary><div class="faq-a">Veriler şifreli iletilir, düzenli yedeklenir. Her klinik yalnızca kendi verisini görür. KVKK kapsamındaki aydınlatma ve açık rıza metinleri sitemizde yayınlanmıştır.</div></details>
+      <details class="faq-item"><summary class="faq-q">Apex AI ne yapabilir?</summary><div class="faq-a">Apex AI hasta iletişim mesajları ve tedavi sonrası bakım rehberleri üretir: randevu hatırlatma, tedavi öncesi/sonrası bilgilendirme, gelmeyen hastaya nazik hatırlatma, teklif takibi, doğum günü ve 6 aylık kontrol daveti gibi. Ürettiği metni hekim düzenleyip gönderir; Apex kendisi mesaj göndermez ve klinik verinizde soru-cevap yapmaz. Pro planda kullanılır; CaseSuite aboneliğinde Apex AI yer almaz.</div></details>
       <details class="faq-item"><summary class="faq-q">Hasta Kazanım Rehberi nedir?</summary><div class="faq-a">“Düşünüyorum” deyip ayrılan hastalar için gün bazlı bir takip rehberidir. 3, 7, 14 ve 30. gün için hastaya ne zaman, hangi kanaldan ve nasıl ulaşılacağını gösterir; tereddüt sebebine göre iletişim önerisi sunar.</div></details>
       <details class="faq-item"><summary class="faq-q">Kaç kullanıcı ekleyebilirim?</summary><div class="faq-a">Pro planda sınırsız kullanıcı ekleyebilirsiniz; her hekim kendi paneline erişir. CaseSuite tek hekim için tasarlanmıştır.</div></details>
       <details class="faq-item"><summary class="faq-q">Sözleşme zorunluluğu var mı?</summary><div class="faq-a">Hayır. Aylık abonelik sistemiyle çalışın, istediğiniz zaman iptal edin. Yıllık planda indirim uygulanır.</div></details>
@@ -1591,7 +1591,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 <section>
   <div class="wrap">
     <div class="final">
-      <h2>Tedavi sizin işiniz.<br>Diğer her şey için, ReGain Assist.</h2>
+      <h2>Kliniğinizin tamamı tek sistemde.</h2>
       <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
       <small>Kredi kartı gerekmez.</small>
     </div>
@@ -1652,7 +1652,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <div class="footer-top">
     <div class="footer-brand">
       <img src="/images/regain-assist-logo.png" alt="ReGain Assist">
-      <p>Diş kliniklerine özel hasta yönetim ve danışmanlık platformu.</p>
+      <p>Diş kliniklerine özel diş kliniği yönetim sistemi.</p>
     </div>
     <div class="footer-col">
       <h4>Ürün</h4>
@@ -1662,7 +1662,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         <li><a href="#ozellikler">Özellikler</a></li>
         <li><a href="#sss">SSS</a></li>
         <li><a href="/rehber/">Rehberler</a></li>
-        <li><a href="https://app.regainassist.com" target="_blank">Demo</a></li>
+        <li><a href="https://app.regainassist.com" target="_blank">Uygulamaya git</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1845,12 +1845,15 @@ function toggleFaq(btn) {
   const alt = document.getElementById('hero-alt');
   if (!kat || !h1 || !alt) return;   // ⛔ capa kaydiysa SESSIZCE cik, patlama
 
+  // ⛔ TEK MESAJ (Tolga 10.09). İkinci mesaj («Diş hekimlerini dinledik /
+  //    Pürüzsüz iş akışı») KALDIRILDI: okuyucu hakkında değil BİZİM hakkımızda
+  //    konuşuyordu ve her yazılım firması aynısını söylüyor. Dizi tek elemanlı
+  //    kalınca aşağıdaki döngü zaten hiç dönmez.
   const MESAJLAR = [
     { h1: 'Tedavi sizin işiniz.<br>Diğer her şey için <span class="soft">ReGain Assist</span>.',
       alt: 'Çok modül değil. Birlikte çalışan tek sistem.' },
-    { h1: 'Diş hekimlerini dinledik.<br>İhtiyaçlarına <span class="soft nowrap">çözüm ürettik</span>.',
-      alt: 'Birbiriyle konuşan modüller. Pürüzsüz iş akışı.' },
   ];
+  if (MESAJLAR.length < 2) return;   // dönecek ikinci mesaj yok
   // ⛔ BEKLE'nin ALT SINIRI okuma suresidir: baslik + alt baslik ~8
   //    kelime, ortalama okuma hiziyla ~2.5 sn. 5 sn okumaya yer
   //    birakir; daha kisasi basligi «kararsiz» gosterir.
@@ -2171,7 +2174,7 @@ function setPricingDonem(donem) {
      "name": "Verilerim güvenli mi?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Veriler SSL/TLS ile şifreli iletilir, satır düzeyinde erişim kontrolü (RLS) ile korunur ve düzenli yedeklenir. Her klinik yalnızca kendi verisini görür. KVKK kapsamındaki aydınlatma ve açık rıza metinleri sitemizde yayınlanmıştır."
+      "text": "Veriler şifreli iletilir, düzenli yedeklenir. Her klinik yalnızca kendi verisini görür. KVKK kapsamındaki aydınlatma ve açık rıza metinleri sitemizde yayınlanmıştır."
      }
     },
     {
@@ -2179,7 +2182,7 @@ function setPricingDonem(donem) {
      "name": "Apex AI ne yapabilir?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Apex AI hasta iletişim mesajları ve tedavi sonrası bakım rehberleri üretir: randevu hatırlatma, tedavi öncesi/sonrası bilgilendirme, gelmeyen hastaya nazik hatırlatma, teklif takibi, doğum günü ve 6 aylık kontrol daveti gibi. Ürettiği metni hekim düzenleyip gönderir; Apex kendisi mesaj göndermez ve klinik verinizde soru-cevap yapmaz. Karar destek aracıdır, klinik karar mercii değildir. Pro planda kullanılır; CaseSuite aboneliğinde Apex AI yer almaz."
+      "text": "Apex AI hasta iletişim mesajları ve tedavi sonrası bakım rehberleri üretir: randevu hatırlatma, tedavi öncesi/sonrası bilgilendirme, gelmeyen hastaya nazik hatırlatma, teklif takibi, doğum günü ve 6 aylık kontrol daveti gibi. Ürettiği metni hekim düzenleyip gönderir; Apex kendisi mesaj göndermez ve klinik verinizde soru-cevap yapmaz. Pro planda kullanılır; CaseSuite aboneliğinde Apex AI yer almaz."
      }
     },
     {
