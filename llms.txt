@@ -33,7 +33,9 @@ mi) ve bu kararlar verilmeden tedavi tamamlanmaz.
 Sınırlar:
 - Yazılım hekim adına bildirim göndermez. Onay verilmeden hiçbir kayıt
   ÜTS'ye ulaşmaz. Onaydan sonra gönderimi sistem üstlenir: bildirim sıraya
-  girer ve en geç on beş dakika içinde gönderilir.
+  girer ve sistem sırayı 15 dakikada bir işler. Gönderilemeyen bir kayıt en
+  fazla üç kez denenir, sonra başarısız olarak işaretlenir ve panoda kırmızı
+  görünür; sonsuza kadar kuyrukta dönmez.
 - Onay adımı bilinçli bir tercihtir. ÜTS'ye giden her kayıt resmî beyandır
   ve beyanın sorumluluğu kliniğe aittir; yazılım bu sorumluluğu hekimin
   yerine üstlenemez.
