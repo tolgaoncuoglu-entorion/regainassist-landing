@@ -237,6 +237,14 @@ if (window.OLCUM_ACIK) {
   }
   .hero-desc { font-size:15.5px; color:var(--text3); margin-top:12px; max-width:60ch; }
   .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; align-items:center; }
+  /* ⑥ İKİNCİL ÇAĞRILAR DÜĞME DEĞİL BAĞ (Tolga 10.09): sayfada dokuz düğme
+     varken hiçbiri öne çıkmıyordu. Düğme yalnız üç yerde: hero, fiyat
+     kartları, kapanış. Bunlar aynı işi görür ama görsel ağırlık taşımaz. */
+  .hero-ikincil, .gb-ikincil { display:inline-flex; align-items:center; gap:6px;
+    font-size:14px; font-weight:600; text-decoration:none; color:var(--brand-d);
+    border-bottom:1px solid currentColor; padding-bottom:1px; }
+  .hero-ikincil:hover, .gb-ikincil:hover { border-bottom-color:transparent; }
+  .gb-ikincil { color:#fff; }
   .hero-note { font-size:13px; color:var(--text3); }
   .rail-head { display:flex; align-items:flex-end; gap:16px; margin-bottom:14px; }
   .rail-head h2 { font-size:15px; font-weight:700; color:var(--text2); letter-spacing:.2px; }
@@ -827,7 +835,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <p class="hero-desc">Hasta kaydından tedaviye, tahsilattan ÜTS bildirimine, CBCT üzerinde implant planlamasından şube yönetimine kadar &mdash; kliniğin tamamı tek sistemde, sınırsız kullanıcıyla.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
-      <a class="btn btn-ghost" href="#hikayeler">Nasıl çalışıyor?</a>
+      <a class="hero-ikincil" href="#hikayeler">Nasıl çalışıyor?</a>
       <!-- ⚠️ Üçü de doğrulanabilir: kurulum adımı yok, uygulama tarayıcıdan
            çalışıyor, deneme kartsız başlıyor. Reklamdan gelen hekim aradığı
            cümleyi ilk ekranda görmeli. -->
@@ -1015,7 +1023,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             <div class="kol-madde"><b>ÜTS</b>Tedavileri tamamladığınızda anında bildirin, gelen bildirimleri görün, bekleyeni takip edin.</div>
             <div class="kol-madde"><b>Onay sizde</b>Bildirim yapılıp yapılmayacağına ve ürünün stoktan düşüp düşmeyeceğine her ürün için ayrı ayrı siz karar verirsiniz.</div>
             <div class="kol-madde"><b>MBYS / e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, MBYS’ye yüklenmeye hazır dosyayı dışa aktarın. Hekim verisini MBYS üzerinden gönderir; e-Nabız hastanın kendi kaydını gördüğü taraftır.</div>
-            <div class="kol-madde"><b>Kayıt altında</b>Gönderilen her bildirim listelenir ve dışa aktarılabilir.</div>
           </div>
           <div class="kol-ss-cift">
             <div class="ss-frame">
@@ -1079,8 +1086,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-grid">
             <div class="kol-madde"><b>Tek dosya, bütün geçmiş</b>Hasta, tedavi, randevu ve ödeme birlikte aktarılır; dosyada varsa ÜTS ve e-Nabız bilgileri de taşınır.</div>
             <div class="kol-madde"><b>Aynı hasta tanınır</b>İki kez kaydedilmez; hatalı kayıtlar engellenir.</div>
-            <div class="kol-madde"><b>Hekim ataması eksikse tamamlanır</b>Hastalara atanmış hekim yoksa tek tek veya topluca hekim atayabilirsiniz.</div>
-            <div class="kol-madde"><b>Önce görün, sonra aktarın</b>Aktarmadan önce kaç yeni kayıt, kaç tekrar olduğunu görürsünüz.</div>
           </div>
           <div class="ss-frame kol-ss">
             <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
@@ -1108,8 +1113,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-grid">
             <div class="kol-madde"><b>Kararsızlar bir arada</b>Kararsız veya düşünen hastaları tek listede görün; tereddüt sebebine ve takip gününe göre ne söyleyeceğiniz hazır.</div>
             <div class="kol-madde"><b>Randevu öncesi, tedavi sonrası</b>Randevu hatırlatma, tedavi öncesi bilgilendirme, tedavi sonrası takip, kontrol daveti ve doğum günü mesajları hazır başlıklardan oluşturulur.</div>
-            <div class="kol-madde"><b>Gelmeyen hasta kaybolmaz</b>Randevusuna gelmeyenler otomatik işaretlenir, ayrı bir panelde toplanır; WhatsApp ile tek tıkla ulaşırsınız.</div>
-            <div class="kol-madde"><b>Aramadan önce</b>Gözden geçirilecek adımlar ve iletişim ipuçları ekranda.</div>
           </div>
           <div class="ss-frame kol-ss">
             <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
@@ -1143,8 +1146,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-grid">
             <div class="kol-madde"><b>Merkezden atama</b>Hekimleri ve personeli hangi şubede çalışacaklarını seçerek eklersiniz; şube değişikliği tek yerden yapılır.</div>
             <div class="kol-madde"><b>Şube yöneticisi kendi şubesini görür</b>Yetki şubeyle sınırlıdır: bir şubenin yöneticisi diğer şubenin hasta ve tedavi kayıtlarına erişemez.</div>
-            <div class="kol-madde"><b>Tüm şubeler tek ekranda</b>Doktor ve personel listelerini şube şube ya da hepsi bir arada görürsünüz; şubeler arasında tek tıkla geçersiniz.</div>
-            <div class="kol-madde"><b>Kullanıcı sayısı sınırsız</b>Şube veya kullanıcı başına ek ücret yoktur; ekip büyüdüğünde fatura değişmez.</div>
           </div>
         </div>
       </details>
@@ -1239,7 +1240,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
            ⚠️ Dönüşüm KIRILMADI: statik sayfanın kendi içinde app kayıt
            hunisine üç bağ var (ölçüldü). Bir adım ekleniyor, hiçbir adım
            kaybolmuyor. Google Ads nihai URL'i de buraya bakmalı. -->
-      <a class="btn btn-primary btn-sm" href="https://www.regainassist.com/casesuite">CaseSuite'i inceleyin</a>
+      <a class="gb-ikincil" href="https://www.regainassist.com/casesuite">CaseSuite'i inceleyin &rarr;</a>
       <span class="gb-not">Tek başına aylık &#8378;790 &middot; Pro aboneliğine dahil &middot; 14 gün deneme</span>
     </div>
     <p class="gb-beyan">CaseSuite bir tanı veya klinik karar destek aracı değildir; hiçbir öneride bulunmaz. Ölçüm ve yerleştirme hekimin kendi işlemidir; sistem anatomik yapı tanımaz, uygunluk değerlendirmesi yapmaz.</p>
