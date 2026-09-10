@@ -1,2 +1,5 @@
 .vercel
 .env*.local
+
+# macOS artığı — ölçüm/derleme çıktısı değil, depoya girmez.
+.DS_Store
