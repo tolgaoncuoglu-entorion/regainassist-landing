@@ -286,9 +286,16 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       <li><b>Bildirim yapılacak mı, hangi türde?</b> Kullanım, tüketiciye verme veya bildirim yok.</li>
       <li><b>Ürün stoktan düşülecek mi?</b></li>
     </ul>
-    <p>Bu iki karar verilmeden tedavi tamamlanmaz. Karar verildikten sonra bildirim kuyruğa
-      alınır ve gönderilir; <b>onay verilmeden hiçbir bildirim gönderilmez</b>. Bildirim tekil
+    <p>Bu iki karar verilmeden tedavi tamamlanmaz. Karar verildikten sonra gönderimi sistem üstlenir: bildirim sıraya girer ve en geç <b>on beş dakika</b> içinde gönderilir, hekimin dönüp yapacağı bir iş kalmaz. Dilerse beklemeden kendisi de tetikleyebilir. <b>Onay verilmeden hiçbir bildirim gönderilmez</b>. Bildirim tekil
       ürün bazındadır: GTIN, lot, varsa seri numarası ve adet ile gider.</p>
+
+    <div class="kutu">
+      <p><b>Onay adımı bilinçli bir tercihtir.</b> Hekim bir bildirimi hiç yapmak
+        istemeyebilir ya da o anda yapmayabilir; inisiyatif tamamen onda kalır.
+        ÜTS'ye giden her kayıt resmî beyandır ve beyanın sorumluluğu kliniğe aittir.
+        Yazılım bu sorumluluğu hekimin yerine üstlenemez; üstlenmeye çalışan bir
+        yazılım hekimi korumaz, riske atar.</p>
+    </div>
 
     <figure style="margin:34px 0 0">
       <div class="ss-frame" style="margin-top:0">
@@ -311,7 +318,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
           ürünün ÜTS kaydından gelir, nihai sorumluluk kliniğindir.</li>
         <li><b>Sistem işlem paketi (SİP) bildirimi kapsam dışıdır.</b> Bildirimler tekil ürün
           bazında gönderilir.</li>
-        <li>Onay verilmeden bildirim gönderilmez; otomatik gönderim yoktur.</li>
+        <li>Yazılım hekim adına bildirim göndermez. Onay verilmeden hiçbir kayıt ÜTS'ye ulaşmaz.</li>
         <li>ÜTS Token, firma numarası ve sağlık tesisi kodu <b>kliniğe aittir</b>; kurulum
           ekranından tanımlanır ve önce test ortamında doğrulanır.</li>
       </ul>
