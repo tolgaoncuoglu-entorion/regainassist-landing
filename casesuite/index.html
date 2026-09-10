@@ -189,7 +189,21 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
    "description": "Tarayıcıda çalışan CBCT ve DICOM görüntüleme, manuel ölçüm ve şablon implant yerleştirme çalışma alanı. Görüntü serisi kullanıcının kendi bilgisayarında açılır, sunucuya yüklenmez. Tanı koymaz, anatomik yapı tanımaz, uygunluk değerlendirmesi veya yerleşim önerisi üretmez.",
    "publisher": {
     "@id": "https://www.regainassist.com/#org"
-   }
+   },
+   "offers": [
+    {
+     "@type": "Offer",
+     "name": "CaseSuite aylık",
+     "price": "790",
+     "priceCurrency": "TRY"
+    },
+    {
+     "@type": "Offer",
+     "name": "CaseSuite yıllık",
+     "price": "7900",
+     "priceCurrency": "TRY"
+    }
+   ]
   }
  ]
 }
@@ -258,12 +272,43 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   </div>
 </section>
 
+<!-- ⛔ 10.09: BU SAYFADA FİYAT HİÇ YOKTU (Tolga sordu). Git geçmişinde de
+     hiç geçmemiş, yani bilerek kaldırılmamış — 08.09'da reklam açılış
+     sayfası kurulurken baştan atlanmış.
+     ⛔ NEDEN ÖNEMLİ: burası CaseSuite Google Ads reklamının NİHAİ URL'i.
+     Reklamdan gelen hekim ürünü, sınırlarını ve CTA'yı görüyor ama fiyatı
+     hiçbir yerde görmüyordu; öğrenmek için kayıt olması ya da ana sayfaya
+     gitmesi gerekiyordu.
+     ⛔ SAYILAR ÜRÜNDEN: api/paytr-init.js → vaka { aylik: 790, yillik: 7900 },
+     hepsi KDV DAHİL. 790x12 = 9.480; yıllıkla fark 1.580 = TAM 2 aylık bedel.
+     ⛔ «Pro özelliği» çerçevesi TEK BAŞINA YANILTICIYDI: CaseSuite Pro'ya
+     dahil AMA tek başına da satılıyor (satista: true, kendi sözleşme seti,
+     kendi giriş hunisi). Sayfa bunu söylemiyordu. -->
+<section class="fiyat-bolum" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <span class="sec-tag">Fiyat</span>
+    <h2 class="sec">Tek başına alın, ya da Pro'nun içinde kullanın.</h2>
+    <p class="sec-alt">CaseSuite bağımsız bir üründür; klinik yönetim yazılımına geçmeden yalnızca çalışma alanını kullanabilirsiniz. ReGain Assist Pro aboneliğinize de dahildir.</p>
+    <div class="guven" style="margin-top:28px">
+      <div class="kart">
+        <b>Aylık &#8378;790</b>
+        <span>Tek başına CaseSuite. Aylık ödeme, istediğiniz zaman bırakırsınız. KDV dahildir.</span>
+      </div>
+      <div class="kart">
+        <b>Yıllık &#8378;7.900</b>
+        <span>Aylık &#8378;658'e denk gelir, 2 ay avantajlı. KDV dahildir.</span>
+      </div>
+    </div>
+    <p class="temsili" style="margin-top:18px">Her iki pakette de 14 gün ücretsiz deneme vardır, kredi kartı gerekmez.</p>
+  </div>
+</section>
+
 <section class="kapanis">
   <div class="wrap">
     <h2>Vakanızın çalışma alanını bugün açın.</h2>
     <p>14 gün ücretsiz deneyin; kredi kartı gerekmez. Karar sizin, ReGain çalışma alanını hazırlar.</p>
     <a class="btn btn-primary" href="https://app.regainassist.com/casesuite/giris?mod=kayit">14 Gün Ücretsiz Dene</a>
-    <span class="alt-not">Pro özelliği · CBCT serisi kendi bilgisayarınızda açılır, sunucuya yüklenmez</span>
+    <span class="alt-not">Tek başına aylık &#8378;790, Pro aboneliğine dahil · CBCT serisi kendi bilgisayarınızda açılır, sunucuya yüklenmez</span>
   </div>
 </section>
 
