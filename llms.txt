@@ -57,6 +57,8 @@ gönderimi kullanıcı yapar.
 Terim: hekim verisini MBYS üzerinden iletir; e-Nabız hastanın kendi
 kaydını gördüğü platformdur. Hekimin ekranında gördüğü ad MBYS'dir.
 
+Ayrıntı: https://www.regainassist.com/mbys-dis-klinigi-hasta-listesi
+
 ## CaseSuite sınırları
 
 CaseSuite görüntüleme, manuel ölçüm ve vaka dokümantasyonu için
@@ -68,7 +70,10 @@ kendi bilgisayarında açılır, sunucuya yüklenmez.
 
 - https://www.regainassist.com/ — ürün, modüller, fiyatlar, SSS
 - https://www.regainassist.com/casesuite — CaseSuite tanıtımı
-- https://www.regainassist.com/uts-dis-klinigi-yazilimi — ÜTS rehberi
+- https://www.regainassist.com/rehber — rehber dizini
+- https://www.regainassist.com/uts-dis-klinigi-yazilimi — ÜTS bildirimi rehberi
+- https://www.regainassist.com/mbys-dis-klinigi-hasta-listesi — MBYS veri
+  hazırlığı rehberi (101/102/103 paketleri, MBYS ile e-Nabız farkı)
 - https://www.regainassist.com/guvenlik — veri güvenliği ve KVKK
 - https://www.regainassist.com/hakkimizda — şirket
 - https://www.regainassist.com/sozlesmeler/ — yasal metinler
