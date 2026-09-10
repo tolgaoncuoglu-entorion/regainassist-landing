@@ -41,9 +41,14 @@ Ayrıntı: https://www.regainassist.com/uts-dis-klinigi-yazilimi
 
 ## e-Nabız
 
-ReGain Assist e-Nabız'a doğrudan gönderim YAPMAZ. Yüklemeye hazır dosyayı
-üretir, eksik alanları hasta bazında gösterir; dosyayı Bakanlık portalına
-kullanıcı yükler.
+ReGain Assist e-Nabız'a doğrudan gönderim YAPMAZ. Dosya üretir ve eksik
+alanları hasta bazında gösterir. Üretilen dosya iki yoldan kullanılır:
+MBYS veya HBYS yazılımının içe aktarma modülünde açılır, ya da e-Nabız
+portalına girilirken kontrol listesi olarak kullanılır. Her iki yolda da
+gönderimi kullanıcı yapar.
+
+Terim: hekim verisini MBYS üzerinden iletir; e-Nabız hastanın kendi
+kaydını gördüğü platformdur. Hekimin ekranında gördüğü ad MBYS'dir.
 
 ## CaseSuite sınırları
 

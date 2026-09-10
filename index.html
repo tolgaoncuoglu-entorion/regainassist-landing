@@ -775,7 +775,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <a role="menuitem" href="#hikayeler">Nasıl çalışıyor</a>
           <a role="menuitem" href="#moduller">Modüller</a>
           <a role="menuitem" href="#casesuite" class="nav-yeni">CaseSuite</a>
-          <a role="menuitem" href="#uts-enabiz">ÜTS &amp; e-Nabız</a>
+          <a role="menuitem" href="#uts-enabiz">ÜTS &amp; MBYS</a>
           <a role="menuitem" href="#veri-aktarimi">Veri Aktarımı</a>
           <a role="menuitem" href="#hasta-kazanimi">Hasta Kazanımı</a>
         </div>
@@ -1012,7 +1012,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
           <div class="kol-grid">
             <div class="kol-madde"><b>ÜTS</b>Tedavileri tamamladığınızda anında bildirin, gelen bildirimleri görün, bekleyeni takip edin.</div>
             <div class="kol-madde"><b>Onay sizde</b>Bildirim yapılıp yapılmayacağına ve ürünün stoktan düşüp düşmeyeceğine her ürün için ayrı ayrı siz karar verirsiniz; karar verilmeden tedavi tamamlanmaz, onay verilmeden bildirim gönderilmez.</div>
-            <div class="kol-madde"><b>e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, hazır dosyayı dışa aktarın.</div>
+            <div class="kol-madde"><b>MBYS / e-Nabız</b>Hasta bilgilerindeki eksikleri görün, veriyi tamamlayın, MBYS’ye yüklenmeye hazır dosyayı dışa aktarın. Hekim verisini MBYS üzerinden gönderir; e-Nabız hastanın kendi kaydını gördüğü taraftır.</div>
             <div class="kol-madde"><b>Kayıt altında</b>Gönderilen her bildirim listelenir ve dışa aktarılabilir.</div>
           </div>
           <div class="kol-ss-cift">
@@ -1042,7 +1042,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
                durur hem oradaki değerini düşürür. "Hekim onayıyla" ifadesi
                burada sınır değil KONTROL olarak okunuyor, o yüzden kaldı. -->
           <p class="kol-not">ReGain Assist, ÜTS kullanım ve tüketiciye verme bildirimlerini tedavinin tamamlanma anına bağlar; bildirim GTIN, lot ve varsa seri numarasıyla tekil ürün bazında, hekim onayıyla gönderilir. <a href="/uts-dis-klinigi-yazilimi/" style="color:var(--brand-d);font-weight:600">Nasıl işlediğini okuyun</a></p>
-          <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz; gönderime hazır listeyi Bakanlık portalına kolayca yükleyebilirsiniz.</p>
+          <!-- ⛔ 10.09 DÜZELTME: bu cümle ürünle ÇELİŞİYORDU. Sihirbaz İKİ mod
+     sunuyor (ENabizExportWizard.jsx:733): ①«MBYS’ye Yükleme» —
+     Excel dosyası kendi MBYS/HBYS yazılımınızın import modülünde açılır
+     ②«Manuel Giriş» — e-Nabız portalına BAKARAK girilecek kontrol listesi.
+     Eski metin ikisini birbirine karıştırıp «listeyi Bakanlık portalına
+     yükleyin» diyordu; bu ne birinci modu ne ikinciyi doğru anlatıyor. -->
+          <p class="kol-not">e-Nabız’a doğrudan gönderim yapılmaz. Dosyayı iki yoldan kullanırsınız: MBYS veya HBYS yazılımınızın içe aktarma modülünde açarsınız, ya da e-Nabız portalına girerken kontrol listesi olarak kullanırsınız.</p>
           <div class="kol-alt">
             <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Bildirim akışını ücretsiz deneyin <i>&rarr;</i></a>
             <span class="kol-alt-not">14 gün · kredi kartı gerekmez</span>
