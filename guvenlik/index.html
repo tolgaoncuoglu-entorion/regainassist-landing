@@ -42,6 +42,9 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 <meta name="google-site-verification" content="pngd3KDO0ntWGGdlshQFmEgGHf6RL6V3asNkw032T40" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Güvenlik & Veri Koruma — ReGain Assist</title>
+<link rel="stylesheet" href="/css/ust-menu.css">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/favicon-180.png">
 <meta name="description" content="Hasta ve klinik verisi ReGain Assist'te nasıl korunuyor: satır düzeyi izolasyon (RLS), TLS şifreleme, e-posta onaylı kimlik doğrulama, kart bilgisi saklamayan ödeme, dışa aktarım ve KVKK.">
 <link rel="canonical" href="https://www.regainassist.com/guvenlik">
 <meta name="robots" content="index, follow">
@@ -169,6 +172,27 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-logo" href="https://www.regainassist.com/" aria-label="ReGain Assist"><img src="/images/regain-assist-logo.png" alt="ReGain Assist"></a>
+    <div class="um-links">
+      <div class="um-sar">
+        <button type="button" class="um-ac" id="umAc"
+                aria-haspopup="true" aria-expanded="false" aria-controls="umMenu">
+          Ürün
+          <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="um-menu" id="umMenu" role="menu" hidden>
+          <a role="menuitem" href="/#hikayeler">Nasıl çalışıyor</a>
+          <a role="menuitem" href="/#moduller">Modüller</a>
+          <a role="menuitem" href="/#casesuite" class="um-yeni">CaseSuite</a>
+          <a role="menuitem" href="/#uts-enabiz">ÜTS &amp; MBYS</a>
+          <a role="menuitem" href="/#veri-aktarimi">Veri Aktarımı</a>
+          <a role="menuitem" href="/#hasta-kazanimi">Hasta Kazanımı</a>
+          <a role="menuitem" href="/#sss">SSS</a>
+        </div>
+      </div>
+      <a href="/rehber/">Rehberler</a>
+      <a href="/#kampanyalar">Fiyatlar</a>
+      <a href="/hakkimizda/">Hakkımızda</a>
+    </div>
     <div class="nav-cta">
       <a class="nav-gir" href="https://app.regainassist.com/login">Giriş yap</a>
       <a class="btn btn-primary btn-sm" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
@@ -264,5 +288,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   </div>
 </footer>
 
+<script src="/js/ust-menu.js" defer></script>
 </body>
 </html>

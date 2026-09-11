@@ -49,6 +49,9 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 <meta name="google-site-verification" content="pngd3KDO0ntWGGdlshQFmEgGHf6RL6V3asNkw032T40" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hakkımızda — ReGain Assist | Entorion Technology</title>
+<link rel="stylesheet" href="/css/ust-menu.css">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/favicon-180.png">
 <meta name="description" content="ReGain Assist, diş kliniklerinin gerçek iş akışından doğan bir klinik yönetim platformudur. Sağlık ve dental implant sektöründe yılların saha deneyimiyle, Entorion Technology çatısı altında geliştirilir.">
 <link rel="canonical" href="https://www.regainassist.com/hakkimizda">
 <meta name="robots" content="index, follow">
@@ -114,8 +117,11 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   section{padding:56px 0}
   .sec-tag{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
   h2.sec{font-size:clamp(23px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin:10px 0 0;line-height:1.22}
-  .lead{font-size:17px;color:var(--text);line-height:1.75;margin:22px 0 0;text-align:justify;hyphens:auto}
-  .body p{font-size:16px;color:var(--text2);line-height:1.78;margin:18px 0 0;text-align:justify;hyphens:auto}
+  /* ⛔ `justify` KALDIRILDI (Tolga 11.09): kelime aralari acilip kapaniyor
+     («hekime ne yapacağını»), okumayi yavaslatiyor ve bu yazi tipinde kotu
+     duruyor. `hyphens` de gitti — tirelemenin tek gerekcesi justify idi. */
+  .lead{font-size:17px;color:var(--text);line-height:1.75;margin:22px 0 0;text-align:left}
+  .body p{font-size:16px;color:var(--text2);line-height:1.78;margin:18px 0 0;text-align:left}
   .body p strong{color:var(--text);font-weight:600}
   .band{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
   /* DEĞER KARTLARI */
@@ -261,6 +267,27 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-logo" href="https://www.regainassist.com/" aria-label="ReGain Assist"><img src="/images/regain-assist-logo.png" alt="ReGain Assist"></a>
+    <div class="um-links">
+      <div class="um-sar">
+        <button type="button" class="um-ac" id="umAc"
+                aria-haspopup="true" aria-expanded="false" aria-controls="umMenu">
+          Ürün
+          <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="um-menu" id="umMenu" role="menu" hidden>
+          <a role="menuitem" href="/#hikayeler">Nasıl çalışıyor</a>
+          <a role="menuitem" href="/#moduller">Modüller</a>
+          <a role="menuitem" href="/#casesuite" class="um-yeni">CaseSuite</a>
+          <a role="menuitem" href="/#uts-enabiz">ÜTS &amp; MBYS</a>
+          <a role="menuitem" href="/#veri-aktarimi">Veri Aktarımı</a>
+          <a role="menuitem" href="/#hasta-kazanimi">Hasta Kazanımı</a>
+          <a role="menuitem" href="/#sss">SSS</a>
+        </div>
+      </div>
+      <a href="/rehber/">Rehberler</a>
+      <a href="/#kampanyalar">Fiyatlar</a>
+      <a href="/hakkimizda/">Hakkımızda</a>
+    </div>
     <div class="nav-cta">
       <a class="nav-gir" href="https://app.regainassist.com/login">Giriş</a>
       <a class="btn btn-primary btn-sm" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
@@ -289,7 +316,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       </div>
 
       <div class="body">
-        <span class="sec-tag">Kurucudan</span>
         <h2 class="sec">Diş hekimliğini dışarıdan izleyerek değil,<br class="br-genis">yıllarca sahada çalışarak tanıdım.</h2>
 
         <p>Sağlık sektöründe yirmi beş yıldır çalışıyorum. Bu sürenin son yedi yılı da dental sektörde siz değerli diş hekimleriyle ve kliniklerle doğrudan sahada geçti. Bu süre boyunca aynı şeyi tekrar tekrar gördüm: hekimin asıl işi tedavi etmekken, günün önemli bir bölümü tedavinin etrafındaki işleri yönetmekle geçiyor.</p>
@@ -306,7 +332,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 
         <p>ReGain Assist'i geliştirirken ölçümüz de bu: <strong>bir özellik gerçekten kliniğin işini kolaylaştırmıyorsa, sadece özellik sayısını artırıyordur.</strong></p>
 
-        <p>Ürünü sahadan gelen geri bildirimlerle geliştirmeye devam ediyoruz. Çünkü benim için ReGain Assist tamamlanmış bir yazılım değil; diş hekiminin gerçek çalışma biçimine giderek daha iyi uyum sağlayan bir sistem. Aklınıza takılan veya sormak istediğiniz konuları direkt olarak bana yazabilirsiniz.</p>
+        <p>Ürünü sahadan gelen geri bildirimlerle geliştirmeye devam ediyoruz. Çünkü benim için ReGain Assist tamamlanmış bir yazılım değil; diş hekiminin gerçek çalışma biçimine giderek daha iyi uyum sağlayan bir sistem. Aklınıza takılan veya sormak istediğiniz konuları doğrudan bana yazabilirsiniz.</p>
 
         <p>Saygılarımla,</p>
 
@@ -427,5 +453,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   </div>
 </footer>
 
+<script src="/js/ust-menu.js" defer></script>
 </body>
 </html>

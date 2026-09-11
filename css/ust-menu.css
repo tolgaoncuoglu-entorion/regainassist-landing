@@ -1,0 +1,30 @@
+/* ═══ ÜST MENÜ · ALT SAYFALAR ══════════════════════════════════════════════
+   ⛔ NEDEN VAR — Tolga 11.09: alt sayfalarda üst menü YOKTU, yalnız «Giriş» ve
+   CTA vardı. Hekim /hakkimizda/ ya da /guvenlik/ sayfasına düştüğünde
+   Fiyatlar'a ya da Rehberler'e DÖNEMİYORDU; tek çıkış altbilgiydi.
+   ⭐ Kural düzeyinde tek yerde duruyor: ana sayfa kendi satır içi nüshasını
+   taşır (ona dokunulmadı), alt sayfaların HEPSİ bu dosyayı yükler. Sekiz
+   sayfaya kopyalamak, yarın menü değişince sekiz yerde unutmak demekti.
+   ⚠️ Bağlantılar ana sayfa ÇAPALARINA gider; alt sayfada `#moduller` diye bir
+   bölüm YOK, o yüzden hepsi `/#...` biçiminde MUTLAK. */
+
+.um-links{display:flex;gap:24px;font-size:14px;font-weight:500;color:var(--text2);
+  align-items:center;margin-left:auto}
+.um-links a{text-decoration:none;color:inherit}
+.um-links a:hover{color:var(--accent)}
+@media(max-width:860px){.um-links{display:none}}
+
+.um-sar{position:relative;display:inline-flex;align-items:center}
+.um-ac{display:inline-flex;align-items:center;gap:5px;background:none;border:none;padding:0;
+  font-family:inherit;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer}
+.um-ac:hover,.um-ac[aria-expanded="true"]{color:var(--accent)}
+.um-ac svg{transition:transform .2s ease}
+.um-ac[aria-expanded="true"] svg{transform:rotate(180deg)}
+.um-menu{position:absolute;left:0;top:calc(100% + 12px);z-index:60;
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  box-shadow:0 12px 32px rgba(15,23,42,.14);padding:6px;min-width:206px}
+.um-menu a{display:block;padding:9px 12px;border-radius:8px;font-size:14px;font-weight:500;
+  color:var(--text2);white-space:nowrap;text-decoration:none}
+.um-menu a:hover{background:var(--bg2);color:var(--accent)}
+.um-menu a.um-yeni{color:var(--brand-d);font-weight:700}
+.um-menu a.um-yeni:hover{color:var(--brand);background:var(--bg2)}
