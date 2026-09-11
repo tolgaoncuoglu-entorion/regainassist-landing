@@ -284,9 +284,23 @@ if (window.OLCUM_ACIK) {
      fikrinden gelir. Salt tipografi + ince ayraç. */
   .hero-flow { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin-top:34px;
     padding-top:22px; border-top:1px solid var(--border); }
-  .hero-flow span { font-size:12.5px; font-weight:700; letter-spacing:.3px; color:var(--text2);
-    background:var(--surface); border:1px solid var(--border); padding:6px 12px; border-radius:999px; }
-  .hero-flow i { width:14px; height:1px; background:var(--border2); flex-shrink:0; }
+  .hf-cip { font-family:inherit; font-size:12.5px; font-weight:700; letter-spacing:.3px;
+    color:var(--text2); background:var(--surface); border:1px solid var(--border);
+    padding:6px 12px; border-radius:999px; cursor:pointer;
+    transition:color .15s, border-color .15s, background .15s; }
+  .hf-cip:hover { color:var(--accent); border-color:var(--border2); }
+  .hf-cip[aria-selected="true"] { color:#fff; background:var(--brand); border-color:var(--brand); }
+  .hf-cip:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+  /* ⛔ 200ms fade — gorsel DEGISIRKEN soner, yuklenince acilir. Yuksekligi
+     cerceve sabit tuttugu icin sayfa ZIPLAMAZ (tum ekranlar 16:9). */
+  .ss-img { transition:opacity .2s ease; }
+  .ss-frame.yukleniyor .ss-img { opacity:.35; }
+  /* ⛔ AYRAÇLAR (`<i>`) KALDIRILDI. İki sebep, ikisi de ölçüldü:
+     ① Sağ sütunu ürün ekranına verince metin sütunu daraldı; şerit içeriği
+        tek satırda 552px, kap 465px → DÖRT satıra sarıyor ve ikinci satır
+        boşta kalan bir ayraçla başlıyordu. Ayraçsız 437px → tek satır.
+     ② Artık SEKME bunlar. Ayraç «şu sırayla git» der; sekme ise seçimdir.
+        Akış anlatısı zaten hero açıklamasında ve #neden bölümünde duruyor. */
   /* ── HİKÂYE RAYI — ortak kabuk, DÖRT FARKLI anlatım ──────────────── */
   .rail-say { font-size:12px; font-weight:800; letter-spacing:1px; color:var(--text3);
     font-variant-numeric:tabular-nums; margin-right:6px; }
@@ -842,8 +856,15 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 
     <!-- Hero'nun gorsel gucu: urun ekrani DEGIL, sistemin baglantili olmasi
          fikri. Salt tipografi + ince bir akis cizgisi. -->
-    <div class="hero-flow" aria-hidden="true">
-      <span>Hasta</span><i></i><span>Tedavi</span><i></i><span>Stok</span><i></i><span>Bildirim</span><i></i><span>Tahsilat</span><i></i><span>Takip</span>
+    <!-- ⛔ ESKIDEN `aria-hidden` SUS BIR SERITTI. Artik SEKME: tiklanan cip
+         hero gorselini o modulun EKRANIYLA degistirir (Tolga 11.09).
+         ⭐ Otomatik donmez — hekim istedigine bakar. Donen gorsel dikkati
+           dagitir ve LCP'ye dokunur.
+         ⭐ Varsayilan Dashboard; secili cipe tekrar tiklayinca ona doner.
+         ⛔ `aria-hidden` KALDIRILDI: artik gercek bir denetim, ekran
+           okuyucudan gizlenemez. `role="tablist"` + `aria-selected`. -->
+    <div class="hero-flow" role="tablist" aria-label="Modül ekranları">
+      <button type="button" role="tab" class="hf-cip" data-ekran="hastalar" aria-selected="false">Hasta</button><button type="button" role="tab" class="hf-cip" data-ekran="tedaviler" aria-selected="false">Tedavi</button><button type="button" role="tab" class="hf-cip" data-ekran="stok" aria-selected="false">Stok</button><button type="button" role="tab" class="hf-cip" data-ekran="uts" aria-selected="false">Bildirim</button><button type="button" role="tab" class="hf-cip" data-ekran="odemeler" aria-selected="false">Tahsilat</button><button type="button" role="tab" class="hf-cip" data-ekran="takip" aria-selected="false">Takip</button>
     </div>
 
     <!-- Sayfadaki TÜM sayı ve isimleri kapsayan tek beyan. Eskiden yalnızca
@@ -861,12 +882,13 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
    <div class="hero-ss-yan">
      <div class="ss-frame">
        <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
-       <picture>
-         <source srcset="/images/pro/hero_dashboard_16x9.webp" type="image/webp">
-         <img class="ss-img" src="/images/pro/hero_dashboard_16x9.jpg" width="2400" height="1350"
-              loading="eager" fetchpriority="high" decoding="async"
-              alt="ReGain Assist kontrol paneli ekranı">
-       </picture>
+       <!-- ⚠️ `<picture>` BIRAKILDI, `<img>`e inildi: sekme degisince `srcset`
+            ve `src`i birlikte guncellemek iki kaynakli bir durum yaratiyordu.
+            webp secimi artik JS'te tek yerde yapiliyor (`.webp` destegi bir
+            kez olculur). Boylece gosterilen gorsel TEK yerden gelir. -->
+       <img class="ss-img" id="heroSs" src="/images/pro/hero_dashboard_16x9.jpg"
+            width="2400" height="1350" loading="eager" fetchpriority="high"
+            decoding="async" alt="ReGain Assist kontrol paneli ekranı">
      </div>
    </div>
   </div>
@@ -1916,6 +1938,70 @@ function toggleFaq(btn) {
   });
   document.addEventListener('click', function (e) { if (!menu.contains(e.target)) kapa(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapa(); });
+})();
+
+// ═══ HERO SEKMELERİ · çip → modül ekranı ══════════════════════════════════
+// ⛔ OTOMATİK DÖNMEZ. Dönen görsel dikkati dağıtır, hekimin bakmak istediği
+//    ekranı elinden alır ve LCP'ye dokunur. Kontrol tamamen hekimde.
+// ⭐ Varsayılan Dashboard; seçili çipe tekrar tıklayınca ona döner.
+// ⚠️ `webp` desteği BİR KEZ ölçülür; her tıklamada yeniden sormak gereksiz.
+//    Destek yoksa `.jpg`ye düşer — sessizce boş görsel KALMAZ.
+(function () {
+  var img = document.getElementById('heroSs');
+  var serit = document.querySelector('.hero-flow');
+  if (!img || !serit) return;
+
+  var VARSAYILAN = { yol: '/images/pro/hero_dashboard_16x9', alt: 'ReGain Assist kontrol paneli ekranı' };
+  var EKRANLAR = {
+    hastalar:  { yol: '/images/pro/modul_hastalar_16x9',  alt: 'Hastalar ekranı — hasta listesi, durum ve hekim ataması' },
+    tedaviler: { yol: '/images/pro/modul_tedaviler_16x9', alt: 'Tedaviler ekranı — teklif ve tedavi takibi' },
+    stok:      { yol: '/images/pro/modul_stok_16x9',      alt: 'Stok ekranı — ürün ve kritik stok takibi' },
+    uts:       { yol: '/images/pro/modul_uts_16x9',       alt: 'ÜTS ekranı — bildirim hazırlık listesi' },
+    odemeler:  { yol: '/images/pro/modul_odemeler_16x9',  alt: 'Ödemeler ekranı — tahsilat ve bekleyen alacak' },
+    takip:     { yol: '/images/pro/modul_takip_16x9',     alt: 'Hasta Kazanım Rehberi — gün bazlı takip planı' }
+  };
+
+  // webp destegi: bir kez olc
+  var webp = (function () {
+    try {
+      var c = document.createElement('canvas');
+      return c.toDataURL && c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    } catch (e) { return false; }
+  })();
+  var uzanti = webp ? '.webp' : '.jpg';
+
+  var cipler = Array.prototype.slice.call(serit.querySelectorAll('.hf-cip'));
+  var aktif = null;
+  var cerceve = img.closest('.ss-frame');
+
+  function goster(kayit, alt) {
+    cerceve.classList.add('yukleniyor');
+    var yeni = new Image();
+    yeni.onload = function () {
+      img.src = yeni.src;
+      img.alt = alt;
+      cerceve.classList.remove('yukleniyor');
+    };
+    // ⛔ Yuklenemezse SESSIZCE bos kalma: eski gorsel durur, sonmeyi geri al.
+    yeni.onerror = function () { cerceve.classList.remove('yukleniyor'); };
+    yeni.src = kayit + uzanti;
+  }
+
+  cipler.forEach(function (cip) {
+    cip.addEventListener('click', function () {
+      var ad = cip.getAttribute('data-ekran');
+      if (aktif === ad) {                       // ayni cipe tekrar → Dashboard
+        aktif = null;
+        cip.setAttribute('aria-selected', 'false');
+        goster(VARSAYILAN.yol, VARSAYILAN.alt);
+        return;
+      }
+      cipler.forEach(function (c) { c.setAttribute('aria-selected', 'false'); });
+      cip.setAttribute('aria-selected', 'true');
+      aktif = ad;
+      goster(EKRANLAR[ad].yol, EKRANLAR[ad].alt);
+    });
+  });
 })();
 
 // «Ürün ▾» açılır menü — dene menüsüyle aynı desen.
