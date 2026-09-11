@@ -91,3 +91,11 @@
   .foot-in{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:center;font-size:13px;color:var(--text3)}
   .foot-in a{color:var(--text2)}
   .foot-in a:hover{color:var(--accent)}
+
+/* ── MARKA SOSYAL SİMGELERİ ────────────────────────────────────────────────
+   Yalnız simge, metin yok. Resmî tek renkli logolar, inline SVG, 20px.
+   Renk altbilgi grisinden gelir, hover'da markanın teal'ine döner. */
+.sosyal{display:flex;gap:14px;align-items:center}
+.sosyal a{display:inline-flex;color:var(--text3);transition:color .15s}
+.sosyal a:hover{color:var(--brand)}
+.sosyal svg{width:20px;height:20px;fill:currentColor;display:block}

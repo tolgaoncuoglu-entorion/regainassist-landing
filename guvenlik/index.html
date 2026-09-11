@@ -129,6 +129,12 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .foot-in{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:center;font-size:13px;color:var(--text3)}
   .foot-in a{color:var(--text2)}
   .foot-in a:hover{color:var(--accent)}
+
+  /* MARKA SOSYAL SİMGELERİ — yalnız simge, metin yok */
+  .sosyal{display:flex;gap:14px;align-items:center}
+  .sosyal a{display:inline-flex;color:var(--text3);transition:color .15s}
+  .sosyal a:hover{color:var(--brand)}
+  .sosyal svg{width:20px;height:20px;fill:currentColor;display:block}
 </style>
 <!-- JSON-LD · 09.09: alt sayfalar şemasızdı, makine bunların siteye
      NEREDEN bağlandığını göremiyordu. Fiyat BİLEREK yok: bu sayfada
@@ -254,6 +260,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
     <a href="/rehber/">Rehberler</a>
     <a href="/sozlesmeler/">Tüm yasal metinler</a>
     <a href="mailto:info@entoriontech.com">İletişim</a>
+      <div class="sosyal"><a href="https://www.instagram.com/regainassist/" target="_blank" rel="noopener" aria-label="ReGain Assist Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9a3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 3.18a6.66 6.66 0 1 0 0 13.32 6.66 6.66 0 0 0 0-13.32Zm0 10.98a4.32 4.32 0 1 1 0-8.64 4.32 4.32 0 0 1 0 8.64Zm8.48-11.25a1.56 1.56 0 1 1-3.11 0 1.56 1.56 0 0 1 3.11 0Z"/></svg></a><a href="https://www.linkedin.com/company/entorion-technology/" target="_blank" rel="noopener" aria-label="Entorion Technology LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.83v1.64h.05a4.2 4.2 0 0 1 3.78-2.08C21.2 8.56 22 10.9 22 14.2V21h-4v-6.03c0-1.44-.03-3.29-2-3.29-2 0-2.31 1.57-2.31 3.19V21h-4V9Z"/></svg></a></div>
   </div>
 </footer>
 
