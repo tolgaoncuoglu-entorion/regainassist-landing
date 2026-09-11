@@ -149,10 +149,19 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
     background:linear-gradient(160deg,var(--accent) 0%,var(--accent-l) 100%);box-shadow:var(--sh-lg);
     display:flex;align-items:center;justify-content:center}
   @media(max-width:820px){.portre{position:relative;top:0;width:200px;margin-inline:auto}}
-  /* ⛔ Fotoğraf HENÜZ YOK. `onerror` ile img kendini kaldırır; arkadaki baş
-     harfler görünür. Böylece dosya eklenene kadar KIRIK GÖRSEL SİMGESİ çıkmaz,
-     dosya eklendiği anda da hiçbir kod değişmeden fotoğraf görünür. */
-  .portre .bh{font-size:52px;font-weight:800;color:rgba(255,255,255,.92);letter-spacing:.02em}
+  /* ⛔⛔ BAŞ HARFLER VARSAYILAN OLARAK GİZLİ — `opacity:0`.
+     Eskiden her zaman basılıyor, fotoğraf üstüne mutlak konumlanıyordu;
+     görsel yüklenene kadar arkadaki «BTÖ» SALİSELİK GÖRÜNÜYORDU
+     (Tolga 11.09, canlıda gördü). Sayfa hızlı açıldığı için kusur daha da
+     belirgindi: metin anında geliyor, görsel bir tık sonra.
+     ⭐ Artık yedek YALNIZCA görsel DÜŞERSE açılır: `onerror` kaba `.yedek`
+     sınıfını ekler. Başarılı yüklemede baş harfler hiç görünmez; dosya
+     silinirse yine kırık görsel simgesi değil baş harfler çıkar.
+     ⚠️ Sıra önemli: önce sınıf eklenir, SONRA `<picture>` kaldırılır —
+     kaldırıldıktan sonra `this` ağaçtan kopar ve `closest` null döner. */
+  .portre .bh{font-size:52px;font-weight:800;color:rgba(255,255,255,.92);letter-spacing:.02em;
+    opacity:0}
+  .portre.yedek .bh{opacity:1}
   .portre picture,.portre img{position:absolute;inset:0;width:100%;height:100%;
     object-fit:cover;object-position:center top}
   /* ⛔ Basliktaki <br> ILK SATIRI ZORLUYOR. Olculdu: 23px yaziyla o satir
@@ -296,9 +305,18 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 </nav>
 
 <header class="hero">
-  <div class="wrap narrow">
+  <!-- ⚠️ `narrow` (712px) KALDIRILDI. Ölçüldü: başlığın ilk cümlesi 50px
+       yazıyla 954px; dar kapta sığmayıp DÖRT satıra bölünüyordu. Geniş kapta
+       (1052px) sığıyor ve başlık iki satırda duruyor. `.hero-sub` kendi
+       680px sınırını taşıdığı için o dar kalmaya devam eder. -->
+  <div class="wrap">
     <span class="eyebrow">Hakkımızda</span>
-    <h1>Diş hekimliğini <span class="teal">içeriden</span> tanıyan bir ekip.</h1>
+    <!-- ⛔ «...tanıyan bir ekip.» KALDIRILDI (Tolga 11.09): sayfa bir
+         EKİBİ değil, kurucunun sahadan gelen deneyimini anlatıyor.
+         Mektubun kendi başlığı buraya, hero'ya çıktı; alttaki cümle de
+         mektuba girizgâh olarak yerinde duruyor. Böylece aynı cümle iki
+         kez okunmuyor — mektuptaki kopya aşağıda silindi. -->
+    <h1>Diş hekimliğini dışarıdan izleyerek değil,<br class="br-genis"><span class="teal">yıllarca sahada çalışarak</span> tanıdım.</h1>
     <p class="hero-sub">ReGain Assist, bir masabaşı fikrinden değil; yıllarca diş kliniklerinin içinde, gerçek iş akışının yanında durmuş bir deneyimden doğdu.</p>
   </div>
 </header>
@@ -311,13 +329,12 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
         <picture>
           <source srcset="/images/kurucu.webp" type="image/webp">
           <img src="/images/kurucu.jpg" alt="Bülent Tolga Öncüoğlu" width="260" height="325"
-               decoding="async" onerror="this.closest('picture').remove()">
+               decoding="async" fetchpriority="high"
+               onerror="var k=this.closest('.portre'); if(k) k.classList.add('yedek'); this.closest('picture').remove()">
         </picture>
       </div>
 
       <div class="body">
-        <h2 class="sec">Diş hekimliğini dışarıdan izleyerek değil,<br class="br-genis">yıllarca sahada çalışarak tanıdım.</h2>
-
         <p>Sağlık sektöründe yirmi beş yıldır çalışıyorum. Bu sürenin son yedi yılı da dental sektörde siz değerli diş hekimleriyle ve kliniklerle doğrudan sahada geçti. Bu süre boyunca aynı şeyi tekrar tekrar gördüm: hekimin asıl işi tedavi etmekken, günün önemli bir bölümü tedavinin etrafındaki işleri yönetmekle geçiyor.</p>
 
         <p>Hasta kayıtları, randevular, tahsilatlar, stok, ÜTS işlemleri, e-Nabız hazırlıkları, eski sistemlerden veri taşıma, tedavi sonrası takip… Bunların her biri tek başına küçük görünüyor. Fakat birlikte düşünüldüğünde kliniğin ciddi bir operasyon yükünü oluşturuyor.</p>
@@ -388,7 +405,7 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
         <span class="sec-tag">Çatımız</span>
         <h2 class="sec">Entorion Technology bünyesinde geliştirilir.</h2>
         <p>ReGain Assist, sağlık profesyonelleri ve kurumları için klinik yazılım ve dijital sağlık teknolojileri geliştiren <strong>Entorion Technology</strong> çatısı altında üretilir. Aynı çatı altındaki her ürünün arkasında kanıta dayalı bir yöntem ve açıklanabilir bir karar mantığı yatar.</p>
-        <p>Bu, ReGain Assist'in tek başına duran bir proje değil; sürdürülebilir bir Ar-Ge ekibinin ürettiği ve büyütmeye devam ettiği bir ürün olduğu anlamına gelir.</p>
+        <p>Bu, ReGain Assist'in tek başına duran bir proje değil; sürdürülebilir bir Ar-Ge sürecinin ürettiği ve büyütmeye devam ettiği bir ürün olduğu anlamına gelir.</p>
       </div>
       <div class="marka-isaret" aria-hidden="true">
         <span class="halka h1"></span>
