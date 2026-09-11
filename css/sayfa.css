@@ -147,3 +147,11 @@
   cursor:pointer;padding:6px 12px;font-family:inherit}
 .cs-buyut-kapat:hover{opacity:.75}
 .cs-buyut-kapat:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ── MARKA ADI · BÜYÜK HARFE ÇEVRİLMEZ ───────────────────────────────────
+   🚨 `text-transform:uppercase` TÜRKÇE yerelde `i` → `İ` yapar ve MARKA ADINI
+   BOZAR: «CaseSuite» → «CASESUİTE» (Tolga 11.09 canlıda gördü).
+   Aynı tuzak «ReGain Assist» → «REGAİN ASSİST» için de geçerli.
+   ⭐ Çözüm etiketin TAMAMINI düz bırakmak değil — Türkçe kelime büyük
+     kalmalı, yalnız MARKA korunmalı. Bu yüzden marka adı sarmalanır. */
+.marka-adi{text-transform:none}
