@@ -270,27 +270,13 @@ if (window.OLCUM_ACIK) {
      Sağdaki boşluk ürün ekranıyla değil MARKA ile doluyor. Header'daki
      logo 30px'te kayboluyordu; işaret burada 200px'e kadar büyüyor ve
      header oranı hiç değişmiyor. */
-  .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:48px; align-items:center; }
+  /* ⛔ Sağ sütun artık MARKA DEĞİL ÜRÜN EKRANI (Tolga 11.09). Eski 300px
+     sabit sütun bir logoya göre ölçülmüştü; ekran görüntüsü okunabilir
+     olmalı, o yüzden oransal. Metin baskın kalsın diye 1 : 0.95. */
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.95fr);
+    gap:44px; align-items:center; }
   .hero-metin { min-width:0; }
-  .marka { position:relative; display:grid; place-items:center; aspect-ratio:1; }
-  /* Merkezde yumuşak bir ışıma — işaret zeminden ayrılsın. */
-  .marka::before { content:''; position:absolute; inset:14%; border-radius:50%;
-    background:radial-gradient(circle, rgba(13,148,136,.14) 0%, rgba(13,148,136,0) 68%); }
-  .marka img { width:50%; height:auto; position:relative; z-index:2;
-    filter:drop-shadow(0 10px 30px rgba(13,148,136,.28)); }
-  .halka { position:absolute; border-radius:50%; border:1.5px solid rgba(13,148,136,.42); }
-  .halka.h1 { width:58%;  height:58%; }
-  .halka.h2 { width:78%;  height:78%; border-color:rgba(13,148,136,.26); }
-  .halka.h3 { width:98%;  height:98%; border-color:rgba(13,148,136,.15); }
-  @media (prefers-reduced-motion:no-preference) {
-    .halka { animation:nefes 3.6s ease-in-out infinite; }
-    .halka.h2 { animation-delay:.5s; }
-    .halka.h3 { animation-delay:1s; }
-  }
-  @keyframes nefes {
-    0%, 100% { transform:scale(1);    opacity:1; }
-    50%      { transform:scale(1.07); opacity:.28; }
-  }
+  .hero-ss-yan { min-width:0; }
 
   /* ── HERO AKIŞ ÇİZGİSİ ────────────────────────────────────────────
      Hero'nun görsel gücü ürün ekranından değil, sistemin bağlı olması
@@ -427,12 +413,9 @@ if (window.OLCUM_ACIK) {
     background:var(--bg2); border-bottom:1px solid var(--border); }
   .ss-dot { width:9px; height:9px; border-radius:50%; background:var(--border2); flex-shrink:0; }
   .ss-img { width:100%; height:auto; display:block; }
-  /* Hero ürün ekranı: geniş; ALT %25 sayfa zeminine gradient mask ile söner
-     (dissolve). Sönen kenarda gölge tutarsız durmasın diye burada gölge yok. */
-  .hero-ss-wrap { margin-top:44px; }
-  .hero-ss { max-width:1000px; margin:0 auto; box-shadow:none;
-    -webkit-mask-image:linear-gradient(to bottom,#000 74%,transparent 100%);
-    mask-image:linear-gradient(to bottom,#000 74%,transparent 100%); }
+  /* ⛔ Alt kenar maskesi KALDIRILDI: tam genişlikte sayfaya sönmek içindi.
+     Ekran artık hero'nun SAĞ sütununda duruyor; orada sönen bir alt kenar
+     yarım kalmış gibi görünür. Çerçeve kendi gölgesini geri aldı. */
   /* Modül kartı ekranı: kartın ÜSTÜNDE, üçte bir kadar; metin baskın kalır. */
   .mgrup-ss { margin-bottom:16px; }
   /* CaseSuite (koyu zemin) ekranı — çerçeve aynı; açık şerit koyu zeminde durur. */
@@ -597,9 +580,9 @@ if (window.OLCUM_ACIK) {
   .footer-links a { color:var(--text3); text-decoration:none; }
   .footer-links a:hover { color:var(--accent); }
   @media (max-width:900px) {
-    /* Dar ekranda marka işareti metnin ALTINA geçer ve küçülür. */
+    /* Dar ekranda ürün ekranı metnin ALTINA geçer, tam genişlik alır. */
     .hero-grid { grid-template-columns:1fr; gap:28px; }
-    .marka { max-width:210px; margin:0 auto; }
+    .hero-ss-yan { max-width:560px; margin:0 auto; width:100%; }
     /* 768'de zincir iki satıra sarıyor ve ayraç satır sonunda asılı kalıyor. */
     .zincir i { display:none; }
     .zincir { gap:8px; }
@@ -863,33 +846,25 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <p class="temsili">Sayfada kullanılan veriler temsilidir.</p>
    </div>
 
-   <!-- MARKA İŞARETİ — hero'daki boşluğu ürün ekranıyla değil markayla
-        dolduruyor. Header'daki logo küçük kaldığı için işaret burada
-        büyük görünür. Halkalar sırayla nefes alır; hareket KAPALIYSA
-        (prefers-reduced-motion) sabit durur. -->
-   <div class="marka" aria-hidden="true">
-     <span class="halka h1"></span>
-     <span class="halka h2"></span>
-     <span class="halka h3"></span>
-     <img src="/images/marka.webp" alt="" width="400" height="400" loading="eager" decoding="async">
+   <!-- ⛔ BURADA ESKİDEN MARKA İŞARETİ (halkalı "G") VARDI. Tolga 11.09:
+        işaret ilk ekranın yarısını kaplıyor ve ÜRÜN HAKKINDA HİÇBİR ŞEY
+        SÖYLEMİYORDU; ürün ekranı ise onun ALTINDA, kıvrımın dışında kalıyordu.
+        Reklamdan gelen hekim ilk ekranda ÜRÜNÜ görmeli. İşaret Hakkımızda →
+        «Çatımız» bölümüne taşındı (orada marka anlatısının parçası).
+        ⭐ eager + fetchpriority=high korunuyor: artık gerçekten LCP adayı. -->
+   <div class="hero-ss-yan">
+     <div class="ss-frame">
+       <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
+       <picture>
+         <source srcset="/images/pro/hero_dashboard_16x9.webp" type="image/webp">
+         <img class="ss-img" src="/images/pro/hero_dashboard_16x9.jpg" width="2400" height="1350"
+              loading="eager" fetchpriority="high" decoding="async"
+              alt="ReGain Assist kontrol paneli ekranı">
+       </picture>
+     </div>
    </div>
   </div>
 
-  <!-- HERO ÜRÜN EKRANI (10.09): dashboard, pencere çerçevesi içinde; altı %25
-       sayfa zeminine söner. ⛔ Metin/başlık/CTA'ya dokunulmadı; marka işareti
-       yerinde kaldı, bu görsel iki sütunlu satırın ALTINA eklendi.
-       ⭐ eager + fetchpriority=high: kıvrım üstü, LCP adayı. -->
-  <div class="wrap hero-ss-wrap">
-    <div class="ss-frame hero-ss">
-      <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
-      <picture>
-        <source srcset="/images/pro/hero_dashboard_16x9.webp" type="image/webp">
-        <img class="ss-img" src="/images/pro/hero_dashboard_16x9.jpg" width="2400" height="1350"
-             loading="eager" fetchpriority="high" decoding="async"
-             alt="ReGain Assist kontrol paneli ekranı">
-      </picture>
-    </div>
-  </div>
 </header>
 
 <!-- ═══ TANIDIK GELİYOR MU? — dört hikâye ═══ -->
