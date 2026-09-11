@@ -864,7 +864,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
          ⛔ `aria-hidden` KALDIRILDI: artik gercek bir denetim, ekran
            okuyucudan gizlenemez. `role="tablist"` + `aria-selected`. -->
     <div class="hero-flow" role="tablist" aria-label="Modül ekranları">
-      <button type="button" role="tab" class="hf-cip" data-ekran="hastalar" aria-selected="false">Hasta</button><button type="button" role="tab" class="hf-cip" data-ekran="tedaviler" aria-selected="false">Tedavi</button><button type="button" role="tab" class="hf-cip" data-ekran="stok" aria-selected="false">Stok</button><button type="button" role="tab" class="hf-cip" data-ekran="uts" aria-selected="false">Bildirim</button><button type="button" role="tab" class="hf-cip" data-ekran="odemeler" aria-selected="false">Tahsilat</button><button type="button" role="tab" class="hf-cip" data-ekran="takip" aria-selected="false">Takip</button>
+      <button type="button" role="tab" class="hf-cip" data-ekran="dashboard" aria-selected="true">Dashboard</button><button type="button" role="tab" class="hf-cip" data-ekran="hastalar" aria-selected="false">Hasta</button><button type="button" role="tab" class="hf-cip" data-ekran="tedaviler" aria-selected="false">Tedavi</button><button type="button" role="tab" class="hf-cip" data-ekran="stok" aria-selected="false">Stok</button><button type="button" role="tab" class="hf-cip" data-ekran="uts" aria-selected="false">Bildirim</button><button type="button" role="tab" class="hf-cip" data-ekran="odemeler" aria-selected="false">Tahsilat</button><button type="button" role="tab" class="hf-cip" data-ekran="takip" aria-selected="false">Takip</button>
     </div>
 
     <!-- Sayfadaki TÜM sayı ve isimleri kapsayan tek beyan. Eskiden yalnızca
@@ -1951,8 +1951,8 @@ function toggleFaq(btn) {
   var serit = document.querySelector('.hero-flow');
   if (!img || !serit) return;
 
-  var VARSAYILAN = { yol: '/images/pro/hero_dashboard_16x9', alt: 'ReGain Assist kontrol paneli ekranı' };
   var EKRANLAR = {
+    dashboard: { yol: '/images/pro/hero_dashboard_16x9',  alt: 'ReGain Assist kontrol paneli — günün özeti' },
     hastalar:  { yol: '/images/pro/modul_hastalar_16x9',  alt: 'Hastalar ekranı — hasta listesi, durum ve hekim ataması' },
     tedaviler: { yol: '/images/pro/modul_tedaviler_16x9', alt: 'Tedaviler ekranı — teklif ve tedavi takibi' },
     stok:      { yol: '/images/pro/modul_stok_16x9',      alt: 'Stok ekranı — ürün ve kritik stok takibi' },
@@ -1971,7 +1971,6 @@ function toggleFaq(btn) {
   var uzanti = webp ? '.webp' : '.jpg';
 
   var cipler = Array.prototype.slice.call(serit.querySelectorAll('.hf-cip'));
-  var aktif = null;
   var cerceve = img.closest('.ss-frame');
 
   function goster(kayit, alt) {
@@ -1987,19 +1986,17 @@ function toggleFaq(btn) {
     yeni.src = kayit + uzanti;
   }
 
+  // ⛔ «Ayni cipe tekrar tikla → Dashboard» numarasi KALDIRILDI (Tolga 11.09):
+  //    calisiyordu ama KESFEDILEMIYORDU — hekim Dashboard'a nasil donecegini
+  //    bilemiyordu. Artik Dashboard seritte GORUNUR bir cip, basta duruyor ve
+  //    varsayilan secili. Duz sekme davranisi: her zaman tam bir tanesi secili.
   cipler.forEach(function (cip) {
     cip.addEventListener('click', function () {
-      var ad = cip.getAttribute('data-ekran');
-      if (aktif === ad) {                       // ayni cipe tekrar → Dashboard
-        aktif = null;
-        cip.setAttribute('aria-selected', 'false');
-        goster(VARSAYILAN.yol, VARSAYILAN.alt);
-        return;
-      }
+      if (cip.getAttribute('aria-selected') === 'true') return;   // zaten secili
       cipler.forEach(function (c) { c.setAttribute('aria-selected', 'false'); });
       cip.setAttribute('aria-selected', 'true');
-      aktif = ad;
-      goster(EKRANLAR[ad].yol, EKRANLAR[ad].alt);
+      var e = EKRANLAR[cip.getAttribute('data-ekran')];
+      goster(e.yol, e.alt);
     });
   });
 })();
