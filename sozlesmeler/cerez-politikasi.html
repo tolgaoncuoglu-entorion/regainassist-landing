@@ -10,6 +10,11 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
   .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+  /* ⛔ Bu sayfa TEK basina ust cikis yolu olmadan duruyordu; oteki on
+     sozlesme sayfasinda var. Uzun hukuki metinde cikis en altta degil
+     USTTE de olmali. Stil otekilerle birebir. */
+  .back { display: inline-block; margin-bottom: 24px; font-size: 13px; color: #64748b; text-decoration: none; }
+  .back:hover { color: #0d9488; }
   .logo { text-align: center; margin-bottom: 32px; }
   .logo span { font-size: 32px; }
   .logo h2 { font-size: 18px; color: #4361ee; margin-top: 4px; }
@@ -27,6 +32,7 @@
 </head>
 <body>
 <div class="container">
+  <a href="/" class="back">&#8592; ReGain Assist'e Dön</a>
   <div class="logo"><span>🦷</span><h2>ReGain Assist</h2></div>
   <div class="card">
     <h1>Çerez Politikası</h1>
