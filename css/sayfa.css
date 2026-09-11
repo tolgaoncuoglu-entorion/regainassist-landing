@@ -99,3 +99,51 @@
 .sosyal a{display:inline-flex;color:var(--text3);transition:color .15s}
 .sosyal a:hover{color:var(--brand)}
 .sosyal svg{width:20px;height:20px;fill:currentColor;display:block}
+
+/* ── CASESUITE HERO MEDYASI ───────────────────────────────────────────────
+   ⛔ 16:9 kutuyu KUTU rezerve eder, medya `object-fit:cover` ile doldurur.
+   `img`e HTML width/height + CSS width:100% birlikte verilirse `aspect-ratio`
+   yok sayılıp dikey EZİLİR — oranı kutu tutar. (Uygulamadaki CaseSuite
+   sayfasında ölçülmüş kural; iki yüzey ayrışmasın diye birebir aynı.) */
+.cs-16x9{aspect-ratio:16/9;width:100%;display:block}
+.cs-16x9>*{width:100%;height:100%;display:block}
+.cs-16x9 img,.cs-16x9 video{width:100%;height:100%;object-fit:cover;display:block}
+.cs-hero-poster{display:none}
+@media(max-width:768px){
+  .cs-hero-video{display:none}
+  .cs-hero-poster{display:block}
+}
+
+/* ── CASESUITE ÜÇLÜ ÜRÜN ŞERİDİ + BÜYÜTME ────────────────────────────────
+   Tasarım sistemi belirteçleri kullanılır, yeni renk/gölge TANIMLANMAZ. */
+.cs-3medya{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  align-items:start;margin-top:30px}
+@media(max-width:860px){.cs-3medya{grid-template-columns:1fr}}
+.cs-gorsel{display:block;width:100%;padding:0;border:1px solid var(--border);
+  background:var(--surface);border-radius:14px;overflow:hidden;cursor:zoom-in;
+  font-family:inherit;text-align:left;box-shadow:var(--sh);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+.cs-gorsel:hover{transform:scale(1.03);box-shadow:var(--sh-lg);border-color:var(--border2)}
+.cs-gorsel:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+/* ⛔ Hareket kapaliysa BUYUME YOK — vestibuler rahatsizlik. */
+@media(prefers-reduced-motion:reduce){.cs-gorsel:hover{transform:none}}
+.cs-etiket{display:block;font-size:13px;font-weight:600;color:var(--text2);
+  padding:10px 14px 12px}
+
+/* ⛔⛔ `[hidden]` TEK BAŞINA YETMEZ. Tarayıcının varsayılan `[hidden]{display:none}`
+   kuralı ÖZELLİK AĞIRLIĞI DÜŞÜK; buradaki `.cs-buyut{display:flex}` onu YENER.
+   11.09'da ölçüldü: `hidden` özniteliği `true` iken hesaplanan `display:flex`,
+   katman 1384x763 alanı kaplıyordu — yani büyütme katmanı SAYFAYI KALICI
+   ÖRTÜYORDU. Ziyaretçi siyah bir perdeyle karşılaşırdı.
+   ⚠️ DOM ölçümüm «hidden: true» diyerek beni yanılttı; haklı olan EKRAN
+   GÖRÜNTÜSÜYDÜ. Öznitelik ≠ ekrana basılan. */
+.cs-buyut[hidden]{display:none}
+.cs-buyut{position:fixed;inset:0;z-index:200;background:rgba(15,23,42,.88);
+  display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.cs-buyut img{max-width:100%;max-height:90vh;width:auto;height:auto;
+  border-radius:10px;display:block;cursor:default}
+.cs-buyut-kapat{position:absolute;top:16px;right:20px;z-index:1;
+  background:none;border:none;color:#fff;font-size:34px;line-height:1;
+  cursor:pointer;padding:6px 12px;font-family:inherit}
+.cs-buyut-kapat:hover{opacity:.75}
+.cs-buyut-kapat:focus-visible{outline:2px solid #fff;outline-offset:2px}

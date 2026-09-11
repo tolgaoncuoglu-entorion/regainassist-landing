@@ -177,14 +177,36 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       <span class="hero-note">Kredi kartı gerekmez</span>
     </div>
 
-    <!-- ÜRÜN EKRANI İLK HTML'DE (SSR/SEO/hız): reklam açılış denetimi ve LCP
-         için görsel sunucudan gelir; JS'e bağlı değildir. -->
+    <!-- ÜRÜN MEDYASI İLK HTML'DE (SSR/SEO/hız): reklam açılış denetimi ve LCP
+         için sunucudan gelir; JS'e bağlı değildir.
+         ⛔ 11.09: burada TEK STATİK GÖRSEL vardı ve sayfanın gücünü düşürüyordu
+            (Tolga). Uygulamadaki CaseSuite sayfasında tanıtım videosu ZATEN
+            çalışıyordu; aynı desen buraya getirildi — iki yüzey ayrışmasın.
+         ⭐ autoplay + muted + playsInline: iOS muted olmadan oynatmaz.
+            loop sürekli döner, kontrol çubuğu yok — hero'da oynat/durdur
+            düğmesi dikkat dağıtır.
+         ⛔ Kaynak sırası ÖNEMLİ: webm önce (küçük/modern), mp4 sonra (Safari).
+         ⛔ 16:9 kutuyu ÇERÇEVE rezerve eder → CLS 0. -->
     <div class="ss-frame">
       <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
-      <picture>
-        <source srcset="/images/pro/casesuite_in_pro_16x10.webp" type="image/webp">
-        <img src="/images/pro/casesuite_in_pro_16x10.jpg" width="1600" height="999" fetchpriority="high" decoding="async" alt="CaseSuite: CBCT dört panel MPR ve ölçüm ekranı">
-      </picture>
+      <div class="cs-16x9 cs-hero-video">
+        <video autoplay muted loop playsinline preload="metadata"
+               poster="/media/casesuite_landing_poster.jpg"
+               aria-label="CaseSuite implant vaka çalışma alanının tanıtım videosu">
+          <source src="/media/casesuite_landing_1920x1080.webm" type="video/webm">
+          <source src="/media/casesuite_landing_1920x1080.mp4" type="video/mp4">
+        </video>
+      </div>
+      <!-- ⛔ MOBİLDE VİDEO YOK, POSTER VAR. 3 MB'lık medyayı hücresel bağlantıda
+           indirtmek hekimi sayfadan kaçırır; ≤768px'te LCP öğesi bu görseldir. -->
+      <div class="cs-16x9 cs-hero-poster">
+        <picture>
+          <source srcset="/media/casesuite_landing_poster.webp" type="image/webp">
+          <img src="/media/casesuite_landing_poster.jpg" width="1920" height="1080"
+               fetchpriority="high" decoding="async"
+               alt="CaseSuite çalışma alanı: CBCT kesitleri üzerinde implant planlaması">
+        </picture>
+      </div>
     </div>
     <p class="temsili">Görüntüler temsili vakadır.</p>
   </div>
@@ -202,6 +224,49 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
       <div class="kart"><b>Vaka karşılaştırma</b><span>Aynı vakaya Plan A, B ve C kurun; yan yana görüp kararı siz verin.</span></div>
       <div class="kart"><b>Vaka arşivi ve rapor</b><span>Çalışmanız cihazınızda saklanır; PDF ve PNG rapor alın.</span></div>
     </div>
+
+    <!-- ÜÇ ÜRÜN GÖRSELİ — özellik kartlarının ALTINDA üçlü şerit.
+         ⛔ 11.09: bu sayfada ürünün ne yaptığını GÖSTEREN tek bir görsel bile
+            yoktu; kartlar yalnız ANLATIYORDU. Uygulamadaki CaseSuite sayfasında
+            bu şerit 08.09'dan beri var (166d912) — iki yüzey ayrışmasın.
+         ⭐ Tıklayınca tam boy açılır: ölçüm yazıları küçük şeritte okunmuyor.
+         ⛔ `loading=lazy`: kıvrımın altında, hero'nun LCP'sini çalmasın. -->
+    <div class="cs-3medya">
+      <button type="button" class="cs-gorsel" data-buyuk="/media/hero_3d_render_1920x1080"
+              aria-label="3B implant şablonu görünümünü büyüt">
+        <span class="cs-16x9">
+          <picture>
+            <source srcset="/media/hero_3d_render_1920x1080.webp" type="image/webp">
+            <img src="/media/hero_3d_render_1920x1080.jpg" width="1920" height="1080" loading="lazy"
+                 decoding="async" alt="Temsili vaka: implant şablonlarının 3B görünümü">
+          </picture>
+        </span>
+        <span class="cs-etiket">3B implant şablonu</span>
+      </button>
+      <button type="button" class="cs-gorsel" data-buyuk="/media/hero_mpr_dort_panel_1920x1080"
+              aria-label="CBCT dört panel MPR görünümünü büyüt">
+        <span class="cs-16x9">
+          <picture>
+            <source srcset="/media/hero_mpr_dort_panel_1920x1080.webp" type="image/webp">
+            <img src="/media/hero_mpr_dort_panel_1920x1080.jpg" width="1920" height="1080" loading="lazy"
+                 decoding="async" alt="Temsili vaka: CBCT dört panel (aksiyel, koronal, sagital) MPR kesitleri">
+          </picture>
+        </span>
+        <span class="cs-etiket">CBCT dört panel MPR</span>
+      </button>
+      <button type="button" class="cs-gorsel" data-buyuk="/media/hero_planlar_yan_yana_1920x1080"
+              aria-label="Plan A, B ve C karşılaştırmasını büyüt">
+        <span class="cs-16x9">
+          <picture>
+            <source srcset="/media/hero_planlar_yan_yana_1920x1080.webp" type="image/webp">
+            <img src="/media/hero_planlar_yan_yana_1920x1080.jpg" width="1920" height="1080" loading="lazy"
+                 decoding="async" alt="Temsili vaka: A, B ve C planlarının yan yana karşılaştırması">
+          </picture>
+        </span>
+        <span class="cs-etiket">Plan A / B / C yan yana</span>
+      </button>
+    </div>
+    <p class="temsili" style="margin-top:14px">Görüntüler temsili vakadır.</p>
   </div>
 </section>
 
@@ -276,5 +341,15 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 </footer>
 
 <script src="/js/ust-menu.js" defer></script>
+
+<!-- BÜYÜTME KATMANI — üçlü şeritteki görseller için. Zemin, X ve Escape kapatır. -->
+<div class="cs-buyut" id="csBuyut" hidden>
+  <button type="button" class="cs-buyut-kapat" id="csBuyutKapat" aria-label="Kapat">&times;</button>
+  <picture>
+    <source id="csBuyutWebp" srcset="" type="image/webp">
+    <img id="csBuyutImg" src="" alt="">
+  </picture>
+</div>
+<script src="/js/cs-buyut.js" defer></script>
 </body>
 </html>
