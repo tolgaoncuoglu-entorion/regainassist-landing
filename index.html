@@ -542,6 +542,19 @@ if (window.OLCUM_ACIK) {
   .plan-features .no { color:var(--text3); opacity:.55; }
   .plan-features .highlight { color:var(--text); font-weight:600; }
   /* ── ILETISIM ────────────────────────────────────────────────── */
+  /* ── İKİ YOL ── sayfanın kendi jetonları; yeni renk uydurulmadı */
+  .iki-yol { padding:64px 0 8px; }
+  .iki-yol-ic { max-width:900px; margin:0 auto; padding:0 24px; text-align:center; }
+  .iki-yol h2 { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; }
+  .iki-yol-kartlar { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; text-align:left; }
+  .yol-kart { background:var(--bg); border:1px solid var(--border2); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:12px; }
+  .yol-kart-birincil { border-color:var(--brand); }
+  .yol-etiket { font-size:13px; font-weight:800; color:var(--brand); letter-spacing:.2px; }
+  .yol-metin { font-size:15px; line-height:1.65; color:var(--text2); margin:0; flex:1; }
+  .yol-kart .btn { align-self:flex-start; }
+  /* ⚠️ Dar ekranda YAN YANA DURMAZ: iki kart sıkışınca metin kırpılır ve
+     «14 gün» ile «24 saat» görsel olarak yan yana düşerdi. */
+  @media (max-width:720px) { .iki-yol-kartlar { grid-template-columns:1fr; } }
   .contact { background:var(--surface); border-top:1px solid var(--border); }
   .contact-header { max-width:660px; margin:0 auto; padding:0 24px; text-align:center; }
   .contact-header h2 { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; }
@@ -1611,6 +1624,47 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <h2>Kliniğinizin tamamı tek sistemde.</h2>
       <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
       <small>Kredi kartı gerekmez.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ İKİ YOL ═══════════════════════════════════════════════════════
+     ⛔ İletişim formunun ÜSTÜNDE durur. Sebebi: forma gelen ziyaretçinin
+        çoğu «denemek için de form doldurmam gerekiyor» sanıyordu. İki yolu
+        ÖNCE söylemek, denemek isteyeni formdan kurtarır.
+     ⛔ TİRE AYRACI YOK (`\s[—–-]\s`). `tire-ayraci-kapisi` bunu ölçüyor;
+        boşluklu tire yapay zekâ metninin en tanınan işareti.
+     ⛔ HER KART KENDİ TAM CÜMLESİNİ TAŞIR. «14 gün» · «3 dakika» ·
+        «24 saat» üç ayrı sayı; yan yana gelirlerse tek cümle okunur
+        (25.08 dersi: «%50» + «24 ay» → «24 ay boyunca %50» anlaşıldı).
+        Bu yüzden 24 saat SAĞ kartta, ötekiler SOL kartta duruyor.
+     ⛔ Sol kartın bağlantısı `app.regainassist.com` taşımalı: `CTAClick`
+        ölçümü `a[href*="app.regainassist.com"]` dinleyicisiyle çalışıyor. -->
+<section class="iki-yol">
+  <div class="iki-yol-ic">
+    <div class="section-tag">Nasıl başlanır</div>
+    <h2>İki yol var, ikisi de ücretsiz.</h2>
+    <div class="iki-yol-kartlar">
+
+      <div class="yol-kart yol-kart-birincil">
+        <div class="yol-etiket">Kendiniz deneyin</div>
+        <p class="yol-metin">
+          14 gün boyunca ücretsiz. Kredi kartı istemiyoruz, telefon görüşmesi
+          gerekmiyor. Kaydolun, kliniğinizi üç dakikada kurun, kendi
+          hastalarınızla deneyin.
+        </p>
+        <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">Hemen başla</a>
+      </div>
+
+      <div class="yol-kart">
+        <div class="yol-etiket">Ya da biz anlatalım</div>
+        <p class="yol-metin">
+          Kliniğinize özel canlı demo. Aşağıdaki formu doldurun, mesai saatlerinde
+          24 saat içinde size dönelim.
+        </p>
+        <a class="btn btn-ghost" href="#iletisim">Demo talep et</a>
+      </div>
+
     </div>
   </div>
 </section>
