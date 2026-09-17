@@ -286,7 +286,17 @@ if (window.OLCUM_ACIK) {
   /* ⛔ TEK SUTUN: sag sutunu dolduran kart kalkti. Metin genisligi 15ch'te
      tutuluyor — fotografin sagi (unite, monitor, pencere) acikta kalsin. */
   .hero-koyu .hero-grid { grid-template-columns:minmax(0,1fr); gap:0; }
-  .hero-koyu .hero-metin { max-width:min(680px,58%); }
+  /* 🔴 `%58` DAR EKRANDA KUSURA DONUSUYORDU. Olculdu: 430px telefonda
+     icerik 382px, %58 kurali metni 222px'e sikistiriyordu; baslik BES
+     satira boluyor, paragraf daralip uzuyordu (Tolga iPhone 14 Pro Max'te
+     gordu).
+     ⛔ Kuralin AMACI fotografin sagini (unite, monitor) acikta birakmakti —
+        ama o kaygi YALNIZ GENIS EKRANDA var. Dar ekranda fotograf zaten
+        dikey kadraja gecip metnin ARKASINA gecmis oluyor.
+     ⭐ Oran kurali `min()` ile mutlak bir tabana baglandi: dar ekranda tam
+       genislik, genis ekranda %58. */
+  .hero-koyu .hero-metin { max-width:min(680px,100%); }
+  @media (min-width:900px) { .hero-koyu .hero-metin { max-width:min(680px,58%); } }
   /* ⛔ PERDE SETI YARATIR. Olculdu: referans sayfadaki 8 fotograf birbirine
      benzemiyor, hepsinin ustundeki AYNI lacivert perde onlari tek set
      yapiyor. Ileride eklenecek fotograf da ayni perdeyi alir. */
@@ -309,7 +319,11 @@ if (window.OLCUM_ACIK) {
      biz B2B'yiz, ortasini aliyoruz. Harf araligi puntoyla ORANTILI acilir. */
   .hero-koyu h1, .hero-koyu .hero-h1-gibi {
     font-size:clamp(34px,5.6vw,74px); line-height:1.04; letter-spacing:-2.4px;
-    font-weight:800; max-width:15ch; }
+    font-weight:800; max-width:20ch; }
+  /* ⛔ `15ch` genis ekranda satir uzunlugunu dengeliyor ama 34px puntoda
+     ~255px'e denk geliyor; telefonda gereksiz satir kirmasi yapiyordu.
+     20ch dar ekranda rahat, genis ekranda zaten `5.6vw` sinirliyor. */
+  @media (min-width:900px) { .hero-koyu h1, .hero-koyu .hero-h1-gibi { max-width:15ch; } }
   .hero-koyu h1 .soft { color:var(--koyu-metin2); }
   .hero-koyu .eyebrow { color:var(--regain-teal-300); background:rgba(45,212,191,.10);
     border-color:rgba(45,212,191,.22); }
@@ -392,8 +406,17 @@ if (window.OLCUM_ACIK) {
   .story-a b { color:var(--text); font-weight:800; }
   .story-note { font-size:13px; color:var(--text3); margin-top:10px; font-style:italic; }
   .rail-dots { display:flex; gap:6px; margin-top:12px; }
-  .dot { width:26px; height:3px; border-radius:2px; background:var(--border2); border:none; padding:0; cursor:pointer; }
-  .dot[aria-current="true"] { background:var(--accent); }
+  /* 🔴 `background` KISAYOLU KULLANILMAZ, `background-color` KULLANILIR.
+     Dar ekranda dokunma hedefi `padding:18px 5px` + `background-clip:
+     content-box` ile buyutuluyor. Kisayol, `background-clip`i BASLANGIC
+     degerine (border-box) SIFIRLAR; ustelik `[aria-current]` secicisinin
+     ozgullugu daha yuksek oldugu icin KAZANIR. Sonuc: secili nokta 26x3'luk
+     cizgi yerine 36x39'luk KOYU KUTU olarak boyaniyordu (Tolga iPhone 14
+     Pro Max'te gordu).
+     ⚠️ Kusur MASAUSTUNDE GORUNMUYORDU: dolgu yalniz dar ekran kuralinda var.
+        Genis ekranda dogru duran bir sey dar ekranda bozuluyordu. */
+  .dot { width:26px; height:3px; border-radius:2px; background-color:var(--border2); border:none; padding:0; cursor:pointer; }
+  .dot[aria-current="true"] { background-color:var(--accent); }
   /* ── HERO YERLEŞİMİ + MARKA İŞARETİ ──────────────────────────────
      Sağdaki boşluk ürün ekranıyla değil MARKA ile doluyor. Header'daki
      logo 30px'te kayboluyordu; işaret burada 200px'e kadar büyüyor ve
