@@ -314,6 +314,22 @@ if (window.OLCUM_ACIK) {
       linear-gradient(98deg, rgba(20,28,43,.90) 0%, rgba(20,28,43,.80) 38%, rgba(20,28,43,.42) 66%, rgba(20,28,43,.30) 100%),
       linear-gradient(180deg, rgba(20,28,43,.55) 0%, transparent 26%, transparent 74%, rgba(20,28,43,.65) 100%); }
   .hero-koyu .wrap { position:relative; z-index:2; }
+  /* 🔴 DAR EKRANDA PERDE YANLIS YONDEYDI. Yatay gradyan (solda .90, sagda
+     .30) MASAUSTU yerlesimi icin tasarlandi: metin solda, fotograf sagda.
+     Dar ekranda metin TAM GENISLIK oluyor, yani sag yarisi ZAYIF perdenin
+     altinda kaliyordu — paragraf unitenin parlak govdesi uzerinde
+     okunmuyordu (Tolga gordu).
+     🔴 ORTALAMA OLCUM BUNU GIZLEDI: metin bandinin ortalamasi 117/255 ve
+        mevcut perdeyle kontrast 7.99:1 «gecer» diyordu. Ama okunurlugu
+        ORTALAMA degil, harflerin uzerine dustugu YEREL leke belirler.
+        Metin olcegine (12px) bulaniklastirip olcunce en parlak %2'lik
+        leke 220/255 cikti ve oradaki kontrast 2.83:1 idi.
+     ⭐ Dar ekranda perde DUZ ve GUCLU: en parlak lekede bile 6.22:1.
+     ⛔ Yatay gradyan burada KALDIRILIR, zayiflatilmaz — yon zaten yanlisti. */
+  @media (max-width:899px) {
+    .hero-perde {
+      background:linear-gradient(180deg, rgba(20,28,43,.78), rgba(20,28,43,.62) 22%, rgba(20,28,43,.62) 78%, rgba(20,28,43,.82)); }
+  }
 
   /* Tipografi olcegi: 50px → 74px. Olculdu, referansta 96px/-3.36px idi;
      biz B2B'yiz, ortasini aliyoruz. Harf araligi puntoyla ORANTILI acilir. */
