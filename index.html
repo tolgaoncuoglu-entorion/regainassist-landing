@@ -344,7 +344,18 @@ if (window.OLCUM_ACIK) {
   .hero-koyu .eyebrow { color:var(--regain-teal-300); background:rgba(45,212,191,.10);
     border-color:rgba(45,212,191,.22); }
   .hero-koyu .hero-sub { color:var(--koyu-metin2); }
-  .hero-koyu .hero-desc { color:var(--koyu-metin3); }
+  /* 🔴 EN SOLUK TON, FOTOGRAF UZERINDE YANLIS TERCIHTI. Olculdu (metin
+     olcegine bulaniklastirilmis yerel leke, p98):
+       masaustu (sol bolge, perde .85)  → 4.35:1  🔴
+       dar ekran (tam genislik, .62)    → 2.20:1  🔴
+     Esik 4.5 (16px = kucuk metin). Yani IKI yerlesimde de kaliyordu;
+     dar ekranda sadece daha gorunur oluyordu.
+     ⭐ Dort ton denendi; her iki yerlesimde birden gecen TEK ton en aciktir:
+       masaustu 11.19 · dar ekran 5.66. Tek kural yeter, medya sorgusu
+       gerekmedi.
+     ⛔ Perdeyi daha da koyulastirmak DA cozerdi ama fotografi bogardi —
+        fotograf zaten bu hero'nun sebebi. */
+  .hero-koyu .hero-desc { color:var(--koyu-metin); }
   .hero-koyu .hero-note { color:var(--koyu-metin3); }
   .hero-koyu .temsili { color:var(--koyu-metin3); }
   .hero-koyu .hero-ikincil { color:var(--koyu-metin); }
