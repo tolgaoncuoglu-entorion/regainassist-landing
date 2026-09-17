@@ -306,9 +306,9 @@ if (window.OLCUM_ACIK) {
      ⛔ TEK EGRI, TEK SURE. Bolumden bolume degisen animasyon dagitir.
      ⛔ HAREKET KAPALIYSA HIC OYNAMAZ — ve onemlisi: gorunur kalir.
         `opacity:0` baslangici, JS hic kosmazsa sayfayi BOS birakirdi. */
-  .bel { opacity:0; transform:translateY(18px);
+  .bel-hazir .bel { opacity:0; transform:translateY(18px);
     transition:opacity var(--sure-yavas) var(--ease), transform var(--sure-yavas) var(--ease); }
-  .bel.gorundu { opacity:1; transform:none; }
+  .bel-hazir .bel.gorundu { opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce) {
     .bel { opacity:1; transform:none; transition:none; }
   }
@@ -550,7 +550,19 @@ if (window.OLCUM_ACIK) {
   .mgrup li span { font-size:12.5px; line-height:1.45; color:var(--text3); }
   /* FINAL */
   /* ── GORUNTULEME BOLUMU — sayfadaki TEK koyu alan ───────────────── */
-  .gorsel-bolum { background:var(--dark); color:#fff; }
+  /* ⛔ KOYU BOLUM DUZ RENKTI. Doku eklendi: bulanik klinik karesi, cok
+     dusuk opaklikta. ⚠️ BULANIK OLMASI SART — uzerinde metin var, okunacak
+     bir sey iceren fotograf burada gurultu olurdu.
+     ⛔ `background-attachment:fixed` KULLANILMADI: iOS'ta bozuk calisir ve
+        kaydirmada tirmalama yapar. */
+  .gorsel-bolum { background:var(--dark); color:#fff; position:relative; isolation:isolate; }
+  .gorsel-bolum::before { content:""; position:absolute; inset:0; z-index:-1;
+    background-image:url("/images/foto/doku-lobi-bulanik-1200.webp");
+    background-size:cover; background-position:center;
+    opacity:.16; filter:saturate(.55) contrast(.92); }
+  .gorsel-bolum::after { content:""; position:absolute; inset:0; z-index:-1;
+    background:radial-gradient(90% 70% at 50% 0%, rgba(45,212,191,.10), transparent 60%),
+               linear-gradient(180deg, rgba(30,41,59,.30), rgba(30,41,59,.85)); }
   .gorsel-bolum .sec-tag { color:var(--regain-teal-300); }
   /* 🚨 TÜRKÇE BÜYÜK HARF: `uppercase` bu yerelde «CaseSuite» → «CASESUİTE»
      yapıyor (i → İ) ve MARKA ADINI BOZUYOR. Marka adı taşıyan etiket
@@ -1017,7 +1029,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <div class="rail-head">
       <div>
         <span class="sec-tag">Tanıdık geliyor mu?</span>
-        <h2 class="sec">Kliniğin dört anı.</h2>
+        <h2 class="sec bel">Kliniğin dört anı.</h2>
       </div>
       <div class="rail-nav">
         <span class="rail-say" id="rail-say">01 / 04</span>
@@ -1138,7 +1150,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 <section id="ozellikler" style="background:var(--bg2);">
   <div class="wrap">
     <span class="sec-tag">Yetenekler</span>
-    <h2 class="sec">Kliniğinizin çalışma alanı.</h2>
+    <h2 class="sec bel">Kliniğinizin çalışma alanı.</h2>
 
     <div class="kollar">
 
@@ -1331,7 +1343,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
          ayrışıyordu. ⚠️ Üstteki etiket de «Görüntüleme» diyordu — başlık
          değişip etiket kalsaydı bölüm KENDİ KENDİYLE çelişirdi. -->
     <span class="sec-tag sec-tag-urun">CaseSuite</span>
-    <h2 class="sec">Sadece görüntüleme değil, <b>implant çalışma alanı.</b></h2>
+    <h2 class="sec bel">Sadece görüntüleme değil, <b>implant çalışma alanı.</b></h2>
     <p class="gb-alt"><b>CBCT'niz tarayıcıda açılır. Kurulum yok, yükleme yok. Görüntü kendi bilgisayarınızdan çıkmaz.</b><br>Röntgeni yalnızca açmayın. Hastanın dosyasının bir parçası olarak çalışın.</p>
     <!-- CaseSuite ürün ekranı (10.09): pencere çerçevesi; koyu zeminde açık şerit durur. -->
     <div class="ss-frame gb-ss">
@@ -1382,7 +1394,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 <section id="moduller">
   <div class="wrap">
     <span class="sec-tag">Modüller</span>
-    <h2 class="sec">Kliniğin tüm işleri, dört bölümde.</h2>
+    <h2 class="sec bel">Kliniğin tüm işleri, dört bölümde.</h2>
     <p class="mod-alt">Her modül aynı hasta kaydını okur; bir yerde girdiğiniz bilgi diğerinde hazır bekler.</p>
 
     <div class="mgrid">
@@ -1704,7 +1716,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 <section class="faq" id="sss" style="background:var(--surface); border-top:1px solid var(--border);">
   <div class="wrap">
     <span class="sec-tag">Sık sorulan sorular</span>
-    <h2 class="sec">Merak edilenler</h2>
+    <h2 class="sec bel">Merak edilenler</h2>
     <div style="margin-top:28px; display:flex; flex-direction:column; gap:10px; max-width:860px;">
       <details class="faq-item"><summary class="faq-q">Ücretsiz deneme nasıl başlar?</summary><div class="faq-a">Kayıt olduktan sonra 14 gün boyunca tüm Pro özelliklere erişirsiniz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz. Deneme süresi bittiğinde planınızı seçersiniz.</div></details>
       <details class="faq-item"><summary class="faq-q">Mevcut hasta verilerimi aktarabilir miyim?</summary><div class="faq-a">Evet. Excel veya CSV dosyanızı yükleyin, sistem sütunları otomatik eşleştirir. Hasta bilgileri, tedavi geçmişi, ödemeler, randevular ve hekim atamaları aktarılabilir. Yazmadan önce hangi kayıtların yeni, hangilerinin güncelleneceğini önizlemede görürsünüz; aynı hasta birden fazla satırda geçiyorsa ad-soyad ve doğum tarihi üzerinden eşleştirilir. Eski yazılımınızdan Excel çıktısı almanız yeterlidir.</div></details>
@@ -2635,5 +2647,51 @@ function setPricingDonem(donem) {
 })();
 </script>
 
+<script>
+// ═══ KAYDIRINCA BELIREN BOLUMLER ════════════════════════════════════════
+// ⛔ CSS `.bel` baslangicta opacity:0 DEGIL — JS hic kosmazsa (hata, eski
+//    tarayici, betik engelli) sayfa BOS KALIRDI. Gorunmezligi JS acar:
+//    once `hazir` isaretlenir, ancak ondan sonra `.bel` saklanir.
+//    ⭐ Yani en kotu durumda animasyon YOK, icerik VAR.
+// ⛔ Hareket kapaliysa hic dokunulmaz.
+(function () {
+  var azHareket = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var kalan = Array.prototype.slice.call(document.querySelectorAll('.bel'));
+  if (!kalan.length || azHareket) return;
+  document.documentElement.classList.add('bel-hazir');
+
+  // 🔴 IntersectionObserver DENENDI VE YETMEDI (17.09, olculdu):
+  //    Gozlemci yalniz ESIK ASILDIGINDA haber verir. Oge tek karede alttan
+  //    uste atlayinca (capa baglantisi, kaydirma konumu geri yuklemesi,
+  //    hizli kaydirma) durum «kesismiyor» → «kesismiyor» olur; esik HIC
+  //    asilmaz, geri cagirma HIC DOGMAZ ve baslik KALICI OLARAK GORUNMEZ
+  //    KALIR. Sayfanin sonuna atlayinca 5 basliktan 4'u gorunmez kaldi.
+  //    ⚠️ `boundingClientRect.top < 0` diye ikinci bir emniyet yazmistim;
+  //      o da ayni sebeple hic calismadi — olcmeseydim «duzelttim» sanacaktim.
+  //    ⭐ Bes ogede rAF ile kisilmis kaydirma dinleyicisi zaten bedava;
+  //      karmasik olan cozum yanlis olandi.
+  function tara() {
+    for (var i = kalan.length - 1; i >= 0; i--) {
+      if (kalan[i].getBoundingClientRect().top < innerHeight * 0.88) {
+        kalan[i].classList.add('gorundu');   // bir kez belirir, geri kaybolmaz
+        kalan.splice(i, 1);
+      }
+    }
+    if (!kalan.length) {
+      removeEventListener('scroll', planla);
+      removeEventListener('resize', planla);
+    }
+  }
+  var bekliyor = false;
+  function planla() {
+    if (bekliyor) return;
+    bekliyor = true;
+    requestAnimationFrame(function () { bekliyor = false; tara(); });
+  }
+  tara();                                     // ilk hal: ust kisim hemen acilir
+  addEventListener('scroll', planla, { passive: true });
+  addEventListener('resize', planla);
+})();
+</script>
 </body>
 </html>
