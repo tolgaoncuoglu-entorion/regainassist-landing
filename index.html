@@ -477,7 +477,7 @@ if (window.OLCUM_ACIK) {
      ve önceki hikâyelerin tekrarı YOKTUR. */
   .aha { text-align:center; }
   .aha-h { max-width:22ch; margin-left:auto; margin-right:auto; }
-  .aha-big { font-size:clamp(21px,3vw,32px); font-weight:800; letter-spacing:-.9px; color:var(--accent);
+  .aha-big { font-size:clamp(24px,3.6vw,42px); font-weight:800; letter-spacing:-1.2px; color:var(--accent);
     margin-top:10px; text-wrap:balance; }
   .zincir { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin:36px 0 0; }
   .zincir span { font-size:12.5px; font-weight:700; color:var(--text2); background:var(--bg2);
@@ -485,7 +485,7 @@ if (window.OLCUM_ACIK) {
   .zincir i { width:14px; height:1px; background:var(--border2); flex-shrink:0; }
   .aha-alt { font-size:15.5px; color:var(--text2); margin-top:26px; }
   /* Bölümün ASIL vurucu cümlesi — marka mesajı burada kapanır. */
-  .aha-final { font-size:clamp(22px,3.1vw,34px); font-weight:800; letter-spacing:-.9px;
+  .aha-final { font-size:clamp(25px,3.7vw,44px); font-weight:800; letter-spacing:-1.25px;
     color:var(--text); margin-top:30px; line-height:1.25; text-wrap:balance; }
   .aha-final b { color:var(--accent); }
   /* ⛔ BURADA SECICISI KOPMUS BIR BLOK VARDI (556584d):
@@ -497,7 +497,14 @@ if (window.OLCUM_ACIK) {
   /* SECTION */
   section { padding:56px 0; }   /* 76→56 (~%26): bölüm-arası boşluk azaltıldı (Faz 1.3) */
   .sec-tag { font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); }
-  h2.sec { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; text-wrap:balance; }
+  /* ── BASLIK OLCEGI ─────────────────────────────────────────────────
+     🔴 Olculdu: h1 74px, h2 36px → aradaki UCURUM 38px. Hero'dan sonra
+        sayfa aniden duzlesiyordu; okuyucu hiyerarsi degil KOPUS goruyordu.
+     ⭐ Bolum basliklari 36 → 48px. Harf araligi puntoyla ORANTILI acildi
+       (-0.8 → -1.4px): buyuk puntoda ayni aralik GEVSEK durur.
+     ⛔ KART ICI BASLIKLAR BUYUTULMEDI (`.story-q` 25px'te kaldi). Hiyerarsi
+        ancak FARK korunursa is gorur; hepsini buyutmek farki yeniden siler. */
+  h2.sec { font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-1.4px; margin-top:10px; line-height:1.2; text-wrap:balance; }
   h3 { font-size:17px; font-weight:700; letter-spacing:-.2px; }
   /* Yapiskan nav'in altinda kalmasin: her ic baglanti hedefi icin */
   section[id], .faq, .kol[id] { scroll-margin-top:80px; }
@@ -677,7 +684,7 @@ if (window.OLCUM_ACIK) {
     background-size:cover; background-position:50% 62%; }
   .final::after { content:""; position:absolute; inset:0; z-index:-1;
     background:linear-gradient(180deg, rgba(20,28,43,.66), rgba(20,28,43,.52) 45%, rgba(20,28,43,.72)); }
-  .final h2 { font-size:clamp(24px,3.4vw,38px); font-weight:800; letter-spacing:-.8px; line-height:1.2; text-wrap:balance; }
+  .final h2 { font-size:clamp(28px,4.2vw,50px); font-weight:800; letter-spacing:-1.5px; line-height:1.2; text-wrap:balance; }
   .final p { color:rgba(255,255,255,.90); margin-top:14px; font-size:16px; }
   /* Koyu zeminde beyaz buton NOTR kalirdi; sayfanin son aksiyonu marka rengini hak eder. */
   .final .btn-primary { background:var(--brand); color:#fff; margin-top:26px; }
@@ -709,7 +716,7 @@ if (window.OLCUM_ACIK) {
   .pricing { background:var(--bg2); border-top:1px solid var(--border); }
   .pricing-header { max-width:1200px; margin:0 auto; padding:0 24px; text-align:center; }
   .section-tag { font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); }
-  .pricing-header h2 { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; }
+  .pricing-header h2 { font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-1.4px; margin-top:10px; line-height:1.2; }
   .pricing-header p { font-size:16px; color:var(--text2); margin-top:12px; }
   .pricing-toggle { display:inline-flex; gap:4px; margin-top:24px; padding:4px; background:var(--surface); border:1px solid var(--border); border-radius:999px; }
   .pricing-toggle button { font-family:inherit; font-size:14px; font-weight:700; padding:9px 20px; border:none; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; }
@@ -762,7 +769,7 @@ if (window.OLCUM_ACIK) {
   /* ── İKİ YOL ── sayfanın kendi jetonları; yeni renk uydurulmadı */
   .iki-yol { padding:64px 0 8px; }
   .iki-yol-ic { max-width:900px; margin:0 auto; padding:0 24px; text-align:center; }
-  .iki-yol h2 { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; }
+  .iki-yol h2 { font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-1.4px; margin-top:10px; line-height:1.2; }
   .iki-yol-kartlar { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; text-align:left; }
   .yol-kart { background:var(--bg); border:1px solid var(--border2); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:12px; }
   .yol-kart-birincil { border-color:var(--brand); }
@@ -774,7 +781,7 @@ if (window.OLCUM_ACIK) {
   @media (max-width:720px) { .iki-yol-kartlar { grid-template-columns:1fr; } }
   .contact { background:var(--surface); border-top:1px solid var(--border); }
   .contact-header { max-width:660px; margin:0 auto; padding:0 24px; text-align:center; }
-  .contact-header h2 { font-size:clamp(24px,3.2vw,36px); font-weight:800; letter-spacing:-.8px; margin-top:10px; line-height:1.2; }
+  .contact-header h2 { font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-1.4px; margin-top:10px; line-height:1.2; }
   .contact-form { max-width:660px; margin:30px auto 0; padding:0 24px; display:flex; flex-direction:column; gap:12px; }
   .contact-form .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .contact-form input, .contact-form textarea { width:100%; font-family:inherit; font-size:15px; color:var(--text); background:var(--bg); border:1px solid var(--border2); border-radius:10px; padding:13px 15px; resize:vertical; }
