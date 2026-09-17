@@ -550,8 +550,14 @@ if (window.OLCUM_ACIK) {
   .mgrup li span { font-size:12.5px; line-height:1.45; color:var(--text3); }
   /* FINAL */
   /* ── GORUNTULEME BOLUMU — sayfadaki TEK koyu alan ───────────────── */
-  /* ⛔ KOYU BOLUM DUZ RENKTI. Doku eklendi: bulanik klinik karesi, cok
-     dusuk opaklikta. ⚠️ BULANIK OLMASI SART — uzerinde metin var, okunacak
+  /* ⛔ KOYU BOLUM DUZ RENKTI. Doku eklendi: bulanik klinik karesi.
+     🔴 ILK DEGERLER ALGILANMIYORDU (Tolga: «hero haric bir degisiklik
+        gormuyorum»). Olculdu: doku .16 opaklikta, ustundeki perde .85'e
+        cikarken bolumun ALT YARISINDA yalnizca ±1.4 SEVIYE salinim
+        biraktiriyordu; koyu zeminde algi esigi ~3-4 seviye. Yani
+        degisiklik yapilmis SAYILMAZDI.
+     ⭐ .34 opaklik + perde .18→.58: salinim ±10-16 seviyeye cikti.
+     ⚠️ «Ekledim» ile «GORUNUYOR» ayri seyler; ikincisi OLCULUR. ⚠️ BULANIK OLMASI SART — uzerinde metin var, okunacak
      bir sey iceren fotograf burada gurultu olurdu.
      ⛔ `background-attachment:fixed` KULLANILMADI: iOS'ta bozuk calisir ve
         kaydirmada tirmalama yapar. */
@@ -559,10 +565,10 @@ if (window.OLCUM_ACIK) {
   .gorsel-bolum::before { content:""; position:absolute; inset:0; z-index:-1;
     background-image:url("/images/foto/doku-lobi-bulanik-1200.webp");
     background-size:cover; background-position:center;
-    opacity:.16; filter:saturate(.55) contrast(.92); }
+    opacity:.34; filter:saturate(.5) contrast(.95); }
   .gorsel-bolum::after { content:""; position:absolute; inset:0; z-index:-1;
-    background:radial-gradient(90% 70% at 50% 0%, rgba(45,212,191,.10), transparent 60%),
-               linear-gradient(180deg, rgba(30,41,59,.30), rgba(30,41,59,.85)); }
+    background:radial-gradient(90% 70% at 50% 0%, rgba(45,212,191,.12), transparent 60%),
+               linear-gradient(180deg, rgba(30,41,59,.18), rgba(30,41,59,.58)); }
   .gorsel-bolum .sec-tag { color:var(--regain-teal-300); }
   /* 🚨 TÜRKÇE BÜYÜK HARF: `uppercase` bu yerelde «CaseSuite» → «CASESUİTE»
      yapıyor (i → İ) ve MARKA ADINI BOZUYOR. Marka adı taşıyan etiket
