@@ -594,13 +594,43 @@ if (window.OLCUM_ACIK) {
   .gb-not { font-size:12.5px; color:rgba(255,255,255,.55); line-height:1.6; flex:1; min-width:240px; }
   .gb-beyan { margin-top:18px; font-size:12px; color:rgba(255,255,255,.58); line-height:1.6; max-width:88ch; }
   @media (max-width:760px) { .gb-grid { grid-template-columns:1fr; } }
-  .final { background:var(--dark); color:#fff; border-radius:var(--r-lg); padding:56px 40px; text-align:center; }
+  /* ⛔ KAPANIS BANDI — SUS DEGIL, VAR OLANIN YUKSELTILMESI.
+     Blok zaten gercek bir cumle («Kliniginizin tamami tek sistemde.») ve
+     gercek bir cagri tasiyordu; araya dekoratif bir serit EKLEMEK yerine
+     BU blok tam genislik fotograf bandina cevrildi. Uydurma metin yok.
+     ⚠️ Fotograf `klinik-lobi`: bekleme alani, insansiz. Kapanista klinigin
+        KENDISI gorunur — urun ekrani degil; o is yukarida yapildi.
+     ⛔ PERDE OLCULEREK SECILDI, hero'daki degerler KOPYALANMADI.
+        `klinik-lobi` ortalamasi 143/255 (hero'daki `klinik-unite` 91) —
+        yani bu fotograf PARLAK, oteki koyu; ayni perde ikisinde ayni sonucu
+        vermez.
+        ⚠️ Ilk yazdigim yorumda «ortalama 150» diyordu; o TAHMINDI, olcunce
+          143 cikti. Olcmeden sayi yazmak, olcmus gibi gostermektir.
+        ⭐ 0.86'da beyaz metin kontrasti 13.6:1 idi — AA esiginin (4.5) cok
+          ustunde, yani perde GEREKSIZ KOYUYDU ve fotografi bosuna
+          bogiyordu. 0.58'e indirildi: kontrast 7.8:1, hala rahat gecer,
+          fotograf GORUNUR. */
+  .final { position:relative; isolation:isolate; overflow:hidden;
+    background:var(--dark); color:#fff; border-radius:var(--r-lg);
+    padding:clamp(56px,8vw,104px) 40px; text-align:center; }
+  .final::before { content:""; position:absolute; inset:0; z-index:-2;
+    background-image:url("/images/foto/klinik-lobi-1200.webp");
+    background-size:cover; background-position:50% 62%; }
+  .final::after { content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(20,28,43,.66), rgba(20,28,43,.52) 45%, rgba(20,28,43,.72)); }
   .final h2 { font-size:clamp(24px,3.4vw,38px); font-weight:800; letter-spacing:-.8px; line-height:1.2; text-wrap:balance; }
-  .final p { color:rgba(255,255,255,.78); margin-top:14px; font-size:16px; }
+  .final p { color:rgba(255,255,255,.90); margin-top:14px; font-size:16px; }
   /* Koyu zeminde beyaz buton NOTR kalirdi; sayfanin son aksiyonu marka rengini hak eder. */
   .final .btn-primary { background:var(--brand); color:#fff; margin-top:26px; }
   .final .btn-primary:hover { background:var(--brand-d); }
-  .final small { display:block; margin-top:14px; font-size:13px; color:rgba(255,255,255,.6); }
+  /* 🔴 PERDEYI HAFIFLETINCE BU SATIR AA'YI KAYBETTI. Olculdu: zemin ~84/255
+     oldugunda %60 beyaz 3.93:1 veriyordu; kucuk metin esigi 4.5.
+     ⛔ Cozum perdeyi geri koyulastirmak DEGIL (fotograf yine boguluyordu),
+        yazinin kendisini guclendirmek. Bu depoda WCAG AA 08.09'da bilerek
+        alinmis bir taahhut (a11y commit'i) — kirilamaz.
+     ⚠️ DERS: bir yerdeki degisiklik (perde) baska yerdeki bir IDDIAYI
+        (kontrast) bozabilir. Degisen sey ile bozulan sey ayni satirda degil. */
+  .final small { display:block; margin-top:14px; font-size:13px; color:rgba(255,255,255,.88); }
   .faq-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
   .faq-q { list-style:none; cursor:pointer; padding:16px 20px; font-size:15.5px; font-weight:700; display:flex; justify-content:space-between; gap:12px; }
   .faq-q::-webkit-details-marker { display:none; }
