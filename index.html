@@ -126,6 +126,26 @@ if (window.OLCUM_ACIK) {
     --ok:#1a6b5e; --wait:#946d18; --stop:#b83232;
     --r:12px; --r-lg:16px;
     --sh:0 1px 2px rgba(26,35,50,.04); --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
+
+    /* ── HAREKET VE DERINLIK SOZLUGU ──────────────────────────────────
+       🔴 17.09 OLCULDU: sayfanin CSS'inde 1 @keyframes, 0 gradyan, 1 blur
+          vardi. Referans aldigimiz sayfada 21 @keyframes, 8+ gradyan,
+          10+ blur var. «Premium» algisinin buyuk kismi fotograf degil,
+          BU SOZLUK. Once o eksik kapatiliyor.
+       ⛔ TEK EGRI: butun gecisler ayni easing'i kullanir. Karisik egriler
+          sayfayi «bir yerlerden toplanmis» gosterir. */
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-cikis:cubic-bezier(.4,0,.2,1);
+    --sure-hizli:.18s; --sure:.32s; --sure-yavas:.6s;
+    /* Koyu yuzeyler: LOGONUN grisinden turetilir, siyahtan degil. */
+    --koyu-1:#141c2b; --koyu-2:#1b2537; --koyu-3:#243044;
+    /* ⛔ Koyu zemin uzerinde metin: beyaz DEGIL, kirik beyaz. Saf beyaz
+       koyu zeminde titrer ve ucuz durur. */
+    --koyu-metin:#eef2f7; --koyu-metin2:#b6c2d4; --koyu-metin3:#8b99ad;
+    --koyu-kenar:rgba(255,255,255,.12);
+    /* Derinlik: tek katmanli golge duz durur, iki katmanli hacim verir. */
+    --sh-yuzen:0 2px 6px rgba(8,14,25,.28), 0 28px 60px -20px rgba(8,14,25,.55);
+    --sh-kart:0 1px 2px rgba(8,14,25,.10), 0 12px 28px -14px rgba(8,14,25,.28);
   }
   html { scroll-behavior:smooth; }
   body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
@@ -211,8 +231,87 @@ if (window.OLCUM_ACIK) {
   .btn-ghost { background:var(--surface); color:var(--accent); border-color:var(--border2); padding:12px 20px; font-size:15px; }
   .btn-ghost:hover { border-color:var(--brand); color:var(--brand); }
   .btn-sm { padding:9px 16px; font-size:14px; }
-  /* HERO */
-  .hero { padding:64px 0 8px; }
+  /* ═══ HERO — KOYU ═══════════════════════════════════════════════════
+     ⛔ NEDEN KOYU (Tolga'nin 01.09 kurali): «cok beyaz olmasin, kontrast
+        bir teal tonu ariyor gozler veya hafif lacivert dokunuslar.» Sayfa
+        golge gibi bembeyazdi (gövde zemini #ffffff, 0 gradyan).
+     ⛔ URUN EKRANI KALDIRILMADI. 11.09'da marka isareti buradan bilerek
+        cikarilmisti: «isaret urun hakkinda hicbir sey soylemiyordu.» O
+        karar KORUNUYOR — fotograf ekranin YERINE degil, ARKASINA geliyor.
+     ⭐ Fotograftaki duvar monitorunde GERCEK ReGain ekrani var (kompozit).
+        Yani fotograf sus degil, urunun kullanildigi yeri anlatiyor. */
+  .hero { position:relative; padding:64px 0 8px; }
+  .hero-koyu { background:var(--koyu-1); color:var(--koyu-metin);
+    padding:clamp(72px,9vw,124px) 0 clamp(56px,7vw,96px); overflow:hidden; }
+  .hero-zemin { position:absolute; inset:0; z-index:0; }
+  .hero-zemin img { width:100%; height:100%; object-fit:cover; object-position:76% 34%; }
+  /* 🔴 KART FOTOGRAFIN ANLAMLI YERINI ORTUYORDU (Tolga gordu). Olculdu:
+        monitor ekranda x 840→1001, kart x 728→1268 → monitorun %100'u
+        kartin altindaydi. Yani fotografi ozel yapan sey (duvardaki GERCEK
+        ReGain ekrani) hic gorunmuyordu.
+     ⛔ `object-position` TEK BASINA YETMEZ: tasma payi 298px, en fazla
+        113px kaydirabiliyor. Cozum kartI ASAGI ALMAK ve hero'yu
+        yukseltmek — monitor bandi (y 396→506) kartin USTUNDE kalir.
+     ⛔ Kart KUCULTULMEDI: urun ekrani okunabilir kalmali, hero'nun isi o. */
+  .hero-koyu { min-height:clamp(600px,80vh,880px); display:flex; align-items:center; }
+  .hero-koyu > .wrap { width:100%; }
+  /* ⛔ TEK SUTUN: sag sutunu dolduran kart kalkti. Metin genisligi 15ch'te
+     tutuluyor — fotografin sagi (unite, monitor, pencere) acikta kalsin. */
+  .hero-koyu .hero-grid { grid-template-columns:minmax(0,1fr); gap:0; }
+  .hero-koyu .hero-metin { max-width:min(680px,58%); }
+  /* ⛔ PERDE SETI YARATIR. Olculdu: referans sayfadaki 8 fotograf birbirine
+     benzemiyor, hepsinin ustundeki AYNI lacivert perde onlari tek set
+     yapiyor. Ileride eklenecek fotograf da ayni perdeyi alir. */
+  /* 🔴 ILK DEGERLER OLCUMSUZDU. Referans sayfanin perdesini kopyalayip
+        koyulastirmistim (.94/.86/.55). Kendi fotografimi olcmemistim:
+        gece cekimi, ortalama 73/255, sag ucte biri 45. Perde altinda her
+        yer 34-37'ye dusuyordu — fotograf KAYBOLMUSTU, duz koyu alan kaldi.
+     ⭐ Yon de tersti: PARLAK KORIDOR SOLDA (metnin arkasi), UNITE VE
+        MONITOR SAGDA (karanlik pencerenin onunde). Yani perde solda GUCLU,
+        sagda ZAYIF olmali — once tam tersini yazmistim.
+     ⛔ Sol taraf metin tasiyor: beyaz metin icin zemin ~60'in altinda
+        kalmali. Sag taraf urunu tasiyor: gorunsun diye acik birakiliyor. */
+  .hero-perde { position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(98deg, rgba(20,28,43,.90) 0%, rgba(20,28,43,.80) 38%, rgba(20,28,43,.42) 66%, rgba(20,28,43,.30) 100%),
+      linear-gradient(180deg, rgba(20,28,43,.55) 0%, transparent 26%, transparent 74%, rgba(20,28,43,.65) 100%); }
+  .hero-koyu .wrap { position:relative; z-index:2; }
+
+  /* Tipografi olcegi: 50px → 74px. Olculdu, referansta 96px/-3.36px idi;
+     biz B2B'yiz, ortasini aliyoruz. Harf araligi puntoyla ORANTILI acilir. */
+  .hero-koyu h1, .hero-koyu .hero-h1-gibi {
+    font-size:clamp(34px,5.6vw,74px); line-height:1.04; letter-spacing:-2.4px;
+    font-weight:800; max-width:15ch; }
+  .hero-koyu h1 .soft { color:var(--koyu-metin2); }
+  .hero-koyu .eyebrow { color:var(--regain-teal-300); background:rgba(45,212,191,.10);
+    border-color:rgba(45,212,191,.22); }
+  .hero-koyu .hero-sub { color:var(--koyu-metin2); }
+  .hero-koyu .hero-desc { color:var(--koyu-metin3); }
+  .hero-koyu .hero-note { color:var(--koyu-metin3); }
+  .hero-koyu .temsili { color:var(--koyu-metin3); }
+  .hero-koyu .hero-ikincil { color:var(--koyu-metin); }
+  .hero-koyu .hero-flow { border-top-color:var(--koyu-kenar); }
+  .hero-koyu .hf-cip { color:var(--koyu-metin2); background:rgba(255,255,255,.05);
+    border-color:var(--koyu-kenar); backdrop-filter:blur(6px); }
+  .hero-koyu .hf-cip:hover { color:var(--koyu-metin); border-color:rgba(255,255,255,.28); }
+  .hero-koyu .hf-cip[aria-selected="true"] { color:#04211d; background:var(--regain-teal-400);
+    border-color:var(--regain-teal-400); }
+  /* ⛔ Birincil dugme KOYU ZEMINDE de teal kalir: teal YALNIZ DONUSUM
+     YOLUNDA kuralini bozmuyoruz, tersine burada tek teal nesne o. */
+  .hero-koyu .btn-primary { box-shadow:0 8px 24px -8px rgba(13,148,136,.55); }
+  /* Urun cercevesi: koyu zeminde YUZUYOR. Tek katmanli golge duz durur. */
+  .hero-koyu .ss-frame { box-shadow:var(--sh-yuzen); border-color:rgba(255,255,255,.14); }
+
+  /* ── KAYDIRINCA BELIREN BOLUMLER ────────────────────────────────────
+     ⛔ TEK EGRI, TEK SURE. Bolumden bolume degisen animasyon dagitir.
+     ⛔ HAREKET KAPALIYSA HIC OYNAMAZ — ve onemlisi: gorunur kalir.
+        `opacity:0` baslangici, JS hic kosmazsa sayfayi BOS birakirdi. */
+  .bel { opacity:0; transform:translateY(18px);
+    transition:opacity var(--sure-yavas) var(--ease), transform var(--sure-yavas) var(--ease); }
+  .bel.gorundu { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    .bel { opacity:1; transform:none; transition:none; }
+  }
   .eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); background:var(--accent-pale); border:1px solid rgba(30,58,95,.12); padding:6px 12px; border-radius:999px; }
   h1, .hero-h1-gibi { font-size:clamp(30px,4.6vw,50px); line-height:1.14; letter-spacing:-1.2px; font-weight:800; margin:18px 0 0; max-width:16ch; text-wrap:balance; }
   h1 .soft { color:var(--accent); }
@@ -839,7 +938,28 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero hero-koyu">
+  <!-- ⛔ FOTOGRAF URUN EKRANININ YERINE DEGIL ARKASINA. 11.09'da marka
+       isareti buradan bilerek cikarilmisti («urun hakkinda hicbir sey
+       soylemiyordu»); o karar korunuyor.
+       ⭐ Duvardaki monitorde GERCEK ReGain tedavi ekrani var (kompozit).
+         Yani fotograf sus degil, urunun kullanildigi yeri anlatiyor.
+       ⚠️ Dar ekranda 16:9 mektup kutusu birakiyordu → 4:5 ayri kadraj.
+       ⛔ `fetchpriority` VERILMEDI: oncelik urun ekraninda kalmali. -->
+  <div class="hero-zemin" aria-hidden="true">
+    <picture>
+      <source media="(max-width:640px)" type="image/webp"
+              srcset="/images/foto/klinik-unite-dikey-640.webp 640w, /images/foto/klinik-unite-dikey.webp 850w" sizes="100vw">
+      <source media="(max-width:640px)" type="image/jpeg"
+              srcset="/images/foto/klinik-unite-dikey-640.jpg 640w, /images/foto/klinik-unite-dikey.jpg 850w" sizes="100vw">
+      <source type="image/webp"
+              srcset="/images/foto/klinik-unite-1200.webp 1200w, /images/foto/klinik-unite-1600.webp 1600w, /images/foto/klinik-unite.webp 2400w" sizes="100vw">
+      <img src="/images/foto/klinik-unite-1600.jpg"
+           srcset="/images/foto/klinik-unite-1200.jpg 1200w, /images/foto/klinik-unite-1600.jpg 1600w, /images/foto/klinik-unite.jpg 2400w"
+           sizes="100vw" width="2400" height="1350" loading="eager" decoding="async" alt="">
+    </picture>
+  </div>
+  <div class="hero-perde" aria-hidden="true"></div>
   <div class="wrap hero-grid">
    <div class="hero-metin">
     <span class="eyebrow">Diş kliniği yönetim sistemi</span>
@@ -867,18 +987,10 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <span class="hero-note">Kurulum yok &middot; Tarayıcıdan çalışır &middot; Kredi kartı gerekmez</span>
     </div>
 
-    <!-- Hero'nun gorsel gucu: urun ekrani DEGIL, sistemin baglantili olmasi
-         fikri. Salt tipografi + ince bir akis cizgisi. -->
-    <!-- ⛔ ESKIDEN `aria-hidden` SUS BIR SERITTI. Artik SEKME: tiklanan cip
-         hero gorselini o modulun EKRANIYLA degistirir (Tolga 11.09).
-         ⭐ Otomatik donmez — hekim istedigine bakar. Donen gorsel dikkati
-           dagitir ve LCP'ye dokunur.
-         ⭐ Varsayilan Dashboard; secili cipe tekrar tiklayinca ona doner.
-         ⛔ `aria-hidden` KALDIRILDI: artik gercek bir denetim, ekran
-           okuyucudan gizlenemez. `role="tablist"` + `aria-selected`. -->
-    <div class="hero-flow" role="tablist" aria-label="Modül ekranları">
-      <button type="button" role="tab" class="hf-cip" data-ekran="dashboard" aria-selected="true">Dashboard</button><button type="button" role="tab" class="hf-cip" data-ekran="hastalar" aria-selected="false">Hasta</button><button type="button" role="tab" class="hf-cip" data-ekran="tedaviler" aria-selected="false">Tedavi</button><button type="button" role="tab" class="hf-cip" data-ekran="stok" aria-selected="false">Stok</button><button type="button" role="tab" class="hf-cip" data-ekran="uts" aria-selected="false">Bildirim</button><button type="button" role="tab" class="hf-cip" data-ekran="odemeler" aria-selected="false">Tahsilat</button><button type="button" role="tab" class="hf-cip" data-ekran="takip" aria-selected="false">Takip</button>
-    </div>
+    <!-- 🔴 17.09: MODUL CIPLERI KALDIRILDI. Tek isleri sagdaki urun
+         ekranini degistirmekti; o kart kalkinca cipler BOSA DUSUYORDU.
+         Modullerin ne ise yaradigi zaten asagidaki bolumlerde anlatiliyor.
+         (Cipleri suren JS de kaldirildi — korumali cikiyordu ama olu koddu.) -->
 
     <!-- Sayfadaki TÜM sayı ve isimleri kapsayan tek beyan. Eskiden yalnızca
          bir kartın altında duruyordu; diğer bölümlerdeki değerler beyansız
@@ -886,24 +998,15 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <p class="temsili">Sayfada kullanılan veriler temsilidir.</p>
    </div>
 
-   <!-- ⛔ BURADA ESKİDEN MARKA İŞARETİ (halkalı "G") VARDI. Tolga 11.09:
-        işaret ilk ekranın yarısını kaplıyor ve ÜRÜN HAKKINDA HİÇBİR ŞEY
-        SÖYLEMİYORDU; ürün ekranı ise onun ALTINDA, kıvrımın dışında kalıyordu.
-        Reklamdan gelen hekim ilk ekranda ÜRÜNÜ görmeli. İşaret Hakkımızda →
-        «Çatımız» bölümüne taşındı (orada marka anlatısının parçası).
-        ⭐ eager + fetchpriority=high korunuyor: artık gerçekten LCP adayı. -->
-   <div class="hero-ss-yan">
-     <div class="ss-frame">
-       <div class="ss-bar" aria-hidden="true"><span class="ss-dot"></span><span class="ss-dot"></span><span class="ss-dot"></span></div>
-       <!-- ⚠️ `<picture>` BIRAKILDI, `<img>`e inildi: sekme degisince `srcset`
-            ve `src`i birlikte guncellemek iki kaynakli bir durum yaratiyordu.
-            webp secimi artik JS'te tek yerde yapiliyor (`.webp` destegi bir
-            kez olculur). Boylece gosterilen gorsel TEK yerden gelir. -->
-       <img class="ss-img" id="heroSs" src="/images/pro/hero_dashboard_16x9.jpg"
-            width="2400" height="1350" loading="eager" fetchpriority="high"
-            decoding="async" alt="ReGain Assist kontrol paneli ekranı">
-     </div>
-   </div>
+   <!-- 🔴 17.09 (Tolga): URUN EKRANI KARTI HERO'DAN KALDIRILDI.
+        Kart, fotografin anlamli yerini ORTUYORDU — olculdu: monitor ekranda
+        x 840→1001, kart x 728→1268, yani monitorun %100'u kartin altindaydi.
+        ⭐ 11.09 KARARI BOZULMUYOR: «reklamdan gelen hekim ilk ekranda URUNU
+          gormeli» hala gecerli. Cunku fotografin icindeki duvar monitorunde
+          GERCEK ReGain tedavi ekrani duruyor (kompozit). Urun ilk ekranda,
+          ama sahnenin icinde — ayri bir kart olarak degil.
+        ⚠️ BEDELI YAZILI OLSUN: dashboard'un sayilari ve modul listesi artik
+          hero'da OKUNMUYOR. O kanit asagidaki bolumlere kaliyor. -->
   </div>
 
 </header>
@@ -1994,66 +2097,8 @@ function toggleFaq(btn) {
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapa(); });
 })();
 
-// ═══ HERO SEKMELERİ · çip → modül ekranı ══════════════════════════════════
-// ⛔ OTOMATİK DÖNMEZ. Dönen görsel dikkati dağıtır, hekimin bakmak istediği
-//    ekranı elinden alır ve LCP'ye dokunur. Kontrol tamamen hekimde.
-// ⭐ Varsayılan Dashboard; seçili çipe tekrar tıklayınca ona döner.
-// ⚠️ `webp` desteği BİR KEZ ölçülür; her tıklamada yeniden sormak gereksiz.
-//    Destek yoksa `.jpg`ye düşer — sessizce boş görsel KALMAZ.
-(function () {
-  var img = document.getElementById('heroSs');
-  var serit = document.querySelector('.hero-flow');
-  if (!img || !serit) return;
-
-  var EKRANLAR = {
-    dashboard: { yol: '/images/pro/hero_dashboard_16x9',  alt: 'ReGain Assist kontrol paneli — günün özeti' },
-    hastalar:  { yol: '/images/pro/modul_hastalar_16x9',  alt: 'Hastalar ekranı — hasta listesi, durum ve hekim ataması' },
-    tedaviler: { yol: '/images/pro/modul_tedaviler_16x9', alt: 'Tedaviler ekranı — teklif ve tedavi takibi' },
-    stok:      { yol: '/images/pro/modul_stok_16x9',      alt: 'Stok ekranı — ürün ve kritik stok takibi' },
-    uts:       { yol: '/images/pro/modul_uts_16x9',       alt: 'ÜTS ekranı — bildirim hazırlık listesi' },
-    odemeler:  { yol: '/images/pro/modul_odemeler_16x9',  alt: 'Ödemeler ekranı — tahsilat ve bekleyen alacak' },
-    takip:     { yol: '/images/pro/modul_takip_16x9',     alt: 'Hasta Kazanım Rehberi — gün bazlı takip planı' }
-  };
-
-  // webp destegi: bir kez olc
-  var webp = (function () {
-    try {
-      var c = document.createElement('canvas');
-      return c.toDataURL && c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-    } catch (e) { return false; }
-  })();
-  var uzanti = webp ? '.webp' : '.jpg';
-
-  var cipler = Array.prototype.slice.call(serit.querySelectorAll('.hf-cip'));
-  var cerceve = img.closest('.ss-frame');
-
-  function goster(kayit, alt) {
-    cerceve.classList.add('yukleniyor');
-    var yeni = new Image();
-    yeni.onload = function () {
-      img.src = yeni.src;
-      img.alt = alt;
-      cerceve.classList.remove('yukleniyor');
-    };
-    // ⛔ Yuklenemezse SESSIZCE bos kalma: eski gorsel durur, sonmeyi geri al.
-    yeni.onerror = function () { cerceve.classList.remove('yukleniyor'); };
-    yeni.src = kayit + uzanti;
-  }
-
-  // ⛔ «Ayni cipe tekrar tikla → Dashboard» numarasi KALDIRILDI (Tolga 11.09):
-  //    calisiyordu ama KESFEDILEMIYORDU — hekim Dashboard'a nasil donecegini
-  //    bilemiyordu. Artik Dashboard seritte GORUNUR bir cip, basta duruyor ve
-  //    varsayilan secili. Duz sekme davranisi: her zaman tam bir tanesi secili.
-  cipler.forEach(function (cip) {
-    cip.addEventListener('click', function () {
-      if (cip.getAttribute('aria-selected') === 'true') return;   // zaten secili
-      cipler.forEach(function (c) { c.setAttribute('aria-selected', 'false'); });
-      cip.setAttribute('aria-selected', 'true');
-      var e = EKRANLAR[cip.getAttribute('data-ekran')];
-      goster(e.yol, e.alt);
-    });
-  });
-})();
+// 🔴 17.09: «HERO SEKMELERİ» bloğu KALDIRILDI — sürdüğü kart ve çipler
+//    hero'dan çıkarıldı, blok korumalı çıkıyordu ama ölü koddu.
 
 // «Ürün ▾» açılır menü — dene menüsüyle aynı desen.
 // ⛔ Tıklamayla açılır (dokunmatikte hover yok); dışarı tıklama + Esc kapatır;
