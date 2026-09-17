@@ -549,8 +549,23 @@ if (window.OLCUM_ACIK) {
      ⛔ YENİ RENK/TOKEN YOK: köşe var(--r-lg)=16px, çerçeve var(--border),
         zemin var(--surface), üst şerit var(--bg2). Gölge yumuşak-geniş-düşük
         opak (sistemin gölge rengiyle: rgba(26,35,50,…)). */
+  /* ── EKRAN CERCEVELERI: HOVER ─────────────────────────────────────
+     ⭐ Tolga 17.09: «yetenekler kisminda ekran gorselleri var, bunlara bir
+       hover efekti konabilir.» Dogru yer: bunlar GERCEK ICERIK — kaldirilan
+       ara bandin aksine, dikkat cekmeleri isin parcasi.
+     ⛔ ZOOM COK HAFIF (1.025): ekran goruntusunde yazi var, buyuk zoom onu
+        bulaniklastirir ve «ne yazdigi» kanitini zayiflatir.
+     ⛔ Cerceve YUKSELIR, goruntu YAKINLASIR — ikisi ayri katman oldugu icin
+        derinlik hissi dogar; tek hareket duz durur.
+     ⛔ Hareket kapaliysa HICBIRI olmaz. Dokunmatikte de olmaz (`hover:hover`). */
   .ss-frame { border-radius:var(--r-lg); overflow:hidden; background:var(--surface);
-    border:1px solid var(--border); box-shadow:0 24px 40px rgba(26,35,50,.14); }
+    border:1px solid var(--border); box-shadow:0 24px 40px rgba(26,35,50,.14);
+    transition:transform var(--sure) var(--ease), box-shadow var(--sure) var(--ease); }
+  .ss-frame .ss-img { transition:transform var(--sure-yavas) var(--ease); will-change:transform; }
+  @media (hover:hover) and (prefers-reduced-motion: no-preference) {
+    .ss-frame:hover { transform:translateY(-4px); box-shadow:var(--sh-yuzen); }
+    .ss-frame:hover .ss-img { transform:scale(1.025); }
+  }
   .ss-bar { height:30px; display:flex; align-items:center; gap:7px; padding:0 13px;
     background:var(--bg2); border-bottom:1px solid var(--border); }
   .ss-dot { width:9px; height:9px; border-radius:50%; background:var(--border2); flex-shrink:0; }
@@ -578,33 +593,15 @@ if (window.OLCUM_ACIK) {
   .mgrup li span { font-size:12.5px; line-height:1.45; color:var(--text3); }
   /* FINAL */
   /* ── GORUNTULEME BOLUMU — sayfadaki TEK koyu alan ───────────────── */
-  /* ── ARA BANT: RITIM ICIN, SUS ICIN DEGIL ───────────────────────────
-     ⛔ Olculdu: `moduller · kampanyalar · fiyatlar · sss` arka arkaya DORT
-        acik bolum ve sayfanin EN YOGUN kismi. Goz oradan «yeni bir kisim
-        basliyor» sinyali alamiyordu.
-     ⛔ METIN YOK VE BU BILINCLI: sayfada zaten soylenmis bir seyi tekrar
-        etmek gurultu, yeni bir iddia uydurmak ise yalan olurdu. Bandin isi
-        YAPI: bolumu bolmek.
-     ⭐ Rastgele bir kare degil: `klinik-duvar-ekran`in duvar TV'sinde
-        GERCEK ReGain kontrol paneli duruyor (kompozit). Nefes aldiran sey
-        ayni zamanda urunu gosteriyor.
-     ⚠️ Yukseklik SINIRLI: buyuk bir fotograf burada sayfayi ikiye bolerdi;
-        amac akisi kesmek degil nefes vermek.
-     🔴 ILK PERDE COK ZAYIFTI ve bant GRIYE dusuyordu. Sebep olculdu:
-        `klinik-duvar-ekran` COK PARLAK bir kare (196/255) — sitedeki en
-        parlagi — ve perdenin ORTASI .34'te birakilmisti; bandin orta tonu
-        140'a cikiyor, komsu beyaz bolumlerden yeterince ayrilmiyordu.
-        Bandin TEK ISI ayrim yaratmak oldugu icin bu, isi yapmamasi demekti.
-        ⭐ .78/.60/.78 → orta ton 100 civari; hero ve CaseSuite ile ayni
-          koyu aileye girdi.
-     ⛔ DERS (ikinci kez): perde degerleri FOTOGRAFTAN BAGIMSIZ secilemez.
-        Hero'da koyu kareye fazla perde koymustum, burada parlak kareye az. */
-  .ara-bant { position:relative; height:clamp(180px,22vw,260px); overflow:hidden;
-    background:var(--koyu-1); }
-  .ara-bant img { position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; object-position:50% 46%; }
-  .ara-bant::after { content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(20,28,43,.78), rgba(20,28,43,.60) 50%, rgba(20,28,43,.78)); }
+  /* 🔴 ARA BANT KALDIRILDI (Tolga 17.09): «hem boyut hem ton olarak fark
+     edilmiyor». Gerekcesi «ritim yaratir» idi; ritim yaratmiyorsa geriye
+     gerekce KALMIYOR.
+     ⛔ Genisletmek de acmak da cozum degildi: iceriksiz bir fotografi
+        buyutmek onu daha cok DOLGU yapar, acmak ise zaten yetersiz olan
+        ayrimi daha da azaltir.
+     ⭐ DERS: bir ogenin TEK gerekcesi bir ETKI ise, etki olculemiyorsa oge
+       de kalmaz. «Yapiyi boluyor» diye savundum; bakan kisi bolunme
+       gormedi — olcum bakanin gordugudur. */
 
   /* ⛔ KOYU BOLUM DUZ RENKTI. Doku eklendi: bulanik klinik karesi.
      🔴 ILK DEGERLER ALGILANMIYORDU (Tolga: «hero haric bir degisiklik
@@ -1594,14 +1591,6 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
      zemin degil (ikisi de --bg2), ARADAKI CIZGI ve ust uste binen
      dolgulardi. Kampanyanin ALT dolgusu sifirlandi, fiyatin ust
      cizgisi kaldirildi ve ust dolgusu kucultuldu. -->
-<!-- ARA BANT — yapisal nefes. Metin yok; gerekcesi CSS'te yazili. -->
-<div class="ara-bant" aria-hidden="true">
-  <picture>
-    <source type="image/webp" srcset="/images/foto/klinik-duvar-ekran-1200.webp 1200w, /images/foto/klinik-duvar-ekran.webp 1890w" sizes="100vw">
-    <img src="/images/foto/klinik-duvar-ekran-1200.jpg" width="1890" height="1063" loading="lazy" decoding="async" alt="">
-  </picture>
-</div>
-
 <section id="kampanyalar" style="background:var(--bg2); border-top:1px solid var(--border); padding-bottom:0;">
   <!-- ⛔ ALT DOLGU KUCUK: fiyat bolumu HEMEN ALTTA ve ikisi birlikte
        okunmali. 72px alt dolgu araya gereksiz bosluk koyuyordu. -->
