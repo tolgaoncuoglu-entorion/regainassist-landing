@@ -13,17 +13,67 @@
       .nav-menu gibi). Burası ORTAK olanın yeri, hepsinin değil. */
 
 :root{
-    --brand:#0d9488; --brand-d:#0b7c72; --brand-pale:rgba(13,148,136,.10);
-    --accent:#243b5e; --accent-l:#3c5f8f;
-    --dark:#1e293b;
-    --bg:#ffffff; --bg2:#f5f7fa; --surface:#ffffff;
-    --border:#e3e8ef; --border2:#d9dfe8;
-    --text:#16233c; --text2:#5a6b85; --text3:#94a3b8;
-    --r:12px; --r-lg:16px;
-    --sh:0 1px 2px rgba(26,35,50,.04);
-    --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
-    --sh-ss:0 24px 40px rgba(26,35,50,.14);
-  }
+  /* ═══ ReGain Design Tokens — PAYLASILAN KAYNAK ════════════════════════
+     ⛔ Bu blok `index.html` icindeki :root ile AYNI isim ve degerleri
+        tasir. Ikisi AYRISIRSA ana sayfa ile ic sayfalar farkli renkte olur
+        ve bu SESSIZ bir kusurdur: her sayfa kendi icinde tutarli gorunur.
+     🔴 17.09 OLCULDU, TAM DA BU OLMUSTU: `--text3` burada #94a3b8 idi,
+        `index.html`de #627085. Beyaz zeminde 2.56:1 ve 5.03:1, yani dokuz
+        ic sayfa WCAG AA esiginin ALTINDA kaliyordu.
+        ⚠️ `token-kapisi` bunu GOREMIYORDU: yalniz uygulama ile index.html'i
+          karsilastiriyordu, bu dosya olcum kapsaminin DISINDAYDI.
+          Kapi genisletildi. */
+  --regain-teal-600:#0b7c72; --regain-teal-500:#0d9488;
+  --regain-teal-400:#2dd4bf; --regain-teal-300:#5eead4;
+  --regain-slate-800:#1e293b; --regain-slate-700:#334155; --regain-slate-650:#3d4a5c;
+  --regain-slate-600:#475569; --regain-slate-500:#64748b;
+  --regain-navy-700:#243b5e; --regain-navy-600:#3c5f8f;
+  --regain-background:#ffffff; --regain-surface:#ffffff;
+  --regain-border:#e3e8ef;
+  --regain-text-primary:#16233c; --regain-text-secondary:#5a6b85;
+  --regain-text-tertiary:#627085;
+  --regain-success:#1a7f5e; --regain-warning:#b07d1a; --regain-danger:#c0392f;
+
+  /* Sayfa tokenlari: hepsi YUKARIDAN beslenir, renk dogrudan yazilmaz. */
+  --brand:var(--regain-teal-500); --brand-d:var(--regain-teal-600);
+  --brand-pale:rgba(13,148,136,.10);
+  --accent:var(--regain-navy-700); --accent-l:var(--regain-navy-600);
+  --accent-pale:rgba(36,59,94,.07);
+  --dark:var(--regain-slate-800);
+  --bg:var(--regain-background); --bg2:#f5f7fa; --surface:var(--regain-surface);
+  --border:var(--regain-border); --border2:#d9dfe8;
+  --text:var(--regain-text-primary); --text2:var(--regain-text-secondary);
+  --text3:var(--regain-text-tertiary);
+  --ikincil:var(--regain-text-secondary); --ikincil-pale:rgba(91,107,128,.10);
+  --ok:#1a6b5e; --wait:#946d18; --stop:#b83232;
+  --r:12px; --r-lg:16px;
+  --sh:0 1px 2px rgba(26,35,50,.04);
+  --sh-lg:0 2px 8px rgba(26,35,50,.06),0 24px 48px -28px rgba(26,35,50,.22);
+  --sh-ss:0 24px 40px rgba(26,35,50,.14);
+
+  /* ── HAREKET VE DERINLIK SOZLUGU ──────────────────────────────────
+     ⛔ TEK EGRI: butun gecisler ayni easing'i kullanir. Karisik egriler
+        sayfayi «bir yerlerden toplanmis» gosterir. */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-cikis:cubic-bezier(.4,0,.2,1);
+  --sure-hizli:.18s; --sure:.32s; --sure-yavas:.6s;
+  /* Koyu yuzeyler LOGONUN grisinden turetilir, siyahtan degil. */
+  --koyu-1:#141c2b; --koyu-2:#1b2537; --koyu-3:#243044;
+  /* Koyu zeminde metin: saf beyaz DEGIL, kirik beyaz (saf beyaz titrer). */
+  --koyu-metin:#eef2f7; --koyu-metin2:#b6c2d4; --koyu-metin3:#8b99ad;
+  --koyu-kenar:rgba(255,255,255,.12);
+  /* Derinlik: tek katmanli golge duz durur, iki katmanli HACIM verir. */
+  --sh-yuzen:0 2px 6px rgba(8,14,25,.28), 0 28px 60px -20px rgba(8,14,25,.55);
+  --sh-kart:0 1px 2px rgba(8,14,25,.10), 0 12px 28px -14px rgba(8,14,25,.28);
+}
+
+/* ── KAYDIRINCA BELIREN BOLUMLER (paylasilan) ────────────────────────
+   ⛔ Gorunmezligi CSS DEGIL JS acar: once `bel-hazir` isaretlenir, `.bel`
+      ancak o zaman saklanir. JS hic kosmazsa sayfa BOS KALMAZ. */
+.bel-hazir .bel { opacity:0; transform:translateY(18px);
+  transition:opacity var(--sure-yavas) var(--ease), transform var(--sure-yavas) var(--ease); }
+.bel-hazir .bel.gorundu { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) { .bel-hazir .bel { opacity:1; transform:none; transition:none; } }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
