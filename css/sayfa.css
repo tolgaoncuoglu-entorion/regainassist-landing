@@ -100,7 +100,14 @@
   .hero{padding:60px 0 8px;text-align:center}
   .eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
     color:var(--brand-d);background:var(--brand-pale);padding:6px 14px;border-radius:999px}
-  h1{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin:22px 0 0}
+  /* ── BASLIK OLCEGI ─────────────────────────────────────────────────
+     ⭐ Ana sayfa h1'i 74px; ORASI tam genislik fotograf uzerinde bir
+       BEYAN. Bu sayfalar ise arama sonucundan gelen ve bir soruya cevap
+       arayan METIN sayfalari. Ayni PUNTO degil, ayni AILE hedefleniyor:
+       52 → 60px. Hiyerarsi ayni, agirlik sayfanin isine gore.
+     ⛔ Harf araligi puntoyla ORANTILI: `em` biriminde oldugu icin
+        kendiliginde olceklenir, `px` olsaydi buyuk puntoda gevserdi. */
+  h1{font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-.035em;line-height:1.08;margin:22px 0 0}
   h1 .teal{color:var(--brand)}
   .hero-sub{font-size:clamp(16px,2vw,19px);color:var(--text2);line-height:1.65;margin:18px auto 0;max-width:720px}
   .hero-mini{font-size:13.5px;color:var(--text3);margin:12px 0 0}
@@ -108,6 +115,12 @@
   .hero-note{font-size:13px;color:var(--text3)}
   /* EKRAN ÇERÇEVESİ */
   .ss-frame{border-radius:var(--r-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);box-shadow:var(--sh-ss);max-width:920px;margin:40px auto 0}
+  .ss-frame{transition:transform var(--sure) var(--ease),box-shadow var(--sure) var(--ease)}
+  .ss-frame .ss-img{transition:transform var(--sure-yavas) var(--ease)}
+  @media (hover:hover) and (prefers-reduced-motion:no-preference){
+    .ss-frame:hover{transform:translateY(-4px);box-shadow:var(--sh-yuzen)}
+    .ss-frame:hover .ss-img{transform:scale(1.025)}
+  }
   .ss-bar{height:30px;display:flex;align-items:center;gap:7px;padding:0 13px;background:var(--bg2);border-bottom:1px solid var(--border)}
   .ss-dot{width:9px;height:9px;border-radius:50%;background:var(--border2)}
   .ss-frame img{width:100%;height:auto;display:block}
@@ -115,13 +128,32 @@
   /* ÖZELLİKLER */
   section{padding:64px 0}
   .sec-tag{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  h2.sec{font-size:clamp(24px,3.1vw,34px);font-weight:800;letter-spacing:-.02em;margin:10px 0 0;line-height:1.2}
+  /* 🔴 DUZ `<h2>` HIC BICIMLENDIRILMEMISTI: tarayici varsayilani 24px ve
+     varsayilan bosluklar. Olculdu, hicbir kural eslesmiyordu. Icerik
+     sayfalarinin bolum basliklari bu yuzden govde metninden zor ayirt
+     ediliyordu.
+     ⛔ ETKI OLCULDU: kendi `h2` kurali olan alti sayfa BUNDAN ETKILENMEZ
+        (satir ici stilleri ezer). Kural yalniz `dis-klinigi-yazilimi` (10
+        baslik) ve `casesuite` (1) icin devreye girer, yani tam da eksik
+        olanlar icin.
+     ⭐ Uc kademeli hiyerarsi: h1 60 → h2.sec 44 → h2 34. Ayni ogeye iki
+       olcek vermek tuhaf gorunebilir ama roller ayri: biri BOLUM basligi,
+       oteki MAKALE ICI alt baslik. */
+  h2{font-size:clamp(24px,2.8vw,34px);font-weight:800;letter-spacing:-.025em;
+    line-height:1.22;margin:38px 0 10px;color:var(--text)}
+  h2.sec{font-size:clamp(26px,3.6vw,44px);font-weight:800;letter-spacing:-.028em;margin:10px 0 0;line-height:1.16}
   .sec-alt{font-size:16px;color:var(--text2);margin:12px 0 0;max-width:640px}
   .ozet{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
   .kartlar{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
   @media(max-width:860px){.kartlar{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.kartlar{grid-template-columns:1fr}}
-  .kart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px}
+  /* ⛔ `.kart` golgesizdi, sayfadan hic ayrismiyordu. Iki katmanli golge:
+     yakin temas + genis yumusak. Tek katman duz durur, iki katman HACIM verir. */
+  .kart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;
+    box-shadow:var(--sh-kart);transition:transform var(--sure) var(--ease),box-shadow var(--sure) var(--ease)}
+  @media (hover:hover) and (prefers-reduced-motion:no-preference){
+    .kart:hover{transform:translateY(-3px);box-shadow:var(--sh-yuzen)}
+  }
   .kart b{display:block;font-size:15.5px;font-weight:700;color:var(--text);letter-spacing:-.1px}
   .kart span{display:block;font-size:13.5px;color:var(--text2);line-height:1.5;margin-top:6px}
   /* GÜVEN ŞERİDİ */
