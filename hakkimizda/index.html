@@ -146,9 +146,26 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   /* ⛔ ÖLÜ ALAN: mektup uzun, portre kısa — sol sütun sayfanın yarısında
      bomboş kalıyordu. `sticky` portreyi okuma boyunca yanında tutar.
      Tek sütuna düşen dar ekranda sticky ANLAMSIZ, orada kapatılıyor. */
+  /* ── PORTRE: DERINLIK VE HOVER ─────────────────────────────────────
+     Golge `--sh-lg` idi: acik yuzeyler icin tasarlanmis hafif bir golge,
+     portre sayfadan hic ayrismiyordu. Iki katmanli `--sh-kart`a alindi,
+     hover'da `--sh-yuzen`e derinlesiyor.
+     ⛔ KABA `transform` VERILMEDI. Bu oge `position:sticky` ve sticky bir
+        ogeye transform vermek onu KAPSAYAN BLOK haline getirir; bazi
+        tarayicilarda yapiskanlik bozulur. Bunun yerine ICERIDEKI gorsel
+        olcekleniyor, `overflow:hidden` zaten kirpiyor.
+     ⛔ ZOOM COK HAFIF (1.04): bu bir insan portresi, buyuk zoom yuzu
+        deforme eder ve «kayiyor» hissi verir.
+     ⛔ Hareket kapaliysa ve dokunmatikte HICBIRI olmaz. */
   .portre{position:sticky;top:32px;width:260px;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;
-    background:linear-gradient(160deg,var(--accent) 0%,var(--accent-l) 100%);box-shadow:var(--sh-lg);
+    background:linear-gradient(160deg,var(--accent) 0%,var(--accent-l) 100%);box-shadow:var(--sh-kart);
+    transition:box-shadow var(--sure) var(--ease);
     display:flex;align-items:center;justify-content:center}
+  .portre img{transition:transform var(--sure-yavas) var(--ease)}
+  @media(hover:hover) and (prefers-reduced-motion:no-preference){
+    .portre:hover{box-shadow:var(--sh-yuzen)}
+    .portre:hover img{transform:scale(1.04)}
+  }
   @media(max-width:820px){.portre{position:relative;top:0;width:200px;margin-inline:auto}}
   /* ⛔⛔ BAŞ HARFLER VARSAYILAN OLARAK GİZLİ — `opacity:0`.
      Eskiden her zaman basılıyor, fotoğraf üstüne mutlak konumlanıyordu;
