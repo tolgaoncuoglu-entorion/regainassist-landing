@@ -17,7 +17,7 @@ Uygulama: https://app.regainassist.com/ (indekslenmez, içerik bu sitededir)
 - ReGain CaseSuite — aylık 790 TRY (KDV dahil). Tek başına satılır.
   Tarayıcıda CBCT ve DICOM görüntüleme, manuel ölçüm, şablon implant
   yerleştirme ve vaka dokümantasyonu.
-- Her iki üründe de 14 gün ücretsiz deneme vardır, kredi kartı gerekmez.
+- Demo hesapları yalnızca kimliği doğrulanan diş hekimlerine açılır; vergi levhası ile demo talep formundan istenir. Kredi kartı gerekmez.
 - Son 24 ay içinde işe başlamış kliniklere ilk 12 ay %50 indirim uygulanır.
   Uygunluk vergi levhasıyla, elle onaylanır.
 

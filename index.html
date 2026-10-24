@@ -811,6 +811,9 @@ if (window.OLCUM_ACIK) {
   .plan-card.suite .plan-avantaj { background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent); }
   .plan-cta { display:block; margin-top:22px; padding:13px 20px; border-radius:10px; text-align:center; font-size:15px; font-weight:700; text-decoration:none; transition:opacity .15s; }
   .plan-cta:hover { opacity:.88; }
+  .plan-giris { margin-top:10px; text-align:center; font-size:12.5px; }
+  .plan-giris a { color:var(--text2); font-weight:600; text-decoration:none; }
+  .plan-giris a:hover { color:var(--brand-d); }
   .plan-features { margin-top:24px; display:flex; flex-direction:column; gap:10px; font-size:14px; flex:1; }
   .plan-features .yes { color:var(--text2); }
   .plan-features .no { color:var(--text3); opacity:.55; }
@@ -863,6 +866,13 @@ if (window.OLCUM_ACIK) {
   @media (max-width:520px) { .onay-secenekler { gap:14px; } }
   .btn-submit { font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--brand); border:none; border-radius:10px; padding:14px 20px; cursor:pointer; transition:opacity .15s; }
   .btn-submit:hover { opacity:.88; }
+  .contact-giris { max-width:620px; margin:12px auto 0; padding:0 24px; font-size:15.5px; line-height:1.65; color:var(--text2); text-align:center; }
+  .belge-alan { display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px dashed var(--border2); border-radius:10px; background:var(--bg2); }
+  .belge-etiket { font-size:13.5px; font-weight:600; color:var(--text2); }
+  .belge-etiket i { color:var(--regain-danger); font-style:normal; font-weight:700; }
+  .contact-form .belge-alan input[type="file"] { width:auto; padding:6px 0; border:0; background:transparent; font-size:14px; color:var(--text); }
+  .contact-form .belge-alan input[type="file"]:focus { outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
+  .belge-not { font-size:12px; color:var(--text3); line-height:1.5; }
   .btn-submit:disabled { opacity:.5; cursor:default; }
   .btn-submit:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
   /* ── FOOTER ──────────────────────────────────────────────────── */
@@ -1096,18 +1106,9 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     </div>
     <div class="nav-actions">
     <a class="nav-giris" href="https://app.regainassist.com/login">Giriş yap</a>
-    <div class="dene-sar">
-      <button type="button" class="btn btn-primary btn-sm" id="deneAc"
-              aria-haspopup="true" aria-expanded="false" aria-controls="deneMenu">Ücretsiz Dene</button>
-      <div class="dene-menu" id="deneMenu" role="menu" hidden>
-        <a role="menuitem" href="https://app.regainassist.com/login?mod=kayit">
-          <b>ReGain Assist Pro</b><span>Hasta, randevu, tahsilat, ÜTS ve e-Nabız</span>
-        </a>
-        <a role="menuitem" href="https://app.regainassist.com/casesuite/giris?mod=kayit">
-          <b>CaseSuite</b><span>Tek hekim için implant vaka çalışma alanı</span>
-        </a>
-      </div>
-    </div>
+    <!-- ⛔ 24.10 (Tolga): «Ücretsiz Dene» açılır menüsü KALDIRILDI; kendi
+         kendine deneme kaydı kapalı. Tek çağrı: demo talep formu (#demo). -->
+    <a class="btn btn-primary btn-sm" href="#demo">Demo Talep Et</a>
     </div>
   </div>
 </nav>
@@ -1154,12 +1155,12 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     </div>
     <p class="hero-desc">Hasta kaydından tedaviye, tahsilattan ÜTS bildirimine, CBCT üzerinde implant planlamasından şube yönetimine kadar. Kliniğin tamamı tek sistemde, sınırsız kullanıcıyla.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
+      <a class="btn btn-primary" href="#demo">Demo Talep Et</a>
       <a class="hero-ikincil" href="#hikayeler">Nasıl çalışıyor?</a>
       <!-- ⚠️ Üçü de doğrulanabilir: kurulum adımı yok, uygulama tarayıcıdan
-           çalışıyor, deneme kartsız başlıyor. Reklamdan gelen hekim aradığı
-           cümleyi ilk ekranda görmeli. -->
-      <span class="hero-note">Kurulum yok &middot; Tarayıcıdan çalışır &middot; Kredi kartı gerekmez</span>
+           çalışıyor, demo hesabı yalnız kimliği doğrulanan diş hekimine
+           açılıyor (24.10, Tolga: kendi kendine deneme kaydı kapatıldı). -->
+      <span class="hero-note">Kurulum yok &middot; Tarayıcıdan çalışır &middot; Diş hekimlerine özel</span>
     </div>
 
     <!-- 🔴 17.09: MODUL CIPLERI KALDIRILDI. Tek isleri sagdaki urun
@@ -1367,8 +1368,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
      Eski metin ikisini birbirine karıştırıp «listeyi Bakanlık portalına
      yükleyin» diyordu; bu ne birinci modu ne ikinciyi doğru anlatıyor. -->
           <div class="kol-alt">
-            <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Bildirim akışını ücretsiz deneyin <i>&rarr;</i></a>
-            <span class="kol-alt-not">14 gün · kredi kartı gerekmez</span>
+            <a class="kol-cta" href="#demo">Bildirim akışı için demo talep edin <i>&rarr;</i></a>
+            <span class="kol-alt-not">Kimliği doğrulanan diş hekimlerine açılır</span>
             <!-- ⛔ İç bağ: /uts-dis-klinigi-yazilimi sitemap'te kayıtlıydı ama
                  hiçbir sayfadan bağ almıyordu, yani YETİM SAYFAYDI. Aynı hata
                  /casesuite'te de vardı ve düzeltilirken burada tekrarlandı.
@@ -1404,7 +1405,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             </picture>
           </div>
           <div class="kol-alt">
-            <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Kayıtlarınızı taşıyarak başlayın <i>&rarr;</i></a>
+            <a class="kol-cta" href="#demo">Veri aktarımı için demo talep edin <i>&rarr;</i></a>
             <span class="kol-alt-not">Excel veya CSV</span>
           </div>
         </div>
@@ -1431,7 +1432,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
             </picture>
           </div>
           <div class="kol-alt">
-            <a class="kol-cta" href="https://app.regainassist.com/login?mod=kayit">Hasta iletişimini deneyin <i>&rarr;</i></a>
+            <a class="kol-cta" href="#demo">Hasta iletişimi için demo talep edin <i>&rarr;</i></a>
             <span class="kol-alt-not">Kurulum gerekmez</span>
             <!-- ⛔ BAĞLAM BAĞI. ÜTS ve MBYS modüllerine koyulmuştu, buraya koymayı
                  ATLAMIŞTIM (Tolga 10.09 fark etti). Rehber /rehber dizininden bağ
@@ -1550,7 +1551,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
            hunisine üç bağ var (ölçüldü). Bir adım ekleniyor, hiçbir adım
            kaybolmuyor. Google Ads nihai URL'i de buraya bakmalı. -->
       <a class="gb-ikincil" href="https://www.regainassist.com/casesuite">CaseSuite'i inceleyin &rarr;</a>
-      <span class="gb-not">Tek başına aylık &#8378;790 &middot; Pro aboneliğine dahil &middot; 14 gün deneme</span>
+      <span class="gb-not">Tek başına aylık &#8378;790 &middot; Pro aboneliğine dahil</span>
     </div>
     <p class="gb-beyan">CaseSuite bir tanı veya klinik karar destek aracı değildir; hiçbir öneride bulunmaz. Ölçüm ve yerleştirme hekimin kendi işlemidir; sistem anatomik yapı tanımaz, uygunluk değerlendirmesi yapmaz.</p>
   </div>
@@ -1704,9 +1705,9 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
              etmiyor gibi okunurdu. 14 gunluk deneme, dugme degil BILGI
              cumlesi olarak kartin icinde duruyor. -->
         <p style="font-size:12.5px; line-height:1.6; color:var(--text2); margin:0 0 16px;">
-          14 gün ücretsiz Pro deneme ile başlayın, kredi kartı gerekmez.
-          Ardından Plan sayfasından işe başlama tarihinizi girip vergi
-          levhanızı yükleyin. Biz inceleyip onaylayalım.</p>
+          Demo talep formuyla hesabınızı açtırın. Ardından Plan sayfasından
+          işe başlama tarihinizi girip vergi levhanızı yükleyin. Biz inceleyip
+          onaylayalım.</p>
         <a href="/sozlesmeler/mesafeli-satis.html#yeni-klinik-kampanyasi"
           style="display:block; background:transparent; color:var(--brand-d);
           font-weight:700; font-size:15px; text-decoration:none; text-align:center;
@@ -1806,7 +1807,10 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <div class="plan-save" id="vaka-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;658,33'e denk gelir
       </div>
-      <a href="https://app.regainassist.com/casesuite/giris?mod=kayit" class="plan-cta" style="background:var(--accent);color:#fff;">14 gün ücretsiz deneyin</a>
+      <a href="#demo" class="plan-cta" style="background:var(--accent);color:#fff;">Demo talep et</a>
+      <!-- Mevcut kullanıcının yolu: deneme kapalı ama CaseSuite hesabı olan
+           hekim buradan giriş ekranına ulaşır (`casesuite-erisim-kapisi`). -->
+      <div class="plan-giris"><a href="https://app.regainassist.com/casesuite/giris">CaseSuite hesabınız var mı? Giriş yapın</a></div>
       <div class="plan-features">
         <div class="highlight">&#10003; CBCT / DICOM Görüntüleme</div>
         <div class="highlight">&#10003; Manuel Ölçüm ve İşaretleme</div>
@@ -1844,7 +1848,8 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <div class="plan-save" id="pro-tasarruf" style="display:none;text-align:center;color:var(--text2);font-weight:600;">
         Aylık &#8378;1.990,83'e denk gelir
       </div>
-      <a href="https://app.regainassist.com/login?mod=kayit" class="plan-cta" style="background:var(--brand);color:#fff;">14 gün ücretsiz deneyin</a>
+      <a href="#demo" class="plan-cta" style="background:var(--brand);color:#fff;">Demo talep et</a>
+      <div class="plan-giris"><a href="https://app.regainassist.com/login">Hesabınız var mı? Giriş yapın</a></div>
       <div class="plan-features">
         <div class="highlight">&#10003; CaseSuite</div>
         <div class="highlight">&#10003; Sınırsız Hasta Kaydı</div>
@@ -1870,9 +1875,9 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <!-- ⛔ 04.09 (Tolga): «arka plandan okunmuyor». --text3 acik zeminde
        solgun kaliyordu; koyu murekkebe ve 600 agirliga alindi, punto 13px. -->
   <p style="text-align:center;margin-top:28px;font-size:13px;font-weight:600;color:var(--text);max-width:820px;margin-left:auto;margin-right:auto;">
-    Her iki planda da 14 gün ücretsiz deneme vardır.<br>
+    Demo hesapları yalnızca kimliği doğrulanan diş hekimlerine açılır.<br>
     CaseSuite tek başına alınabilir, ReGain Assist PRO aboneliğine zaten dâhildir.<br>
-    Kredi kartı gerekmez. Fiyatlara KDV dahildir.
+    Fiyatlara KDV dahildir.
   </p>
 
   </section>
@@ -1883,7 +1888,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
     <span class="sec-tag">Sık sorulan sorular</span>
     <h2 class="sec bel">Merak edilenler</h2>
     <div style="margin-top:28px; display:flex; flex-direction:column; gap:10px; max-width:860px;">
-      <details class="faq-item"><summary class="faq-q">Ücretsiz deneme nasıl başlar?</summary><div class="faq-a">Kayıt olduktan sonra 14 gün boyunca tüm Pro özelliklere erişirsiniz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz. Deneme süresi bittiğinde planınızı seçersiniz.</div></details>
+      <details class="faq-item"><summary class="faq-q">Demo hesabı nasıl açılır?</summary><div class="faq-a">Demo talep formunu doldurup vergi levhanızı yüklersiniz. Hesaplar yalnızca kimliği doğrulanan diş hekimlerine açılır; belgenizi inceledikten sonra giriş bilgilerinizi e-posta ile gönderir, mesai saatlerinde 24 saat içinde size döneriz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz.</div></details>
       <details class="faq-item"><summary class="faq-q">Mevcut hasta verilerimi aktarabilir miyim?</summary><div class="faq-a">Evet. Excel veya CSV dosyanızı yükleyin, sistem sütunları otomatik eşleştirir. Hasta bilgileri, tedavi geçmişi, ödemeler, randevular ve hekim atamaları aktarılabilir. Yazmadan önce hangi kayıtların yeni, hangilerinin güncelleneceğini önizlemede görürsünüz; aynı hasta birden fazla satırda geçiyorsa ad-soyad ve doğum tarihi üzerinden eşleştirilir. Eski yazılımınızdan Excel çıktısı almanız yeterlidir.</div></details>
       <details class="faq-item"><summary class="faq-q">e-Nabız kayıtlarını nasıl hazırlayabilirim?</summary><div class="faq-a">ReGain Assist e-Nabız’a doğrudan bildirim göndermez. Tedavi kayıtlarınızı e-Nabız paket formatına (Paket 101 Hasta Kayıt, Paket 102 Tedavi, Paket 103 Muayene) hazırlar ve Excel olarak dışa aktarır; dosyayı Sağlık Bakanlığı portalına siz yüklersiniz. Bilgileri tam olan tedaviler listeye eklenir, eksik olanlar nedeniyle birlikte gösterilir. SUT ve ICD kodları hekim tarafından girilir; sistem kod önermez.</div></details>
       <details class="faq-item"><summary class="faq-q">ÜTS bildirimi nasıl çalışıyor?</summary><div class="faq-a">Tedavi kaydederken kullandığınız tıbbi ürünleri seçersiniz; sistem bildirim için gereken veriyi o kayıttan hazırlar ve kuyruğa alır. Alma, kullanım ve tüketiciye verme bildirimleri desteklenir. Bildirim türünü tedavi kartında siz seçersiniz; “Tedaviyi Tamamla” onayınızdan sonra bildirim gönderim sırasına alınır ve ReGain süreci takip eder. Eksik bilgi varsa kaydetmeden önce listelenir.</div></details>
@@ -1902,67 +1907,80 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
   <div class="wrap">
     <div class="final">
       <h2>Kliniğinizin tamamı tek sistemde.</h2>
-      <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">14 Gün Ücretsiz Dene</a>
-      <small>Kredi kartı gerekmez.</small>
+      <a class="btn btn-primary" href="#demo">Demo Talep Et</a>
+      <small>Diş hekimlerine özel. Kredi kartı gerekmez.</small>
     </div>
   </div>
 </section>
 
-<!-- ═══ İKİ YOL ═══════════════════════════════════════════════════════
-     ⛔ İletişim formunun ÜSTÜNDE durur. Sebebi: forma gelen ziyaretçinin
-        çoğu «denemek için de form doldurmam gerekiyor» sanıyordu. İki yolu
-        ÖNCE söylemek, denemek isteyeni formdan kurtarır.
-     ⛔ TİRE AYRACI YOK (`\s[—–-]\s`). `tire-ayraci-kapisi` bunu ölçüyor;
-        boşluklu tire yapay zekâ metninin en tanınan işareti.
-     ⛔ HER KART KENDİ TAM CÜMLESİNİ TAŞIR. «14 gün» · «3 dakika» ·
-        «24 saat» üç ayrı sayı; yan yana gelirlerse tek cümle okunur
-        (25.08 dersi: «%50» + «24 ay» → «24 ay boyunca %50» anlaşıldı).
-        Bu yüzden 24 saat SAĞ kartta, ötekiler SOL kartta duruyor.
-     ⛔ Sol kartın bağlantısı `app.regainassist.com` taşımalı: `CTAClick`
-        ölçümü `a[href*="app.regainassist.com"]` dinleyicisiyle çalışıyor. -->
+<!-- ═══ NASIL BAŞLANIR ══════════════════════════════════════════════════
+     ⛔ 24.10 (Tolga): «İki yol var, ikisi de ücretsiz» KALDIRILDI; kendi
+        kendine deneme kaydı KAPALI. Demo hesabı yalnız kimliği doğrulanan
+        diş hekimine açılır (vergi levhası formda yüklenir). Form artık
+        «iletişim» değil DEMO TALEP formudur; bu blok onun girizgâhı.
+     ⛔ TİRE AYRACI YOK (`tire-ayraci-kapisi`). HER KART KENDİ TAM CÜMLESİNİ
+        TAŞIR; «24 saat» yalnız sol kartta geçer.
+     ⛔ Sağ kartın bağlantısı `app.regainassist.com` taşır: `CTAClick`
+        ölçümü o seçiciyle çalışıyor. Demo talebi ise formun BAŞARILI
+        gönderiminde ayrı olay (`DemoTalep`) olarak sayılır. -->
 <section class="iki-yol">
   <div class="iki-yol-ic">
     <div class="section-tag">Nasıl başlanır</div>
-    <h2>İki yol var, ikisi de ücretsiz.</h2>
+    <h2>Demo hesabı, kimliği doğrulanan diş hekimlerine açılır.</h2>
     <div class="iki-yol-kartlar">
 
       <div class="yol-kart yol-kart-birincil">
-        <div class="yol-etiket">Kendiniz deneyin</div>
+        <div class="yol-etiket">Demo talep edin</div>
         <p class="yol-metin">
-          14 gün boyunca ücretsiz. Kredi kartı istemiyoruz, telefon görüşmesi
-          gerekmiyor. Kaydolun, kliniğinizi üç dakikada kurun, kendi
-          hastalarınızla deneyin.
+          Aşağıdaki formu doldurun ve vergi levhanızı yükleyin. Belgenizi
+          inceleyip hesabınızı hazırlar, mesai saatlerinde 24 saat içinde
+          giriş bilgilerinizi e-posta ile göndeririz. Kredi kartı gerekmez.
         </p>
-        <a class="btn btn-primary" href="https://app.regainassist.com/login?mod=kayit">Hemen başla</a>
+        <a class="btn btn-primary" href="#demo">Forma git</a>
       </div>
 
       <div class="yol-kart">
-        <div class="yol-etiket">Ya da biz anlatalım</div>
+        <div class="yol-etiket">Hesabınız zaten var mı?</div>
         <p class="yol-metin">
-          Kliniğinize özel canlı demo. Aşağıdaki formu doldurun, mesai saatlerinde
-          24 saat içinde size dönelim.
+          Giriş sayfasından devam edin. Aboneliğiniz ya da demo süreniz
+          hakkında sorunuz varsa yine aşağıdaki formdan ulaşabilirsiniz.
         </p>
-        <a class="btn btn-ghost" href="#iletisim">Demo talep et</a>
+        <a class="btn btn-ghost" href="https://app.regainassist.com/login">Giriş yap</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<section class="contact" id="iletisim">
+<section class="contact" id="demo">
+  <!-- ⛔ 24.10 (Tolga): iletişim formu DEMO TALEP formu oldu. Demo hesabı
+       yalnız kimliği doğrulanan diş hekimine açıldığı için VERGİ LEVHASI
+       ZORUNLU (PDF/JPG/PNG, en çok 10 MB). Dosya Supabase Storage
+       `demo-belgeler` kovasına anon olarak YALNIZ yüklenir (okuma/listeleme
+       yok; 24.10 ölçüldü: anon okuma 400, anon liste boş, yanlış tür 400),
+       yolu `iletisim_formlari.belge_yolu`na yazılır; `basvuru-cron`
+       e-postaya 7 gün geçerli imzalı bağlantı koyar. Belge karar sonrası
+       silinir (kampanya belgesiyle aynı kural). Eski `#iletisim` çapası
+       görünmez işaret olarak duruyor; dış bağlar kırılmaz. -->
+  <span id="iletisim" aria-hidden="true"></span>
   <div class="contact-header">
-    <div class="section-tag">İletişim</div>
-    <h2>Sorularınız mı var?</h2>
+    <div class="section-tag">Demo talebi</div>
+    <h2>Demo hesabı talep edin</h2>
+    <p class="contact-giris">Demo hesapları yalnızca kimliği doğrulanan diş hekimlerine açılır. Formu doldurup vergi levhanızı yükleyin; belgenizi inceleyip hesabınızı açalım.</p>
   </div>
   <div class="contact-form">
-    <input type="text" id="contact-name" placeholder="Dr. Ad Soyad">
+    <input type="text" id="contact-name" placeholder="Dr. Ad Soyad" autocomplete="name">
     <div class="row">
-      <input type="tel" id="contact-phone" placeholder="0532 000 00 00">
-      <input type="email" id="contact-email" placeholder="ornek@klinik.com">
+      <input type="tel" id="contact-phone" placeholder="0532 000 00 00" autocomplete="tel">
+      <input type="email" id="contact-email" placeholder="ornek@klinik.com" autocomplete="email">
     </div>
-    <input type="text" id="contact-clinic" placeholder="Klinik adınız">
-    <textarea id="contact-msg" rows="3" placeholder="Mesajınız..."></textarea>
-
+    <input type="text" id="contact-clinic" placeholder="Klinik adınız" autocomplete="organization">
+    <textarea id="contact-msg" rows="3" placeholder="Eklemek istedikleriniz (isteğe bağlı)"></textarea>
+    <div class="belge-alan">
+      <label class="belge-etiket" for="contact-belge">Vergi levhası <i>*</i></label>
+      <input type="file" id="contact-belge" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png">
+      <div class="belge-not">PDF, JPG ya da PNG; en çok 10 MB. Belge yalnızca diş hekimi kimliğinizi doğrulamak için kullanılır, karar verildikten sonra silinir.</div>
+    </div>
     <!-- ═══ ZORUNLU ONAYLAR ═══════════════════════════════════════════
          ⛔ VARSAYILAN SECILI DEGIL. On isaretli bir kutu, 6563 sayili
             Kanun anlaminda ACIK RIZA SAYILMAZ; kanit degeri de olmaz.
@@ -1981,7 +1999,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
         </div>
       </div>
       <div class="onay-soru">
-        <span class="onay-baslik">İletişim bilgilerimin bu talebe dönüş amacıyla işlenmesine <i>*</i></span>
+        <span class="onay-baslik">İletişim bilgilerimin ve yüklediğim vergi levhasının bu talebe dönüş ve diş hekimi kimlik doğrulaması amacıyla işlenmesine <i>*</i></span>
         <div class="onay-secenekler">
           <label><input type="radio" name="veri-izin" value="evet"> Onay veriyorum</label>
           <label><input type="radio" name="veri-izin" value="hayir"> Onay vermiyorum</label>
@@ -1994,7 +2012,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <div id="onay-uyari" class="onay-uyari" style="display:none;"></div>
     </div>
 
-    <button class="btn-submit" id="contact-btn" onclick="submitContact()">Gönder</button>
+    <button class="btn-submit" id="contact-btn" onclick="submitContact()">Demo talep et</button>
     <div id="contact-result" style="display:none;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;"></div>
   </div>
 </section>
@@ -2034,7 +2052,7 @@ src="https://www.facebook.com/tr?id=2149949149068931&ev=PageView&noscript=1"
       <ul>
         <li><a href="mailto:support@regainassist.com">support@regainassist.com</a> · ürün desteği</li>
         <li><a href="mailto:info@entoriontech.com">info@entoriontech.com</a> · fatura, sözleşme</li>
-        <li><a href="#iletisim">İletişim Formu</a></li>
+        <li><a href="#demo">Demo talep formu</a></li>
       </ul>
       <div class="sosyal"><a href="https://www.instagram.com/regainassist/" target="_blank" rel="noopener" aria-label="ReGain Assist Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9a3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 3.18a6.66 6.66 0 1 0 0 13.32 6.66 6.66 0 0 0 0-13.32Zm0 10.98a4.32 4.32 0 1 1 0-8.64 4.32 4.32 0 0 1 0 8.64Zm8.48-11.25a1.56 1.56 0 1 1-3.11 0 1.56 1.56 0 0 1 3.11 0Z"/></svg></a><a href="https://www.linkedin.com/company/entorion-technology/" target="_blank" rel="noopener" aria-label="Entorion Technology LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.83v1.64h.05a4.2 4.2 0 0 1 3.78-2.08C21.2 8.56 22 10.9 22 14.2V21h-4v-6.03c0-1.44-.03-3.29-2-3.29-2 0-2.31 1.57-2.31 3.19V21h-4V9Z"/></svg></a></div>
     </div>
@@ -2064,7 +2082,13 @@ var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 // ⚠️ ONAY METNI DEGISIRSE BU SURUM DE DEGISMELI. Kaydedilen onayin
 //    HANGI metne verildigi sonradan sorulur; surum olmadan cevap yoktur.
-var ONAY_SURUMU = 'v1-2026-09-02';
+var ONAY_SURUMU = 'v2-2026-10-24';   // 24.10: onay metnine vergi levhası + kimlik doğrulama amacı eklendi
+// ── DEMO BELGESİ (vergi levhası) ──
+// ⛔ Tür ve boyut tarayıcıda ÖN kontrol; asıl sınır Supabase kovasında
+//    (allowed_mime_types + file_size_limit 10 MB; 24.10 ölçüldü: text/plain 400).
+var BELGE_KOVASI = 'demo-belgeler';
+var BELGE_TIPLERI = ['application/pdf', 'image/jpeg', 'image/png'];
+var BELGE_BOYUT = 10 * 1024 * 1024;
 
 async function submitContact() {
   var name = document.getElementById('contact-name').value.trim();
@@ -2075,13 +2099,22 @@ async function submitContact() {
   var result = document.getElementById('contact-result');
   var btn = document.getElementById('contact-btn');
 
-  if (!name || !phone || !email || !clinic || !msg) {
+  function formHata(m) {
     result.style.display = 'block';
     result.style.background = '#fef2f2';
     result.style.color = '#dc2626';
-    result.textContent = 'Lütfen tüm alanları doldurun.';
-    return;
+    result.textContent = m;
+    result.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
+  // Mesaj isteğe bağlı; e-posta ZORUNLU (giriş bilgileri oraya gider).
+  if (!name || !phone || !email || !clinic) { formHata('Lütfen ad soyad, telefon, e-posta ve klinik adını doldurun.'); return; }
+  // ⛔ VERGİ LEVHASI ZORUNLU: demo hesabı yalnız kimliği doğrulanan diş
+  //    hekimine açılır (Tolga 24.10). Belgesiz talep GÖNDERİLMEZ.
+  var belgeGirdi = document.getElementById('contact-belge');
+  var belge = belgeGirdi && belgeGirdi.files && belgeGirdi.files[0];
+  if (!belge) { formHata('Vergi levhanızı yükleyin (PDF, JPG ya da PNG). Demo hesabı yalnızca kimliği doğrulanan diş hekimlerine açılır.'); return; }
+  if (BELGE_TIPLERI.indexOf(belge.type) === -1) { formHata('Belge PDF, JPG ya da PNG olmalı.'); return; }
+  if (belge.size > BELGE_BOYUT) { formHata('Belge en çok 10 MB olabilir.'); return; }
 
   // ── ZORUNLU ONAYLAR ────────────────────────────────────────────────
   // ⛔ SECILMEMIS ≠ HAYIR. Bos birakilan bir soru «izin vermedi» diye
@@ -2114,6 +2147,20 @@ async function submitContact() {
   btn.textContent = 'Gönderiliyor...';
 
   try {
+    // ── ① BELGE ÖNCE YÜKLENİR, yolu kayda yazılır ──
+    //    Kayıt önce yazılsaydı belge düşen talep «belgeli» görünürdü.
+    //    Yol kullanıcı girdisi taşımaz (dosya adı atılır): rastgele kimlik + tür.
+    var uzanti = belge.type === 'application/pdf' ? 'pdf' : (belge.type === 'image/png' ? 'png' : 'jpg');
+    var kimlik = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+               : (Date.now().toString(36) + '-' + Math.random().toString(16).slice(2));
+    var belgeYolu = 'vergi-levhasi/' + kimlik + '/vergi-levhasi.' + uzanti;
+    var yk = await fetch(SUPABASE_URL + '/storage/v1/object/' + BELGE_KOVASI + '/' + belgeYolu, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': belge.type, 'x-upsert': 'false' },
+      body: belge
+    });
+    if (!yk.ok) throw new Error('Belge yüklenemedi');
+    // ── ② KAYIT ──
     var res = await fetch(SUPABASE_URL + '/rest/v1/iletisim_formlari', {
       method: 'POST',
       headers: {
@@ -2128,7 +2175,8 @@ async function submitContact() {
         email: email || null,
         klinik_adi: clinic || null,
         mesaj: msg || null,
-        kaynak: 'landing_page',
+        kaynak: 'demo-talep',           // 24.10: 'landing_page' idi; artık demo talebi
+        belge_yolu: belgeYolu,
         // ⛔ ONAY KUTUSU KORUMA SAGLAMAZ, KAYDEDILEN ONAY SAGLAR.
         //    Sürüm alani olmadan «false» iki sey demek olurdu: kisi hayir
         //    dedi VEYA soru hic sorulmadi (onay alanlari eklenmeden once
@@ -2143,7 +2191,10 @@ async function submitContact() {
     result.style.display = 'block';
     result.style.background = 'rgba(30,58,95,.06)';
     result.style.color = 'var(--accent)';
-    result.textContent = 'Teşekkürler! En kısa sürede size ulaşacağız.';
+    result.textContent = 'Teşekkürler! Belgenizi inceleyip mesai saatlerinde 24 saat içinde size döneceğiz.';
+    // Dönüşüm olayı YALNIZ başarılı gönderimde; parametre yok (kişisel veri gitmez).
+    if (typeof fbq === 'function') { try { fbq('trackCustom', 'DemoTalep'); } catch (e) {} }
+    if (belgeGirdi) belgeGirdi.value = '';
     document.getElementById('contact-name').value = '';
     document.getElementById('contact-phone').value = '';
     document.getElementById('contact-email').value = '';
@@ -2157,7 +2208,7 @@ async function submitContact() {
     result.style.display = 'block';
     result.style.background = '#fef2f2';
     result.style.color = '#dc2626';
-    result.textContent = 'Bir hata oluştu. info@entoriontech.com adresine mail atin.';
+    result.textContent = 'Bir hata oluştu. Talebinizi ve belgenizi info@entoriontech.com adresine e-posta ile de gönderebilirsiniz.';
   }
   btn.disabled = false;
   btn.textContent = 'Gönder';
@@ -2260,19 +2311,7 @@ function toggleFaq(btn) {
 // Pricing toggle
 // ⛔ TIKLAMAYLA açılır, HOVER ile değil: dokunmatik cihazda hover yoktur.
 // ⛔ Dışarı tıklayınca ve Esc ile kapanır; `aria-expanded` senkron tutulur.
-(function () {
-  var ac = document.getElementById('deneAc'), menu = document.getElementById('deneMenu');
-  if (!ac || !menu) return;
-  function kapa() { menu.hidden = true; ac.setAttribute('aria-expanded', 'false'); }
-  ac.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var acik = !menu.hidden;
-    menu.hidden = acik;
-    ac.setAttribute('aria-expanded', acik ? 'false' : 'true');
-  });
-  document.addEventListener('click', function (e) { if (!menu.contains(e.target)) kapa(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapa(); });
-})();
+// ⛔ 24.10: «Ücretsiz Dene» açılır menüsünün betiği kaldırıldı (menü yok).
 
 // 🔴 17.09: «HERO SEKMELERİ» bloğu KALDIRILDI — sürdüğü kart ve çipler
 //    hero'dan çıkarıldı, blok korumalı çıkıyordu ama ölü koddu.
@@ -2500,10 +2539,10 @@ function setPricingDonem(donem) {
    "mainEntity": [
     {
      "@type": "Question",
-     "name": "Ücretsiz deneme nasıl başlar?",
+     "name": "Demo hesabı nasıl açılır?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Kayıt olduktan sonra 14 gün boyunca tüm Pro özelliklere erişirsiniz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz. Deneme süresi bittiğinde planınızı seçersiniz."
+      "text": "Demo talep formunu doldurup vergi levhanızı yüklersiniz. Hesaplar yalnızca kimliği doğrulanan diş hekimlerine açılır; belgenizi inceledikten sonra giriş bilgilerinizi e-posta ile gönderir, mesai saatlerinde 24 saat içinde size döneriz. Kredi kartı gerekmez, otomatik ücretlendirme yapılmaz."
      }
     },
     {
@@ -2700,8 +2739,8 @@ function setPricingDonem(donem) {
         <li><b>Kimler yararlanabilir?</b> Son 24 ay içinde işe başlamış
           hekimler ve klinikler. Yeni mezun olabilirsiniz ya da ilk
           kliniğinizi açmış olabilirsiniz.</li>
-        <li><b>Nasıl başvurulur?</b> Ücretsiz denemeyi başlatın, Plan
-          sayfasındaki karttan işe başlama tarihinizi girin ve vergi
+        <li><b>Nasıl başvurulur?</b> Demo talep formuyla hesabınızı açtırın,
+          Plan sayfasındaki karttan işe başlama tarihinizi girin ve vergi
           levhanızı yükleyin. Biz inceleyip onaylıyoruz.</li>
         <li><b>İndirim ne zaman başlar?</b> Onaydan sonra ilk Pro
           ödemenizde. İlk ödemenizden itibaren 12 ay boyunca yaptığınız her
@@ -2714,7 +2753,7 @@ function setPricingDonem(donem) {
       </ul>
     </details>
 
-    <a class="kampanya-cta" href="https://app.regainassist.com/login?mod=kayit">14 gün ücretsiz deneyin</a>
+    <a class="kampanya-cta" href="#demo">Demo talep edin</a>
     <!-- ⛔ POP-UP TEK İŞ YAPAR: yeni klinik kampanyası. Referans buraya
          KONULMADI (Tolga 01.09) ve sebebi hedefleme: landing ziyaretçisi
          henüz müşteri değil, referans kodu yok, o teklifi KULLANAMAZ.

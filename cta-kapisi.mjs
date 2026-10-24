@@ -67,7 +67,10 @@ function ortam({ pixel = 'calisir' } = {}) {
 
 console.log(`\n(1) KAPSAM — HTML'deki TUM app.regainassist.com CTA'lari (${ctalar.length})`)
 {
-  T('CTA bulundu (kapi OLCEBILDI)', ctalar.length >= 8, `bulunan: ${ctalar.length}`)
+  // 24.10: deneme kaydi kapandi; app'e giden baglar yalniz GIRIS (nav, iki yol,
+  //    iki fiyat karti, footer). 24.10 sayim: 5. Esik 8 → 5. Demo cagrilari #demo'ya
+  //    gider ve CTAClick DEGIL, formun basarili gonderiminde `DemoTalep` sayilir.
+  T('CTA bulundu (kapi OLCEBILDI)', ctalar.length >= 5, `bulunan: ${ctalar.length}`)
   let kapsanan = 0, eksik = []
   for (const c of ctalar) {
     const o = ortam()
