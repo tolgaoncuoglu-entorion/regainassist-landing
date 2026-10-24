@@ -131,57 +131,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   .kart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 20px}
   .kart b{display:block;font-size:16px;font-weight:700;color:var(--text);letter-spacing:-.1px}
   .kart span{display:block;font-size:14px;color:var(--text2);line-height:1.55;margin-top:8px}
-  /* KURUCU MEKTUBU */
-  .mektup{display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:start}
-  /* ⚠️ DUZELTME (11.09): once "414px'te tasiyor" diye yazmistim — YANLISTI.
-     `--window-size=414` verdigim headless Chrome sayfayi 500 CSS px'te render
-     edip PNG'yi 414'e KIRPIYORDU; gordugum tasma OLCUM ARACININ eseriydi.
-     Sayfa 500px'te olculdu: tasan oge SIFIR.
-     `justify-items:center` yine de kaldirildi: izgara ogesini gerdirmek yerine
-     MAX-CONTENT genisligine sokar ve uzun metin blogu icin kirilgandir.
-     Portre `margin-inline:auto` ile ortalanir, metin gerdirilir. */
-  @media(max-width:820px){.mektup{grid-template-columns:1fr;gap:28px}
-    .mektup .body{text-align:center}
-    .mektup .body p,.mektup .body .imza{text-align:left}}
-  /* ⛔ ÖLÜ ALAN: mektup uzun, portre kısa — sol sütun sayfanın yarısında
-     bomboş kalıyordu. `sticky` portreyi okuma boyunca yanında tutar.
-     Tek sütuna düşen dar ekranda sticky ANLAMSIZ, orada kapatılıyor. */
-  /* ── PORTRE: DERINLIK VE HOVER ─────────────────────────────────────
-     Golge `--sh-lg` idi: acik yuzeyler icin tasarlanmis hafif bir golge,
-     portre sayfadan hic ayrismiyordu. Iki katmanli `--sh-kart`a alindi,
-     hover'da `--sh-yuzen`e derinlesiyor.
-     ⛔ KABA `transform` VERILMEDI. Bu oge `position:sticky` ve sticky bir
-        ogeye transform vermek onu KAPSAYAN BLOK haline getirir; bazi
-        tarayicilarda yapiskanlik bozulur. Bunun yerine ICERIDEKI gorsel
-        olcekleniyor, `overflow:hidden` zaten kirpiyor.
-     ⛔ ZOOM COK HAFIF (1.04): bu bir insan portresi, buyuk zoom yuzu
-        deforme eder ve «kayiyor» hissi verir.
-     ⛔ Hareket kapaliysa ve dokunmatikte HICBIRI olmaz. */
-  .portre{position:sticky;top:32px;width:260px;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;
-    background:linear-gradient(160deg,var(--accent) 0%,var(--accent-l) 100%);box-shadow:var(--sh-kart);
-    transition:box-shadow var(--sure) var(--ease);
-    display:flex;align-items:center;justify-content:center}
-  .portre img{transition:transform var(--sure-yavas) var(--ease)}
-  @media(hover:hover) and (prefers-reduced-motion:no-preference){
-    .portre:hover{box-shadow:var(--sh-yuzen)}
-    .portre:hover img{transform:scale(1.04)}
-  }
-  @media(max-width:820px){.portre{position:relative;top:0;width:200px;margin-inline:auto}}
-  /* ⛔⛔ BAŞ HARFLER VARSAYILAN OLARAK GİZLİ — `opacity:0`.
-     Eskiden her zaman basılıyor, fotoğraf üstüne mutlak konumlanıyordu;
-     görsel yüklenene kadar arkadaki «BTÖ» SALİSELİK GÖRÜNÜYORDU
-     (Tolga 11.09, canlıda gördü). Sayfa hızlı açıldığı için kusur daha da
-     belirgindi: metin anında geliyor, görsel bir tık sonra.
-     ⭐ Artık yedek YALNIZCA görsel DÜŞERSE açılır: `onerror` kaba `.yedek`
-     sınıfını ekler. Başarılı yüklemede baş harfler hiç görünmez; dosya
-     silinirse yine kırık görsel simgesi değil baş harfler çıkar.
-     ⚠️ Sıra önemli: önce sınıf eklenir, SONRA `<picture>` kaldırılır —
-     kaldırıldıktan sonra `this` ağaçtan kopar ve `closest` null döner. */
-  .portre .bh{font-size:52px;font-weight:800;color:rgba(255,255,255,.92);letter-spacing:.02em;
-    opacity:0}
-  .portre.yedek .bh{opacity:1}
-  .portre picture,.portre img{position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;object-position:center top}
   /* ⛔ Basliktaki <br> ILK SATIRI ZORLUYOR. Olculdu: 23px yaziyla o satir
      439px; 360px telefonda kullanilabilir genislik ~312px → TASAR. 500px'te
      kil payi sigdigi icin headless olcumde gorunmuyordu. Dar ekranda satir
@@ -189,12 +138,6 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
   @media(max-width:640px){.br-genis{display:none}}
   .imza{margin-top:30px;padding-top:22px;border-top:1px solid var(--border2)}
   .imza .ad{font-size:17px;font-weight:800;color:var(--text);letter-spacing:-.01em}
-  .imza .unvan{font-size:14px;color:var(--text2);margin-top:3px}
-  .baglar{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;align-items:center;
-    font-size:14.5px;color:var(--text3)}
-  @media(max-width:820px){.baglar{justify-content:center}}
-  .baglar a{color:var(--text2);font-weight:600;text-decoration:none;transition:color .15s}
-  .baglar a:hover{color:var(--brand)}
   /* KİMLİK KUTUSU */
   .kimlik{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
     padding:26px 24px;margin-top:30px;box-shadow:var(--sh)}
@@ -268,22 +211,19 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
    ]
   },
   {
-   "@type": "Person",
-   "@id": "https://www.regainassist.com/hakkimizda#kurucu",
-   "name": "Bülent Tolga Öncüoğlu",
-   "jobTitle": "Kurucu",
-   "email": "tolga@entoriontech.com",
-   "image": "https://www.regainassist.com/images/kurucu-kare.jpg",
-   "worksFor": {
-    "@type": "Organization",
-    "name": "Entorion Technology",
+   "@type": "Organization",
+   "@id": "https://www.regainassist.com/hakkimizda#entorion",
+   "name": "Entorion Technology",
    "legalName": "Entorion Teknoloji San. ve Tic. Ltd. Şti.",
-    "alternateName": "Entorion Technology",
-    "url": "https://www.regainassist.com/"
+   "url": "https://www.regainassist.com/",
+   "email": "info@entoriontech.com",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "İzmir",
+    "addressCountry": "TR"
    },
    "sameAs": [
-    "https://www.linkedin.com/in/b%C3%BClent-tolga-%C3%B6nc%C3%BCo%C4%9Flu-3ba73087",
-    "https://www.instagram.com/tolgaoncuoglu/"
+    "https://www.instagram.com/regainassist/"
    ]
   }
  ]
@@ -330,31 +270,23 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
        680px sınırını taşıdığı için o dar kalmaya devam eder. -->
   <div class="wrap">
     <span class="eyebrow">Hakkımızda</span>
-    <!-- ⛔ «...tanıyan bir ekip.» KALDIRILDI (Tolga 11.09): sayfa bir
-         EKİBİ değil, kurucunun sahadan gelen deneyimini anlatıyor.
-         Mektubun kendi başlığı buraya, hero'ya çıktı; alttaki cümle de
-         mektuba girizgâh olarak yerinde duruyor. Böylece aynı cümle iki
-         kez okunmuyor — mektuptaki kopya aşağıda silindi. -->
-    <h1>Diş hekimliğini dışarıdan izleyerek değil,<br class="br-genis"><span class="teal">yıllarca sahada çalışarak</span> tanıdım.</h1>
+    <!-- ⛔ 24.10 (Tolga): sayfa artık KİŞİYİ değil ŞİRKETİ anlatıyor.
+         Kurucu fotoğrafı, adı ve kişisel bağlantıları kaldırıldı; mektup
+         çoğul ağızla yazıldı, imza yalnız «Entorion Technology».
+         (11.09'daki «ekip değil kurucu» kararı bu kararla DEĞİŞTİ.)
+         Hero başlığı mektubun girizgâhı; alttaki cümle de aynı işi görür,
+         mektupta kopyası yok. -->
+    <h1>Diş hekimliğini dışarıdan izleyerek değil,<br class="br-genis"><span class="teal">yıllarca sahada çalışarak</span> tanıdık.</h1>
     <p class="hero-sub">ReGain Assist, bir masabaşı fikrinden değil; yıllarca diş kliniklerinin içinde, gerçek iş akışının yanında durmuş bir deneyimden doğdu.</p>
   </div>
 </header>
 
-<section id="kurucu">
-  <div class="wrap">
-    <div class="mektup">
-      <div class="portre" role="img" aria-label="Bülent Tolga Öncüoğlu, Entorion Technology kurucusu">
-        <span class="bh" aria-hidden="true">BTÖ</span>
-        <picture>
-          <source srcset="/images/kurucu.webp" type="image/webp">
-          <img src="/images/kurucu.jpg" alt="Bülent Tolga Öncüoğlu" width="260" height="325"
-               decoding="async" fetchpriority="high"
-               onerror="var k=this.closest('.portre'); if(k) k.classList.add('yedek'); this.closest('picture').remove()">
-        </picture>
-      </div>
-
+<section id="mektup">
+  <!-- Portre ve iki sütunlu ızgara 24.10'da kaldırıldı; mektup öteki
+       bölümler gibi `narrow` (760px) kapta tek sütun akar. -->
+  <div class="wrap narrow">
       <div class="body">
-        <p>Sağlık sektöründe yirmi beş yıldır çalışıyorum. Bu sürenin son yedi yılı da dental sektörde siz değerli diş hekimleriyle ve kliniklerle doğrudan sahada geçti. Bu süre boyunca aynı şeyi tekrar tekrar gördüm: hekimin asıl işi tedavi etmekken, günün önemli bir bölümü tedavinin etrafındaki işleri yönetmekle geçiyor.</p>
+        <p>Sağlık sektöründe yirmi beş yıllık bir deneyimden geliyoruz. Bu sürenin son yedi yılı dental sektörde, siz değerli diş hekimleriyle ve kliniklerle doğrudan sahada geçti. Bu süre boyunca aynı şeyi tekrar tekrar gördük: hekimin asıl işi tedavi etmekken, günün önemli bir bölümü tedavinin etrafındaki işleri yönetmekle geçiyor.</p>
 
         <p>Hasta kayıtları, randevular, tahsilatlar, stok, ÜTS işlemleri, e-Nabız hazırlıkları, eski sistemlerden veri taşıma, tedavi sonrası takip… Bunların her biri tek başına küçük görünüyor. Fakat birlikte düşünüldüğünde kliniğin ciddi bir operasyon yükünü oluşturuyor.</p>
 
@@ -364,31 +296,18 @@ if (window.OLCUM_ACIK) { fbq('init', '2149949149068931'); fbq('track', 'PageView
 
         <p>Bu yüzden ReGain Assist'te hasta kaydı yalnızca bir hasta kaydı değil; tedaviye, tahsilata, stoğa, gerekli bildirimlere ve gerektiğinde hasta takibine bağlanan bir sürecin başlangıcı. CaseSuite'i de aynı düşünceyle geliştirdik: hekimin implant vakası üzerinde ölçüm yapabileceği, alternatiflerini karşılaştırabileceği ve çalışmasını saklayabileceği sade bir çalışma alanı.</p>
 
-        <p>Teknolojinin hekimin yerine geçmemesi gerektiğine inanıyorum. İyi bir yazılımın görevi hekime ne yapacağını söylemek değil, hekimin kendi işini daha düzenli, daha hızlı ve daha az operasyonel yükle yapmasını sağlamak olmalı.</p>
+        <p>Teknolojinin hekimin yerine geçmemesi gerektiğine inanıyoruz. İyi bir yazılımın görevi hekime ne yapacağını söylemek değil, hekimin kendi işini daha düzenli, daha hızlı ve daha az operasyonel yükle yapmasını sağlamak olmalı.</p>
 
         <p>ReGain Assist'i geliştirirken ölçümüz de bu: <strong>bir özellik gerçekten kliniğin işini kolaylaştırmıyorsa, sadece özellik sayısını artırıyordur.</strong></p>
 
-        <p>Ürünü sahadan gelen geri bildirimlerle geliştirmeye devam ediyoruz. Benim için ReGain Assist tamamlanmış bir yazılım değil; diş hekiminin gerçek çalışma biçimine giderek daha iyi uyum sağlayan bir sistem. Bu uyumu şekillendiren de bugüne kadar hep hekimler oldu. Katkı ve geri bildirimlerinizi dilerseniz doğrudan bana iletebilirsiniz.</p>
+        <p>Ürünü sahadan gelen geri bildirimlerle geliştirmeye devam ediyoruz. Bizim için ReGain Assist tamamlanmış bir yazılım değil; diş hekiminin gerçek çalışma biçimine giderek daha iyi uyum sağlayan bir sistem. Bu uyumu şekillendiren de bugüne kadar hep hekimler oldu. Katkı ve geri bildirimlerinizi aşağıdaki iletişim adreslerinden doğrudan bize iletebilirsiniz.</p>
 
-        <p>Saygılarımla,</p>
+        <p>Saygılarımızla,</p>
 
         <div class="imza">
-          <div class="ad">Bülent Tolga Öncüoğlu</div>
-          <div class="unvan">Kurucu, Entorion Technology</div>
-          <div class="baglar">
-            <a href="mailto:tolga@entoriontech.com">tolga@entoriontech.com</a>
-            <span aria-hidden="true">·</span>
-            <!-- ⚠️ Bu adres LinkedIn'in VARSAYILAN genel profil bicimi
-                 (`-3ba73087` eki). 11.09'da `in/tolgaoncuoglu` yazmistim —
-                 o ozel adres ALINMAMIS, LinkedIn `/404/`e atiyordu.
-                 Tolga kendi profilinden dogruladi. Degistirmeden once SOR. -->
-            <a href="https://www.linkedin.com/in/b%C3%BClent-tolga-%C3%B6nc%C3%BCo%C4%9Flu-3ba73087" target="_blank" rel="noopener">LinkedIn</a>
-            <span aria-hidden="true">·</span>
-            <a href="https://www.instagram.com/tolgaoncuoglu/" target="_blank" rel="noopener">Instagram</a>
-          </div>
+          <div class="ad">Entorion Technology</div>
         </div>
       </div>
-    </div>
   </div>
 </section>
 
